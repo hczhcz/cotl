@@ -1,3 +1,8 @@
+#ifndef _COTL_HPP
+#define _COTL_HPP
+
 namespace cotl {
-    long long ago = 5;
+    long long ago;
 }
+
+#endif
