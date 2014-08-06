@@ -18,7 +18,7 @@ dflags="-Wall -Wextra"
 flags="$@"
 if [ "$flags" = "" ]
 then
-    flags="-O2"
+    flags="-std=c++11 -g -O1"
 fi
 
 rm ./output/*
