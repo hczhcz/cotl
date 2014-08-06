@@ -2,9 +2,12 @@
 #define _COTL_HPP
 
 #include "cotl_gc.hpp"
+#include "cotl_type.hpp"
 
 namespace cotl {
-    long long ago;
+
+const long long ago = 5;
+
 }
 
 #endif
