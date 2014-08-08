@@ -1,6 +1,7 @@
 #ifndef _COTL_HPP
 #define _COTL_HPP
 
+#include "cotl_stdlib.hpp"
 #include "cotl_gc.hpp"
 #include "cotl_type.hpp"
 
