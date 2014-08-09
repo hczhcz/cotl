@@ -7,7 +7,7 @@ typedef long long int_t;
 typedef double real_t;
 
 class Val; // forward
-typedef void (*func_t)(Val &job, Val &stack, Val &caller, Val &tunnel /* could be null */);
+typedef void (*func_t)(Val &caller, Val &job, Val &stack, Val &tunnel /* could be null */);
 
 }
 
