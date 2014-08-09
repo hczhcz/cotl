@@ -3,6 +3,8 @@
 
 #include "cotl_stdlib.hpp"
 #include "cotl_gc.hpp"
+
+#include "cotl_native.hpp"
 #include "cotl_type.hpp"
 #include "cotl_repl.hpp"
 

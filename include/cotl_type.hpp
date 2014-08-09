@@ -3,9 +3,6 @@
 
 namespace cotl {
 
-typedef long long int_t;
-typedef double real_t;
-
 class Val {
 private:
     int_t _type;
