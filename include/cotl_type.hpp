@@ -41,7 +41,10 @@ private:
     T _data;
 
 protected:
-    inline NativeVal(const int_t type, const func_t func, const T data):
+    inline NativeVal(const int_t type, const func_t func):
+        Val(type, func), _data() {}
+
+    inline NativeVal(const int_t type, const func_t func, const T &data):
         Val(type, func), _data(data) {}
 
     inline void set(const T data) {
@@ -94,7 +97,7 @@ private:
     PVal _data2;
 
 protected:
-    inline Pair(const int_t type, const func_t func, const PVal data1, const PVal data2):
+    inline Pair(const int_t type, const func_t func, const PVal &data1, const PVal &data2):
         Val(type, func), _data1(data1), _data2(data2) {}
 
     inline void set1(const PVal data) {
