@@ -48,11 +48,11 @@ protected:
     }
 
 public:
-    inline T get() {
+    inline T &getVar() {
         return _data;
     }
 
-    inline const T getConst() const {
+    inline const T &get() const {
         return _data;
     }
 };
@@ -69,13 +69,45 @@ class Real: public NativeVal<real_t> {
 class Str: public NativeVal<std::string> {
 };
 
-class Arr: public NativeVal<std::map<int_t, Val *>> {
+class Arr: public NativeVal<std::map<int_t, PVal>> {
 };
 
-class Ptr: public NativeVal<Val *> {
+class Ptr: public NativeVal<PVal> {
 };
 
-class Pair: public NativeVal<std::pair<Val *, Val *>> {
+class Pair: public Val {
+private:
+    PVal _data1;
+    PVal _data2;
+
+protected:
+    inline Pair(const int_t type, const func_t func, const PVal data1, const PVal data2):
+        Val(type, func), _data1(data1), _data2(data2) {}
+
+    inline void set1(const PVal data) {
+        _data1 = data;
+    }
+
+    inline void set2(const PVal data) {
+        _data2 = data;
+    }
+
+public:
+    inline PVal &getVar1() {
+        return _data1;
+    }
+
+    inline const PVal &get1() const {
+        return _data1;
+    }
+
+    inline PVal &getVar2() {
+        return _data2;
+    }
+
+    inline const PVal &get2() const {
+        return _data2;
+    }
 };
 
 }
