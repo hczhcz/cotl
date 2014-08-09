@@ -20,6 +20,8 @@ public:
     inline long getType() {
         return _type;
     }
+
+    virtual void repl(std::ostream &stream, long level) const;
 };
 
 template <class T>
