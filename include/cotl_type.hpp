@@ -3,25 +3,28 @@
 
 namespace cotl {
 
+typedef long long int_t;
+typedef double real_t;
+
 class Val {
 private:
-    long _type;
+    int_t _type;
 
 protected:
-    inline Val(long type): _type(type) {};
+    inline Val(int_t type): _type(type) {};
 
     inline Val(const Val &) = delete;
 
-    inline void setType(long type) {
+    inline void setType(int_t type) {
         _type = type;
     }
 
 public:
-    inline long getType() const {
+    inline int_t getType() const {
         return _type;
     }
 
-    virtual void repl(std::ostream &stream, long level) const;
+    virtual void repl(std::ostream &stream, int_t level) const;
 };
 
 template <class T>
@@ -30,7 +33,7 @@ private:
     T _data;
 
 protected:
-    inline NativeVal(long type, T data): Val(type), _data(data) {};
+    inline NativeVal(int_t type, T data): Val(type), _data(data) {};
 
     inline void set(T data) {
         _data = data;
@@ -49,13 +52,16 @@ public:
 class Atom: public Val {
 };
 
-class Int: public NativeVal<long> {
+class Int: public NativeVal<int_t> {
+};
+
+class Real: public NativeVal<real_t> {
 };
 
 class Str: public NativeVal<std::string> {
 };
 
-class Arr: public NativeVal<std::map<long, Val *>> {
+class Arr: public NativeVal<std::map<int_t, Val *>> {
 };
 
 class Ptr: public NativeVal<Val *> {
