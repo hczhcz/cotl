@@ -6,17 +6,28 @@ namespace cotl {
 class Val {
 private:
     int_t _type;
+    func_t _func;
 
 protected:
-    inline Val(int_t type): _type(type) {};
+    inline Val(int_t type, func_t func): _type(type), _func(func) {};
 
     inline Val(const Val &) = delete;
+
+    inline Val &operator=(const Val &) = delete;
 
     inline void setType(int_t type) {
         _type = type;
     }
 
+    inline void setFunc(func_t func) {
+        _func = func;
+    }
+
 public:
+    inline void operator()(Val &job, Val &stack, Val &tunnel /* could be null */) {
+        _func(*this, job, stack, tunnel);
+    }
+
     inline int_t getType() const {
         return _type;
     }
@@ -30,7 +41,7 @@ private:
     T _data;
 
 protected:
-    inline NativeVal(int_t type, T data): Val(type), _data(data) {};
+    inline NativeVal(int_t type, func_t func, T data): Val(type, func), _data(data) {};
 
     inline void set(T data) {
         _data = data;
