@@ -17,7 +17,7 @@ protected:
     }
 
 public:
-    inline long getType() {
+    inline long getType() const {
         return _type;
     }
 
@@ -38,6 +38,10 @@ protected:
 
 public:
     inline T get() {
+        return _data;
+    }
+
+    inline const T getConst() const {
         return _data;
     }
 };
