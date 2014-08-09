@@ -10,14 +10,14 @@ private:
 protected:
     inline Val(long type): _type(type) {};
 
-    Val(const Val &) = delete;
+    inline Val(const Val &) = delete;
 
-    void setType(long type) {
+    inline void setType(long type) {
         _type = type;
     }
 
 public:
-    long getType() {
+    inline long getType() {
         return _type;
     }
 };
@@ -27,7 +27,12 @@ class NativeVal: public Val {
 private:
     T _data;
 
+protected:
     inline NativeVal(long type, T data): Val(type), _data(data) {};
+
+    inline void set(T data) {
+        _data = data;
+    }
 
 public:
     inline T get() {
