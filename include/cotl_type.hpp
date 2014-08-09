@@ -9,17 +9,17 @@ private:
     func_t _func;
 
 protected:
-    inline Val(int_t type, func_t func): _type(type), _func(func) {};
+    inline Val(const int_t type, const func_t func): _type(type), _func(func) {}
 
     inline Val(const Val &) = delete;
 
     inline Val &operator=(const Val &) = delete;
 
-    inline void setType(int_t type) {
+    inline void setType(const int_t type) {
         _type = type;
     }
 
-    inline void setFunc(func_t func) {
+    inline void setFunc(const func_t func) {
         _func = func;
     }
 
@@ -32,7 +32,7 @@ public:
         return _type;
     }
 
-    virtual void repl(std::ostream &stream, int_t level) const;
+    virtual void repl(std::ostream &stream, const int_t level) const = 0;
 };
 
 template <class T>
@@ -41,9 +41,10 @@ private:
     T _data;
 
 protected:
-    inline NativeVal(int_t type, func_t func, T data): Val(type, func), _data(data) {};
+    inline NativeVal(const int_t type, const func_t func, const T data):
+        Val(type, func), _data(data) {}
 
-    inline void set(T data) {
+    inline void set(const T data) {
         _data = data;
     }
 
@@ -58,21 +59,33 @@ public:
 };
 
 class Atom: public Val {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Int: public NativeVal<int_t> {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Real: public NativeVal<real_t> {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Str: public NativeVal<std::string> {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Arr: public NativeVal<std::map<int_t, PVal>> {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Ptr: public NativeVal<PVal> {
+public:
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 class Pair: public Val {
@@ -108,6 +121,8 @@ public:
     inline const PVal &get2() const {
         return _data2;
     }
+
+    virtual void repl(std::ostream &stream, const int_t level) const;
 };
 
 }
