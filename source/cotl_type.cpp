@@ -16,44 +16,44 @@ static std::ostream &operator<<(std::ostream &stream, const _Indent indent) {
     return stream;
 }
 
-void Atom::repl(std::ostream &stream, const int_t level) const {
+void Atom::repr(std::ostream &stream, const int_t level) const {
     stream << "atom(" << getType() << ")";
 }
 
-void Int::repl(std::ostream &stream, const int_t level) const {
+void Int::repr(std::ostream &stream, const int_t level) const {
     stream << "int(" << getType() << ", " << get() << ")";
 }
 
-void Real::repl(std::ostream &stream, const int_t level) const {
+void Real::repr(std::ostream &stream, const int_t level) const {
     stream << "real(" << getType() << ", " << get() << ")";
 }
 
-void Str::repl(std::ostream &stream, const int_t level) const {
+void Str::repr(std::ostream &stream, const int_t level) const {
     stream << "str(" << getType() << ", " << get() << ")";
 }
 
-void Arr::repl(std::ostream &stream, const int_t level) const {
+void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "arr(" << getType() << ",";
 
     for (auto i = get().begin(); i != get().end(); ++i) {
         stream << "\n" << _Indent(level) << i->first;
-        i->second->repl(stream, level + 1);
+        i->second->repr(stream, level + 1);
     }
 
     stream << "\n" << _Indent(level) << stream << ")";
 }
 
-void Ptr::repl(std::ostream &stream, const int_t level) const {
+void Ptr::repr(std::ostream &stream, const int_t level) const {
     stream << "ptr(" << getType() << ", ";
-    get()->repl(stream, level);
+    get()->repr(stream, level);
     stream << ")";
 }
 
-void Pair::repl(std::ostream &stream, const int_t level) const {
+void Pair::repr(std::ostream &stream, const int_t level) const {
     stream << "pair(" << getType() << ", ";
-    get1()->repl(stream, level);
+    get1()->repr(stream, level);
     stream << ", ";
-    get2()->repl(stream, level);
+    get2()->repr(stream, level);
     stream << ")";
 }
 

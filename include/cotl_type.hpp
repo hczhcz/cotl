@@ -32,7 +32,7 @@ public:
         return _type;
     }
 
-    virtual void repl(std::ostream &stream, const int_t level) const = 0;
+    virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
 
 template <class T>
@@ -63,32 +63,32 @@ public:
 
 class Atom: public Val {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Int: public NativeVal<int_t> {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Real: public NativeVal<real_t> {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Str: public NativeVal<std::string> {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Arr: public NativeVal<std::map<int_t, PVal>> {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Ptr: public NativeVal<PVal> {
 public:
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Pair: public Val {
@@ -125,7 +125,7 @@ public:
         return _data2;
     }
 
-    virtual void repl(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 }
