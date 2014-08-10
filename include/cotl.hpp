@@ -6,6 +6,7 @@
 
 #include "cotl_native.hpp"
 #include "cotl_type.hpp"
+#include "cotl_new.hpp"
 #include "cotl_repr.hpp"
 
 namespace cotl {

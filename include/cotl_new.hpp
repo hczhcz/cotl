@@ -3,37 +3,37 @@
 
 namespace cotl {
 
-Atom *_atom(const int_t type) {
+func_t dfunc;
+
+inline Atom *_atom(const int_t type) {
+    return new (UseGC) Atom(type, dfunc);
+}
+
+inline Int *_int(const int_t type, const int_t &data) {
+    // return new (UseGC) Atom(type, dfunc);
+}
+
+inline Real *_real(const int_t type, const real_t &data) {
     // TODO
     // return new (UseGC) ();
 }
 
-Int *_int(const int_t type, const int_t &data) {
+inline Str *_str(const int_t type, const std::string &data) {
     // TODO
     // return new (UseGC) ();
 }
 
-Real *_real(const int_t type, const real &data) {
+inline Arr *_arr(const int_t type, ...) {
     // TODO
     // return new (UseGC) ();
 }
 
-Str *_str(const int_t type, const std::string &data) {
+inline Ptr *_ptr(const int_t type, const PVal &data) {
     // TODO
     // return new (UseGC) ();
 }
 
-Arr *_arr(const int_t type, ...) {
-    // TODO
-    // return new (UseGC) ();
-}
-
-Ptr *_ptr(const int_t type, const PVal &data) {
-    // TODO
-    // return new (UseGC) ();
-}
-
-Pair *_pair(const int_t type, const PVal &data1, const PVal &data2) {
+inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2) {
     // TODO
     // return new (UseGC) ();
 }
