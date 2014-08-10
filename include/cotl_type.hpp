@@ -23,6 +23,10 @@ protected:
         _func = func;
     }
 
+    inline func_t getFunc() const {
+        return _func;
+    }
+
 public:
     inline void operator()(Val &job, Val &stack, Val &tunnel /* could be null */) {
         _func(*this, job, stack, tunnel);
@@ -63,31 +67,43 @@ public:
 
 class Atom: public Val {
 public:
+    friend Atom *_atom(const int_t type);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Int: public NativeVal<int_t> {
 public:
+    friend Int *_int(const int_t type, const int_t &data);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Real: public NativeVal<real_t> {
 public:
+    friend Real *_real(const int_t type, const real_t &data);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Str: public NativeVal<std::string> {
 public:
+    friend Str *_str(const int_t type, const std::string &data);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Arr: public NativeVal<std::map<int_t, PVal>> {
 public:
+    friend Arr *_arr(const int_t type, ...);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 class Ptr: public NativeVal<PVal> {
 public:
+    friend Ptr *_ptr(const int_t type, const PVal &data);
+
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
@@ -109,6 +125,8 @@ protected:
     }
 
 public:
+    friend Pair *_pair(const int_t type, const PVal &data1, const PVal &data2);
+
     inline PVal &getVar1() {
         return _data1;
     }
