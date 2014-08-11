@@ -1,0 +1,6 @@
+#ifndef _COTL_CONFIG_HPP
+#define _COTL_CONFIG_HPP
+
+#define _COTL_USE_GLOBAL_GC
+
+#endif

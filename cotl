@@ -1,1 +1,2 @@
+#include "cotl_config"
 #include "include/cotl.hpp"
