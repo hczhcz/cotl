@@ -30,5 +30,4 @@ do
 done
 
 echo "======== linking ========"
-
-"$cc" $dflags $flags ./output/*.o -o "./output/cotl"
+"$cc" $dflags $flags ./output/*.o ./gc/*.o -o "./output/cotl"
