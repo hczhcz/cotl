@@ -16,6 +16,57 @@ static std::ostream &operator<<(std::ostream &stream, const _Indent indent) {
     return stream;
 }
 
+static void outputStr(std::ostream &stream, const std::string &str) {
+    stream << "\"";
+
+    for (auto i = str.begin(); i != str.end(); ++i) {
+        char val = *i;
+
+        switch (val) {
+        case '\0':
+            stream << "\\0";
+            break;
+        case '\a':
+            stream << "\\a";
+            break;
+        case '\b':
+            stream << "\\b";
+            break;
+        case '\t':
+            stream << "\\t";
+            break;
+        case '\n':
+            stream << "\\n";
+            break;
+        case '\v':
+            stream << "\\v";
+            break;
+        case '\f':
+            stream << "\\f";
+            break;
+        case '\r':
+            stream << "\\r";
+            break;
+        case '\'':
+        case '\"':
+        case '\?':
+        case '\\':
+            stream << "\\" << val;
+            break;
+        default:
+            if ((val < 0x20) || (val >= 0x7F)) { // 0-31, 127, 128-255
+                const char hexChar[] = "0123456789ABCDEF";
+                stream << "\\x" << hexChar[(val >> 4) & 0xF] << hexChar[val & 0xF];
+            } else {
+                stream << val;
+            }
+            break;
+        }
+    }
+
+    stream << "\"";
+}
+
 void Atom::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
@@ -40,7 +91,9 @@ template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
-    stream << "_str(" << getType() << ", " << get() << ")";
+    stream << "_str(" << getType() << ", ";
+    outputStr(stream, get());
+    stream << ")";
 }
 
 template <>
@@ -48,11 +101,11 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "_arr(" << getType() << ", " << get().size() << ",";
 
     for (auto i = get().begin(); i != get().end(); ++i) {
-        stream << std::endl << _Indent(level) << i->first << ", ";
+        stream << std::endl << _Indent(level + 1) << i->first << ", ";
         i->second->repr(stream, level + 1);
     }
 
-    stream << std::endl << _Indent(level) << stream << ")";
+    stream << std::endl << _Indent(level) << ")";
 }
 
 template <>
@@ -63,11 +116,11 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
 }
 
 void Pair::repr(std::ostream &stream, const int_t level) const {
-    stream << "_pair(" << getType() << ", ";
-    get1()->repr(stream, level);
-    stream << ", ";
-    get2()->repr(stream, level);
-    stream << ")";
+    stream << "_pair(" << getType() << "," << std::endl << _Indent(level + 1);
+    get1()->repr(stream, level + 1);
+    stream << "," << std::endl << _Indent(level + 1);
+    get2()->repr(stream, level + 1);
+    stream << std::endl << _Indent(level) << ")";
 }
 
 }
