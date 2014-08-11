@@ -30,4 +30,6 @@ do
 done
 
 echo "======== linking ========"
-"$cc" $dflags $flags ./output/*.o ./gc/*.o -o "./output/cotl"
+# if libgc is already installed, use -lgc
+# "$cc" $dflags $flags ./output/*.o ./gc/*.o -o "./output/cotl"
+"$cc" $dflags $flags ./output/*.o -lgc -o "./output/cotl"

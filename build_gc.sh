@@ -8,5 +8,6 @@ autoreconf -vif &&
 automake --add-missing &&
 ./configure &&
 make
+make check
 
 cd ..
