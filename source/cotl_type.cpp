@@ -20,18 +20,22 @@ void Atom::repr(std::ostream &stream, const int_t level) const {
     stream << "_atom(" << getType() << ")";
 }
 
+template <>
 void Int::repr(std::ostream &stream, const int_t level) const {
     stream << "_int(" << getType() << ", " << get() << ")";
 }
 
+template <>
 void Real::repr(std::ostream &stream, const int_t level) const {
     stream << "_real(" << getType() << ", " << get() << ")";
 }
 
+template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
     stream << "_str(" << getType() << ", " << get() << ")";
 }
 
+template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "_arr(" << getType() << ",";
 
@@ -43,6 +47,7 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "\n" << _Indent(level) << stream << ")";
 }
 
+template <>
 void Ptr::repr(std::ostream &stream, const int_t level) const {
     stream << "_ptr(" << getType() << ", ";
     get()->repr(stream, level);

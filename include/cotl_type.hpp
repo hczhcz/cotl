@@ -39,32 +39,6 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
 
-template <class T>
-class NativeVal: public Val {
-private:
-    T _data;
-
-protected:
-    inline NativeVal(const int_t type, const func_t func):
-        Val(type, func), _data() {}
-
-    inline NativeVal(const int_t type, const func_t func, const T &data):
-        Val(type, func), _data(data) {}
-
-    inline void set(const T data) {
-        _data = data;
-    }
-
-public:
-    inline T &getVar() {
-        return _data;
-    }
-
-    inline const T &get() const {
-        return _data;
-    }
-};
-
 class Atom: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
@@ -75,39 +49,47 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
-class Int: public NativeVal<int_t> {
+template <class T> class NativeVal;
+
+typedef NativeVal<int_t> Int;
+typedef NativeVal<real_t> Real;
+typedef NativeVal<std::string> Str;
+typedef NativeVal<std::map<int_t, PVal>> Arr;
+typedef NativeVal<PVal> Ptr;
+
+template <class T>
+class NativeVal: public Val {
+private:
+    T _data;
+
+protected:
+    inline void set(const T &data) {
+        _data = data;
+    }
+
+    inline NativeVal(const int_t type, const func_t func):
+        Val(type, func), _data() {}
+
+    inline NativeVal(const int_t type, const func_t func, const T &data):
+        Val(type, func), _data(data) {}
+
 public:
     friend inline Int *_int(const int_t type, const int_t &data);
-
-    virtual void repr(std::ostream &stream, const int_t level) const;
-};
-
-class Real: public NativeVal<real_t> {
-public:
     friend inline Real *_real(const int_t type, const real_t &data);
-
-    virtual void repr(std::ostream &stream, const int_t level) const;
-};
-
-class Str: public NativeVal<std::string> {
-public:
     friend inline Str *_str(const int_t type, const std::string &data);
-
-    virtual void repr(std::ostream &stream, const int_t level) const;
-};
-
-class Arr: public NativeVal<std::map<int_t, PVal>> {
-public:
-    friend inline Arr *_arr(const int_t type, ...);
-
-    virtual void repr(std::ostream &stream, const int_t level) const;
-};
-
-class Ptr: public NativeVal<PVal> {
-public:
+    friend inline Arr *_arr(const int_t type);
+    friend inline Arr *_arr(const int_t type, int_t count, ...);
     friend inline Ptr *_ptr(const int_t type, const PVal &data);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
+
+    inline T &getVar() {
+        return _data;
+    }
+
+    inline const T &get() const {
+        return _data;
+    }
 };
 
 class Pair: public Val {
@@ -119,11 +101,11 @@ protected:
     inline Pair(const int_t type, const func_t func, const PVal &data1, const PVal &data2):
         Val(type, func), _data1(data1), _data2(data2) {}
 
-    inline void set1(const PVal data) {
+    inline void set1(const PVal &data) {
         _data1 = data;
     }
 
-    inline void set2(const PVal data) {
+    inline void set2(const PVal &data) {
         _data2 = data;
     }
 
