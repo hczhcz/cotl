@@ -2,13 +2,13 @@
 
 namespace cotl {
 
-struct _Indent {
+struct indent_t {
     int_t _level;
 
-    _Indent(const int_t level): _level(level) {}
+    indent_t(const int_t level): _level(level) {}
 };
 
-static std::ostream &operator<<(std::ostream &stream, const _Indent indent) {
+static std::ostream &operator<<(std::ostream &stream, const indent_t indent) {
     for (int_t i = 0; i < indent._level; ++i) {
         stream << "\t";
     }
@@ -101,11 +101,11 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "_arr(" << getType() << ", " << get().size() << ",";
 
     for (auto i = get().begin(); i != get().end(); ++i) {
-        stream << std::endl << _Indent(level + 1) << i->first << ", ";
+        stream << std::endl << indent_t(level + 1) << i->first << ", ";
         i->second->repr(stream, level + 1);
     }
 
-    stream << std::endl << _Indent(level) << ")";
+    stream << std::endl << indent_t(level) << ")";
 }
 
 template <>
@@ -116,11 +116,11 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
 }
 
 void Pair::repr(std::ostream &stream, const int_t level) const {
-    stream << "_pair(" << getType() << "," << std::endl << _Indent(level + 1);
+    stream << "_pair(" << getType() << "," << std::endl << indent_t(level + 1);
     get1()->repr(stream, level + 1);
-    stream << "," << std::endl << _Indent(level + 1);
+    stream << "," << std::endl << indent_t(level + 1);
     get2()->repr(stream, level + 1);
-    stream << std::endl << _Indent(level) << ")";
+    stream << std::endl << indent_t(level) << ")";
 }
 
 }

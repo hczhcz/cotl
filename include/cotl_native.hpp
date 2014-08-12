@@ -8,7 +8,9 @@ typedef double real_t;
 
 class Val; // forward
 typedef Val *PVal;
-typedef void (*func_t)(Val &caller, Val &job, Val &stack, Val &tunnel /* could be null */);
+
+#define _COTL_FUNC_T(name) void (name)(Val &caller, Val &job, Val &stack, Val &tunnel /* could be null */)
+typedef _COTL_FUNC_T(*func_t);
 
 }
 
