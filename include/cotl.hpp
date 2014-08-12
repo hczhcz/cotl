@@ -10,6 +10,7 @@
 #include "cotl_type.hpp"
 
 // cotl std library
+#include "cotl_id.hpp"
 #include "cotl_std.hpp"
 
 // utilities
