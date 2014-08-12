@@ -1,6 +1,8 @@
 #ifndef _COTL_ID_HPP
 #define _COTL_ID_HPP
 
+#include "cotl_helper.hpp"
+
 namespace cotl {
 
 enum {

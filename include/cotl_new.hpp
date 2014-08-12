@@ -1,6 +1,8 @@
 #ifndef _COTL_NEW_HPP
 #define _COTL_NEW_HPP
 
+#include "cotl_helper.hpp"
+
 namespace cotl {
 
 inline Atom *_atom(const int_t type) {

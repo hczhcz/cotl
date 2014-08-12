@@ -1,6 +1,8 @@
 #ifndef _COTL_TYPE_HPP
 #define _COTL_TYPE_HPP
 
+#include "cotl_helper.hpp"
+
 namespace cotl {
 
 class Val {

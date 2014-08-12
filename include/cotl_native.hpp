@@ -1,6 +1,8 @@
 #ifndef _COTL_NATIVE_HPP
 #define _COTL_NATIVE_HPP
 
+#include "cotl_helper.hpp"
+
 namespace cotl {
 
 typedef long long int_t;

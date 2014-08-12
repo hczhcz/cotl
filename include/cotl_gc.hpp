@@ -1,6 +1,8 @@
 #ifndef _COTL_GC_HPP
 #define _COTL_GC_HPP
 
+#include "cotl_helper.hpp"
+
 #ifdef _COTL_USE_GLOBAL_GC
     // use libgc from OS
     #include <gc.h>
