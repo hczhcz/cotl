@@ -1,11 +1,15 @@
 #ifndef _COTL_HPP
 #define _COTL_HPP
 
-#include "cotl_stdlib.hpp"
+// c/c++ library
+#include "cotl_clib.hpp"
 #include "cotl_gc.hpp"
 
+// type definitions
 #include "cotl_native.hpp"
 #include "cotl_type.hpp"
+
+// utilities
 #include "cotl_new.hpp"
 #include "cotl_repr.hpp"
 

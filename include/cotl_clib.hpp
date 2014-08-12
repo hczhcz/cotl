@@ -1,5 +1,5 @@
-#ifndef _COTL_STDLIB_HPP
-#define _COTL_STDLIB_HPP
+#ifndef _COTL_CLIB_HPP
+#define _COTL_CLIB_HPP
 
 #define NDEBUG
 #include <cassert>
