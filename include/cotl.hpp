@@ -9,6 +9,9 @@
 #include "cotl_native.hpp"
 #include "cotl_type.hpp"
 
+// cotl std library
+#include "cotl_std.hpp"
+
 // utilities
 #include "cotl_new.hpp"
 #include "cotl_repr.hpp"

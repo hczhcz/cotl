@@ -3,26 +3,24 @@
 
 namespace cotl {
 
-const func_t dfunc = 0;
-
 inline Atom *_atom(const int_t type) {
-    return new (UseGC) Atom(type, dfunc);
+    return new (UseGC) Atom(type, look);
 }
 
 inline Int *_int(const int_t type, const int_t &data) {
-    return new (UseGC) Int(type, dfunc, data);
+    return new (UseGC) Int(type, look, data);
 }
 
 inline Real *_real(const int_t type, const real_t &data) {
-    return new (UseGC) Real(type, dfunc, data);
+    return new (UseGC) Real(type, look, data);
 }
 
 inline Str *_str(const int_t type, const std::string &data) {
-    return new (UseGC) Str(type, dfunc, data);
+    return new (UseGC) Str(type, look, data);
 }
 
 inline Arr *_arr(const int_t type) {
-    return new (UseGC) Arr(type, dfunc);
+    return new (UseGC) Arr(type, look);
 }
 
 inline Arr *_arr(const int_t type, int_t count /* not const */, ... /* int_t index, PVal data, (loop) */) {
@@ -44,11 +42,11 @@ inline Arr *_arr(const int_t type, int_t count /* not const */, ... /* int_t ind
 }
 
 inline Ptr *_ptr(const int_t type, const PVal &data) {
-    return new (UseGC) Ptr(type, dfunc, data);
+    return new (UseGC) Ptr(type, look, data);
 }
 
 inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2) {
-    return new (UseGC) Pair(type, dfunc, data1, data2);
+    return new (UseGC) Pair(type, look, data1, data2);
 }
 
 
