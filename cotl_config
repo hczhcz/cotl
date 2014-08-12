@@ -1,1 +1,2 @@
+// use libgc from OS instead of ./gc
 #define _COTL_USE_GLOBAL_GC
