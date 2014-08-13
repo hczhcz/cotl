@@ -2,18 +2,10 @@
 
 namespace cotl {
 
-struct indent_t {
-    int_t _level;
-
-    indent_t(const int_t level): _level(level) {}
-};
-
-static std::ostream &operator<<(std::ostream &stream, const indent_t indent) {
-    for (int_t i = 0; i < indent._level; ++i) {
+static void outputIndent(std::ostream &stream, const int_t indent) {
+    for (int_t i = 0; i < indent; ++i) {
         stream << "    ";
     }
-
-    return stream;
 }
 
 static void outputStr(std::ostream &stream, const std::string &str) {
@@ -67,31 +59,51 @@ static void outputStr(std::ostream &stream, const std::string &str) {
     stream << "\"";
 }
 
+static void outputFunc(std::ostream &stream, const func_t func) {
+    stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
+}
+
+static void outputAppendFunc(std::ostream &stream, const func_t func) {
+    if (func != autotype) {
+        stream << ", ";
+        outputFunc(stream, func);
+    }
+}
+
 void Atom::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
-    stream << "_atom(" << getType() << ")";
+    stream << "_atom(" << getType();
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 template <>
 void Int::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
-    stream << "_int(" << getType() << ", " << get() << ")";
+    stream << "_int(" << getType() << ", " << get();
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 template <>
 void Real::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
-    stream << "_real(" << getType() << ", " << get() << ")";
+    stream << "_real(" << getType() << ", " << get();
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 template <>
 void Func::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
-    stream << "_func(" << getType() << ", " << get() << ")";
+    stream << "_func(" << getType() << ", ";
+    outputFunc(stream, get());
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 template <>
@@ -100,34 +112,50 @@ void Str::repr(std::ostream &stream, const int_t level) const {
 
     stream << "_str(" << getType() << ", ";
     outputStr(stream, get());
+    outputAppendFunc(stream, getFunc());
     stream << ")";
 }
 
 template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
-    stream << "_arr(" << getType() << ",";
+    stream << "_arr(" << getType() << std::endl;
 
     for (auto i = get().begin(); i != get().end(); ++i) {
-        stream << std::endl << indent_t(level + 1) << i->first << ", ";
+        outputIndent(stream, level + 1);
+        stream << ", " << i->first << ", ";
         i->second->repr(stream, level + 1);
+        stream << std::endl;
     }
 
-    stream << std::endl << indent_t(level) << ")";
+    outputIndent(stream, level);
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 template <>
 void Ptr::repr(std::ostream &stream, const int_t level) const {
     stream << "_ptr(" << getType() << ", ";
     get()->repr(stream, level);
+    outputAppendFunc(stream, getFunc());
     stream << ")";
 }
 
 void Pair::repr(std::ostream &stream, const int_t level) const {
-    stream << "_pair(" << getType() << "," << std::endl << indent_t(level + 1);
+    stream << "_pair(" << getType() << std::endl;
+
+    outputIndent(stream, level + 1);
+    stream << ", ";
     get1()->repr(stream, level + 1);
-    stream << "," << std::endl << indent_t(level + 1);
+    stream << std::endl;
+
+    outputIndent(stream, level + 1);
+    stream << ", ";
     get2()->repr(stream, level + 1);
-    stream << std::endl << indent_t(level) << ")";
+    stream << std::endl;
+
+    outputIndent(stream, level);
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
 }
 
 }
