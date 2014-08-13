@@ -21,6 +21,9 @@ typedef _COTL_FUNC_T(*func_t);
     (void) caller; (void) job; (void) stack; (void) tunnel;\
 } while (0)
 
+#define _COTL_FUNC_BEGIN _COTL_FUNC_USE_PARAM(); {
+#define _COTL_FUNC_END }
+
 }
 
 #endif
