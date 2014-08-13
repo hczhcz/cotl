@@ -105,7 +105,7 @@ void Str::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
-    stream << "_arr(" << getType() << ", " << get().size() << ",";
+    stream << "_arr(" << getType() << ",";
 
     for (auto i = get().begin(); i != get().end(); ++i) {
         stream << std::endl << indent_t(level + 1) << i->first << ", ";

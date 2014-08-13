@@ -5,50 +5,45 @@
 
 namespace cotl {
 
-inline Atom *_atom(const int_t type) {
-    return new (UseGC) Atom(type, autotype);
+inline Atom *_atom(const int_t type, const func_t func = autotype) {
+    return new (UseGC) Atom(type, func);
 }
 
-inline Int *_int(const int_t type, const int_t &data) {
-    return new (UseGC) Int(type, autotype, data);
+inline Int *_int(const int_t type, const int_t &data, const func_t func = autotype) {
+    return new (UseGC) Int(type, func, data);
 }
 
-inline Real *_real(const int_t type, const real_t &data) {
-    return new (UseGC) Real(type, autotype, data);
+inline Real *_real(const int_t type, const real_t &data, const func_t func = autotype) {
+    return new (UseGC) Real(type, func, data);
 }
 
-inline Str *_str(const int_t type, const std::string &data) {
-    return new (UseGC) Str(type, autotype, data);
+inline Func *_func(const int_t type, const func_t &data, const func_t func = autotype) {
+    return new (UseGC) Func(type, func, data);
 }
 
-inline Arr *_arr(const int_t type) {
-    return new (UseGC) Arr(type, autotype);
+inline Str *_str(const int_t type, const std::string &data, const func_t func = autotype) {
+    return new (UseGC) Str(type, func, data);
 }
 
-inline Arr *_arr(const int_t type, int_t count /* not const */, ... /* int_t index, PVal data, (loop) */) {
-    Arr *result = _arr(type);
+inline Arr *_arr(const int_t type, const func_t func = autotype) {
+    return new (UseGC) Arr(type, func);
+}
 
-    va_list vl;
-    int_t max = count;
+template <class... Args>
+Arr *_arr(const int_t type, const int_t key, const PVal value, const Args... data /* (key, value) loop */) {
+    Arr *result = _arr(type, data...);
 
-    count *= 2;
-
-    va_start(vl, count);
-    for (int_t i = 0; i < max; ++i) {
-        int_t key = va_arg(vl, int_t);
-        result->getVar()[key] = va_arg(vl, PVal);
-    }
-    va_end(vl);
+    result->getVar()[key] = value;
 
     return result;
 }
 
-inline Ptr *_ptr(const int_t type, const PVal &data) {
-    return new (UseGC) Ptr(type, autotype, data);
+inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func = autotype) {
+    return new (UseGC) Ptr(type, func, data);
 }
 
-inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2) {
-    return new (UseGC) Pair(type, autotype, data1, data2);
+inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func = autotype) {
+    return new (UseGC) Pair(type, func, data1, data2);
 }
 
 

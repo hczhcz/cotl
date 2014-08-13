@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
 
     // for testing
 
-    cout << _arr(1001, 3,
+    cout << _arr(1001,
         123, _atom(1002),
         456, _str(1004, "xxx\n\t\r啊\x01\x7F"),
         789, _pair(1005,

@@ -46,7 +46,7 @@ protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
 public:
-    friend inline Atom *_atom(const int_t type);
+    friend inline Atom *_atom(const int_t type, const func_t func);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
@@ -77,12 +77,12 @@ protected:
         Val(type, func), _data(data) {}
 
 public:
-    friend inline Int *_int(const int_t type, const int_t &data);
-    friend inline Real *_real(const int_t type, const real_t &data);
-    friend inline Str *_str(const int_t type, const std::string &data);
-    friend inline Arr *_arr(const int_t type);
-    friend inline Arr *_arr(const int_t type, int_t count, ...);
-    friend inline Ptr *_ptr(const int_t type, const PVal &data);
+    friend inline Int *_int(const int_t type, const int_t &data, const func_t func);
+    friend inline Real *_real(const int_t type, const real_t &data, const func_t func);
+    friend inline Func *_func(const int_t type, const func_t &data, const func_t func);
+    friend inline Str *_str(const int_t type, const std::string &data, const func_t func);
+    friend inline Arr *_arr(const int_t type, const func_t func);
+    friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 
@@ -113,7 +113,7 @@ protected:
     }
 
 public:
-    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2);
+    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func);
 
     inline PVal &getVar1() {
         return _data1;
