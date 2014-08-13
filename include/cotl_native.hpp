@@ -12,13 +12,13 @@ class Val; // forward
 typedef Val *PVal;
 
 #define _COTL_FUNC_T(name) void (name)(\
-    Val &caller, Val &job, Val &stack, Val &tunnel /* could be null */\
-)
+    PVal self, PVal caller, PVal lib, PVal tunnel /* could be null */\
+) // if changed, check cotl_type.hpp
 
 typedef _COTL_FUNC_T(*func_t);
 
 #define _COTL_FUNC_USE_PARAM() do {\
-    (void) caller; (void) job; (void) stack; (void) tunnel;\
+    (void) self; (void) caller; (void) lib; (void) tunnel;\
 } while (0)
 
 #define _COTL_FUNC_BEGIN _COTL_FUNC_USE_PARAM(); {

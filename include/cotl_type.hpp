@@ -5,7 +5,7 @@
 
 namespace cotl {
 
-class Val {
+class Val: public virtual gc {
 private:
     int_t _type;
     func_t _func;
@@ -30,8 +30,8 @@ protected:
     }
 
 public:
-    inline void operator()(Val &job, Val &stack, Val &tunnel /* could be null */) {
-        _func(*this, job, stack, tunnel);
+    inline void operator()(PVal caller, PVal lib, PVal tunnel /* could be null */) {
+        _func(this, caller, lib, tunnel);
     }
 
     inline int_t getType() const {
