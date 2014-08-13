@@ -38,18 +38,21 @@ enum {
     // real
     id_real = IDX_TYPE + 32,
 
+    // func
+    id_func = IDX_TYPE + 48,
+
     // str
-    id_str = IDX_TYPE + 48,
+    id_str = IDX_TYPE + 64,
 
     // arr
-    id_arr = IDX_TYPE + 64,
+    id_arr = IDX_TYPE + 80,
     id_stack,
 
     // ptr
-    id_ptr = IDX_TYPE + 80,
+    id_ptr = IDX_TYPE + 96,
 
     // pair
-    id_pair = IDX_TYPE + 96
+    id_pair = IDX_TYPE + 112
 };
 
 enum {

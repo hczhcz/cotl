@@ -88,6 +88,13 @@ void Real::repr(std::ostream &stream, const int_t level) const {
 }
 
 template <>
+void Func::repr(std::ostream &stream, const int_t level) const {
+    (void) level; // unused
+
+    stream << "_func(" << getType() << ", " << get() << ")";
+}
+
+template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 

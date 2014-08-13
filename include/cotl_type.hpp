@@ -55,6 +55,7 @@ template <class T> class NativeVal;
 
 typedef NativeVal<int_t> Int;
 typedef NativeVal<real_t> Real;
+typedef NativeVal<func_t> Func;
 typedef NativeVal<std::string> Str;
 typedef NativeVal<std::map<int_t, PVal>> Arr;
 typedef NativeVal<PVal> Ptr;
