@@ -10,7 +10,7 @@ struct indent_t {
 
 static std::ostream &operator<<(std::ostream &stream, const indent_t indent) {
     for (int_t i = 0; i < indent._level; ++i) {
-        stream << "\t";
+        stream << "    ";
     }
 
     return stream;
