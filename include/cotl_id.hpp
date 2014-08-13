@@ -54,7 +54,7 @@ enum {
 
 enum {
     id_exec = IDX_RUNTIME,
-    id_lock
+    id_autotype
 };
 
 }
