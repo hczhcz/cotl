@@ -107,6 +107,14 @@ void Func::repr(std::ostream &stream, const int_t level) const {
 }
 
 template <>
+void Ptr::repr(std::ostream &stream, const int_t level) const {
+    stream << "_ptr(" << getType() << ", ";
+    get()->repr(stream, level);
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
+}
+
+template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
@@ -128,14 +136,6 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     }
 
     outputIndent(stream, level);
-    outputAppendFunc(stream, getFunc());
-    stream << ")";
-}
-
-template <>
-void Ptr::repr(std::ostream &stream, const int_t level) const {
-    stream << "_ptr(" << getType() << ", ";
-    get()->repr(stream, level);
     outputAppendFunc(stream, getFunc());
     stream << ")";
 }

@@ -56,9 +56,9 @@ template <class T> class NativeVal;
 typedef NativeVal<int_t> Int;
 typedef NativeVal<real_t> Real;
 typedef NativeVal<func_t> Func;
+typedef NativeVal<PVal> Ptr;
 typedef NativeVal<std::string> Str;
 typedef NativeVal<std::map<int_t, PVal>> Arr;
-typedef NativeVal<PVal> Ptr;
 typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>
@@ -81,9 +81,9 @@ public:
     friend inline Int *_int(const int_t type, const int_t &data, const func_t func);
     friend inline Real *_real(const int_t type, const real_t &data, const func_t func);
     friend inline Func *_func(const int_t type, const func_t &data, const func_t func);
+    friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func);
     friend inline Str *_str(const int_t type, const std::string &data, const func_t func);
     friend inline Arr *_arr(const int_t type, const func_t func);
-    friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func);
     friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func);
 
     virtual void repr(std::ostream &stream, const int_t level) const;

@@ -41,15 +41,15 @@ enum {
     // func
     id_func = IDX_TYPE + 48,
 
+    // ptr
+    id_ptr = IDX_TYPE + 64,
+
     // str
-    id_str = IDX_TYPE + 64,
+    id_str = IDX_TYPE + 80,
 
     // arr
-    id_arr = IDX_TYPE + 80,
+    id_arr = IDX_TYPE + 96,
     id_stack,
-
-    // ptr
-    id_ptr = IDX_TYPE + 96,
 
     // pair
     id_pair = IDX_TYPE + 112
