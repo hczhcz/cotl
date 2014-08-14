@@ -5,7 +5,7 @@
 
 namespace cotl {
 
-class Val: public virtual gc {
+class Val: public virtual gc_cleanup {
 private:
     int_t _type;
     func_t _func;
@@ -58,7 +58,7 @@ typedef NativeVal<real_t> Real;
 typedef NativeVal<func_t> Func;
 typedef NativeVal<PVal> Ptr;
 typedef NativeVal<std::string> Str;
-typedef NativeVal<std::map<int_t, PVal>> Arr;
+typedef NativeVal</* std::map or std::unordered_map */map_t> Arr;
 typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>

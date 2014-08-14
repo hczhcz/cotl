@@ -30,14 +30,18 @@ inline Str *_str(const int_t type, const std::string &data, const func_t func = 
 }
 
 inline Arr *_arr(const int_t type, const func_t func = autotype) {
-    return new (UseGC) Arr(type, func);
+    Arr *result = new (UseGC) Arr(type, func);
+
+    result->getVar() = map_t(new map_t::element_type());
+
+    return result;
 }
 
 template <class... Args>
 Arr *_arr(const int_t type, const int_t key, const PVal value, const Args... data /* (key, value) loop */) {
     Arr *result = _arr(type, data...);
 
-    result->getVar()[key] = value;
+    result->getVar()->insert(std::pair<int_t, PVal>(key, value));
 
     return result;
 }

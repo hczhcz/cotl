@@ -11,6 +11,8 @@ typedef double real_t;
 class Val; // forward
 typedef Val *PVal;
 
+#define _COTL_OBJ_SIZE() (sizeof(Val) + sizeof(long long))
+
 #define _COTL_FUNC_T(name) void (name)(\
     PVal self, PVal caller, PVal lib, PVal &tunnel /* could be null */\
 ) // if changed, check cotl_type.hpp
@@ -24,6 +26,20 @@ typedef _COTL_FUNC_T(*func_t);
 #define _COTL_FUNC_BEGIN _COTL_FUNC_USE_PARAM(); {
 #define _COTL_FUNC_END }
 
+#ifdef _COTL_USE_UNORDERED_MAP
+    typedef std::unique_ptr<std::unordered_map<
+        int_t, PVal,
+        std::hash<int_t>,
+        std::equal_to<int_t>,
+        traceable_allocator<std::pair<const int_t, const PVal>>
+    >> map_t;
+#else
+    typedef std::unique_ptr<std::map<
+        int_t, PVal,
+        std::less<int_t>,
+        traceable_allocator<std::pair<const int_t, const PVal>>
+    >> map_t;
+#endif
 }
 
 #endif

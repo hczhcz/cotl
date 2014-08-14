@@ -12,8 +12,13 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#ifdef _COTL_USE_UNORDERED_MAP
+    #include <unordered_map>
+#else
+    #include <map>
+#endif
 
+#include <memory>
 #include <iostream>
 
 #endif

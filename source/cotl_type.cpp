@@ -128,7 +128,7 @@ template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
     stream << "_arr(" << getType() << std::endl;
 
-    for (auto i = get().begin(); i != get().end(); ++i) {
+    for (auto i = get()->begin(); i != get()->end(); ++i) {
         outputIndent(stream, level + 1);
         stream << ", " << i->first << ", ";
         i->second->repr(stream, level + 1);

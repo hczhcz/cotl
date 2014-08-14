@@ -1,2 +1,5 @@
 // use libgc from OS instead of ./gc
 #define _COTL_USE_GLOBAL_GC
+
+// use unordered_map instead of map
+#define _COTL_USE_UNORDERED_MAP
