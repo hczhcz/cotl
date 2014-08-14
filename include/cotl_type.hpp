@@ -10,14 +10,19 @@ private:
     int_t _type;
     func_t _func;
 
-protected:
-    inline Val(const int_t type, const func_t func): _type(type), _func(func) {}
+    // TODO
+    // void *operator new(size_t s);
+    // void *operator new[](size_t s);
+    //
 
     inline Val() = delete;
 
     inline Val(const Val &) = delete;
 
     inline Val &operator=(const Val &) = delete;
+
+protected:
+    inline Val(const int_t type, const func_t func): _type(type), _func(func) {}
 
     inline void setType(const int_t type) {
         _type = type;
@@ -27,10 +32,6 @@ protected:
         _func = func;
     }
 
-    inline func_t getFunc() const {
-        return _func;
-    }
-
 public:
     inline void operator()(PVal caller, PVal lib, PVal tunnel /* could be null */) {
         _func(this, caller, lib, tunnel);
@@ -38,6 +39,10 @@ public:
 
     inline int_t getType() const {
         return _type;
+    }
+
+    inline func_t getFunc() const {
+        return _func;
     }
 
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
@@ -90,6 +95,7 @@ public:
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 
+    // should not be overused
     inline T &getVar() {
         return _data;
     }
