@@ -5,13 +5,15 @@
 
 namespace cotl {
 
-class Val: public virtual gc_cleanup {
+class Val: public gc_cleanup {
 private:
     int_t _type;
     func_t _func;
 
 protected:
     inline Val(const int_t type, const func_t func): _type(type), _func(func) {}
+
+    inline Val() = delete;
 
     inline Val(const Val &) = delete;
 
@@ -41,7 +43,7 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
 
-class Atom: public virtual Val {
+class Atom: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
@@ -62,7 +64,7 @@ typedef NativeVal</* std::map or std::unordered_map */map_t> Arr;
 typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>
-class NativeVal: public virtual Val {
+class NativeVal: public Val {
 private:
     T _data;
 

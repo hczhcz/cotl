@@ -11,7 +11,7 @@ typedef double real_t;
 class Val; // forward
 typedef Val *PVal;
 
-#define _COTL_OBJ_SIZE() (sizeof(Val) + sizeof(long long))
+#define _COTL_OBJ_SIZE() (sizeof(Val) + 16)
 
 #define _COTL_FUNC_T(name) void (name)(\
     PVal self, PVal caller, PVal lib, PVal &tunnel /* could be null */\
