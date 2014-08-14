@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
             _int(1006, 123, autotype),
             _real(1007, 45.6)
         ),
-        101112, _func(1008, autotype)
+        101112, _ptr(1009, _func(1008, autotype))
     ) << endl;
 
     // end

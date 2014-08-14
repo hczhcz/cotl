@@ -41,7 +41,7 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
 
-class Atom: public Val {
+class Atom: public virtual Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
@@ -62,7 +62,7 @@ typedef NativeVal<PVal> Ptr;
 typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>
-class NativeVal: public Val {
+class NativeVal: public virtual Val {
 private:
     T _data;
 

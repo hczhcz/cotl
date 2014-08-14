@@ -12,7 +12,7 @@ class Val; // forward
 typedef Val *PVal;
 
 #define _COTL_FUNC_T(name) void (name)(\
-    PVal self, PVal caller, PVal lib, PVal tunnel /* could be null */\
+    PVal self, PVal caller, PVal lib, PVal &tunnel /* could be null */\
 ) // if changed, check cotl_type.hpp
 
 typedef _COTL_FUNC_T(*func_t);
