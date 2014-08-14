@@ -59,6 +59,7 @@ typedef NativeVal<func_t> Func;
 typedef NativeVal<std::string> Str;
 typedef NativeVal<std::map<int_t, PVal>> Arr;
 typedef NativeVal<PVal> Ptr;
+typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>
 class NativeVal: public Val {
@@ -83,6 +84,7 @@ public:
     friend inline Str *_str(const int_t type, const std::string &data, const func_t func);
     friend inline Arr *_arr(const int_t type, const func_t func);
     friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func);
+    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 
@@ -93,45 +95,6 @@ public:
     inline const T &get() const {
         return _data;
     }
-};
-
-class Pair: public Val {
-private:
-    PVal _data1;
-    PVal _data2;
-
-protected:
-    inline Pair(const int_t type, const func_t func, const PVal &data1, const PVal &data2):
-        Val(type, func), _data1(data1), _data2(data2) {}
-
-    inline void set1(const PVal &data) {
-        _data1 = data;
-    }
-
-    inline void set2(const PVal &data) {
-        _data2 = data;
-    }
-
-public:
-    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func);
-
-    inline PVal &getVar1() {
-        return _data1;
-    }
-
-    inline const PVal &get1() const {
-        return _data1;
-    }
-
-    inline PVal &getVar2() {
-        return _data2;
-    }
-
-    inline const PVal &get2() const {
-        return _data2;
-    }
-
-    virtual void repr(std::ostream &stream, const int_t level) const;
 };
 
 }

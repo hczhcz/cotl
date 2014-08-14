@@ -140,17 +140,18 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
     stream << ")";
 }
 
+template <>
 void Pair::repr(std::ostream &stream, const int_t level) const {
     stream << "_pair(" << getType() << std::endl;
 
     outputIndent(stream, level + 1);
     stream << ", ";
-    get1()->repr(stream, level + 1);
+    get().first->repr(stream, level + 1);
     stream << std::endl;
 
     outputIndent(stream, level + 1);
     stream << ", ";
-    get2()->repr(stream, level + 1);
+    get().second->repr(stream, level + 1);
     stream << std::endl;
 
     outputIndent(stream, level);

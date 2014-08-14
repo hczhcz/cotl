@@ -43,7 +43,7 @@ inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func = autotyp
 }
 
 inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func = autotype) {
-    return new (UseGC) Pair(type, func, data1, data2);
+    return new (UseGC) Pair(type, func, std::pair<PVal, PVal>(data1, data2));
 }
 
 
