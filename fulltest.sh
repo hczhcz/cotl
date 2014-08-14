@@ -1,5 +1,5 @@
 ./build.sh
 ./check.sh
 ./doc.sh
-echo "======== ./output/cotl ========"
-./output/cotl
+echo "======== valgrind ./output/cotl ========"
+valgrind ./output/cotl
