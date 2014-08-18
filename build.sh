@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # a simple script to build cotl
-# use clang++ -O2 by default
+# use clang++ -O1 by default
 
 cc="clang++"
 if ! type "$cc" > /dev/null
