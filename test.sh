@@ -1,3 +1,3 @@
 ./build.sh "$@"
-echo "======== ./output/cotl ========"
-./output/cotl
+echo "======== time ./output/cotl ========"
+time ./output/cotl
