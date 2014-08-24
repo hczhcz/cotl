@@ -9,6 +9,9 @@ class Val: public gc_cleanup {
 private:
     int_t _type;
     func_t _func;
+    #ifdef _COTL_USE_REF_COUNT
+        int_t _ref = 0;
+    #endif
 
     inline Val() = delete;
     inline Val(const Val &) = delete;
@@ -52,6 +55,22 @@ protected:
         _func = func;
     }
 
+    #ifdef _COTL_USE_REF_COUNT
+        friend class PVal;
+
+        inline void incRef() {
+            ++_ref;
+        }
+
+        inline void decRef() {
+            --_ref;
+
+            if (!_ref) {
+                delete this;
+            }
+        }
+    #endif
+
 public:
     inline int_t getType() const {
         return _type;
@@ -64,10 +83,27 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
 
-// from cotl_ptr.hpp
+// begin: from cotl_ptr.hpp
+
 inline void PVal::operator()(PVal caller, PVal lib, PVal tunnel /* could be null */) {
     _val->getFunc()(_val, caller, lib, tunnel);
 }
+
+#ifdef _COTL_USE_REF_COUNT
+    inline void PVal::doInc() {
+        if (_val) {
+            _val->incRef();
+        }
+    }
+
+    inline void PVal::doDec() {
+        if (_val) {
+            _val->decRef();
+        }
+    }
+#endif
+
+// end: from cotl_ptr.hpp
 
 inline std::ostream &operator<<(std::ostream &stream, const PVal &value) {
     value->repr(stream, 0);

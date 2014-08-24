@@ -16,6 +16,14 @@ private:
     inline PVal &operator=(Val &&) = delete;
     inline void *operator new(size_t size) = delete;
 
+    #ifdef _COTL_USE_REF_COUNT
+        inline void doInc();
+        // defined in cotl_type.hpp
+
+        inline void doDec();
+        // defined in cotl_type.hpp
+    #endif
+
 public:
     inline PVal(Val *val): _val(val) {}
 
