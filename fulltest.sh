@@ -1,4 +1,4 @@
-./build.sh
+./build.sh "$@"
 ./check.sh
 ./doc.sh
 echo "======== valgrind ./output/cotl ========"
