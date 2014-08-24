@@ -24,7 +24,14 @@ protected:
             reused->~Val();
             return reused;
         } else {
-            return GC_MALLOC(_COTL_OBJ_SIZE());
+            const size_t maxsize = sizeof(Val) + 16;
+
+            if (size > maxsize) {
+                // TODO: error
+                exit(1);
+            }
+
+            return GC_MALLOC(maxsize);
         }
     }
 
