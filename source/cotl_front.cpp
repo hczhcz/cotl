@@ -48,8 +48,8 @@ int main(int argc, char* argv[]) {
             101112, _ptr(1009, _func(1008, autotype))
         );*/
 
-        Val *a1 = _atom(1002, autotype);
-        Val *a2 = _int(1002, 1, autotype, a1);
+        PVal a1 = _atom(1002, autotype);
+        PVal a2 = _int(1002, 1, autotype, a1);
         cout<<(a2 == a1)<<endl;
         cout<<a1<<endl;
     }

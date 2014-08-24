@@ -17,7 +17,7 @@ private:
     inline Val &operator=(const Val &) = delete;
 
 protected:
-    inline void *operator new(size_t size, Val *reused) {
+    inline void *operator new(size_t size, PVal reused) {
         (void) size;
 
         if (reused) {
@@ -68,7 +68,7 @@ protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
 public:
-    friend inline Atom *_atom(const int_t type, const func_t func, Val *reused);
+    friend inline Atom *_atom(const int_t type, const func_t func, PVal reused);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
@@ -100,13 +100,13 @@ protected:
         Val(type, func), _data(data) {}
 
 public:
-    friend inline Int *_int(const int_t type, const int_t &data, const func_t func, Val *reused);
-    friend inline Real *_real(const int_t type, const real_t &data, const func_t func, Val *reused);
-    friend inline Func *_func(const int_t type, const func_t &data, const func_t func, Val *reused);
-    friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func, Val *reused);
-    friend inline Str *_str(const int_t type, const std::string &data, const func_t func, Val *reused);
-    friend inline Arr *_arr(const int_t type, const func_t func, Val *reused);
-    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func, Val *reused);
+    friend inline Int *_int(const int_t type, const int_t &data, const func_t func, PVal reused);
+    friend inline Real *_real(const int_t type, const real_t &data, const func_t func, PVal reused);
+    friend inline Func *_func(const int_t type, const func_t &data, const func_t func, PVal reused);
+    friend inline Ptr *_ptr(const int_t type, const PVal &data, const func_t func, PVal reused);
+    friend inline Str *_str(const int_t type, const std::string &data, const func_t func, PVal reused);
+    friend inline Arr *_arr(const int_t type, const func_t func, PVal reused);
+    friend inline Pair *_pair(const int_t type, const PVal &data1, const PVal &data2, const func_t func, PVal reused);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 
