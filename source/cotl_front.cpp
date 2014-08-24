@@ -4,6 +4,9 @@ int main(int argc, char* argv[]) {
     using namespace std;
     using namespace cotl;
 
+    (void) argc;
+    (void) argv;
+
     // TODO
 
     // for testing
@@ -38,7 +41,7 @@ int main(int argc, char* argv[]) {
 
     for (int i = 0; i < 100000; ++i) {
         // memory leak test
-        /*_arr(1001,
+        _arr(1001,
             123, _atom(1002, func_t(0x12345678)),
             456, _str(1004, "xxx\n\t\r啊\x01\x7F"),
             789, _pair(1005,
@@ -46,12 +49,15 @@ int main(int argc, char* argv[]) {
                 _real(1007, 45.6)
             ),
             101112, _ptr(1009, _func(1008, autotype))
-        );*/
+        );
 
+        // correctness test
         PVal a1 = _atom(1002, autotype);
-        PVal a2 = _int(1002, 1, autotype, a1);
-        cout<<(a2 == a1)<<endl;
-        cout<<a1<<endl;
+        PVal a2 = _int(1002, 123, autotype, a1);
+        (void) a2;
+        // cout << (a2 == a1) << endl;
+        // cout << a1 << endl;
+        // cout << a2.as<Int>()->get() << endl;
     }
 
     // end
