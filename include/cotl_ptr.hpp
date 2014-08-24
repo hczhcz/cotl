@@ -10,10 +10,6 @@ private:
     Val *_val;
 
     inline PVal() = delete;
-    inline PVal(const Val &) = delete;
-    inline PVal(Val &&) = delete;
-    inline PVal &operator=(const Val &) = delete;
-    inline PVal &operator=(Val &&) = delete;
     inline void *operator new(size_t size) = delete;
 
     #ifdef _COTL_USE_REF_COUNT
@@ -25,7 +21,49 @@ private:
     #endif
 
 public:
-    inline PVal(Val *val): _val(val) {}
+    inline PVal(Val *val): _val(val) {
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+    }
+
+    inline PVal(const PVal &ptr): _val(ptr._val) {
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+    };
+
+    inline PVal(PVal &&ptr): _val(ptr._val) {
+        ptr._val = nullptr;
+    }
+
+    inline ~PVal() {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+    }
+
+    inline PVal &operator=(const PVal &ptr) {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+        _val = ptr._val;
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+
+        return *this;
+    };
+
+    inline PVal &operator=(PVal &&ptr) {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+        _val = ptr._val;
+        ptr._val = nullptr;
+
+        return *this;
+    }
 
     inline Val *operator->() {
         return _val;
