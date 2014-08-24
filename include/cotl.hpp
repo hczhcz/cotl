@@ -7,6 +7,7 @@
 
 // type definitions
 #include "cotl_native.hpp"
+#include "cotl_ptr.hpp"
 #include "cotl_type.hpp"
 
 // cotl std library
@@ -15,7 +16,6 @@
 
 // utilities
 #include "cotl_new.hpp"
-#include "cotl_repr.hpp"
 
 namespace cotl {
 

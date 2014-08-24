@@ -11,10 +11,14 @@ private:
     func_t _func;
 
     inline Val() = delete;
-
     inline Val(const Val &) = delete;
-
+    inline Val(Val &&) = delete;
     inline Val &operator=(const Val &) = delete;
+    inline Val &operator=(Val &&) = delete;
+
+    inline void *mem() {
+        return this;
+    }
 
 protected:
     inline void *operator new(size_t size, PVal reused) {
@@ -22,7 +26,8 @@ protected:
 
         if (reused) {
             reused->~Val();
-            return reused;
+
+            return reused->mem();
         } else {
             const size_t maxsize = sizeof(Val) + 16;
 
@@ -48,10 +53,6 @@ protected:
     }
 
 public:
-    inline void operator()(PVal caller, PVal lib, PVal tunnel /* could be null */) {
-        _func(this, caller, lib, tunnel);
-    }
-
     inline int_t getType() const {
         return _type;
     }
@@ -62,6 +63,16 @@ public:
 
     virtual void repr(std::ostream &stream, const int_t level) const = 0;
 };
+
+// from cotl_ptr.hpp
+inline void PVal::operator()(PVal caller, PVal lib, PVal tunnel /* could be null */) {
+    _val->getFunc()(_val, caller, lib, tunnel);
+}
+
+inline std::ostream &operator<<(std::ostream &stream, const PVal &value) {
+    value->repr(stream, 0);
+    return stream;
+}
 
 class Atom: public Val {
 protected:

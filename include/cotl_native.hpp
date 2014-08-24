@@ -8,12 +8,13 @@ namespace cotl {
 typedef long long int_t;
 typedef double real_t;
 
-class Val; // forward
-typedef Val *PVal;
+// forward
+class Val;
+class PVal;
 
 #define _COTL_FUNC_T(name) void (name)(\
     PVal self, PVal caller, PVal lib, PVal &tunnel /* could be null */\
-) // if changed, check cotl_type.hpp
+) // if changed, check cotl_ptr.hpp and cotl_type.hpp
 
 typedef _COTL_FUNC_T(*func_t);
 
