@@ -105,11 +105,6 @@ inline void PVal::operator()(PVal caller, PVal lib, PVal tunnel /* could be null
 
 // end: from cotl_ptr.hpp
 
-inline std::ostream &operator<<(std::ostream &stream, const PVal &value) {
-    value->repr(stream, 0);
-    return stream;
-}
-
 class Atom: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}

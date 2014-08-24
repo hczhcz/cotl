@@ -16,6 +16,7 @@
 
 // utilities
 #include "cotl_new.hpp"
+#include "cotl_repr.hpp"
 
 namespace cotl {
 
