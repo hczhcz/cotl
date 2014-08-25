@@ -4,21 +4,24 @@
 # use clang++ -O1 by default
 
 cc="clang++"
+# ccflags="-flto -emit-llvm"
+ccflags=""
 if ! type "$cc" > /dev/null
 then
     cc="g++"
+    ccflags=""
 fi
 if ! type "$cc" > /dev/null
 then
     sudo apt-get install g++
 fi
 
-dflags="-Wall -Wextra"
+dflags="-std=c++11 -Wall -Wextra"
 
 flags="$@"
 if [ "$flags" = "" ]
 then
-    flags="-std=c++11 -g -O1"
+    flags="-g -O1"
 fi
 
 rm ./output/*
@@ -26,7 +29,7 @@ rm ./output/*
 for file in ./source/*.cpp
 do
     echo "======== $(basename $file) ========"
-    "$cc" -c $dflags $flags "$file" -o "./output/$(basename $file .cpp).o"
+    "$cc" -c $ccflags $dflags $flags "$file" -o "./output/$(basename $file .cpp).o"
 done
 
 echo "======== linking ========"
