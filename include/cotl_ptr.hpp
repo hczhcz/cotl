@@ -11,8 +11,6 @@ private:
     PValRaw _val;
 
     inline PValProto() = delete;
-    inline PValProto(PValProto<maybe> &&) = delete;
-    inline PValProto<maybe> &operator=(PValProto<maybe> &&) = delete;
     inline void *operator new(size_t) = delete;
 
     inline void checkNull();
@@ -51,6 +49,14 @@ public:
             doInc();
         #endif
     }
+
+    inline PValProto(PMaybe &&ptr): _val(ptr._val) {
+        checkNull();
+
+        ptr._val = nullptr;
+    }
+
+    inline PValProto(PVal &&ptr) = delete; // not allowed
 
     inline ~PValProto() {
         #ifdef _COTL_USE_REF_COUNT
@@ -101,6 +107,21 @@ public:
 
         return *this;
     }
+
+    inline PValProto<maybe> &operator=(PMaybe &&ptr) {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+
+        _val = ptr._val;
+        checkNull();
+
+        ptr._val = nullptr;
+
+        return *this;
+    }
+
+    inline PValProto<maybe> &operator=(PVal &&ptr) = delete; // not allowed
 
     inline PValRaw operator->() const;
     // defined in cotl_inline.hpp
