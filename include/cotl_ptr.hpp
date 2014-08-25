@@ -10,7 +10,15 @@ private:
     PValRaw _val;
 
     inline PVal() = delete;
-    inline void *operator new(size_t size) = delete;
+    inline PVal(PVal &&) = delete;
+    inline PVal &operator=(PVal &&) = delete;
+    inline void *operator new(size_t) = delete;
+
+    inline void checkNull() {
+        if (!_val) {
+            // TODO
+        }
+    }
 
     #ifdef _COTL_USE_REF_COUNT
         inline void doInc();
@@ -21,7 +29,9 @@ private:
     #endif
 
 public:
-    inline PVal(PValRaw val): _val(val) {
+    inline PVal(const PValRaw val): _val(val) {
+        checkNull();
+
         #ifdef _COTL_USE_REF_COUNT
             doInc();
         #endif
@@ -33,9 +43,9 @@ public:
         #endif
     };
 
-    inline PVal(PVal &&ptr): _val(ptr._val) {
+    /* inline PVal(PVal &&ptr): _val(ptr._val) {
         ptr._val = nullptr;
-    }
+    } */
 
     inline ~PVal() {
         #ifdef _COTL_USE_REF_COUNT
@@ -43,11 +53,14 @@ public:
         #endif
     }
 
-    inline PVal &operator=(const PVal &ptr) {
+    inline PVal &operator=(const PValRaw val) {
         #ifdef _COTL_USE_REF_COUNT
             doDec();
         #endif
-        _val = ptr._val;
+
+        _val = val;
+        checkNull();
+
         #ifdef _COTL_USE_REF_COUNT
             doInc();
         #endif
@@ -55,15 +68,30 @@ public:
         return *this;
     };
 
-    inline PVal &operator=(PVal &&ptr) {
+    inline PVal &operator=(const PVal &ptr) {
         #ifdef _COTL_USE_REF_COUNT
             doDec();
         #endif
+
+        _val = ptr._val;
+
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+
+        return *this;
+    };
+
+    /* inline PVal &operator=(PVal &&ptr) {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+
         _val = ptr._val;
         ptr._val = nullptr;
 
         return *this;
-    }
+    } */
 
     inline PValRaw operator->() const {
         return _val;

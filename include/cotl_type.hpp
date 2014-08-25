@@ -19,10 +19,6 @@ private:
     inline Val &operator=(const Val &) = delete;
     inline Val &operator=(Val &&) = delete;
 
-    inline void *mem() {
-        return this;
-    }
-
 protected:
     inline void *operator new(size_t size, PValRaw reused) {
         (void) size;
@@ -30,7 +26,7 @@ protected:
         if (reused) {
             reused->~Val();
 
-            return reused->mem();
+            return reused;
         } else {
             const size_t maxsize = sizeof(Val) + 16;
 
@@ -45,7 +41,7 @@ protected:
 
     inline Val(const int_t type, const func_t func): gc_cleanup(), _type(type), _func(func) {}
 
-    virtual ~Val() {/* inherit ~gc_cleanup() */}
+    virtual ~Val() {};
 
     inline void setType(const int_t type) {
         _type = type;
@@ -91,15 +87,11 @@ inline void PVal::operator()(const PVal &caller, const PVal &lib, PVal &tunnel /
 
 #ifdef _COTL_USE_REF_COUNT
     inline void PVal::doInc() {
-        if (_val) {
-            _val->incRef();
-        }
+        _val->incRef();
     }
 
     inline void PVal::doDec() {
-        if (_val) {
-            _val->decRef();
-        }
+        _val->decRef();
     }
 #endif
 
@@ -108,6 +100,8 @@ inline void PVal::operator()(const PVal &caller, const PVal &lib, PVal &tunnel /
 class Atom: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
+
+    virtual ~Atom() {}
 
 public:
     friend inline Atom *_atom(const int_t type, const func_t func, PValRaw reused);
@@ -140,6 +134,8 @@ protected:
 
     inline NativeVal(const int_t type, const func_t func, const T &data):
         Val(type, func), _data(data) {}
+
+    virtual ~NativeVal() {}
 
 public:
     friend inline Int *_int(const int_t type, const int_t &data, const func_t func, PValRaw reused);
