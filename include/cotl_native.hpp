@@ -11,9 +11,10 @@ typedef double real_t;
 // forward
 class Val;
 class PVal;
+typedef Val *PValRaw;
 
 #define _COTL_FUNC_T(name) void (name)(\
-    PVal self, PVal caller, PVal lib, PVal &tunnel /* could be null */\
+    const PVal &self, const PVal &caller, const PVal &lib, PVal &tunnel /* could be null */\
 ) // if changed, check cotl_ptr.hpp and cotl_type.hpp
 
 typedef _COTL_FUNC_T(*func_t);

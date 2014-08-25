@@ -7,7 +7,7 @@ namespace cotl {
 
 class PVal {
 private:
-    Val *_val;
+    PValRaw _val;
 
     inline PVal() = delete;
     inline void *operator new(size_t size) = delete;
@@ -21,7 +21,7 @@ private:
     #endif
 
 public:
-    inline PVal(Val *val): _val(val) {
+    inline PVal(PValRaw val): _val(val) {
         #ifdef _COTL_USE_REF_COUNT
             doInc();
         #endif
@@ -65,11 +65,7 @@ public:
         return *this;
     }
 
-    inline Val *operator->() {
-        return _val;
-    }
-
-    inline const Val *operator->() const {
+    inline PValRaw operator->() const {
         return _val;
     }
 
@@ -77,12 +73,16 @@ public:
         return _val;
     }
 
-    inline void operator()(PVal caller, PVal lib, PVal tunnel /* could be null */);
+    inline void operator()(const PVal &caller, const PVal &lib, PVal &tunnel /* could be null */) const;
     // defined in cotl_type.hpp
 
     template <class T>
-    inline T *as() {
+    inline T *as() const {
         return dynamic_cast<T *>(_val);
+    }
+
+    inline PValRaw raw() const {
+        return _val;
     }
 };
 

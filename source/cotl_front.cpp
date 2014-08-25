@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 
         // correctness test
         PVal a1 = _atom(1002, autotype);
-        PVal a2 = _int(1002, 123, autotype, a1);
+        PVal a2 = _int(1002, 123, autotype, a1.raw());
         (void) a2;
         // cout << (a2 == a1) << endl;
         // cout << a1 << endl;
