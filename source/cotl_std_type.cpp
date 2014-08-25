@@ -1,6 +1,6 @@
 #include "../cotl"
 
-namespace cotl {
+namespace cotlstd {
 
 _COTL_FUNC_T(_int) {
     _COTL_FUNC_BEGIN

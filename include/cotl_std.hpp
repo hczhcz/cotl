@@ -3,10 +3,18 @@
 
 #include "cotl_helper.hpp"
 
-namespace cotl {
+namespace cotlstd {
+
+using namespace cotl;
 
 _COTL_FUNC_T(exec);
 _COTL_FUNC_T(autotype);
+
+}
+
+namespace cotl {
+
+using cotlstd::autotype;
 
 }
 

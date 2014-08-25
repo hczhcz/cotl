@@ -3,7 +3,7 @@
 
 #include "cotl_helper.hpp"
 
-namespace cotl {
+namespace cotlstd {
 
 enum {
     // std lib
