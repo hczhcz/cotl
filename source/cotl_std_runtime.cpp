@@ -11,7 +11,7 @@ _COTL_FUNC_T(exec) {
 _COTL_FUNC_T(autotype) {
     _COTL_FUNC_BEGIN
 
-    PVal func = nullptr;
+    PMaybe func(nullptr);
 
     lib(self, lib, func);
 

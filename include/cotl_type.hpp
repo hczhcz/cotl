@@ -21,6 +21,7 @@ private:
 
 protected:
     inline void *operator new(size_t size, PValRaw reused) {
+        // TODO move _ref to new object
         (void) size;
 
         if (reused) {
@@ -41,7 +42,7 @@ protected:
 
     inline Val(const int_t type, const func_t func): gc_cleanup(), _type(type), _func(func) {}
 
-    virtual ~Val() {};
+    virtual ~Val() {}
 
     inline void setType(const int_t type) {
         _type = type;

@@ -12,10 +12,4 @@ _COTL_FUNC_T(autotype);
 
 }
 
-namespace cotl {
-
-using cotlstd::autotype;
-
-}
-
 #endif
