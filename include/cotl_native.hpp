@@ -8,14 +8,21 @@ namespace cotl {
 typedef long long int_t;
 typedef double real_t;
 
-// forward
+// begin: forward
+
 class Val;
-class PVal;
+
+template <bool maybe> class PValProto;
+typedef PValProto<true> PMaybe;
+typedef PValProto<false> PVal;
+
+// end: foward
+
 typedef Val *PValRaw;
 
 #define _COTL_FUNC_T(name) void (name)(\
-    const PVal &self, const PVal &caller, const PVal &lib, PVal &tunnel /* could be null */\
-) // if changed, check cotl_ptr.hpp and cotl_type.hpp
+    const PVal &self, const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */\
+) // if changed, check cotl_ptr.hpp and cotl_ptr_inline.hpp
 
 typedef _COTL_FUNC_T(*func_t);
 

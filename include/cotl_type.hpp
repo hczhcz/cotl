@@ -53,7 +53,8 @@ protected:
     }
 
     #ifdef _COTL_USE_REF_COUNT
-        friend class PVal;
+        friend class PValProto<false>;
+        friend class PValProto<true>;
 
         inline void incRef() {
             ++_ref;
@@ -79,24 +80,6 @@ public:
 
     virtual void repr(std::ostream &stream, const int_t level) const = 0 /* abstract */;
 };
-
-// begin: from cotl_ptr.hpp
-
-inline void PVal::operator()(const PVal &caller, const PVal &lib, PVal &tunnel /* could be null */) const {
-    _val->getFunc()(*this, caller, lib, tunnel);
-}
-
-#ifdef _COTL_USE_REF_COUNT
-    inline void PVal::doInc() {
-        _val->incRef();
-    }
-
-    inline void PVal::doDec() {
-        _val->decRef();
-    }
-#endif
-
-// end: from cotl_ptr.hpp
 
 class Atom: public Val {
 protected:

@@ -5,31 +5,32 @@
 
 namespace cotl {
 
-class PVal {
+template <bool maybe>
+class PValProto {
 private:
     PValRaw _val;
 
-    inline PVal() = delete;
-    inline PVal(PVal &&) = delete;
-    inline PVal &operator=(PVal &&) = delete;
+    inline PValProto() = delete;
+    inline PValProto(PValProto<maybe> &&) = delete;
+    inline PValProto<maybe> &operator=(PValProto<maybe> &&) = delete;
     inline void *operator new(size_t) = delete;
 
-    inline void checkNull() {
-        if (!_val) {
-            // TODO
-        }
-    }
+    inline void checkNull();
+    // defined in cotl_inline.hpp
+
+    inline bool exist() const;
+    // defined in cotl_inline.hpp
 
     #ifdef _COTL_USE_REF_COUNT
-        inline void doInc();
-        // defined in cotl_type.hpp
+        inline void doInc() const;
+        // defined in cotl_inline.hpp
 
-        inline void doDec();
-        // defined in cotl_type.hpp
+        inline void doDec() const;
+        // defined in cotl_inline.hpp
     #endif
 
 public:
-    inline PVal(const PValRaw val): _val(val) {
+    inline PValProto(const PValRaw val): _val(val) {
         checkNull();
 
         #ifdef _COTL_USE_REF_COUNT
@@ -37,23 +38,27 @@ public:
         #endif
     }
 
-    inline PVal(const PVal &ptr): _val(ptr._val) {
+    inline PValProto(const PMaybe &ptr): _val(ptr._val) {
+        checkNull();
+
         #ifdef _COTL_USE_REF_COUNT
             doInc();
         #endif
-    };
+    }
 
-    /* inline PVal(PVal &&ptr): _val(ptr._val) {
-        ptr._val = nullptr;
-    } */
+    inline PValProto(const PVal &ptr): _val(ptr._val) {
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+    }
 
-    inline ~PVal() {
+    inline ~PValProto() {
         #ifdef _COTL_USE_REF_COUNT
             doDec();
         #endif
     }
 
-    inline PVal &operator=(const PValRaw val) {
+    inline PValProto<maybe> &operator=(const PValRaw val) {
         #ifdef _COTL_USE_REF_COUNT
             doDec();
         #endif
@@ -66,9 +71,24 @@ public:
         #endif
 
         return *this;
-    };
+    }
 
-    inline PVal &operator=(const PVal &ptr) {
+    inline PValProto<maybe> &operator=(const PMaybe &ptr) {
+        #ifdef _COTL_USE_REF_COUNT
+            doDec();
+        #endif
+
+        _val = ptr._val;
+        checkNull();
+
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+
+        return *this;
+    }
+
+    inline PValProto<maybe> &operator=(const PVal &ptr) {
         #ifdef _COTL_USE_REF_COUNT
             doDec();
         #endif
@@ -80,33 +100,27 @@ public:
         #endif
 
         return *this;
-    };
-
-    /* inline PVal &operator=(PVal &&ptr) {
-        #ifdef _COTL_USE_REF_COUNT
-            doDec();
-        #endif
-
-        _val = ptr._val;
-        ptr._val = nullptr;
-
-        return *this;
-    } */
-
-    inline PValRaw operator->() const {
-        return _val;
     }
+
+    inline PValRaw operator->() const;
+    // defined in cotl_inline.hpp
+
+    inline void operator()(
+        const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+    ) const;
+    // defined in cotl_inline.hpp
 
     inline operator bool() const {
-        return _val;
+        return exist();
     }
-
-    inline void operator()(const PVal &caller, const PVal &lib, PVal &tunnel /* could be null */) const;
-    // defined in cotl_type.hpp
 
     template <class T>
     inline T *as() const {
-        return dynamic_cast<T *>(_val);
+        if (exist()) {
+            return dynamic_cast<T *>(_val);
+        } else {
+            return nullptr;
+        }
     }
 
     inline PValRaw raw() const {

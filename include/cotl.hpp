@@ -19,6 +19,9 @@
 #include "cotl_new.hpp"
 #include "cotl_repr.hpp"
 
+// implementation
+#include "cotl_ptr_inline.hpp"
+
 namespace cotl {
 
 const long long ago = 5;
