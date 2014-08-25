@@ -28,6 +28,8 @@ private:
     #endif
 
 public:
+    friend class PValProto<!maybe>;
+
     inline PValProto(const PValRaw val): _val(val) {
         checkNull();
 
