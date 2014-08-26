@@ -26,8 +26,8 @@ enum {
 enum {
     // atom
     id_atom = IDX_TYPE,
-    id_error,
-    id_null,
+    id_error, // exception
+    id_null, // not found
     id_false,
     id_true,
 

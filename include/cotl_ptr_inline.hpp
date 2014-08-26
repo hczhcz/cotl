@@ -17,7 +17,7 @@ inline bool PValProto<maybe>::exist() const {
 
 template <bool maybe>
 inline void PValProto<maybe>::giveVal() {
-    _val = _atom(cotlstd::id_error);
+    _val = _atom(cotlstd::id_null);
 }
 
 #ifdef _COTL_USE_REF_COUNT
