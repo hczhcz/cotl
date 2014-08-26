@@ -11,9 +11,7 @@ static void outputIndent(std::ostream &stream, const int_t indent) {
 static void outputStr(std::ostream &stream, const std::string &str) {
     stream << "\"";
 
-    for (auto i = str.begin(); i != str.end(); ++i) {
-        char val = *i;
-
+    for (const char val: str) {
         switch (val) {
         case '\0':
             stream << "\\0";

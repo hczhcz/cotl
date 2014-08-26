@@ -30,10 +30,7 @@ protected:
         } else {
             const size_t maxsize = sizeof(Val) + 16;
 
-            if (size > maxsize) {
-                // TODO: error
-                exit(1);
-            }
+            assert(size <= maxsize);
 
             return GC_MALLOC(maxsize);
         }

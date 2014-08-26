@@ -2,6 +2,8 @@
 
 namespace cotlstd {
 
+// arg: self, caller, lib, tunnel
+
 _COTL_FUNC_T(exec) {
     _COTL_FUNC_BEGIN
 
