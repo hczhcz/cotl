@@ -99,6 +99,22 @@ inline Ptr *_ptr(const PVal &data,
     return result;
 }
 
+inline Pair *_pair(const PVal &data1, const PVal &data2,
+    const int_t type = id_pair, const func_t func = autotype, PValRaw reused = nullptr
+) {
+    #ifdef _COTL_USE_REF_COUNT
+        int_t ref = getRef(reused);
+    #endif
+
+    Pair * result = new (reused) Pair(std::pair<PVal, PVal>(data1, data2), type, func);
+
+    #ifdef _COTL_USE_REF_COUNT
+        setRef(result, ref);
+    #endif
+
+    return result;
+}
+
 inline Str *_str(const std::string &data,
     const int_t type = id_str, const func_t func = autotype, PValRaw reused = nullptr
 ) {
@@ -141,22 +157,6 @@ inline Arr *_arr(const int_t key, const PVal &value, const Args... data /* (key,
     Arr *result = _arr(data...);
 
     result->getVar()->insert(std::pair<int_t, PVal>(key, value));
-
-    return result;
-}
-
-inline Pair *_pair(const PVal &data1, const PVal &data2,
-    const int_t type = id_pair, const func_t func = autotype, PValRaw reused = nullptr
-) {
-    #ifdef _COTL_USE_REF_COUNT
-        int_t ref = getRef(reused);
-    #endif
-
-    Pair * result = new (reused) Pair(std::pair<PVal, PVal>(data1, data2), type, func);
-
-    #ifdef _COTL_USE_REF_COUNT
-        setRef(result, ref);
-    #endif
 
     return result;
 }

@@ -17,9 +17,9 @@ int main(int argc, char* argv[]) {
     cout << sizeof(Real) << endl;
     cout << sizeof(Func) << endl;
     cout << sizeof(Ptr) << endl;
+    cout << sizeof(Pair) << endl;
     cout << sizeof(Str) << endl;
     cout << sizeof(Arr) << endl;
-    cout << sizeof(Pair) << endl;
     cout << sizeof(std::string) << endl;
     std::string s("aaahhhh");
     cout << sizeof(s) << endl;
@@ -34,12 +34,12 @@ int main(int argc, char* argv[]) {
         456, _str("xxx\n\t\r啊\x01\x7F", 1004),
         789, _pair(
             _int(123, 1006, autotype),
-            _real(45.6, 1007),
+            _real(45.6, id_real),
         1005),
         101112, _ptr(_func(autotype, 1008)),
     1001) << endl;
 
-    cout << _pair(_arr(), _atom()) << endl;
+    cout << _pair(_arr(1, _ptr(_arr())), _atom()) << endl;
 
     for (int i = 0; i < 100000; ++i) {
         // memory leak test
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
                 456, _str("xxx\n\t\r啊\x01\x7F", 1004),
                 789, _pair(
                     _int(123, 1006, autotype),
-                    _real(45.6, 1007),
+                    _real(45.6, id_real),
                 1005),
                 101112, _ptr(_func(autotype, 1008)),
             1001)

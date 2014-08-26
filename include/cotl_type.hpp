@@ -100,9 +100,9 @@ typedef NativeVal<int_t> Int;
 typedef NativeVal<real_t> Real;
 typedef NativeVal<func_t> Func;
 typedef NativeVal<PVal> Ptr;
+typedef NativeVal<std::pair<PVal, PVal>> Pair;
 typedef NativeVal<std::string> Str;
 typedef NativeVal</* std::map or std::unordered_map */map_t> Arr;
-typedef NativeVal<std::pair<PVal, PVal>> Pair;
 
 template <class T>
 class NativeVal: public Val {
@@ -135,13 +135,13 @@ public:
     friend inline Ptr *_ptr(const PVal &data,
         const int_t type, const func_t func, PValRaw reused
     );
+    friend inline Pair *_pair(const PVal &data1, const PVal &data2,
+        const int_t type, const func_t func, PValRaw reused
+    );
     friend inline Str *_str(const std::string &data,
         const int_t type, const func_t func, PValRaw reused
     );
     friend inline Arr *_arr(
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend inline Pair *_pair(const PVal &data1, const PVal &data2,
         const int_t type, const func_t func, PValRaw reused
     );
 

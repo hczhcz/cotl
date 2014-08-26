@@ -135,6 +135,23 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
 }
 
 template <>
+void Pair::repr(std::ostream &stream, const int_t level) const {
+    stream << "_pair(" << std::endl;
+
+    // next line
+    outputIndent(stream, level + 1);
+    get().first->repr(stream, level + 1);
+    stream << "," << std::endl;
+
+    // next line
+    outputIndent(stream, level + 1);
+    get().second->repr(stream, level + 1);
+    outputAppendType(stream, getType(), id_pair);
+    outputAppendFunc(stream, getFunc());
+    stream << ")";
+}
+
+template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
@@ -161,23 +178,6 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
         i->second->repr(stream, level + 1);
     }
 
-    outputAppendType(stream, getType(), id_arr);
-    outputAppendFunc(stream, getFunc());
-    stream << ")";
-}
-
-template <>
-void Pair::repr(std::ostream &stream, const int_t level) const {
-    stream << "_pair(" << std::endl;
-
-    // next line
-    outputIndent(stream, level + 1);
-    get().first->repr(stream, level + 1);
-    stream << "," << std::endl;
-
-    // next line
-    outputIndent(stream, level + 1);
-    get().second->repr(stream, level + 1);
     outputAppendType(stream, getType(), id_arr);
     outputAppendFunc(stream, getFunc());
     stream << ")";
