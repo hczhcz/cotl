@@ -26,11 +26,11 @@ typedef Val *PValRaw;
 
 typedef _COTL_FUNC_T(*func_t);
 
-#define _COTL_FUNC_USE_PARAM() do {\
+#define _COTL_FUNC_USE_ARG() do {\
     (void) self; (void) caller; (void) lib; (void) tunnel;\
 } while (0)
 
-#define _COTL_FUNC_BEGIN _COTL_FUNC_USE_PARAM(); {
+#define _COTL_FUNC_BEGIN _COTL_FUNC_USE_ARG(); {
 #define _COTL_FUNC_END }
 
 #ifdef _COTL_USE_UNORDERED_MAP
