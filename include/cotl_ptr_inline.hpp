@@ -47,7 +47,7 @@ inline void PValProto<maybe>::operator()(const PVal &caller, const PVal &lib, PM
     if (exist()) {
         _val->getFunc()(*this, caller, lib, tunnel);
     } else {
-        // TODO: error
+        tunnel = _atom(cotlstd::id_error);
     }
 }
 

@@ -29,28 +29,28 @@ int main(int argc, char* argv[]) {
     // cout << sizeof(std::unordered_map<int, PVal>) << endl;
     cout << sizeof(std::pair<PVal, PVal>) << endl;
 
-    cout << _arr(1001,
+    cout << _arr(
         123, _atom(1002, func_t(0x12345678)),
-        456, _str(1004, "xxx\n\t\r啊\x01\x7F"),
-        789, _pair(1005,
-            _int(1006, 123, autotype),
-            _real(1007, 45.6)
-        ),
-        101112, _ptr(1009, _func(1008, autotype))
-    ) << endl;
+        456, _str("xxx\n\t\r啊\x01\x7F", 1004),
+        789, _pair(
+            _int(123, 1006, autotype),
+            _real(45.6, 1007),
+        1005),
+        101112, _ptr(_func(autotype, 1008)),
+    1001) << endl;
 
     for (int i = 0; i < 100000; ++i) {
         // memory leak test
         PVal(
-            _arr(1001,
+            _arr(
                 123, _atom(1002, func_t(0x12345678)),
-                456, _str(1004, "xxx\n\t\r啊\x01\x7F"),
-                789, _pair(1005,
-                    _int(1006, 123, autotype),
-                    _real(1007, 45.6)
-                ),
-                101112, _ptr(1009, _func(1008, autotype))
-            )
+                456, _str("xxx\n\t\r啊\x01\x7F", 1004),
+                789, _pair(
+                    _int(123, 1006, autotype),
+                    _real(45.6, 1007),
+                1005),
+                101112, _ptr(_func(autotype, 1008)),
+            1001)
         );
 
         // correctness test
