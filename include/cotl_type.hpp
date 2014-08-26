@@ -21,7 +21,6 @@ private:
 
 protected:
     inline void *operator new(size_t size, PValRaw reused) {
-        // TODO move _ref to new object
         (void) size;
 
         if (reused) {
@@ -55,6 +54,8 @@ protected:
     #ifdef _COTL_USE_REF_COUNT
         friend class PValProto<false>;
         friend class PValProto<true>;
+        friend inline int_t getRef(PValRaw obj);
+        friend inline void setRef(PValRaw obj, int_t ref);
 
         inline void incRef() {
             ++_ref;
