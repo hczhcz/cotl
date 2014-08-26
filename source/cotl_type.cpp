@@ -124,8 +124,11 @@ void Func::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Ptr::repr(std::ostream &stream, const int_t level) const {
-    stream << "_ptr(";
-    get()->repr(stream, level);
+    stream << "_ptr(" << std::endl;
+
+    // next line
+    outputIndent(stream, level + 1);
+    get()->repr(stream, level + 1);
     outputAppendType(stream, getType(), id_ptr);
     outputAppendFunc(stream, getFunc());
     stream << ")";
@@ -144,20 +147,22 @@ void Str::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
-    stream << "_arr(" << std::endl;
+    stream << "_arr(";
 
     for (auto i = get()->begin(); i != get()->end(); ++i) {
+        if (i != get()->begin()) {
+            stream << ",";
+        }
+        stream << std::endl;
+
+        // next line
         outputIndent(stream, level + 1);
         stream << i->first << ", ";
         i->second->repr(stream, level + 1);
-        stream << "," << std::endl;
     }
 
-    outputIndent(stream, level);
-    // outputAppendType(stream, getType(), id_arr);
-    stream << getType();
+    outputAppendType(stream, getType(), id_arr);
     outputAppendFunc(stream, getFunc());
-
     stream << ")";
 }
 
@@ -165,19 +170,16 @@ template <>
 void Pair::repr(std::ostream &stream, const int_t level) const {
     stream << "_pair(" << std::endl;
 
+    // next line
     outputIndent(stream, level + 1);
     get().first->repr(stream, level + 1);
     stream << "," << std::endl;
 
+    // next line
     outputIndent(stream, level + 1);
     get().second->repr(stream, level + 1);
-    stream << "," << std::endl;
-
-    outputIndent(stream, level);
-    // outputAppendType(stream, getType(), id_arr);
-    stream << getType();
+    outputAppendType(stream, getType(), id_arr);
     outputAppendFunc(stream, getFunc());
-
     stream << ")";
 }
 
