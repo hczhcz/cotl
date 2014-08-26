@@ -6,15 +6,18 @@
 namespace cotl {
 
 template <bool maybe>
-inline void PValProto<maybe>::checkNull() {
-    if (!maybe && !_val) {
-        _val = _atom(cotlstd::id_error);
-    }
+inline bool PValProto<maybe>::legal() const {
+    return maybe || _val;
 }
 
 template <bool maybe>
 inline bool PValProto<maybe>::exist() const {
     return !maybe || _val;
+}
+
+template <bool maybe>
+inline void PValProto<maybe>::giveVal() {
+    _val = _atom(cotlstd::id_error);
 }
 
 #ifdef _COTL_USE_REF_COUNT
@@ -33,22 +36,54 @@ inline bool PValProto<maybe>::exist() const {
     }
 #endif
 
+template <>
+inline PValRaw PValProto<true>::operator->() const = delete;
+
 template <bool maybe>
-inline PValRaw PValProto<maybe>::operator->() const{
-    if (exist()) {
-        return _val;
-    } else {
-        return _atom(cotlstd::id_error);
-    }
+inline PValRaw PValProto<maybe>::operator->() const {
+    assert(exist());
+    return _val;
 }
 
 template <bool maybe>
-inline void PValProto<maybe>::operator()(const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */) const {
-    if (exist()) {
-        _val->getFunc()(*this, caller, lib, tunnel);
-    } else {
-        tunnel = _atom(cotlstd::id_error);
+inline PValRaw PValProto<maybe>::operator->() {
+    if (!exist()) {
+        giveVal();
+
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
     }
+
+    return _val;
+}
+
+template <>
+inline void PValProto<true>::operator()(
+    const PVal &, const PVal &, PMaybe &
+) const = delete;
+
+template <bool maybe>
+inline void PValProto<maybe>::operator()(
+    const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+) const {
+    assert(exist());
+    _val->getFunc()(*this, caller, lib, tunnel);
+}
+
+template <bool maybe>
+inline void PValProto<maybe>::operator()(
+    const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+) {
+    if (!exist()) {
+        giveVal();
+
+        #ifdef _COTL_USE_REF_COUNT
+            doInc();
+        #endif
+    }
+
+    _val->getFunc()(*this, caller, lib, tunnel);
 }
 
 }

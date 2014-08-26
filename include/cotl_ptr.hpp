@@ -13,10 +13,13 @@ private:
     inline PValProto() = delete;
     inline void *operator new(size_t) = delete;
 
-    inline void checkNull();
+    inline bool legal() const;
     // defined in cotl_inline.hpp
 
     inline bool exist() const;
+    // defined in cotl_inline.hpp
+
+    inline void giveVal();
     // defined in cotl_inline.hpp
 
     #ifdef _COTL_USE_REF_COUNT
@@ -31,7 +34,9 @@ public:
     friend class PValProto<!maybe>;
 
     inline PValProto(const PValRaw val): _val(val) {
-        checkNull();
+        if (!legal()) {
+            giveVal();
+        }
 
         #ifdef _COTL_USE_REF_COUNT
             doInc();
@@ -39,7 +44,9 @@ public:
     }
 
     inline PValProto(const PMaybe &ptr): _val(ptr._val) {
-        checkNull();
+        if (!legal()) {
+            giveVal();
+        }
 
         #ifdef _COTL_USE_REF_COUNT
             doInc();
@@ -53,7 +60,13 @@ public:
     }
 
     inline PValProto(PMaybe &&ptr): _val(ptr._val) {
-        checkNull();
+        if (!legal()) {
+            giveVal();
+
+            #ifdef _COTL_USE_REF_COUNT
+                doInc();
+            #endif
+        }
 
         ptr._val = nullptr;
     }
@@ -72,7 +85,10 @@ public:
         #endif
 
         _val = val;
-        checkNull();
+
+        if (!legal()) {
+            giveVal();
+        }
 
         #ifdef _COTL_USE_REF_COUNT
             doInc();
@@ -87,7 +103,10 @@ public:
         #endif
 
         _val = ptr._val;
-        checkNull();
+
+        if (!legal()) {
+            giveVal();
+        }
 
         #ifdef _COTL_USE_REF_COUNT
             doInc();
@@ -116,7 +135,14 @@ public:
         #endif
 
         _val = ptr._val;
-        checkNull();
+
+        if (!legal()) {
+            giveVal();
+
+            #ifdef _COTL_USE_REF_COUNT
+                doInc();
+            #endif
+        }
 
         ptr._val = nullptr;
 
@@ -128,9 +154,17 @@ public:
     inline PValRaw operator->() const;
     // defined in cotl_inline.hpp
 
+    inline PValRaw operator->();
+    // defined in cotl_inline.hpp
+
     inline void operator()(
         const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
     ) const;
+    // defined in cotl_inline.hpp
+
+    inline void operator()(
+        const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+    );
     // defined in cotl_inline.hpp
 
     inline operator bool() const {
