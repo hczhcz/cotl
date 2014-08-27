@@ -12,6 +12,7 @@ private:
 
     inline PValProto() = delete;
     inline void *operator new(size_t) = delete;
+    inline void operator delete(void *) = delete;
 
     inline bool legal() const;
     // defined in cotl_inline.hpp
@@ -71,7 +72,7 @@ public:
         ptr._val = nullptr;
     }
 
-    inline PValProto(PVal &&ptr) = delete; // not allowed
+    inline PValProto(PVal &&) = delete; // not allowed
 
     inline ~PValProto() {
         #ifdef _COTL_USE_REF_COUNT
@@ -149,7 +150,7 @@ public:
         return *this;
     }
 
-    inline PValProto<maybe> &operator=(PVal &&ptr) = delete; // not allowed
+    inline PValProto<maybe> &operator=(PVal &&) = delete; // not allowed
 
     inline PValRaw operator->() const;
     // defined in cotl_inline.hpp
