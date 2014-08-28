@@ -90,7 +90,7 @@ protected:
     virtual ~Atom() {}
 
 public:
-    friend inline Atom *_atom(const int_t type, const func_t func, PValRaw reused);
+    friend Atom *_atom(const int_t type, const func_t func, PValRaw reused);
 
     virtual void repr(std::ostream &stream, const int_t level) const;
 };
@@ -124,25 +124,25 @@ protected:
     virtual ~NativeVal() {}
 
 public:
-    friend inline Int *_int(const int_t &data,
+    friend Int *_int(const int_t &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Real *_real(const real_t &data,
+    friend Real *_real(const real_t &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Func *_func(const func_t &data,
+    friend Func *_func(const func_t &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Ptr *_ptr(const PVal &data,
+    friend Ptr *_ptr(const PVal &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Pair *_pair(const PVal &data1, const PVal &data2,
+    friend Pair *_pair(const PVal &data1, const PVal &data2,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Str *_str(const std::string &data,
+    friend Str *_str(const std::string &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend inline Arr *_arr(
+    friend Arr *_arr(
         const int_t type, const func_t func, PValRaw reused
     );
 
