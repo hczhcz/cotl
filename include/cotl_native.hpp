@@ -52,13 +52,13 @@ typedef _COTL_FUNC_T(*func_t);
         int_t, PVal,
         std::hash<int_t>,
         std::equal_to<int_t>,
-        traceable_allocator<std::pair<const int_t, const PVal>>
+        MemAlloc<std::pair<int_t, PVal>>
     >> map_t;
 #else
     typedef std::unique_ptr<std::map<
         int_t, PVal,
         std::less<int_t>,
-        traceable_allocator<std::pair<const int_t, const PVal>>
+        MemAlloc<std::pair<int_t, PVal>>
     >> map_t;
 #endif
 }

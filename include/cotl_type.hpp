@@ -5,7 +5,7 @@
 
 namespace cotl {
 
-class Val: public gc_cleanup {
+class Val: public MemBase {
 private:
     int_t _type;
     func_t _func;
@@ -32,15 +32,15 @@ protected:
 
             assert(size <= maxsize);
 
-            return GC_MALLOC(maxsize);
+            return _COTL_MALLOC(maxsize);
         }
     }
 
     inline void operator delete(void *obj) {
-        GC_FREE(obj);
+        _COTL_FREE(obj);
     }
 
-    inline Val(const int_t type, const func_t func): gc_cleanup(), _type(type), _func(func) {}
+    inline Val(const int_t type, const func_t func): MemBase(), _type(type), _func(func) {}
 
     virtual ~Val() {}
 
