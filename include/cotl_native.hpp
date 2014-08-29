@@ -5,7 +5,7 @@
 
 namespace cotl {
 
-using int_t = long long;
+using int_t = long;
 using real_t = double;
 
 // begin: forward

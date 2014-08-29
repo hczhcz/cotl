@@ -28,7 +28,7 @@ protected:
 
             return reused;
         } else {
-            const size_t maxsize = sizeof(Val) + 16;
+            const size_t maxsize = sizeof(Val) + 2 * sizeof(void *);
 
             assert(size <= maxsize);
 
@@ -87,12 +87,12 @@ class Atom: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
-    virtual ~Atom() {}
+    virtual ~Atom() override {}
 
 public:
     friend Atom *_atom(const int_t type, const func_t func, PValRaw reused);
 
-    virtual void repr(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const override;
 };
 
 template <class T> class NativeVal;
@@ -121,7 +121,7 @@ protected:
     inline NativeVal(const T &data, const int_t type, const func_t func):
         Val(type, func), _data(data) {}
 
-    virtual ~NativeVal() {}
+    virtual ~NativeVal() override {}
 
 public:
     friend Int *_int(const int_t &data,
@@ -146,7 +146,7 @@ public:
         const int_t type, const func_t func, PValRaw reused
     );
 
-    virtual void repr(std::ostream &stream, const int_t level) const;
+    virtual void repr(std::ostream &stream, const int_t level) const override;
 
     // should not be overused
     inline T &getVar() {

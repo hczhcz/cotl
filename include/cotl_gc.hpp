@@ -32,7 +32,7 @@ namespace cotl {
     #define _COTL_FREE(ptr) free(ptr)
     #define _COTL_MEMINIT() do {} while (false)
 
-    using MemBase = void;
+    using MemBase = class {};
     template <class T>
     using MemAlloc = typename std::allocator<T>;
 #endif
