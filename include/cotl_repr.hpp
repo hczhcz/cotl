@@ -10,11 +10,6 @@ inline std::ostream &operator<<(std::ostream &stream, const PVal &value) {
     return stream;
 }
 
-inline std::ostream &operator<<(std::ostream &stream, const Val *value) {
-    value->repr(stream, 0);
-    return stream;
-}
-
 }
 
 #endif

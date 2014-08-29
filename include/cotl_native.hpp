@@ -5,20 +5,16 @@
 
 namespace cotl {
 
-using int_t = long;
-using real_t = double;
-
-// begin: forward
-
 class Val;
+using PValRaw = Val *;
 
 template <bool maybe> class PValProto;
+
 using PMaybe = PValProto<true>;
 using PVal = PValProto<false>;
 
-// end: foward
-
-using PValRaw = Val *;
+using int_t = long;
+using real_t = double;
 
 #define _COTL_FUNC_T(name) \
     void (name)(\
@@ -57,6 +53,7 @@ using func_t = _COTL_FUNC_T(*);
         MemAlloc<std::pair<int_t, PVal>>
     >>;
 #endif
+
 }
 
 #endif

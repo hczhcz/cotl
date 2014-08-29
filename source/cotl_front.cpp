@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
     // cout << sizeof(std::unordered_map<int, PVal>) << endl;
     cout << sizeof(std::pair<PVal, PVal>) << endl;
 
-    cout << _arr(
+    cout << PVal(_arr(
         123, _atom(1002, func_t(0x12345678)),
         456, _str("xxx\n\t\r啊\x01\x7F", 1004),
         789, _pair(
@@ -39,9 +39,9 @@ int main(int argc, char* argv[]) {
             _real(45.6, id_real),
         1005),
         101112, _ptr(_func(autotype, 1008)),
-    1001) << endl;
+    1001)) << endl;
 
-    cout << _pair(_arr(1, _ptr(_arr())), _atom()) << endl;
+    cout << PVal(_pair(_arr(1, _ptr(_arr())), _atom())) << endl;
 
     for (int i = 0; i < 100000; ++i) {
         // memory leak test
