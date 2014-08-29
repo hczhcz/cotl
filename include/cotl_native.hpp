@@ -20,7 +20,7 @@ using PVal = PValProto<false>;
 
 using PValRaw = Val *;
 
-#define _COTL_FUNC_T(name)\
+#define _COTL_FUNC_T(name) \
     void (name)(\
         const PVal &self,\
         const PVal &caller,\
@@ -30,17 +30,13 @@ using PValRaw = Val *;
 
 using func_t = _COTL_FUNC_T(*);
 
-#define _COTL_FUNC_USE_ARG()\
-    do {\
+#define _COTL_FUNC_BEGIN \
+    try {\
         (void) self; (void) caller; (void) lib; (void) tunnel;\
-    } while (false)
+        {
 
-#define _COTL_FUNC_BEGIN\
-    _COTL_FUNC_USE_ARG();\
-    try {
-
-// TODO: improve the object
-#define _COTL_FUNC_END\
+#define _COTL_FUNC_END \
+        }\
     } catch (const PVal &e) {\
         throw _arr(0, self, 1, caller, 2, lib, 3, tunnel, 4, e, id_error);\
     } catch (...) {\
