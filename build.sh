@@ -24,6 +24,18 @@ then
     flags="-g -O1"
 fi
 
+lflags="-lgc"
+if ! grep "^#define _COTL_USE_GLOBAL_GC" cotl_config > /dev/null
+then
+    # have some problem
+    # lflags="./gc/*.o ./gc/*/*.o"
+    lflags="-lgc"
+fi
+if ! grep "^#define _COTL_USE_GC" cotl_config > /dev/null
+then
+    lflags=""
+fi
+
 rm ./output/*
 
 for file in ./source/*.cpp
@@ -33,6 +45,4 @@ do
 done
 
 echo "======== linking ========"
-# if libgc is already installed, use -lgc
-# "$cc" $dflags $flags ./output/*.o ./gc/*.o -o "./output/cotl"
-"$cc" $dflags $flags ./output/*.o -lgc -o "./output/cotl"
+"$cc" $dflags $flags $lflags ./output/*.o -o "./output/cotl"
