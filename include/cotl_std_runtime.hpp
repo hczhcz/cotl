@@ -1,5 +1,5 @@
-#ifndef _COTL_STD_HPP
-#define _COTL_STD_HPP
+#ifndef _COTL_STD_RUNTIME_HPP
+#define _COTL_STD_RUNTIME_HPP
 
 #include "cotl_helper.hpp"
 

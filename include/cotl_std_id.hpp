@@ -1,5 +1,5 @@
-#ifndef _COTL_ID_HPP
-#define _COTL_ID_HPP
+#ifndef _COTL_STD_ID_HPP
+#define _COTL_STD_ID_HPP
 
 #include "cotl_helper.hpp"
 
@@ -40,39 +40,55 @@ namespace published {
 enum {
     // atom
     id_atom = IDX_TYPE,
-    id_error, // exception
-    id_null, // not found
-    id_false,
-    id_true,
+    id_error,
+    id_null,
 
     // int
     id_int  = IDX_TYPE + 16,
-    id_increase,
-    id_decrease,
+    id_increment,
+    id_decrement,
 
     // real
     id_real = IDX_TYPE + 32,
 
     // func
     id_func = IDX_TYPE + 48,
+    id_libfunc,
 
     // ptr
     id_ptr  = IDX_TYPE + 64,
+    id_wrapptr,
+    id_refptr,
 
     // pair
     id_pair = IDX_TYPE + 80,
+    id_wrappair,
 
     // str
     id_str  = IDX_TYPE + 96,
 
     // arr
     id_arr  = IDX_TYPE + 112,
+    id_wraparr,
     id_stack
 };
 
 enum {
-    id_exec = IDX_RUNTIME,
-    id_auto
+    // atom
+    ID_NULLARY = IDX_RUNTIME,
+    id_false,
+    id_true,
+
+    // ptr
+    ID_UNARY   = IDX_RUNTIME + 256,
+
+    // pair
+    ID_BINARY  = IDX_RUNTIME + 512,
+    id_auto,
+    id_literal,
+
+    // atom / ptr / pair
+    id_VARARY  = IDX_RUNTIME + 768
 };
 
 }

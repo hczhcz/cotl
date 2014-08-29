@@ -11,8 +11,8 @@
 #include "cotl_type.hpp"
 
 // cotl std library
-#include "cotl_id.hpp"
-#include "cotl_std.hpp"
+#include "cotl_std_id.hpp"
+#include "cotl_std_runtime.hpp"
 #include "cotl_std_export.hpp"
 
 // utilities
