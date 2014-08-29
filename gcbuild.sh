@@ -1,13 +1,30 @@
 #!/bin/sh
 
-# https://github.com/ivmai/bdwgc
+# see https://github.com/ivmai/bdwgc
+
+if ! test -e ".git"
+then
+    git init
+fi
+
+if ! test -e "gc"
+then
+    git submodule add git://github.com/ivmai/bdwgc.git gc
+fi
 
 cd gc
 
-autoreconf -vif &&
-automake --add-missing &&
-./configure &&
-make
-make check
+if ! test -e "libatomic_ops"
+then
+    git submodule add git://github.com/ivmai/libatomic_ops.git libatomic_ops
+fi
+
+# autoreconf -vif &&
+# automake --add-missing &&
+# ./configure &&
+# make
+# make check
+
+make c++ -f Makefile.direct
 
 cd ..

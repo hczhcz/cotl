@@ -27,9 +27,7 @@ fi
 lflags="-lgc"
 if ! grep "^#define _COTL_USE_GLOBAL_GC" cotl_config > /dev/null
 then
-    # have some problem
-    # lflags="./gc/*.o ./gc/*/*.o"
-    lflags="-lgc"
+    lflags="./gc/*.o"
 fi
 if ! grep "^#define _COTL_USE_GC" cotl_config > /dev/null
 then
