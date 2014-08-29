@@ -2,6 +2,9 @@
 
 namespace cotl {
 
+inline
+namespace published {
+
 Atom *_atom(
     const int_t type, const func_t func, PValRaw reused
 ) {
@@ -133,6 +136,8 @@ Arr *_arr(
     #endif
 
     return result;
+}
+
 }
 
 }

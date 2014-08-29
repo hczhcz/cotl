@@ -10,6 +10,9 @@ using PValRaw = Val *;
 
 template <bool maybe> class PValProto;
 
+inline
+namespace published {
+
 using PMaybe = PValProto<true>;
 using PVal = PValProto<false>;
 
@@ -53,6 +56,8 @@ using func_t = _COTL_FUNC_T(*);
         MemAlloc<std::pair<int_t, PVal>>
     >>;
 #endif
+
+}
 
 }
 

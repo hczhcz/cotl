@@ -9,6 +9,7 @@ class Val: public MemBase {
 private:
     int_t _type;
     func_t _func;
+
     #ifdef _COTL_USE_REF_COUNT
         int_t _ref = 0;
     #endif
@@ -55,8 +56,18 @@ protected:
     #ifdef _COTL_USE_REF_COUNT
         friend class PValProto<false>;
         friend class PValProto<true>;
-        friend inline int_t getRef(PValRaw obj);
-        friend inline void setRef(PValRaw obj, int_t ref);
+
+        friend inline int_t getRef(PValRaw obj) {
+            if (obj) {
+                return obj->_ref;
+            } else {
+                return 0;
+            }
+        }
+
+        friend inline void setRef(PValRaw obj, int_t ref) {
+            obj->_ref = ref;
+        }
 
         inline void incRef() {
             ++_ref;
@@ -82,6 +93,9 @@ public:
 
     virtual void repr(std::ostream &stream, const int_t level) const = 0 /* abstract */;
 };
+
+inline
+namespace published {
 
 class Atom: public Val {
 protected:
@@ -157,6 +171,8 @@ public:
         return _data;
     }
 };
+
+}
 
 }
 

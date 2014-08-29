@@ -2,6 +2,9 @@
 
 namespace cotl {
 
+inline
+namespace published {
+
 namespace {
 
     void outputIndent(std::ostream &stream, const int_t indent) {
@@ -183,6 +186,8 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     outputAppendType(stream, getType(), id_arr);
     outputAppendFunc(stream, getFunc());
     stream << ")";
+}
+
 }
 
 }

@@ -24,7 +24,12 @@
 
 namespace cotl {
 
+inline
+namespace published {
+
 const long long ago = 5;
+
+}
 
 }
 

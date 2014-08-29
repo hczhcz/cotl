@@ -5,7 +5,7 @@
 
 namespace cotlstd {
 
-using namespace cotl;
+using namespace cotl::published;
 
 _COTL_FUNC_T(exec);
 _COTL_FUNC_T(autotype);

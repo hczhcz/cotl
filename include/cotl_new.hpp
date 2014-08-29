@@ -5,19 +5,8 @@
 
 namespace cotl {
 
-#ifdef _COTL_USE_REF_COUNT
-    inline int_t getRef(PValRaw obj) {
-        if (obj) {
-            return obj->_ref;
-        } else {
-            return 0;
-        }
-    }
-
-    inline void setRef(PValRaw obj, int_t ref) {
-        obj->_ref = ref;
-    }
-#endif
+inline
+namespace published {
 
 Atom *_atom(
     const int_t type = id_atom, const func_t func = autotype, PValRaw reused = nullptr
@@ -58,6 +47,8 @@ inline Arr *_arr(const int_t key, const PVal &value, const Args... data /* (key,
     result->getVar()->insert(std::pair<int_t, PVal>(key, value));
 
     return result;
+}
+
 }
 
 }

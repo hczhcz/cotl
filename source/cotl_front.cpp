@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[]) {
     using namespace std;
-    using namespace cotl;
+    using namespace cotl::published;
 
     (void) argc;
     (void) argv;
@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 
     // for testing
 
-    cout << sizeof(Val) << endl;
+    cout << sizeof(cotl::Val) << endl;
     cout << sizeof(Atom) << endl;
     cout << sizeof(Int) << endl;
     cout << sizeof(Real) << endl;

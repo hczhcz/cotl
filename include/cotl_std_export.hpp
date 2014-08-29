@@ -5,6 +5,9 @@
 
 namespace cotl {
 
+inline
+namespace published {
+
 // cotl_id.hpp - types
 using cotlstd::id_atom;
 using cotlstd::id_int;
@@ -20,6 +23,8 @@ using cotlstd::id_error;
 
 // cotl_std.hpp
 using cotlstd::autotype;
+
+}
 
 }
 
