@@ -7,8 +7,12 @@ namespace cotlstd {
 
 using namespace cotl::published;
 
-_COTL_FUNC_T(stdexec);
+inline
+namespace published {
+
 _COTL_FUNC_T(stdauto);
+
+}
 
 }
 

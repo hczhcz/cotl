@@ -8,21 +8,7 @@ namespace cotl {
 inline
 namespace published {
 
-// cotl_id.hpp - types
-using cotlstd::id_atom;
-using cotlstd::id_int;
-using cotlstd::id_real;
-using cotlstd::id_func;
-using cotlstd::id_ptr;
-using cotlstd::id_pair;
-using cotlstd::id_str;
-using cotlstd::id_arr;
-
-// cotl_id.hpp
-using cotlstd::id_error;
-
-// cotl_std.hpp
-using cotlstd::stdauto;
+using namespace cotlstd::published;
 
 }
 

@@ -34,6 +34,9 @@ enum {
     IDX_USER_TOP    = IDX_BASE + 2333332
 };
 
+inline
+namespace published {
+
 enum {
     // atom
     id_atom = IDX_TYPE,
@@ -71,6 +74,8 @@ enum {
     id_exec = IDX_RUNTIME,
     id_auto
 };
+
+}
 
 }
 
