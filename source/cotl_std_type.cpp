@@ -4,43 +4,67 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(_atom)
+_COTL_FUNC_T(stdatom)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_int)
+_COTL_FUNC_T(stdint)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_real)
+_COTL_FUNC_T(stdreal)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_func)
+_COTL_FUNC_T(stdfunc)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_ptr)
+_COTL_FUNC_T(stdptr)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_pair)
+_COTL_FUNC_T(stdpair)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_str)
+_COTL_FUNC_T(stdstr)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
-_COTL_FUNC_T(_arr)
+_COTL_FUNC_T(stdarr)
 _COTL_FUNC_BEGIN
+    // TODO: change this
+
+
 
 _COTL_FUNC_END
 
