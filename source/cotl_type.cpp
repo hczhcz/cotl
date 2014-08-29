@@ -79,7 +79,7 @@ namespace {
     }
 
     void outputAppendFunc(std::ostream &stream, const func_t func) {
-        if (func != autotype) {
+        if (func != stdauto) {
             stream << ", ";
             outputFunc(stream, func);
         }

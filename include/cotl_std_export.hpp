@@ -22,7 +22,7 @@ using cotlstd::id_arr;
 using cotlstd::id_error;
 
 // cotl_std.hpp
-using cotlstd::autotype;
+using cotlstd::stdauto;
 
 }
 
