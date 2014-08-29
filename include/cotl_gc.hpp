@@ -24,7 +24,7 @@ namespace cotl {
     #define _COTL_FREE(ptr) GC_FREE(ptr)
     #define _COTL_MEMINIT() GC_INIT()
 
-    typedef gc_cleanup MemBase;
+    using MemBase = gc_cleanup;
     template <class T>
     using MemAlloc = typename ::traceable_allocator<T>;
 #else
@@ -32,7 +32,7 @@ namespace cotl {
     #define _COTL_FREE(ptr) free(ptr)
     #define _COTL_MEMINIT() do {} while (false)
 
-    typedef class {} MemBase;
+    using MemBase = void;
     template <class T>
     using MemAlloc = typename std::allocator<T>;
 #endif

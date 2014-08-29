@@ -5,20 +5,20 @@
 
 namespace cotl {
 
-typedef long long int_t;
-typedef double real_t;
+using int_t = long long;
+using real_t = double;
 
 // begin: forward
 
 class Val;
 
 template <bool maybe> class PValProto;
-typedef PValProto<true> PMaybe;
-typedef PValProto<false> PVal;
+using PMaybe = PValProto<true>;
+using PVal = PValProto<false>;
 
 // end: foward
 
-typedef Val *PValRaw;
+using PValRaw = Val *;
 
 #define _COTL_FUNC_T(name)\
     void (name)(\
@@ -28,7 +28,7 @@ typedef Val *PValRaw;
         PMaybe &tunnel /* could be null */\
     ) // if changed, check cotl_ptr.hpp and cotl_ptr_inline.hpp
 
-typedef _COTL_FUNC_T(*func_t);
+using func_t = _COTL_FUNC_T(*);
 
 #define _COTL_FUNC_USE_ARG()\
     do {\
@@ -48,18 +48,18 @@ typedef _COTL_FUNC_T(*func_t);
     }
 
 #ifdef _COTL_USE_UNORDERED_MAP
-    typedef std::unique_ptr<std::unordered_map<
+    using map_t = std::unique_ptr<std::unordered_map<
         int_t, PVal,
         std::hash<int_t>,
         std::equal_to<int_t>,
         MemAlloc<std::pair<int_t, PVal>>
-    >> map_t;
+    >>;
 #else
-    typedef std::unique_ptr<std::map<
+    using map_t = std::unique_ptr<std::map<
         int_t, PVal,
         std::less<int_t>,
         MemAlloc<std::pair<int_t, PVal>>
-    >> map_t;
+    >>;
 #endif
 }
 

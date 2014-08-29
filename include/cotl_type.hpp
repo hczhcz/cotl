@@ -97,13 +97,13 @@ public:
 
 template <class T> class NativeVal;
 
-typedef NativeVal<int_t> Int;
-typedef NativeVal<real_t> Real;
-typedef NativeVal<func_t> Func;
-typedef NativeVal<PVal> Ptr;
-typedef NativeVal<std::pair<PVal, PVal>> Pair;
-typedef NativeVal<std::string> Str;
-typedef NativeVal</* std::map or std::unordered_map */map_t> Arr;
+using Int = NativeVal<int_t>;
+using Real = NativeVal<real_t>;
+using Func = NativeVal<func_t>;
+using Ptr = NativeVal<PVal>;
+using Pair = NativeVal<std::pair<PVal, PVal>>;
+using Str = NativeVal<std::string>;
+using Arr = NativeVal</* std::map or std::unordered_map */map_t>;
 
 template <class T>
 class NativeVal: public Val {
