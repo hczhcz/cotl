@@ -7,7 +7,7 @@ namespace published {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdauto)
+_COTL_FUNC_T(stdAuto)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
@@ -20,7 +20,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdliteral)
+_COTL_FUNC_T(stdLiteral)
 _COTL_FUNC_BEGIN
     if (tunnel) {
         throw;

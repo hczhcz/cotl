@@ -76,7 +76,7 @@ void outputFunc(std::ostream &stream, const func_t func) {
 }
 
 void outputAppendFunc(std::ostream &stream, const func_t func) {
-    if (func != stdauto) {
+    if (func != stdAuto) {
         stream << ", ";
         outputFunc(stream, func);
     }

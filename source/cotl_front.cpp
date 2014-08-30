@@ -35,10 +35,10 @@ int main(int argc, char* argv[]) {
         123, _atom(1002, func_t(0x12345678)),
         456, _str("xxx\n\t\r啊\x01\x7F", 1004),
         789, _pair(
-            _int(123, 1006, stdauto),
+            _int(123, 1006, stdAuto),
             _real(45.6, id_real),
         1005),
-        101112, _ptr(_func(stdauto, 1008)),
+        101112, _ptr(_func(stdAuto, 1008)),
     1001)) << endl;
 
     cout << PVal(_pair(_arr(1, _ptr(_arr())), _atom())) << endl;
@@ -50,16 +50,16 @@ int main(int argc, char* argv[]) {
                 123, _atom(1002, func_t(0x12345678)),
                 456, _str("xxx\n\t\r啊\x01\x7F", 1004),
                 789, _pair(
-                    _int(123, 1006, stdauto),
+                    _int(123, 1006, stdAuto),
                     _real(45.6, id_real),
                 1005),
-                101112, _ptr(_func(stdauto, 1008)),
+                101112, _ptr(_func(stdAuto, 1008)),
             1001)
         );
 
         // correctness test
-        PVal a1(_atom(1002, stdauto));
-        PVal a2(_int(1002, 123, stdauto, a1.raw()));
+        PVal a1(_atom(1002, stdAuto));
+        PVal a2(_int(1002, 123, stdAuto, a1.raw()));
         (void) a2;
         PMaybe a3 = a2;
         PVal a4(a3);

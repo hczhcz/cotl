@@ -4,7 +4,7 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdincrement)
+_COTL_FUNC_T(stdIncrement)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Int>()) {
         if (tunnel) {
@@ -22,7 +22,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stddecrement)
+_COTL_FUNC_T(stdDecrement)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Int>()) {
         if (tunnel) {
@@ -40,7 +40,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdlibfunc)
+_COTL_FUNC_T(stdLibFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
         self_p->get()(caller, self, lib, tunnel);
@@ -49,7 +49,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdwrapptr)
+_COTL_FUNC_T(stdWrapPtr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
         if (tunnel) {
@@ -81,7 +81,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdrefptr)
+_COTL_FUNC_T(stdRefPtr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
         self_p->get()(self, lib, tunnel);
@@ -90,7 +90,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdwrappair)
+_COTL_FUNC_T(stdWrapPair)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Pair>()) {
         if (tunnel) {
@@ -126,7 +126,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdwraparr)
+_COTL_FUNC_T(stdWrapArr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Arr>()) {
         if (tunnel) {
@@ -169,7 +169,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdstack)
+_COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Arr>()) {
         map_t &data = self_p->getVar();

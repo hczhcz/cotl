@@ -9,35 +9,35 @@ inline
 namespace published {
 
 Atom *_atom(
-    const int_t type = id_atom, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_atom, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Int *_int(const int_t &data,
-    const int_t type = id_int, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Real *_real(const real_t &data,
-    const int_t type = id_real, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_real, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Func *_func(const func_t &data,
-    const int_t type = id_func, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_func, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Ptr *_ptr(const PVal &data,
-    const int_t type = id_ptr, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_ptr, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Pair *_pair(const PVal &data1, const PVal &data2,
-    const int_t type = id_pair, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_pair, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Str *_str(const std::string &data,
-    const int_t type = id_str, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 Arr *_arr(
-    const int_t type = id_arr, const func_t func = stdauto, PValRaw reused = nullptr
+    const int_t type = id_arr, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 template <class... Args>

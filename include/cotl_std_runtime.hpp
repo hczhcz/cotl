@@ -10,7 +10,7 @@ using namespace cotl::published;
 inline
 namespace published {
 
-_COTL_FUNC_T(stdauto);
+_COTL_FUNC_T(stdAuto);
 
 }
 
