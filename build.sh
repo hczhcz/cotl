@@ -41,7 +41,7 @@ do
     echo "======== $(basename $file) ========"
     "$cc" -c $ccflags $dflags $flags "$file" -o "./output/$(basename $file .cpp).o"
     nm -C -l -p "./output/$(basename $file .cpp).o" |
-        grep "/cotl" |
+        grep "cotl" |
         sed -e "s:^[0-9A-Fa-f]* *::g" |
         sed -e "s:$(pwd).*/::g" > "./output/$(basename $file .cpp).nm"
 done
@@ -49,7 +49,7 @@ done
 echo "======== linking ========"
 "$cc" $dflags $flags $lflags ./output/*.o -o "./output/cotl"
 nm -C -l -p "./output/cotl" |
-    grep "/cotl" |
+    grep "cotl" |
     sed -e "s:^[0-9A-Fa-f]* *::g" |
     sed -e "s:$(pwd).*/::g" > "./output/cotl.nm"
 readelf -a "./output/cotl" > "./output/cotl.readelf"
