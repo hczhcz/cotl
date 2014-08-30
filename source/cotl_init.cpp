@@ -22,17 +22,26 @@ int_t addInitializer(func_t func) {
     return 0;
 }
 
-void callInitializer(const PVal &lib) {
+void callInitializer(const PVal &self, const PVal &lib) {
     PVal blank(_atom(id_error));
     PMaybe tunnel(nullptr);
 
     for (int_t i = 0; i < initListIndex; ++i) {
-        initializerList[i](blank, blank, lib, tunnel);
+        initializerList[i](blank, self, lib, tunnel);
 
         if (tunnel) {
             throw;
         }
     }
+}
+
+void boot(const PVal &exec, PMaybe &tunnel) {
+    PVal caller(_atom(id_error));
+    PVal lib(_atom()); // TODO // lib = (not_found, arr())
+
+    callInitializer(exec, lib);
+
+    exec(caller, lib, tunnel);
 }
 
 }
