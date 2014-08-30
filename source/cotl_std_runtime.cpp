@@ -31,4 +31,13 @@ _COTL_FUNC_END
 
 }
 
+_COTL_FUNC_T(initRuntime)
+_COTL_FUNC_BEGIN
+    // TODO
+
+_COTL_FUNC_END
+
+static
+long long ago = addInitializer(initRuntime);
+
 }

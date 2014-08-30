@@ -23,14 +23,4 @@
 // implementation
 #include "cotl_ptr_inline.hpp"
 
-namespace cotl {
-
-namespace {
-
-long long ago;
-
-}
-
-}
-
 #endif

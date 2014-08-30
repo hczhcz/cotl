@@ -185,4 +185,13 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+_COTL_FUNC_T(initTypeEx)
+_COTL_FUNC_BEGIN
+    // TODO
+
+_COTL_FUNC_END
+
+static
+long long ago = addInitializer(initTypeEx);
+
 }
