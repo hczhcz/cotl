@@ -17,6 +17,7 @@
 
 // utilities
 #include "cotl_new.hpp"
+#include "cotl_init.hpp"
 #include "cotl_repr.hpp"
 
 // implementation
