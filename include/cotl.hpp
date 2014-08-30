@@ -25,10 +25,9 @@
 
 namespace cotl {
 
-inline
-namespace published {
+namespace {
 
-const long long ago = 5;
+long long ago;
 
 }
 

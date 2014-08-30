@@ -39,7 +39,7 @@ using func_t = _COTL_FUNC_T(*);
     } catch (const PVal &e) {\
         throw _arr(0, self, 1, caller, 2, lib, 3, tunnel, 4, e, id_error);\
     } catch (...) {\
-        throw _arr(0, self, 1, caller, 2, lib, 3, tunnel);\
+        throw _arr(0, self, 1, caller, 2, lib, 3, tunnel, id_error);\
     }
 
 #ifdef _COTL_USE_UNORDERED_MAP

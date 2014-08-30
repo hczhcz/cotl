@@ -2,90 +2,90 @@
 
 namespace cotl {
 
-inline
-namespace published {
-
 namespace {
 
-    void outputIndent(std::ostream &stream, const int_t indent) {
-        for (int_t i = 0; i < indent; ++i) {
-            stream << "    ";
-        }
+void outputIndent(std::ostream &stream, const int_t indent) {
+    for (int_t i = 0; i < indent; ++i) {
+        stream << "    ";
     }
+}
 
-    void outputStr(std::ostream &stream, const std::string &str) {
-        stream << "\"";
+void outputStr(std::ostream &stream, const std::string &str) {
+    stream << "\"";
 
-        for (auto val: str) {
-            switch (val) {
-            case '\0':
-                stream << "\\0";
-                break;
-            case '\a':
-                stream << "\\a";
-                break;
-            case '\b':
-                stream << "\\b";
-                break;
-            case '\t':
-                stream << "\\t";
-                break;
-            case '\n':
-                stream << "\\n";
-                break;
-            case '\v':
-                stream << "\\v";
-                break;
-            case '\f':
-                stream << "\\f";
-                break;
-            case '\r':
-                stream << "\\r";
-                break;
-            case '\'':
-            case '\"':
-            case '\?':
-            case '\\':
-                stream << "\\" << val;
-                break;
-            default:
-                if ((val < 0x20) || (val >= 0x7F)) { // 0-31, 127, 128-255
-                    const char hexChar[] = "0123456789ABCDEF";
-                    stream << "\\x" << hexChar[(val >> 4) & 0xF] << hexChar[val & 0xF];
-                } else {
-                    stream << val;
-                }
-                break;
+    for (auto val: str) {
+        switch (val) {
+        case '\0':
+            stream << "\\0";
+            break;
+        case '\a':
+            stream << "\\a";
+            break;
+        case '\b':
+            stream << "\\b";
+            break;
+        case '\t':
+            stream << "\\t";
+            break;
+        case '\n':
+            stream << "\\n";
+            break;
+        case '\v':
+            stream << "\\v";
+            break;
+        case '\f':
+            stream << "\\f";
+            break;
+        case '\r':
+            stream << "\\r";
+            break;
+        case '\'':
+        case '\"':
+        case '\?':
+        case '\\':
+            stream << "\\" << val;
+            break;
+        default:
+            if ((val < 0x20) || (val >= 0x7F)) { // 0-31, 127, 128-255
+                const char hexChar[] = "0123456789ABCDEF";
+                stream << "\\x" << hexChar[(val >> 4) & 0xF] << hexChar[val & 0xF];
+            } else {
+                stream << val;
             }
-        }
-
-        stream << "\"";
-    }
-
-    void outputType(std::ostream &stream, const int_t type, const int_t dtype) {
-        if (type != dtype) {
-            stream << type;
+            break;
         }
     }
 
-    void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype) {
-        if (type != dtype) {
-            stream << ", " << type;
-        }
-    }
+    stream << "\"";
+}
 
-    void outputFunc(std::ostream &stream, const func_t func) {
-        stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
+void outputType(std::ostream &stream, const int_t type, const int_t dtype) {
+    if (type != dtype) {
+        stream << type;
     }
+}
 
-    void outputAppendFunc(std::ostream &stream, const func_t func) {
-        if (func != stdauto) {
-            stream << ", ";
-            outputFunc(stream, func);
-        }
+void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype) {
+    if (type != dtype) {
+        stream << ", " << type;
     }
+}
+
+void outputFunc(std::ostream &stream, const func_t func) {
+    stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
+}
+
+void outputAppendFunc(std::ostream &stream, const func_t func) {
+    if (func != stdauto) {
+        stream << ", ";
+        outputFunc(stream, func);
+    }
+}
 
 }
+
+inline
+namespace published {
 
 void Atom::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused

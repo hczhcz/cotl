@@ -40,7 +40,6 @@ namespace published {
 enum {
     // atom
     id_atom = IDX_TYPE,
-    id_error,
     id_null,
 
     // int
@@ -70,7 +69,10 @@ enum {
     // arr
     id_arr  = IDX_TYPE + 112,
     id_wraparr,
-    id_stack
+    id_stack,
+
+    // special
+    id_error = IDX_TYPE + 128
 };
 
 enum {
@@ -84,11 +86,11 @@ enum {
 
     // pair
     ID_BINARY  = IDX_RUNTIME + 512,
-    id_auto,
-    id_literal,
 
     // atom / ptr / pair
-    id_VARARY  = IDX_RUNTIME + 768
+    id_VARARY  = IDX_RUNTIME + 768,
+    id_auto,
+    id_literal
 };
 
 }
