@@ -127,7 +127,7 @@ Arr *_arr(
     Arr *result = new (reused) Arr(type, func);
 
     // note: global --GC-> Val --RAII-> ptr --RAII-> map --GCalloc--> map data
-    result->getVar() = map_t(new map_t::element_type());
+    result->getVar() = map_t(std::make_shared<map_t::element_type>());
 
     return result;
 
