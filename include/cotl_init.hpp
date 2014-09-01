@@ -10,7 +10,7 @@ namespace published {
 
 int_t addInitializer(const func_t func);
 
-void callInitializer(const PVal &self, const PVal &lib);
+void callInitializer(const PVal &lib);
 
 void boot(const PVal &exec, PMaybe &tunnel);
 

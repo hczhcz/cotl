@@ -23,7 +23,7 @@ using real_t = double;
 #define _COTL_FUNC_T(name) \
     void (name)(\
         const PVal &self,\
-        const PVal &caller,\
+        const PMaybe &caller,\
         const PVal &lib,\
         PMaybe &tunnel /* could be null */\
     ) // if changed, check cotl_ptr.hpp and cotl_ptr_inline.hpp
@@ -35,6 +35,7 @@ using func_t = _COTL_FUNC_T(*);
         (void) self; (void) caller; (void) lib; (void) tunnel;\
         {
 
+// TODO: check if PMaybe is nullptr
 #define _COTL_FUNC_END \
         }\
     } catch (const PVal &e) {\

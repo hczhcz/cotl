@@ -38,8 +38,7 @@ _COTL_FUNC_BEGIN
     if (func) {
         if (auto func_p = func.as<cotl::Func>()) {
             self.raw()->setFunc(func_p->get());
-            // or self(caller, lib, tunnel) ?
-            self(self, lib, tunnel); // _COTL_CALL
+            self(caller, lib, tunnel); // _COTL_CALL
         } else {
             throw;
         }

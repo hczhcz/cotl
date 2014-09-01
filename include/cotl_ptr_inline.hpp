@@ -51,12 +51,12 @@ inline PValConst PValProto<maybe>::operator->() {
 
 template <>
 inline void PValProto<true>::operator()(
-    const PVal &, const PVal &, PMaybe &
+    const PMaybe &, const PVal &, PMaybe &
 ) const = delete;
 
 template <bool maybe>
 inline void PValProto<maybe>::operator()(
-    const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+    const PMaybe &caller, const PVal &lib, PMaybe &tunnel /* could be null */
 ) const {
     assert(exist());
     _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
@@ -64,7 +64,7 @@ inline void PValProto<maybe>::operator()(
 
 template <bool maybe>
 inline void PValProto<maybe>::operator()(
-    const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+    const PMaybe &caller, const PVal &lib, PMaybe &tunnel /* could be null */
 ) {
     if (!exist()) {
         throw;

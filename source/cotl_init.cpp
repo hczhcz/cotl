@@ -22,12 +22,13 @@ int_t addInitializer(func_t func) {
     return 0;
 }
 
-void callInitializer(const PVal &self, const PVal &lib) {
+void callInitializer(const PVal &lib) {
     PVal blank(_atom(id_error));
+    PMaybe caller(nullptr);
     PMaybe tunnel(nullptr);
 
     for (int_t i = 0; i < initListIndex; ++i) {
-        initializerList[i](blank, self, lib, tunnel); // _COTL_CALL
+        initializerList[i](blank, caller, lib, tunnel); // _COTL_CALL
 
         if (tunnel) {
             throw;
@@ -36,10 +37,10 @@ void callInitializer(const PVal &self, const PVal &lib) {
 }
 
 void boot(const PVal &exec, PMaybe &tunnel) {
-    PVal caller(_atom(id_error));
+    PMaybe caller(nullptr);
     PVal lib(_atom()); // TODO // lib = (not_found, arr())
 
-    callInitializer(exec, lib);
+    callInitializer(lib);
 
     exec(caller, lib, tunnel); // _COTL_CALL
 }
