@@ -31,6 +31,21 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdBind)
 _COTL_FUNC_BEGIN
+    PMaybe func(nullptr);
+
+    lib(self, lib, func);
+
+    if (func) {
+        if (auto func_p = func.as<cotl::Func>()) {
+            self.raw()->setFunc(func_p->get());
+            // or self(caller, lib, tunnel) ?
+            self(self, lib, tunnel);
+        } else {
+            throw;
+        }
+    } else {
+        throw;
+    }
 _COTL_FUNC_END
 
 }

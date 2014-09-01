@@ -45,14 +45,6 @@ protected:
 
     virtual ~Val() {}
 
-    inline void setType(const int_t type) {
-        _type = type;
-    }
-
-    inline void setFunc(const func_t func) {
-        _func = func;
-    }
-
     #ifdef _COTL_USE_REF_COUNT
         friend class PValProto<false>;
         friend class PValProto<true>;
@@ -77,6 +69,14 @@ public:
 
     inline func_t getFunc() const {
         return _func;
+    }
+
+    inline void setType(const int_t type) {
+        _type = type;
+    }
+
+    inline void setFunc(const func_t func) {
+        _func = func;
     }
 
     #ifdef _COTL_USE_REF_COUNT
@@ -127,10 +127,6 @@ private:
     T _data;
 
 protected:
-    inline void set(const T &data) {
-        _data = data;
-    }
-
     inline NativeVal(const int_t type, const func_t func):
         Val(type, func), _data() {}
 
@@ -171,6 +167,10 @@ public:
 
     inline const T &get() const {
         return _data;
+    }
+
+    inline void set(const T &data) {
+        _data = data;
     }
 };
 
