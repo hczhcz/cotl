@@ -152,10 +152,10 @@ public:
 
     inline PValProto<maybe> &operator=(PVal &&) = delete; // not allowed
 
-    inline PValRaw operator->() const;
+    inline PValConst operator->() const;
     // defined in cotl_inline.hpp
 
-    inline PValRaw operator->();
+    inline PValConst operator->();
     // defined in cotl_inline.hpp
 
     inline void operator()(
@@ -173,7 +173,16 @@ public:
     }
 
     template <class T>
-    inline T *as() const {
+    inline const T *as() const {
+        if (exist()) {
+            return dynamic_cast<T *>(_val);
+        } else {
+            return nullptr;
+        }
+    }
+
+    template <class T>
+    inline T *raw() const {
         if (exist()) {
             return dynamic_cast<T *>(_val);
         } else {

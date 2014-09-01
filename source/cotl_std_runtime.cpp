@@ -50,7 +50,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdContain)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr>()) {
+    if (auto self_p = self.raw<cotl::Ptr>()) {
         if (tunnel) {
             self_p->getVar() = tunnel;
             tunnel = nullptr;

@@ -6,7 +6,7 @@ namespace cotlstd {
 
 _COTL_FUNC_T(stdIncrement)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Int>()) {
+    if (auto self_p = self.raw<cotl::Int>()) {
         if (tunnel) {
             if (auto tunnel_p = tunnel.as<cotl::Int>()) {
                 self_p->getVar() = tunnel_p->get();
@@ -24,7 +24,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdDecrement)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Int>()) {
+    if (auto self_p = self.raw<cotl::Int>()) {
         if (tunnel) {
             if (auto tunnel_p = tunnel.as<cotl::Int>()) {
                 self_p->getVar() = tunnel_p->get();
@@ -131,8 +131,8 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Arr>()) {
         if (tunnel) {
             if (auto tunnel_p = tunnel.as<cotl::Arr>()) {
-                map_t &self_data = self_p->getVar();
-                map_t &tunnel_data = tunnel_p->getVar();
+                const map_t &self_data = self_p->get();
+                const map_t &tunnel_data = tunnel_p->get();
 
                 for (auto &val: *self_data) {
                     PMaybe tunnel1(tunnel_data->at(val.first));
@@ -151,7 +151,7 @@ _COTL_FUNC_BEGIN
         } else {
             auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
 
-            map_t &self_data = self_p->getVar();
+            const map_t &self_data = self_p->get();
             map_t &tunnel_data = tunnel_p->getVar();
 
             for (auto &val: *self_data) {
@@ -171,7 +171,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Arr>()) {
+    if (auto self_p = self.raw<cotl::Arr>()) {
         map_t &data = self_p->getVar();
         if (tunnel) {
             data->insert({{data->size(), tunnel}});

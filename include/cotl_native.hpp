@@ -7,6 +7,7 @@ namespace cotl {
 
 class Val;
 using PValRaw = Val *;
+using PValConst = const Val *;
 
 template <bool maybe> class PValProto;
 

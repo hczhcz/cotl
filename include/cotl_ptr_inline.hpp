@@ -37,16 +37,16 @@ inline void PValProto<maybe>::giveVal() {
 #endif
 
 template <>
-inline PValRaw PValProto<true>::operator->() const = delete;
+inline PValConst PValProto<true>::operator->() const = delete;
 
 template <bool maybe>
-inline PValRaw PValProto<maybe>::operator->() const {
+inline PValConst PValProto<maybe>::operator->() const {
     assert(exist());
     return _val;
 }
 
 template <bool maybe>
-inline PValRaw PValProto<maybe>::operator->() {
+inline PValConst PValProto<maybe>::operator->() {
     if (!exist()) {
         giveVal();
 
