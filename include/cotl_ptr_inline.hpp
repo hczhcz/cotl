@@ -15,11 +15,6 @@ inline bool PValProto<maybe>::exist() const {
     return !maybe || _val;
 }
 
-template <bool maybe>
-inline void PValProto<maybe>::giveVal() {
-    _val = _atom(cotlstd::id_null);
-}
-
 #ifdef _COTL_USE_REF_COUNT
     template <bool maybe>
     inline void PValProto<maybe>::doInc() const {
@@ -48,11 +43,7 @@ inline PValConst PValProto<maybe>::operator->() const {
 template <bool maybe>
 inline PValConst PValProto<maybe>::operator->() {
     if (!exist()) {
-        giveVal();
-
-        #ifdef _COTL_USE_REF_COUNT
-            doInc();
-        #endif
+        throw;
     }
 
     return _val;
@@ -76,11 +67,7 @@ inline void PValProto<maybe>::operator()(
     const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
 ) {
     if (!exist()) {
-        giveVal();
-
-        #ifdef _COTL_USE_REF_COUNT
-            doInc();
-        #endif
+        throw;
     }
 
     _val->getFunc()(*this, caller, lib, tunnel);

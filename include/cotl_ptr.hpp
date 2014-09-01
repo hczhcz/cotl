@@ -20,9 +20,6 @@ private:
     inline bool exist() const;
     // defined in cotl_inline.hpp
 
-    inline void giveVal();
-    // defined in cotl_inline.hpp
-
     #ifdef _COTL_USE_REF_COUNT
         inline void doInc() const;
         // defined in cotl_inline.hpp
@@ -36,7 +33,7 @@ public:
 
     inline PValProto(const PValRaw val): _val(val) {
         if (!legal()) {
-            giveVal();
+            throw;
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -46,7 +43,7 @@ public:
 
     inline PValProto(const PMaybe &ptr): _val(ptr._val) {
         if (!legal()) {
-            giveVal();
+            throw;
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -62,11 +59,7 @@ public:
 
     inline PValProto(PMaybe &&ptr): _val(ptr._val) {
         if (!legal()) {
-            giveVal();
-
-            #ifdef _COTL_USE_REF_COUNT
-                doInc();
-            #endif
+            throw;
         }
 
         ptr._val = nullptr;
@@ -88,7 +81,7 @@ public:
         _val = val;
 
         if (!legal()) {
-            giveVal();
+            throw;
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -106,7 +99,7 @@ public:
         _val = ptr._val;
 
         if (!legal()) {
-            giveVal();
+            throw;
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -138,11 +131,7 @@ public:
         _val = ptr._val;
 
         if (!legal()) {
-            giveVal();
-
-            #ifdef _COTL_USE_REF_COUNT
-                doInc();
-            #endif
+            throw;
         }
 
         ptr._val = nullptr;
