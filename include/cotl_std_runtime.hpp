@@ -11,6 +11,8 @@ inline
 namespace published {
 
 _COTL_FUNC_T(stdAuto);
+_COTL_FUNC_T(stdLiteral);
+_COTL_FUNC_T(stdBind);
 
 }
 

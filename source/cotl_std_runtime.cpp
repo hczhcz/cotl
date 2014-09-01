@@ -14,7 +14,7 @@ _COTL_FUNC_BEGIN
     lib(self, lib, func);
 
     if (func) {
-        func(self, lib, func);
+        func(self, lib, tunnel);
     } else {
         throw;
     }
@@ -29,7 +29,38 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdBind)
+_COTL_FUNC_BEGIN
+_COTL_FUNC_END
+
 }
+
+_COTL_FUNC_T(stdQuote)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::Ptr>()) {
+        if (tunnel) {
+            throw;
+        } else {
+            tunnel = self_p->get();
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdContain)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::Ptr>()) {
+        if (tunnel) {
+            self_p->getVar() = tunnel;
+            tunnel = nullptr;
+        } else {
+            tunnel = self_p->get();
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
 
 _COTL_FUNC_T(initRuntime)
 _COTL_FUNC_BEGIN

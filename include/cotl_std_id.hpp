@@ -83,6 +83,8 @@ enum {
 
     // ptr
     ID_UNARY   = IDX_RUNTIME + 256,
+    id_quote,
+    id_contain,
 
     // pair
     ID_BINARY  = IDX_RUNTIME + 512,
@@ -90,7 +92,8 @@ enum {
     // atom / ptr / pair
     id_VARARY  = IDX_RUNTIME + 768,
     id_auto,
-    id_literal
+    id_literal,
+    id_bind
 };
 
 }
