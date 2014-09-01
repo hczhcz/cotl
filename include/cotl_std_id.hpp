@@ -89,7 +89,7 @@ enum {
     // pair
     ID_BINARY  = IDX_RUNTIME + 512,
 
-    // atom / ptr / pair
+    // any
     id_VARARY  = IDX_RUNTIME + 768,
     id_auto,
     id_literal,

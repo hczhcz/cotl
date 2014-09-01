@@ -59,7 +59,7 @@ inline void PValProto<maybe>::operator()(
     const PVal &caller, const PVal &lib, PMaybe &tunnel /* could be null */
 ) const {
     assert(exist());
-    _val->getFunc()(*this, caller, lib, tunnel);
+    _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
 }
 
 template <bool maybe>
@@ -70,7 +70,7 @@ inline void PValProto<maybe>::operator()(
         throw;
     }
 
-    _val->getFunc()(*this, caller, lib, tunnel);
+    _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
 }
 
 }

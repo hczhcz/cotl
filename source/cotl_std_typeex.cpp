@@ -43,7 +43,7 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdLibFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
-        self_p->get()(caller, self, lib, tunnel);
+        self_p->get()(caller, self, lib, tunnel); // _COTL_CALL
     } else {
         throw;
     }
@@ -56,7 +56,7 @@ _COTL_FUNC_BEGIN
             if (auto tunnel_p = tunnel.as<cotl::Ptr>()) {
                 PMaybe tunnel1(tunnel_p->get());
 
-                self_p->get()(self, lib, tunnel1);
+                self_p->get()(self, lib, tunnel1); // _COTL_CALL
 
                 if (tunnel1) {
                     throw;
@@ -69,7 +69,7 @@ _COTL_FUNC_BEGIN
         } else {
             PMaybe tunnel1(nullptr);
 
-            self_p->get()(self, lib, tunnel1);
+            self_p->get()(self, lib, tunnel1); // _COTL_CALL
 
             tunnel = _ptr(
                 tunnel1,
@@ -84,7 +84,7 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdRefPtr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
-        self_p->get()(self, lib, tunnel);
+        self_p->get()(self, lib, tunnel); // _COTL_CALL
     } else {
         throw;
     }
@@ -98,8 +98,8 @@ _COTL_FUNC_BEGIN
                 PMaybe tunnel1(tunnel_p->get().first);
                 PMaybe tunnel2(tunnel_p->get().second);
 
-                self_p->get().first(self, lib, tunnel1);
-                self_p->get().second(self, lib, tunnel2);
+                self_p->get().first(self, lib, tunnel1); // _COTL_CALL
+                self_p->get().second(self, lib, tunnel2); // _COTL_CALL
 
                 if (tunnel1 || tunnel2) {
                     throw;
@@ -113,8 +113,8 @@ _COTL_FUNC_BEGIN
             PMaybe tunnel1(nullptr);
             PMaybe tunnel2(nullptr);
 
-            self_p->get().first(self, lib, tunnel1);
-            self_p->get().second(self, lib, tunnel2);
+            self_p->get().first(self, lib, tunnel1); // _COTL_CALL
+            self_p->get().second(self, lib, tunnel2); // _COTL_CALL
 
             tunnel = _pair(
                 tunnel1, tunnel2,
@@ -137,7 +137,7 @@ _COTL_FUNC_BEGIN
                 for (auto &val: *self_data) {
                     PMaybe tunnel1(tunnel_data->at(val.first));
 
-                    val.second(self, lib, tunnel1);
+                    val.second(self, lib, tunnel1); // _COTL_CALL
 
                     if (tunnel1) {
                         throw;
@@ -157,7 +157,7 @@ _COTL_FUNC_BEGIN
             for (auto &val: *self_data) {
                 PMaybe tunnel1(nullptr);
 
-                val.second(self, lib, tunnel1);
+                val.second(self, lib, tunnel1); // _COTL_CALL
 
                 tunnel_data->insert({{val.first, tunnel1}});
             }

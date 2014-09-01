@@ -27,7 +27,7 @@ void callInitializer(const PVal &self, const PVal &lib) {
     PMaybe tunnel(nullptr);
 
     for (int_t i = 0; i < initListIndex; ++i) {
-        initializerList[i](blank, self, lib, tunnel);
+        initializerList[i](blank, self, lib, tunnel); // _COTL_CALL
 
         if (tunnel) {
             throw;
@@ -41,7 +41,7 @@ void boot(const PVal &exec, PMaybe &tunnel) {
 
     callInitializer(exec, lib);
 
-    exec(caller, lib, tunnel);
+    exec(caller, lib, tunnel); // _COTL_CALL
 }
 
 }

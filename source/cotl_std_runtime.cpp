@@ -11,10 +11,10 @@ _COTL_FUNC_T(stdAuto)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
-    lib(self, lib, func);
+    lib(self, lib, func); // _COTL_CALL
 
     if (func) {
-        func(self, lib, tunnel);
+        func(self, lib, tunnel); // _COTL_CALL
     } else {
         throw;
     }
@@ -33,13 +33,13 @@ _COTL_FUNC_T(stdBind)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
-    lib(self, lib, func);
+    lib(self, lib, func); // _COTL_CALL
 
     if (func) {
         if (auto func_p = func.as<cotl::Func>()) {
             self.raw()->setFunc(func_p->get());
             // or self(caller, lib, tunnel) ?
-            self(self, lib, tunnel);
+            self(self, lib, tunnel); // _COTL_CALL
         } else {
             throw;
         }
