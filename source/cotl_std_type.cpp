@@ -4,73 +4,27 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdAtom)
-_COTL_FUNC_BEGIN
-    // TODO: change this
 
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdInt)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdReal)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdFunc)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdPtr)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdPair)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdStr)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdArr)
-_COTL_FUNC_BEGIN
-    // TODO: change this
-
-
-
-_COTL_FUNC_END
+_COTL_FUNC_ALIAS(stdAtom, stdLiteral)
+_COTL_FUNC_ALIAS(stdInt, stdLiteral)
+_COTL_FUNC_ALIAS(stdReal, stdLiteral)
+_COTL_FUNC_ALIAS_DECL(stdFunc, stdLibFunc)
+_COTL_FUNC_ALIAS_DECL(stdPtr, stdWrapPtr)
+_COTL_FUNC_ALIAS_DECL(stdPair, stdWrapPair)
+_COTL_FUNC_ALIAS(stdStr, stdLiteral)
+_COTL_FUNC_ALIAS_DECL(stdArr, stdWrapArr)
 
 _COTL_FUNC_T(initType)
 _COTL_FUNC_BEGIN
     // TODO
+    (void) stdAtom;
+    (void) stdInt;
+    (void) stdReal;
+    (void) stdFunc;
+    (void) stdPtr;
+    (void) stdPair;
+    (void) stdStr;
+    (void) stdArr;
 
 _COTL_FUNC_END
 

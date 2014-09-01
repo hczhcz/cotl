@@ -43,6 +43,13 @@ using func_t = _COTL_FUNC_T(*);
         throw _arr(0, self, 1, caller, 2, lib, 3, tunnel, id_error);\
     }
 
+#define _COTL_FUNC_ALIAS(name, oldname) \
+    const auto name = oldname;
+
+#define _COTL_FUNC_ALIAS_DECL(name, oldname) \
+    _COTL_FUNC_T(oldname);\
+    const auto name = oldname;
+
 #ifdef _COTL_USE_UNORDERED_MAP
     using map_t = std::shared_ptr<std::unordered_map<
         int_t, PVal,
