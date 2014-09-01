@@ -57,18 +57,6 @@ protected:
         friend class PValProto<false>;
         friend class PValProto<true>;
 
-        friend inline int_t getRef(PValRaw obj) {
-            if (obj) {
-                return obj->_ref;
-            } else {
-                return 0;
-            }
-        }
-
-        friend inline void setRef(PValRaw obj, int_t ref) {
-            obj->_ref = ref;
-        }
-
         inline void incRef() {
             ++_ref;
         }
@@ -90,6 +78,20 @@ public:
     inline func_t getFunc() const {
         return _func;
     }
+
+    #ifdef _COTL_USE_REF_COUNT
+        friend inline int_t _getRef(PValRaw obj) {
+            if (obj) {
+                return obj->_ref;
+            } else {
+                return 0;
+            }
+        }
+
+        friend inline void _setRef(PValRaw obj, int_t ref) {
+            obj->_ref = ref;
+        }
+    #endif
 
     virtual void repr(std::ostream &stream, const int_t level) const = 0 /* abstract */;
 };

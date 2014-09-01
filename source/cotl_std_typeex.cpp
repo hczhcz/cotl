@@ -191,7 +191,10 @@ _COTL_FUNC_BEGIN
 
 _COTL_FUNC_END
 
-static
+namespace {
+
 long long ago = addInitializer(initTypeEx);
+
+}
 
 }
