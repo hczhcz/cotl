@@ -7,5 +7,8 @@
 // use reference counter
 #define _COTL_USE_REF_COUNT
 
+// use deque instead of vector
+#define _COTL_USE_DEQUE
+
 // use unordered_map instead of map
 #define _COTL_USE_UNORDERED_MAP

@@ -119,7 +119,8 @@ using Func = NativeVal<func_t>;
 using Ptr = NativeVal<PVal>;
 using Pair = NativeVal<std::pair<PVal, PVal>>;
 using Str = NativeVal<std::string>;
-using Arr = NativeVal</* std::map or std::unordered_map */map_t>;
+using Arr = NativeVal<arr_t>;
+using Map = NativeVal<map_t>;
 
 template <class T>
 class NativeVal: public Val {
@@ -154,7 +155,10 @@ public:
     friend Str *_str(const std::string &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend Arr *_arr(
+    friend Arr *_arr_m(const arr_t &container,
+        const int_t type, const func_t func, PValRaw reused
+    );
+    friend Map *_map_m(const map_t &container,
         const int_t type, const func_t func, PValRaw reused
     );
 

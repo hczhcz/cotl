@@ -11,7 +11,13 @@
 #include <cstdarg>
 
 #include <string>
-#include <vector>
+
+#ifdef _COTL_USE_DEQUE
+    #include <deque>
+#else
+    #include <vector>
+#endif
+
 #ifdef _COTL_USE_UNORDERED_MAP
     #include <unordered_map>
 #else

@@ -13,6 +13,7 @@ _COTL_FUNC_ALIAS_DECL(stdPtr, stdWrapPtr)
 _COTL_FUNC_ALIAS_DECL(stdPair, stdWrapPair)
 _COTL_FUNC_ALIAS(stdStr, stdLiteral)
 _COTL_FUNC_ALIAS_DECL(stdArr, stdWrapArr)
+_COTL_FUNC_ALIAS_DECL(stdMap, stdLibMap)
 
 _COTL_FUNC_T(initType)
 _COTL_FUNC_BEGIN
@@ -25,6 +26,7 @@ _COTL_FUNC_BEGIN
     (void) stdPair;
     (void) stdStr;
     (void) stdArr;
+    (void) stdMap;
 
 _COTL_FUNC_END
 

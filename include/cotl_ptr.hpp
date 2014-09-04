@@ -11,8 +11,9 @@ private:
     PValRaw _val;
 
     inline PValProto() = delete;
-    inline void *operator new(size_t) = delete;
-    inline void operator delete(void *) = delete;
+    // TODO: necessary?
+    // inline void *operator new(size_t) = delete;
+    // inline void operator delete(void *) = delete;
 
     inline bool legal() const;
     // defined in cotl_inline.hpp

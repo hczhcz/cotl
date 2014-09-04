@@ -36,17 +36,44 @@ Str *_str(const std::string &data,
     const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
-Arr *_arr(
+Arr *_arr_m(const arr_t &container,
     const int_t type = id_arr, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
+Map *_map_m(const map_t &container,
+    const int_t type = id_map, const func_t func = stdAuto, PValRaw reused = nullptr
+);
+
 template <class... Args>
-inline Arr *_arr(const int_t key, const PVal &value, const Args... data /* (key, value) loop */) {
-    Arr *result = _arr(data...);
+inline Arr *_arr_m(const arr_t &container,
+    const PVal &value, const Args... args /* values */
+) {
+    container->push_back(value);
 
-    result->getVar()->insert(std::pair<int_t, PVal>(key, value));
+    return _arr(container, args...);
+}
 
-    return result;
+template <class... Args>
+inline Arr *_arr(
+    const Args... args /* values */
+) {
+    return _arr_m(std::make_shared<arr_t::element_type>(), args...);
+}
+
+template <class... Args>
+inline Map *_map_m(const map_t &container,
+    const int_t key, const PVal &value, const Args... args /* (key, value) loop */
+) {
+    container->insert(std::pair<int_t, PVal>(key, value));
+
+    return _map(container, args...);
+}
+
+template <class... Args>
+inline Map *_map(
+    const Args... args /* (key, value) loop */
+) {
+    return _map_m(std::make_shared<map_t::element_type>(), args...);
 }
 
 }

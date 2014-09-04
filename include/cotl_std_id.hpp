@@ -71,8 +71,13 @@ enum {
     id_wraparr,
     id_stack,
 
+    // map
+    id_map  = IDX_TYPE + 128,
+    id_wrapmap,
+    id_libmap,
+
     // special
-    id_error = IDX_TYPE + 128
+    id_error = IDX_TYPE + 144
 };
 
 enum {
@@ -85,6 +90,7 @@ enum {
     ID_UNARY   = IDX_RUNTIME + 256,
     id_quote,
     id_contain,
+    id_query,
 
     // pair
     ID_BINARY  = IDX_RUNTIME + 512,

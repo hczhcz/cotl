@@ -131,11 +131,11 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWrapArr)
+_COTL_FUNC_T(stdWrapMap)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Arr>()) {
+    if (auto self_p = self.as<cotl::Map>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Arr>()) {
+            if (auto tunnel_p = tunnel.as<cotl::Map>()) {
                 const map_t &self_data = self_p->get();
                 const map_t &tunnel_data = tunnel_p->get();
 
@@ -154,7 +154,7 @@ _COTL_FUNC_BEGIN
                 throw;
             }
         } else {
-            auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
+            auto tunnel_p = _map(self_p->getType(), self_p->getFunc());
 
             const map_t &self_data = self_p->get();
             map_t &tunnel_data = tunnel_p->getVar();
@@ -176,7 +176,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Arr>()) {
+    if (auto self_p = self.raw<cotl::Map>()) {
         map_t &data = self_p->getVar();
         if (tunnel) {
             data->insert({{data->size(), tunnel}});

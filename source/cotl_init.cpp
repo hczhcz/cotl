@@ -38,7 +38,7 @@ void callInitializer(const PVal &lib) {
 
 void boot(const PVal &exec, PMaybe &tunnel) {
     PMaybe caller(nullptr);
-    PVal lib(_atom()); // TODO // lib = (not_found, arr())
+    PVal lib(_atom()); // TODO // lib = (not_found, map())
 
     callInitializer(lib);
 
