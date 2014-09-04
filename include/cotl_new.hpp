@@ -50,7 +50,7 @@ inline Arr *_arr_m(const arr_t &container,
 ) {
     container->push_back(value);
 
-    return _arr(container, args...);
+    return _arr_m(container, args...);
 }
 
 template <class... Args>
@@ -66,7 +66,7 @@ inline Map *_map_m(const map_t &container,
 ) {
     container->insert(std::pair<int_t, PVal>(key, value));
 
-    return _map(container, args...);
+    return _map_m(container, args...);
 }
 
 template <class... Args>
