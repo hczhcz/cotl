@@ -59,15 +59,19 @@ void outputStr(std::ostream &stream, const std::string &str) {
     stream << "\"";
 }
 
-void outputType(std::ostream &stream, const int_t type, const int_t dtype) {
-    if (type != dtype) {
-        stream << type;
-    }
-}
-
 void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype) {
     if (type != dtype) {
         stream << ", " << type;
+    }
+}
+
+void outputAppendTypeX(std::ostream &stream, const int_t type, const int_t dtype, bool &after) {
+    if (type != dtype) {
+        if (after) {
+            stream << ", ";
+        }
+        stream << type;
+        after = true;
     }
 }
 
@@ -82,6 +86,16 @@ void outputAppendFunc(std::ostream &stream, const func_t func) {
     }
 }
 
+void outputAppendFuncX(std::ostream &stream, const func_t func, bool &after) {
+    if (func != stdAuto) {
+        if (after) {
+            stream << ", ";
+        }
+        outputFunc(stream, func);
+        after = true;
+    }
+}
+
 }
 
 inline
@@ -91,8 +105,9 @@ void Atom::repr(std::ostream &stream, const int_t level) const {
     (void) level; // unused
 
     stream << "_atom(";
-    outputType(stream, getType(), id_atom);
-    outputAppendFunc(stream, getFunc());
+    bool after = false;
+    outputAppendTypeX(stream, getType(), id_atom, after);
+    outputAppendFuncX(stream, getFunc(), after);
     stream << ")";
 }
 
@@ -179,12 +194,34 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
 
         // next line
         outputIndent(stream, level + 1);
+        (*i)->repr(stream, level + 1);
+    }
+
+    bool after = !get()->empty();
+    outputAppendTypeX(stream, getType(), id_arr, after);
+    outputAppendFuncX(stream, getFunc(), after);
+    stream << ")";
+}
+
+template <>
+void Map::repr(std::ostream &stream, const int_t level) const {
+    stream << "_map(";
+
+    for (auto i = get()->begin(); i != get()->end(); ++i) {
+        if (i != get()->begin()) {
+            stream << ",";
+        }
+        stream << std::endl;
+
+        // next line
+        outputIndent(stream, level + 1);
         stream << i->first << ", ";
         i->second->repr(stream, level + 1);
     }
 
-    outputAppendType(stream, getType(), id_arr);
-    outputAppendFunc(stream, getFunc());
+    bool after = !get()->empty();
+    outputAppendTypeX(stream, getType(), id_map, after);
+    outputAppendFuncX(stream, getFunc(), after);
     stream << ")";
 }
 

@@ -117,19 +117,30 @@ Str *_str(const std::string &data,
     return result;
 }
 
-Arr *_arr(
+Arr *_arr_m(const arr_t &container,
     const int_t type, const func_t func, PValRaw reused
 ) {
     #ifdef _COTL_USE_REF_COUNT
         int_t ref = _getRef(reused);
     #endif
 
-    Arr *result = new (reused) Arr(type, func);
+    Arr *result = new (reused) Arr(container, type, func);
 
-    // note: global --GC-> Val --RAII-> ptr --RAII-> map --GCalloc--> map data
-    result->getVar() = map_t(std::make_shared<map_t::element_type>());
+    #ifdef _COTL_USE_REF_COUNT
+        _setRef(result, ref);
+    #endif
 
     return result;
+}
+
+Map *_map_m(const map_t &container,
+    const int_t type, const func_t func, PValRaw reused
+) {
+    #ifdef _COTL_USE_REF_COUNT
+        int_t ref = _getRef(reused);
+    #endif
+
+    Map *result = new (reused) Map(container, type, func);
 
     #ifdef _COTL_USE_REF_COUNT
         _setRef(result, ref);

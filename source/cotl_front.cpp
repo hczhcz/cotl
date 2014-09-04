@@ -22,38 +22,50 @@ int main(int argc, char* argv[]) {
     cout << sizeof(Pair) << endl;
     cout << sizeof(Str) << endl;
     cout << sizeof(Arr) << endl;
+    cout << sizeof(Map) << endl;
     cout << sizeof(std::string) << endl;
     std::string s("aaahhhh");
     cout << sizeof(s) << endl;
-    cout << sizeof(std::vector<PVal>) << endl;
+    // cout << sizeof(std::vector<PVal>) << endl;
     // cout << sizeof(std::map<int, PVal>) << endl;
+    cout << sizeof(arr_t) << endl;
     cout << sizeof(map_t) << endl;
     // cout << sizeof(std::unordered_map<int, PVal>) << endl;
     cout << sizeof(std::pair<PVal, PVal>) << endl;
 
-    cout << PVal(_arr(
+    cout << PVal(_map(
         123, _atom(1002, func_t(0x12345678)),
         456, _str("xxx\n\t\r啊\x01\x7F", 1004),
         789, _pair(
             _int(123, 1006, stdAuto),
             _real(45.6, id_real),
         1005),
-        101112, _ptr(_func(stdAuto, 1008)),
+        101112, _arr(
+            _ptr(_func(stdAuto, 1008)),
+            _atom(),
+            _atom(),
+            1009
+        ),
     1001)) << endl;
 
-    cout << PVal(_pair(_arr(1, _ptr(_arr())), _atom())) << endl;
+    cout << PVal(_pair(_arr(_map(123), _map(1, _ptr(_map())), _arr()), _atom())) << endl;
 
     for (int i = 0; i < 100000; ++i) {
         // memory leak test
         PVal(
-            _arr(
+            _map(
                 123, _atom(1002, func_t(0x12345678)),
                 456, _str("xxx\n\t\r啊\x01\x7F", 1004),
                 789, _pair(
                     _int(123, 1006, stdAuto),
                     _real(45.6, id_real),
                 1005),
-                101112, _ptr(_func(stdAuto, 1008)),
+                101112, _arr(
+                    _ptr(_func(stdAuto, 1008)),
+                    _atom(),
+                    _atom(),
+                    1009
+                ),
             1001)
         );
 
@@ -69,6 +81,10 @@ int main(int argc, char* argv[]) {
         // cout << a1 << endl;
         // cout << a2.as<Int>()->get() << endl;
     }
+
+    PMaybe tunnel1(nullptr);
+
+    boot(_atom(), tunnel1);
 
     // end
 
