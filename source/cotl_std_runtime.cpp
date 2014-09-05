@@ -76,18 +76,6 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdQuery)
-_COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr>()) {
-        if (tunnel) {
-            // TODO
-        } else {
-            //
-        }
-    }
-
-_COTL_FUNC_END
-
 _COTL_FUNC_T(initRuntime)
 _COTL_FUNC_BEGIN
     // TODO

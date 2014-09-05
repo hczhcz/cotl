@@ -90,7 +90,6 @@ enum {
     ID_UNARY   = IDX_RUNTIME + 256,
     id_quote,
     id_contain,
-    id_query,
 
     // pair
     ID_BINARY  = IDX_RUNTIME + 512,

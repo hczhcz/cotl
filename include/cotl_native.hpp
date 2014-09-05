@@ -46,11 +46,11 @@ using func_t = _COTL_FUNC_T(*);
     }// TODO TODO
 
 #define _COTL_FUNC_ALIAS(name, oldname) \
-    const auto name = oldname;
+    const auto (name) = (oldname);
 
 #define _COTL_FUNC_ALIAS_DECL(name, oldname) \
     _COTL_FUNC_T(oldname);\
-    const auto name = oldname;
+    const auto (name) = (oldname);
 
 template <class T>
 using hold_t = std::unique_ptr<T, MemDel<T>>;

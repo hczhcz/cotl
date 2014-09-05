@@ -31,9 +31,6 @@ inline bool PValProto<maybe>::exist() const {
     }
 #endif
 
-template <>
-inline PValConst PValProto<true>::operator->() const = delete;
-
 template <bool maybe>
 inline PValConst PValProto<maybe>::operator->() const {
     assert(exist());
@@ -48,11 +45,6 @@ inline PValConst PValProto<maybe>::operator->() {
 
     return _val;
 }
-
-template <>
-inline void PValProto<true>::operator()(
-    const PMaybe &, const PVal &, PMaybe &
-) const = delete;
 
 template <bool maybe>
 inline void PValProto<maybe>::operator()(

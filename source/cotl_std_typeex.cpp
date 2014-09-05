@@ -131,6 +131,71 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdWarpArr)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::Arr>()) {
+        if (tunnel) {
+            if (auto tunnel_p = tunnel.as<cotl::Arr>()) {
+                const arr_t &self_data = self_p->get();
+                const arr_t &tunnel_data = tunnel_p->get();
+
+                if (self_data->size() != tunnel_data->size()) {
+                    throw;
+                }
+
+                // notice: without range check
+                for (size_t i = 0; i != self_data->size(); ++i) {
+                    PMaybe tunnel1((*tunnel_data)[i]);
+
+                    (*self_data)[i](caller, lib, tunnel1); // _COTL_CALL
+
+                    if (tunnel1) {
+                        throw;
+                    }
+                }
+
+                tunnel = nullptr;
+            } else {
+                throw;
+            }
+        } else {
+            auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
+
+            const arr_t &self_data = self_p->get();
+            arr_t &tunnel_data = tunnel_p->getVar();
+
+            // notice: without range check
+            for (size_t i = 0; i != self_data->size(); ++i) {
+                PMaybe tunnel1(nullptr);
+
+                (*self_data)[i](caller, lib, tunnel1); // _COTL_CALL
+
+                tunnel_data->push_back(tunnel1);
+            }
+
+            tunnel = tunnel_p;
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdStack)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.raw<cotl::Arr>()) {
+        arr_t &data = self_p->getVar();
+        if (tunnel) {
+            data->push_back(tunnel);
+            tunnel = nullptr;
+        } else {
+            tunnel = data->back();
+            data->pop_back();
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
 _COTL_FUNC_T(stdWrapMap)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Map>()) {
@@ -174,16 +239,19 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdStack)
+_COTL_FUNC_T(stdLibMap)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Map>()) {
-        map_t &data = self_p->getVar();
-        if (tunnel) {
-            data->insert({{data->size(), tunnel}});
-            tunnel = nullptr;
+        if (caller){
+            if (tunnel) {
+                self_p->getVar()->at(caller->getType()) = tunnel;
+
+                tunnel = nullptr;
+            } else {
+                tunnel = self_p->get()->at(caller->getType());
+            }
         } else {
-            tunnel = data->at(data->size() - 1);
-            data->erase(data->size() - 1);
+            throw;
         }
     } else {
         throw;
