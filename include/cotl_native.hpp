@@ -52,25 +52,28 @@ using func_t = _COTL_FUNC_T(*);
     _COTL_FUNC_T(oldname);\
     const auto name = oldname;
 
+template <class T>
+using hold_t = std::unique_ptr<T, MemDel<T>>;
+
 #ifdef _COTL_USE_DEQUE
-    using arr_t = std::shared_ptr<std::deque<
+    using arr_t = hold_t<std::deque<
         PVal, MemAlloc<std::pair<int_t, PVal>>
     >>;
 #else
-    using arr_t = std::shared_ptr<std::vector<
+    using arr_t = hold_t<std::vector<
         PVal, MemAlloc<std::pair<int_t, PVal>>
     >>;
 #endif
 
 #ifdef _COTL_USE_UNORDERED_MAP
-    using map_t = std::shared_ptr<std::unordered_map<
+    using map_t = hold_t<std::unordered_map<
         int_t, PVal,
         std::hash<int_t>,
         std::equal_to<int_t>,
         MemAlloc<std::pair<int_t, PVal>>
     >>;
 #else
-    using map_t = std::shared_ptr<std::map<
+    using map_t = hold_t<std::map<
         int_t, PVal,
         std::less<int_t>,
         MemAlloc<std::pair<int_t, PVal>>

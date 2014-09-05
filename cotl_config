@@ -4,6 +4,9 @@
 // use libgc from OS instead of ./gc
 #define _COTL_USE_GLOBAL_GC
 
+// use weak allocator (traceable_allocator<T>)
+#define _COTL_USE_WEAK_ALLOCATOR
+
 // use reference counter
 #define _COTL_USE_REF_COUNT
 

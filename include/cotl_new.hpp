@@ -57,7 +57,7 @@ template <class... Args>
 inline Arr *_arr(
     const Args... args /* values */
 ) {
-    return _arr_m(std::make_shared<arr_t::element_type>(), args...);
+    return _arr_m(arr_t(_COTL_RAWNEW(arr_t::element_type())), args...);
 }
 
 template <class... Args>
@@ -73,7 +73,7 @@ template <class... Args>
 inline Map *_map(
     const Args... args /* (key, value) loop */
 ) {
-    return _map_m(std::make_shared<map_t::element_type>(), args...);
+    return _map_m(map_t(_COTL_RAWNEW(map_t::element_type())), args...);
 }
 
 }

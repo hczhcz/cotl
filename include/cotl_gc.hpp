@@ -22,20 +22,34 @@ namespace cotl {
 #ifdef _COTL_USE_GC
     #define _COTL_MALLOC(size) GC_MALLOC(size)
     #define _COTL_FREE(ptr) GC_FREE(ptr)
+    #define _COTL_RAWNEW(obj) (new (UseGC) obj)
     #define _COTL_MEMINIT() GC_INIT()
 
     using MemBase = gc_cleanup;
     template <class T>
-    using MemAlloc = typename ::traceable_allocator<T>;
+    #ifdef _COTL_USE_WEAK_ALLOCATOR
+        using MemAlloc = typename ::traceable_allocator<T>;
+    #else
+        using MemAlloc = typename ::gc_allocator<T>;
+    #endif
 #else
     #define _COTL_MALLOC(size) malloc(size)
     #define _COTL_FREE(ptr) free(ptr)
+    #define _COTL_RAWNEW(obj) (new obj)
     #define _COTL_MEMINIT() do {} while (false)
 
     using MemBase = class {};
     template <class T>
     using MemAlloc = typename std::allocator<T>;
 #endif
+
+template <class T>
+class MemDel {
+public:
+    inline void operator()(T *ptr) const {
+        _COTL_FREE(ptr);
+    }
+};
 
 }
 
