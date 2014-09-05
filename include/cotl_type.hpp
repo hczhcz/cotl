@@ -134,6 +134,9 @@ protected:
     inline NativeVal(const T &data, const int_t type, const func_t func):
         Val(type, func), _data(data) {}
 
+    inline NativeVal(T &&data, const int_t type, const func_t func):
+        Val(type, func), _data(std::move(data)) {}
+
     virtual ~NativeVal() override {}
 
 public:
@@ -155,10 +158,10 @@ public:
     friend Str *_str(const std::string &data,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend Arr *_arr_m(const arr_t &container,
+    friend Arr *_arr_m(arr_t &&container,
         const int_t type, const func_t func, PValRaw reused
     );
-    friend Map *_map_m(const map_t &container,
+    friend Map *_map_m(map_t &&container,
         const int_t type, const func_t func, PValRaw reused
     );
 

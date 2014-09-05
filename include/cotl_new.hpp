@@ -36,21 +36,21 @@ Str *_str(const std::string &data,
     const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
-Arr *_arr_m(const arr_t &container,
+Arr *_arr_m(arr_t &&container,
     const int_t type = id_arr, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
-Map *_map_m(const map_t &container,
+Map *_map_m(map_t &&container,
     const int_t type = id_map, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
 template <class... Args>
-inline Arr *_arr_m(const arr_t &container,
+inline Arr *_arr_m(arr_t &&container,
     const PVal &value, const Args... args /* values */
 ) {
     container->push_back(value);
 
-    return _arr_m(container, args...);
+    return _arr_m(std::move(container), args...);
 }
 
 template <class... Args>
@@ -61,12 +61,12 @@ inline Arr *_arr(
 }
 
 template <class... Args>
-inline Map *_map_m(const map_t &container,
+inline Map *_map_m(map_t &&container,
     const int_t key, const PVal &value, const Args... args /* (key, value) loop */
 ) {
     container->insert(std::pair<int_t, PVal>(key, value));
 
-    return _map_m(container, args...);
+    return _map_m(std::move(container), args...);
 }
 
 template <class... Args>

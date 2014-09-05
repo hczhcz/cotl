@@ -117,14 +117,14 @@ Str *_str(const std::string &data,
     return result;
 }
 
-Arr *_arr_m(const arr_t &container,
+Arr *_arr_m(arr_t &&container,
     const int_t type, const func_t func, PValRaw reused
 ) {
     #ifdef _COTL_USE_REF_COUNT
         int_t ref = _getRef(reused);
     #endif
 
-    Arr *result = new (reused) Arr(container, type, func);
+    Arr *result = new (reused) Arr(std::move(container), type, func);
 
     #ifdef _COTL_USE_REF_COUNT
         _setRef(result, ref);
@@ -133,14 +133,14 @@ Arr *_arr_m(const arr_t &container,
     return result;
 }
 
-Map *_map_m(const map_t &container,
+Map *_map_m(map_t &&container,
     const int_t type, const func_t func, PValRaw reused
 ) {
     #ifdef _COTL_USE_REF_COUNT
         int_t ref = _getRef(reused);
     #endif
 
-    Map *result = new (reused) Map(container, type, func);
+    Map *result = new (reused) Map(std::move(container), type, func);
 
     #ifdef _COTL_USE_REF_COUNT
         _setRef(result, ref);
