@@ -10,9 +10,14 @@ using namespace cotl::published;
 inline
 namespace published {
 
+// runtime
 _COTL_FUNC_T(stdAuto);
 _COTL_FUNC_T(stdLiteral);
 _COTL_FUNC_T(stdBind);
+
+// type
+_COTL_FUNC_T(stdLibFunc);
+_COTL_FUNC_T(stdLibMap);
 
 }
 
