@@ -149,7 +149,7 @@ public:
     // defined in cotl_inline.hpp
 
     inline void operator()(
-        const PMaybe &caller, const PVal &lib, PMaybe &tunnel /* could be null */
+        const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const;
     // defined in cotl_inline.hpp
 

@@ -24,8 +24,8 @@ using real_t = double;
     void (name)(\
         const PVal &self,\
         const PMaybe &caller,\
-        const PVal &lib,\
-        PMaybe &tunnel /* could be null */\
+        const PMaybe &lib,\
+        PMaybe &tunnel\
     ) // if changed, check cotl_ptr.hpp and cotl_ptr_inline.hpp
 
 using func_t = _COTL_FUNC_T(*);

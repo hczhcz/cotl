@@ -22,7 +22,7 @@ int_t addInitializer(func_t func) {
     return 0;
 }
 
-void callInitializer(const PVal &lib) {
+void callInitializer(const PMaybe &lib) {
     PVal blank(_atom(id_error));
     PMaybe caller(nullptr);
     PMaybe tunnel(nullptr);
@@ -38,7 +38,7 @@ void callInitializer(const PVal &lib) {
 
 void boot(const PVal &exec, PMaybe &tunnel) {
     PMaybe caller(nullptr);
-    PVal lib(_atom()); // TODO // lib = (not_found, map())
+    PMaybe lib(_map(id_map, stdLibMap));
 
     callInitializer(lib);
 
