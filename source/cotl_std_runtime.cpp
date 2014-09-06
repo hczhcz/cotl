@@ -2,12 +2,9 @@
 
 namespace cotlstd {
 
-inline
-namespace published {
-
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdAuto)
+_COTL_FUNC_T(published::stdAuto)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
@@ -20,7 +17,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdLiteral)
+_COTL_FUNC_T(published::stdLiteral)
 _COTL_FUNC_BEGIN
     if (tunnel) {
         throw;
@@ -29,7 +26,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdBind)
+_COTL_FUNC_T(published::stdBind)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
@@ -46,8 +43,6 @@ _COTL_FUNC_BEGIN
         throw;
     }
 _COTL_FUNC_END
-
-}
 
 _COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
@@ -76,15 +71,15 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(initRuntime)
+namespace {
+
+_COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     // TODO
 
 _COTL_FUNC_END
 
-namespace {
-
-long long ago = addInitializer(initRuntime);
+long long ago = addInitializer(init);
 
 }
 

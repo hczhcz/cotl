@@ -41,6 +41,8 @@ enum {
     // atom
     id_atom = IDX_TYPE,
     id_null,
+    id_false,
+    id_true,
 
     // int
     id_int  = IDX_TYPE + 16,
@@ -52,29 +54,23 @@ enum {
 
     // func
     id_func = IDX_TYPE + 48,
-    id_libfunc,
 
     // ptr
     id_ptr  = IDX_TYPE + 64,
-    id_wrapptr,
     id_refptr,
 
     // pair
     id_pair = IDX_TYPE + 80,
-    id_wrappair,
 
     // str
     id_str  = IDX_TYPE + 96,
 
     // arr
     id_arr  = IDX_TYPE + 112,
-    id_wraparr,
     id_stack,
 
     // map
     id_map  = IDX_TYPE + 128,
-    id_wrapmap,
-    id_libmap,
 
     // special
     id_error = IDX_TYPE + 144
@@ -83,8 +79,6 @@ enum {
 enum {
     // atom
     ID_NULLARY = IDX_RUNTIME,
-    id_false,
-    id_true,
 
     // ptr
     ID_UNARY   = IDX_RUNTIME + 256,

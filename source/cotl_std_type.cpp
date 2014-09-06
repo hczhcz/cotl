@@ -4,8 +4,9 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-
-_COTL_FUNC_ALIAS(stdAtom, stdLiteral)
+// TODO: use function directly
+//       remove alias
+/*_COTL_FUNC_ALIAS(stdAtom, stdLiteral)
 _COTL_FUNC_ALIAS(stdInt, stdLiteral)
 _COTL_FUNC_ALIAS(stdReal, stdLiteral)
 _COTL_FUNC_ALIAS_DECL(stdFunc, stdLibFunc)
@@ -13,12 +14,14 @@ _COTL_FUNC_ALIAS_DECL(stdPtr, stdWrapPtr)
 _COTL_FUNC_ALIAS_DECL(stdPair, stdWrapPair)
 _COTL_FUNC_ALIAS(stdStr, stdLiteral)
 _COTL_FUNC_ALIAS_DECL(stdArr, stdWrapArr)
-_COTL_FUNC_ALIAS_DECL(stdMap, stdLibMap)
+_COTL_FUNC_ALIAS_DECL(stdMap, stdLibMap)*/
 
-_COTL_FUNC_T(initType)
+namespace {
+
+_COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     // TODO
-    (void) stdAtom;
+    /*(void) stdAtom;
     (void) stdInt;
     (void) stdReal;
     (void) stdFunc;
@@ -26,13 +29,11 @@ _COTL_FUNC_BEGIN
     (void) stdPair;
     (void) stdStr;
     (void) stdArr;
-    (void) stdMap;
+    (void) stdMap;*/
 
 _COTL_FUNC_END
 
-namespace {
-
-long long ago = addInitializer(initType);
+long long ago = addInitializer(init);
 
 }
 
