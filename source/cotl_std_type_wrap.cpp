@@ -4,50 +4,63 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdIncrement)
+_COTL_FUNC_T(stdWrapAtom)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Int>()) {
+    if (auto self_p = self.as<cotl::Atom>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Int>()) {
-                self_p->getVar() = tunnel_p->get();
-                tunnel = nullptr;
-            } else {
-                throw;
-            }
+            throw;
         } else {
-            ++(self_p->getVar());
+            tunnel = _atom(
+                self_p->getType(), self_p->getFunc()
+            );
         }
     } else {
         throw;
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdDecrement)
+_COTL_FUNC_T(stdWrapInt)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Int>()) {
+    if (auto self_p = self.as<cotl::Int>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Int>()) {
-                self_p->getVar() = tunnel_p->get();
-                tunnel = nullptr;
-            } else {
-                throw;
-            }
+            throw;
         } else {
-            --(self_p->getVar());
+            tunnel = _int(
+                self_p->get(),
+                self_p->getType(), self_p->getFunc()
+            );
         }
     } else {
         throw;
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdLibFunc)
+_COTL_FUNC_T(stdWrapReal)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::Real>()) {
+        if (tunnel) {
+            throw;
+        } else {
+            tunnel = _real(
+                self_p->get(),
+                self_p->getType(), self_p->getFunc()
+            );
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdWrapFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
-        if (caller) {
-            PMaybe caller1(nullptr);
-            self_p->get()(caller, caller1, lib, tunnel); // _COTL_CALL
-        } else {
+        if (tunnel) {
             throw;
+        } else {
+            tunnel = _func(
+                self_p->get(),
+                self_p->getType(), self_p->getFunc()
+            );
         }
     } else {
         throw;
@@ -86,15 +99,6 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdRefPtr)
-_COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr>()) {
-        self_p->get()(caller, lib, tunnel); // _COTL_CALL
-    } else {
-        throw;
-    }
-_COTL_FUNC_END
-
 _COTL_FUNC_T(stdWrapPair)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Pair>()) {
@@ -123,6 +127,22 @@ _COTL_FUNC_BEGIN
 
             tunnel = _pair(
                 tunnel1, tunnel2,
+                self_p->getType(), self_p->getFunc()
+            );
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdWrapStr)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::Str>()) {
+        if (tunnel) {
+            throw;
+        } else {
+            tunnel = _str(
+                self_p->get(),
                 self_p->getType(), self_p->getFunc()
             );
         }
@@ -180,22 +200,6 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdStack)
-_COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Arr>()) {
-        arr_t &data = self_p->getVar();
-        if (tunnel) {
-            data->push_back(tunnel);
-            tunnel = nullptr;
-        } else {
-            tunnel = data->back();
-            data->pop_back();
-        }
-    } else {
-        throw;
-    }
-_COTL_FUNC_END
-
 _COTL_FUNC_T(stdWrapMap)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Map>()) {
@@ -239,34 +243,15 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdLibMap)
-_COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Map>()) {
-        if (caller){
-            if (tunnel) {
-                self_p->getVar()->at(caller->getType()) = tunnel;
+namespace {
 
-                tunnel = nullptr;
-            } else {
-                tunnel = self_p->get()->at(caller->getType());
-            }
-        } else {
-            throw;
-        }
-    } else {
-        throw;
-    }
-_COTL_FUNC_END
-
-_COTL_FUNC_T(initTypeEx)
+_COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     // TODO
 
 _COTL_FUNC_END
 
-namespace {
-
-long long ago = addInitializer(initTypeEx);
+long long ago = addInitializer(init);
 
 }
 
