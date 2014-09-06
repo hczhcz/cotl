@@ -145,18 +145,20 @@ public:
     inline PValConst operator->() const;
     // defined in cotl_inline.hpp
 
-    inline PValConst operator->();
-    // defined in cotl_inline.hpp
-
     inline void operator()(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const;
     // defined in cotl_inline.hpp
 
-    inline void operator()(
-        const PMaybe &caller, const PVal &lib, PMaybe &tunnel /* could be null */
-    );
-    // defined in cotl_inline.hpp
+    template <bool ret>
+    inline void call(
+        const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+    ) const {
+        *this(caller, lib, tunnel);
+        if (bool(tunnel) != ret) {
+            throw;
+        }
+    }
 
     inline operator bool() const {
         return exist();

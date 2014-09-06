@@ -33,12 +33,6 @@ inline bool PValProto<maybe>::exist() const {
 
 template <bool maybe>
 inline PValConst PValProto<maybe>::operator->() const {
-    assert(exist());
-    return _val;
-}
-
-template <bool maybe>
-inline PValConst PValProto<maybe>::operator->() {
     if (!exist()) {
         throw;
     }
@@ -50,14 +44,6 @@ template <bool maybe>
 inline void PValProto<maybe>::operator()(
     const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
 ) const {
-    assert(exist());
-    _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
-}
-
-template <bool maybe>
-inline void PValProto<maybe>::operator()(
-    const PMaybe &caller, const PVal &lib, PMaybe &tunnel /* could be null */
-) {
     if (!exist()) {
         throw;
     }
