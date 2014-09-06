@@ -154,7 +154,7 @@ public:
     inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const {
-        *this(caller, lib, tunnel);
+        (*this)(caller, lib, tunnel); // _COTL_CALL
         if (bool(tunnel) != ret) {
             throw;
         }

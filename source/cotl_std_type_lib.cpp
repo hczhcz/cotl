@@ -7,12 +7,8 @@ namespace cotlstd {
 _COTL_FUNC_T(published::stdLibFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
-        if (caller) {
-            PMaybe caller1(nullptr);
-            self_p->get()(caller, caller1, lib, tunnel); // _COTL_CALL
-        } else {
-            throw;
-        }
+        PMaybe caller1(nullptr);
+        self_p->get()(caller, caller1, lib, tunnel); // _COTL_CALL
     } else {
         throw;
     }
@@ -21,7 +17,7 @@ _COTL_FUNC_END
 _COTL_FUNC_T(published::stdLibMap)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Map>()) {
-        if (caller){
+        if (self_p->get()->count(caller->getType())) {
             if (tunnel) {
                 self_p->getVar()->at(caller->getType()) = tunnel;
 
@@ -30,7 +26,10 @@ _COTL_FUNC_BEGIN
                 tunnel = self_p->get()->at(caller->getType());
             }
         } else {
-            throw;
+            // call (next) lib if not found
+            PMaybe lib1(nullptr);
+
+            lib(caller, lib1, tunnel); // _COTL_CALL
         }
     } else {
         throw;
