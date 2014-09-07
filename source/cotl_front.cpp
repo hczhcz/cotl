@@ -86,6 +86,8 @@ int main(int argc, char* argv[]) {
 
     boot(_atom(), tunnel1);
 
+    cout << tunnel1 << endl;
+
     // end
 
     return 0;
