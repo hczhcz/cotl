@@ -1,0 +1,37 @@
+#include "../cotl"
+
+namespace cotlstd {
+
+// arg: self, caller, lib, tunnel
+
+_COTL_FUNC_T(std???)
+_COTL_FUNC_BEGIN
+    if (auto self_p = self.as<cotl::???>) {
+        if (tunnel) {
+            //
+        } else {
+            //
+        }
+    } else {
+        throw;
+    }
+_COTL_FUNC_END
+
+namespace {
+
+_COTL_FUNC_T(init)
+_COTL_FUNC_BEGIN
+    PMaybe caller1(nullptr);
+    PMaybe lib1(nullptr);
+    PMaybe tunnel1(nullptr);
+
+    caller1 = _atom(id_???);
+    tunnel1 = _func(std???, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+_COTL_FUNC_END
+
+long long ago = addInitializer(init);
+
+}
+
+}

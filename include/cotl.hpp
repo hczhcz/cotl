@@ -12,6 +12,7 @@
 
 // cotl std library
 #include "cotl_std_id.hpp"
+#include "cotl_std_util.hpp"
 #include "cotl_std_published.hpp"
 #include "cotl_std_export.hpp"
 
