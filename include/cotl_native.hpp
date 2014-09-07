@@ -45,13 +45,6 @@ using func_t = _COTL_FUNC_T(*);
         throw _arr(self, caller, lib, tunnel, id_error);\
     }// TODO TODO
 
-#define _COTL_FUNC_ALIAS(name, oldname) \
-    const auto (name) = (oldname);
-
-#define _COTL_FUNC_ALIAS_DECL(name, oldname) \
-    _COTL_FUNC_T(oldname);\
-    const auto (name) = (oldname);
-
 template <class T>
 using hold_t = std::unique_ptr<T, MemDel<T>>;
 

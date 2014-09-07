@@ -67,7 +67,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWrapPtr)
+_COTL_FUNC_T(published::stdWrapPtr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
         if (tunnel) {
@@ -95,7 +95,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWrapPair)
+_COTL_FUNC_T(published::stdWrapPair)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Pair>()) {
         if (tunnel) {
@@ -143,7 +143,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWarpArr)
+_COTL_FUNC_T(published::stdWrapArr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Arr>()) {
         if (tunnel) {

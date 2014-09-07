@@ -18,6 +18,9 @@ _COTL_FUNC_T(stdBind);
 // type
 _COTL_FUNC_T(stdLibFunc);
 _COTL_FUNC_T(stdLibMap);
+_COTL_FUNC_T(stdWrapPtr);
+_COTL_FUNC_T(stdWrapPair);
+_COTL_FUNC_T(stdWrapArr);
 
 }
 

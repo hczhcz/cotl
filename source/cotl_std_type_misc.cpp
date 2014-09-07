@@ -69,8 +69,25 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    // TODO
+    PMaybe caller1(nullptr);
+    PMaybe lib1(nullptr);
+    PMaybe tunnel1(nullptr);
 
+    caller1 = _atom(id_increment);
+    tunnel1 = _func(stdIncrement, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_decrement);
+    tunnel1 = _func(stdDecrement, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_refptr);
+    tunnel1 = _func(stdRefPtr, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_stack);
+    tunnel1 = _func(stdStack, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
 _COTL_FUNC_END
 
 long long ago = addInitializer(init);

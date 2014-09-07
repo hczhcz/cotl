@@ -4,33 +4,49 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-// TODO: use function directly
-//       remove alias
-/*_COTL_FUNC_ALIAS(stdAtom, stdLiteral)
-_COTL_FUNC_ALIAS(stdInt, stdLiteral)
-_COTL_FUNC_ALIAS(stdReal, stdLiteral)
-_COTL_FUNC_ALIAS_DECL(stdFunc, stdLibFunc)
-_COTL_FUNC_ALIAS_DECL(stdPtr, stdWrapPtr)
-_COTL_FUNC_ALIAS_DECL(stdPair, stdWrapPair)
-_COTL_FUNC_ALIAS(stdStr, stdLiteral)
-_COTL_FUNC_ALIAS_DECL(stdArr, stdWrapArr)
-_COTL_FUNC_ALIAS_DECL(stdMap, stdLibMap)*/
-
 namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    // TODO
-    /*(void) stdAtom;
-    (void) stdInt;
-    (void) stdReal;
-    (void) stdFunc;
-    (void) stdPtr;
-    (void) stdPair;
-    (void) stdStr;
-    (void) stdArr;
-    (void) stdMap;*/
+    PMaybe caller1(nullptr);
+    PMaybe lib1(nullptr);
+    PMaybe tunnel1(nullptr);
 
+    caller1 = _atom(id_atom);
+    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_int);
+    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_real);
+    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_func);
+    tunnel1 = _func(stdLibFunc, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_ptr);
+    tunnel1 = _func(stdWrapPtr, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_pair);
+    tunnel1 = _func(stdWrapPair, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_str);
+    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_arr);
+    tunnel1 = _func(stdWrapArr, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+
+    caller1 = _atom(id_map);
+    tunnel1 = _func(stdLibMap, id_func, stdLibFunc);
+    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
 _COTL_FUNC_END
 
 long long ago = addInitializer(init);
