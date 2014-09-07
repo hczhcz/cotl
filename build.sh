@@ -1,30 +1,29 @@
 #!/bin/sh
 
-# a simple script to build cotl
+# build cotl
 # use clang++ -O1 by default
 
 cc="clang++"
-# ccflags="-flto -emit-llvm"
-ccflags=""
 if ! type "$cc" > /dev/null
 then
     cc="g++"
-    ccflags=""
 fi
 if ! type "$cc" > /dev/null
 then
     sudo apt-get install g++
 fi
 
+ccflags="-c"
+pchflags="-x c++-header"
 dflags="-std=c++11 -Wall -Wextra"
-
 flags="$@"
+lflags="-lgc"
+
 if [ "$flags" = "" ]
 then
     flags="-g -O1"
 fi
 
-lflags="-lgc"
 if ! grep "^#define _COTL_USE_GLOBAL_GC" cotl_config > /dev/null
 then
     lflags="./gc/*.o"
@@ -36,10 +35,12 @@ fi
 
 rm ./output/*
 
+"$cc" $pchflags $dflags $flags "cotl" -o "./cotl.pch"
+
 for file in ./source/*.cpp
 do
     echo "======== $(basename $file) ========"
-    "$cc" -c $ccflags $dflags $flags "$file" -o "./output/$(basename $file .cpp).o"
+    "$cc" $ccflags $dflags $flags -include "cotl" "$file" -o "./output/$(basename $file .cpp).o" || exit
     nm -C -l -p "./output/$(basename $file .cpp).o" |
         grep "cotl" |
         sed -e "s:^[0-9A-Fa-f]* *::g" |
