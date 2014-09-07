@@ -35,6 +35,7 @@ fi
 
 rm ./output/*
 
+echo "======== precompiling ========"
 "$cc" $pchflags $dflags $flags "cotl" -o "./cotl.pch"
 
 for file in ./source/*.cpp

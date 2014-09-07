@@ -17,19 +17,29 @@ _COTL_FUNC_END
 _COTL_FUNC_T(published::stdLibMap)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Map>()) {
-        if (self_p->get()->count(caller->getType())) {
+        int_t type = caller->getType();
+
+        if (self_p->get()->count(type)) {
             if (tunnel) {
-                self_p->getVar()->at(caller->getType()) = tunnel;
+                self_p->getVar()->at(type) = tunnel;
 
                 tunnel = nullptr;
             } else {
-                tunnel = self_p->get()->at(caller->getType());
+                tunnel = self_p->get()->at(type);
             }
         } else {
-            // call (next) lib if not found
-            PMaybe lib1(nullptr);
+            // key not found
+            if (tunnel) {
+                // insert new item
+                self_p->getVar()->insert(std::pair<int_t, PVal>(type, tunnel));
 
-            lib(caller, lib1, tunnel); // _COTL_CALL
+                tunnel = nullptr;
+            } else {
+                // call (next) lib
+                PMaybe lib1(nullptr);
+
+                lib(caller, lib1, tunnel); // _COTL_CALL
+            }
         }
     } else {
         throw;
