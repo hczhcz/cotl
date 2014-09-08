@@ -74,12 +74,12 @@ _COTL_FUNC_BEGIN
 
     lib.call<false>(
         _atom(id_type),
-        _libmap(
+        _ptr(_libmap(
             id_increment, _libfunc(stdIncrement),
             id_decrement, _libfunc(stdDecrement),
             id_refptr, _libfunc(stdRefPtr),
             id_stack, _libfunc(stdStack)
-        ),
+        ), id_quote),
         tunnel1
     );
 _COTL_FUNC_END

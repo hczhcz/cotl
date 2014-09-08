@@ -73,13 +73,13 @@ _COTL_FUNC_BEGIN
 
     lib.call<false>(
         _atom(id_runtime),
-        _libmap(
+        _ptr(_libmap(
             id_auto, _libfunc(stdAuto),
             id_literal, _libfunc(stdLiteral),
             id_bind, _libfunc(stdBind),
             id_quote, _libfunc(stdQuote),
             id_contain, _libfunc(stdContain)
-        ),
+        ), id_quote),
         tunnel1
     );
 _COTL_FUNC_END

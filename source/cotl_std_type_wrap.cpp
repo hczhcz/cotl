@@ -240,7 +240,7 @@ _COTL_FUNC_BEGIN
 
     lib.call<false>(
         _atom(id_type),
-        _libmap(
+        _ptr(_libmap(
             id_atom, _libfunc(stdWrapAtom),
             id_int, _libfunc(stdWrapInt),
             id_real, _libfunc(stdWrapReal),
@@ -252,7 +252,7 @@ _COTL_FUNC_BEGIN
             id_map, _libfunc(stdWrapMap)
             // TODO: really necessary?
             // id_error, _libfunc(stdWrapErr)
-        ),
+        ), id_quote),
         tunnel1
     );
 _COTL_FUNC_END

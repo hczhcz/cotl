@@ -54,10 +54,10 @@ _COTL_FUNC_BEGIN
 
     lib.call<false>(
         _atom(id_type),
-        _libmap(
+        _ptr(_libmap(
             id_func, _libfunc(stdLibFunc),
             id_map, _libfunc(stdLibMap)
-        ),
+        ), id_quote),
         tunnel1
     );
 _COTL_FUNC_END

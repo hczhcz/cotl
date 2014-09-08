@@ -12,7 +12,7 @@ _COTL_FUNC_BEGIN
 
     lib.call<false>(
         _atom(id_type),
-        _libmap(
+        _ptr(_libmap(
             id_atom, _libfunc(stdLiteral),
             id_int, _libfunc(stdLiteral),
             id_real, _libfunc(stdLiteral),
@@ -23,7 +23,7 @@ _COTL_FUNC_BEGIN
             id_arr, _libfunc(stdWrapArr),
             id_map, _libfunc(stdLibMap),
             id_error, _libfunc(stdLiteral)
-        ),
+        ), id_quote),
         tunnel1
     );
 _COTL_FUNC_END
