@@ -15,84 +15,96 @@ enum {
     // std lib
 
     // types (int, real, arr, stack, null, true etc.)
-    IDX_TYPE        = IDX_BASE + 23,
-    IDX_TYPE_TOP    = IDX_BASE + 232,
+    IDX_TYPE       = IDX_BASE + 23,
+    IDX_TYPE_TOP   = IDX_BASE + 232,
     // core functions
-    IDX_RUNTIME     = IDX_BASE + 233,
-    IDX_RUNTIME_TOP = IDX_BASE + 2332,
+    IDX_CORE       = IDX_BASE + 233,
+    IDX_CORE_TOP   = IDX_BASE + 2332,
     // library functions
-    IDX_FUNC        = IDX_BASE + 2333,
-    IDX_FUNC_TOP    = IDX_BASE + 23332,
+    IDX_LIB        = IDX_BASE + 2333,
+    IDX_LIB_TOP    = IDX_BASE + 23332,
 
     // non-std
 
     // user-defined native types / functions
-    IDX_NATIVE      = IDX_BASE + 23333,
-    IDX_NATIVE_TOP  = IDX_BASE + 233332,
+    IDX_NATIVE     = IDX_BASE + 23333,
+    IDX_NATIVE_TOP = IDX_BASE + 233332,
     // user-defined values in cotl code
-    IDX_USER        = IDX_BASE + 233333,
-    IDX_USER_TOP    = IDX_BASE + 2333332
+    IDX_USER       = IDX_BASE + 233333,
+    IDX_USER_TOP   = IDX_BASE + 2333332
 };
 
 inline
 namespace published {
 
 enum {
-    // atom
-    id_atom = IDX_TYPE,
-    id_null,
-    id_false,
-    id_true,
+    id_type = IDX_TYPE, // TODO: add lib for id_error
 
-    // int
-    id_int  = IDX_TYPE + 16,
-    id_increment,
-    id_decrement,
+        // atom
+        id_atom  = IDX_TYPE + 16,
+        id_null,
+        id_false,
+        id_true,
 
-    // real
-    id_real = IDX_TYPE + 32,
+        // int
+        id_int   = IDX_TYPE + 32,
+        id_increment,
+        id_decrement,
 
-    // func
-    id_func = IDX_TYPE + 48,
+        // real
+        id_real  = IDX_TYPE + 48,
 
-    // ptr
-    id_ptr  = IDX_TYPE + 64,
-    id_refptr,
+        // func
+        id_func  = IDX_TYPE + 64,
 
-    // pair
-    id_pair = IDX_TYPE + 80,
+        // ptr
+        id_ptr   = IDX_TYPE + 80,
+        id_refptr,
 
-    // str
-    id_str  = IDX_TYPE + 96,
+        // pair
+        id_pair  = IDX_TYPE + 96,
 
-    // arr
-    id_arr  = IDX_TYPE + 112,
-    id_stack,
+        // str
+        id_str   = IDX_TYPE + 112,
 
-    // map
-    id_map  = IDX_TYPE + 128,
+        // arr
+        id_arr   = IDX_TYPE + 128,
+        id_stack,
 
-    // special
-    id_error = IDX_TYPE + 144
+        // map
+        id_map   = IDX_TYPE + 144,
+
+        // special
+        id_error = IDX_TYPE + 160,
+
+        // override packages
+        id_type_wrap = IDX_TYPE + 176,
+            /* override: non-special types */
+        id_type_lib,
+            /* override: func, map */
 };
 
 enum {
-    // atom
-    ID_NULLARY = IDX_RUNTIME,
+    ID_STD = IDX_CORE,
+        id_runtime,
+            id_auto,
+            id_literal,
+            id_bind,
+            id_quote,
+            id_contain,
 
-    // ptr
-    ID_UNARY   = IDX_RUNTIME + 256,
-    id_quote,
-    id_contain,
+        id_math,
+            id_add, // TODO: both int and real (auto detect)
+            id_sub,
+            id_mul,
+            id_div,
 
-    // pair
-    ID_BINARY  = IDX_RUNTIME + 512,
+            id_math_int,
+                /* override: add, sub, mul, div */
+                id_mod,
 
-    // any
-    id_VARARY  = IDX_RUNTIME + 768,
-    id_auto,
-    id_literal,
-    id_bind
+            id_math_real
+                /* override: add, sub, mul, div */
 };
 
 }
