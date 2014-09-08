@@ -255,7 +255,7 @@ _COTL_FUNC_BEGIN
                 // id_error, _libfunc(stdWrapErr)
             ), id_quote),
             tunnel
-        );
+        ); // _COTL_CALL
     }
 _COTL_FUNC_END
 

@@ -85,7 +85,7 @@ _COTL_FUNC_BEGIN
                 id_stack, _libfunc(stdStack)
             ), id_quote),
             tunnel
-        );
+        ); // _COTL_CALL
     }
 _COTL_FUNC_END
 

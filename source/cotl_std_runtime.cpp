@@ -9,7 +9,7 @@ _COTL_FUNC_BEGIN
     PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib(self, lib1, func); // _COTL_CALL
+    lib.call<true>(self, lib1, func); // _COTL_CALL
 
     func(self, lib, tunnel); // _COTL_CALL
 _COTL_FUNC_END
@@ -28,7 +28,7 @@ _COTL_FUNC_BEGIN
     PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib(self, lib1, func); // _COTL_CALL
+    lib.call<true>(self, lib1, func); // _COTL_CALL
 
     if (auto func_p = func.as<cotl::Func>()) {
         self.raw()->setFunc(func_p->get());
@@ -82,7 +82,7 @@ _COTL_FUNC_BEGIN
                 id_contain, _libfunc(stdContain)
             ), id_quote),
             tunnel
-        );
+        ); // _COTL_CALL
     }
 _COTL_FUNC_END
 

@@ -60,7 +60,7 @@ _COTL_FUNC_BEGIN
                 id_map, _libfunc(stdLibMap)
             ), id_quote),
             tunnel
-        );
+        ); // _COTL_CALL
     }
 _COTL_FUNC_END
 
