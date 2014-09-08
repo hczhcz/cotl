@@ -66,7 +66,7 @@ template <class... Args>
 inline Map *_map_m(map_t &&container,
     const int_t key, const PVal &value, const Args... args /* (key, value) loop */
 ) {
-    container->insert(std::pair<int_t, PVal>(key, value));
+    container->insert({{key, value}});
 
     return _map_m(std::move(container), args...);
 }

@@ -35,11 +35,11 @@ using hold_t = std::unique_ptr<T, MemDel<T>>;
 
 #ifdef _COTL_USE_DEQUE
     using arr_t = hold_t<std::deque<
-        PVal, MemAlloc<std::pair<int_t, PVal>>
+        PVal, MemAlloc<PVal>
     >>;
 #else
     using arr_t = hold_t<std::vector<
-        PVal, MemAlloc<std::pair<int_t, PVal>>
+        PVal, MemAlloc<PVal>
     >>;
 #endif
 
@@ -48,13 +48,13 @@ using hold_t = std::unique_ptr<T, MemDel<T>>;
         int_t, PVal,
         std::hash<int_t>,
         std::equal_to<int_t>,
-        MemAlloc<std::pair<int_t, PVal>>
+        MemAlloc<std::pair<const int_t, PVal>>
     >>;
 #else
     using map_t = hold_t<std::map<
         int_t, PVal,
         std::less<int_t>,
-        MemAlloc<std::pair<int_t, PVal>>
+        MemAlloc<std::pair<const int_t, PVal>>
     >>;
 #endif
 

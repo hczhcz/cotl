@@ -178,7 +178,8 @@ _COTL_FUNC_BEGIN
 
                 (*self_data)[i].call<true>(caller, lib, tunnel1); // _COTL_CALL
 
-                tunnel_data->push_back(tunnel1);
+                PVal helper(tunnel1); // notice: use copy constructor in push_back
+                tunnel_data->push_back(helper);
             }
 
             tunnel = tunnel_p;

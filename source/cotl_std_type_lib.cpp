@@ -31,7 +31,7 @@ _COTL_FUNC_BEGIN
             // key not found
             if (tunnel) {
                 // insert new item
-                self_p->getVar()->insert(std::pair<int_t, PVal>(type, tunnel));
+                self_p->getVar()->insert({{type, tunnel}});
 
                 tunnel = nullptr;
             } else {
