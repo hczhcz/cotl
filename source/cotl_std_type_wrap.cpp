@@ -236,25 +236,27 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe tunnel1(nullptr);
-
-    lib.call<false>(
-        _atom(id_type),
-        _ptr(_libmap(
-            id_atom, _libfunc(stdWrapAtom),
-            id_int, _libfunc(stdWrapInt),
-            id_real, _libfunc(stdWrapReal),
-            id_func, _libfunc(stdWrapFunc),
-            id_ptr, _libfunc(stdWrapPtr),
-            id_pair, _libfunc(stdWrapPair),
-            id_str, _libfunc(stdWrapStr),
-            id_arr, _libfunc(stdWrapArr),
-            id_map, _libfunc(stdWrapMap)
-            // TODO: really necessary?
-            // id_error, _libfunc(stdWrapErr)
-        ), id_quote),
-        tunnel1
-    );
+    if (tunnel) {
+        throw;
+    } else {
+        lib.call<false>(
+            _atom(id_type_wrap),
+            _ptr(_libmap(
+                id_atom, _libfunc(stdWrapAtom),
+                id_int, _libfunc(stdWrapInt),
+                id_real, _libfunc(stdWrapReal),
+                id_func, _libfunc(stdWrapFunc),
+                id_ptr, _libfunc(stdWrapPtr),
+                id_pair, _libfunc(stdWrapPair),
+                id_str, _libfunc(stdWrapStr),
+                id_arr, _libfunc(stdWrapArr),
+                id_map, _libfunc(stdWrapMap)
+                // TODO: really necessary?
+                // id_error, _libfunc(stdWrapErr)
+            ), id_quote),
+            tunnel
+        );
+    }
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

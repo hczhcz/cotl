@@ -70,18 +70,23 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe tunnel1(nullptr);
-
-    lib.call<false>(
-        _atom(id_type),
-        _ptr(_libmap(
-            id_increment, _libfunc(stdIncrement),
-            id_decrement, _libfunc(stdDecrement),
-            id_refptr, _libfunc(stdRefPtr),
-            id_stack, _libfunc(stdStack)
-        ), id_quote),
-        tunnel1
-    );
+    if (tunnel) {
+        throw;
+    } else {
+        lib.call<false>(
+            _atom(id_type_misc),
+            _ptr(_libmap(
+                id_null, _libfunc(stdLiteral),
+                id_false, _libfunc(stdLiteral),
+                id_true, _libfunc(stdLiteral),
+                id_increment, _libfunc(stdIncrement),
+                id_decrement, _libfunc(stdDecrement),
+                id_refptr, _libfunc(stdRefPtr),
+                id_stack, _libfunc(stdStack)
+            ), id_quote),
+            tunnel
+        );
+    }
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

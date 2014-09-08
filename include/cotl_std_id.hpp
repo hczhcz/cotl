@@ -78,10 +78,15 @@ enum {
         id_error = IDX_TYPE + 160,
 
         // override packages
+
         id_type_wrap = IDX_TYPE + 176,
-            /* override: non-special types */
+            /* override: base types except error */
+
         id_type_lib,
             /* override: func, map */
+
+        id_type_misc
+            /* override: non-base types */
 };
 
 enum {

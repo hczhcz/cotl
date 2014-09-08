@@ -21,15 +21,17 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe tunnel1(nullptr);
-
-    lib.call<false>(
-        _atom(id_???),
-        _ptr(_libmap(
-            id_???, _libfunc(std???),
-        ), id_quote),
-        tunnel1
-    );
+    if (tunnel) {
+        throw;
+    } else {
+        lib.call<false>(
+            _atom(id_???),
+            _ptr(_libmap(
+                id_???, _libfunc(std???),
+            ), id_quote),
+            tunnel
+        );
+    }
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_???);

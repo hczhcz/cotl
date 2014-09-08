@@ -50,16 +50,18 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe tunnel1(nullptr);
-
-    lib.call<false>(
-        _atom(id_type),
-        _ptr(_libmap(
-            id_func, _libfunc(stdLibFunc),
-            id_map, _libfunc(stdLibMap)
-        ), id_quote),
-        tunnel1
-    );
+    if (tunnel) {
+        throw;
+    } else {
+        lib.call<false>(
+            _atom(id_type_lib),
+            _ptr(_libmap(
+                id_func, _libfunc(stdLibFunc),
+                id_map, _libfunc(stdLibMap)
+            ), id_quote),
+            tunnel
+        );
+    }
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);
