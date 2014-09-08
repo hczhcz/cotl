@@ -8,7 +8,20 @@ namespace cotl {
 inline
 namespace published {
 
-int_t addInitializer(const func_t func);
+enum init_t {
+    INIT_BEGIN,
+
+    init_core = INIT_BEGIN,
+    init_lib,
+    init_lib_after,
+    init_user,
+    init_user_after,
+    init_test,
+
+    INIT_END
+};
+
+int_t addInitializer(const func_t func, const init_t init);
 
 void callInitializer(const PMaybe &lib);
 

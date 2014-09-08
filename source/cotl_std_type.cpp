@@ -49,7 +49,7 @@ _COTL_FUNC_BEGIN
     lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
 _COTL_FUNC_END
 
-long long ago = addInitializer(init);
+long long ago = addInitializer(init, init_core);
 
 }
 
