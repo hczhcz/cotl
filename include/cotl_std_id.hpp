@@ -90,7 +90,13 @@ enum {
 };
 
 enum {
-    ID_STD = IDX_CORE,
+    id_std = IDX_CORE,
+        // id_type,
+            // <types>
+            // id_type_wrap,
+            // id_type_lib,
+            // id_type_misc,
+
         id_runtime,
             id_auto,
             id_literal,
