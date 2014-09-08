@@ -72,17 +72,17 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         throw;
     } else {
-        lib.call<false>(
-            _atom(id_runtime),
+        PMaybe tunnel1(
             _ptr(_libmap(
                 id_auto, _libfunc(stdAuto),
                 id_literal, _libfunc(stdLiteral),
                 id_bind, _libfunc(stdBind),
                 id_quote, _libfunc(stdQuote),
                 id_contain, _libfunc(stdContain)
-            ), id_quote),
-            tunnel
-        ); // _COTL_CALL
+            ), id_quote)
+        );
+
+        lib.call<false>(_atom(id_runtime), nullptr, tunnel1); // _COTL_CALL
     }
 _COTL_FUNC_END
 

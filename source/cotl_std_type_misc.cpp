@@ -73,8 +73,7 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         throw;
     } else {
-        lib.call<false>(
-            _atom(id_type_misc),
+        PMaybe tunnel1(
             _ptr(_libmap(
                 id_null, _libfunc(stdLiteral),
                 id_false, _libfunc(stdLiteral),
@@ -83,9 +82,10 @@ _COTL_FUNC_BEGIN
                 id_decrement, _libfunc(stdDecrement),
                 id_refptr, _libfunc(stdRefPtr),
                 id_stack, _libfunc(stdStack)
-            ), id_quote),
-            tunnel
-        ); // _COTL_CALL
+            ), id_quote)
+        );
+
+        lib.call<false>(_atom(id_type_misc), nullptr, tunnel1); // _COTL_CALL
     }
 _COTL_FUNC_END
 

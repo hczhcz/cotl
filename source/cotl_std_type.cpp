@@ -11,8 +11,7 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         throw;
     } else {
-        lib.call<false>(
-            _atom(id_type),
+        PMaybe tunnel1(
             _ptr(_libmap(
                 id_atom, _libfunc(stdLiteral),
                 id_int, _libfunc(stdLiteral),
@@ -24,9 +23,10 @@ _COTL_FUNC_BEGIN
                 id_arr, _libfunc(stdWrapArr),
                 id_map, _libfunc(stdLibMap),
                 id_error, _libfunc(stdLiteral)
-            ), id_quote),
-            tunnel
-        ); // _COTL_CALL
+            ), id_quote)
+        );
+
+        lib.call<false>(_atom(id_type), nullptr, tunnel1); // _COTL_CALL
     }
 _COTL_FUNC_END
 
