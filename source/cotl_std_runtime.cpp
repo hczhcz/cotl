@@ -69,29 +69,19 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe caller1(nullptr);
-    PMaybe lib1(nullptr);
     PMaybe tunnel1(nullptr);
 
-    caller1 = _atom(id_auto);
-    tunnel1 = _func(stdAuto, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_literal);
-    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_bind);
-    tunnel1 = _func(stdBind, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_quote);
-    tunnel1 = _func(stdQuote, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_contain);
-    tunnel1 = _func(stdContain, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+    lib.call<false>(
+        _atom(id_runtime),
+        _libmap(
+            id_auto, _libfunc(stdAuto),
+            id_literal, _libfunc(stdLiteral),
+            id_bind, _libfunc(stdBind),
+            id_quote, _libfunc(stdQuote),
+            id_contain, _libfunc(stdContain)
+        ),
+        tunnel1
+    );
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

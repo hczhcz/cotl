@@ -8,45 +8,24 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe caller1(nullptr);
-    PMaybe lib1(nullptr);
     PMaybe tunnel1(nullptr);
 
-    caller1 = _atom(id_atom);
-    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_int);
-    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_real);
-    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_func);
-    tunnel1 = _func(stdLibFunc, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_ptr);
-    tunnel1 = _func(stdWrapPtr, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_pair);
-    tunnel1 = _func(stdWrapPair, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_str);
-    tunnel1 = _func(stdLiteral, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_arr);
-    tunnel1 = _func(stdWrapArr, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_map);
-    tunnel1 = _func(stdLibMap, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+    lib.call<false>(
+        _atom(id_type),
+        _libmap(
+            id_atom, _libfunc(stdLiteral),
+            id_int, _libfunc(stdLiteral),
+            id_real, _libfunc(stdLiteral),
+            id_func, _libfunc(stdLibFunc),
+            id_ptr, _libfunc(stdWrapPtr),
+            id_pair, _libfunc(stdWrapPair),
+            id_str, _libfunc(stdLiteral),
+            id_arr, _libfunc(stdWrapArr),
+            id_map, _libfunc(stdLibMap),
+            id_error, _libfunc(stdLiteral)
+        ),
+        tunnel1
+    );
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

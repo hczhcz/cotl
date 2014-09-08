@@ -54,7 +54,7 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Arr>()) {
         arr_t &data = self_p->getVar();
         if (tunnel) {
-            PVal helper(tunnel)
+            PVal helper(tunnel);
             data->push_back(helper);
             tunnel = nullptr;
         } else {
@@ -70,25 +70,18 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    PMaybe caller1(nullptr);
-    PMaybe lib1(nullptr);
     PMaybe tunnel1(nullptr);
 
-    caller1 = _atom(id_increment);
-    tunnel1 = _func(stdIncrement, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_decrement);
-    tunnel1 = _func(stdDecrement, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_refptr);
-    tunnel1 = _func(stdRefPtr, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
-
-    caller1 = _atom(id_stack);
-    tunnel1 = _func(stdStack, id_func, stdLibFunc);
-    lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
+    lib.call<false>(
+        _atom(id_type),
+        _libmap(
+            id_increment, _libfunc(stdIncrement),
+            id_decrement, _libfunc(stdDecrement),
+            id_refptr, _libfunc(stdRefPtr),
+            id_stack, _libfunc(stdStack)
+        ),
+        tunnel1
+    );
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

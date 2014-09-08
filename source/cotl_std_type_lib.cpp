@@ -50,8 +50,16 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    // TODO
+    PMaybe tunnel1(nullptr);
 
+    lib.call<false>(
+        _atom(id_type),
+        _libmap(
+            id_func, _libfunc(stdLibFunc),
+            id_map, _libfunc(stdLibMap)
+        ),
+        tunnel1
+    );
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

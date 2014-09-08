@@ -44,6 +44,8 @@ Map *_map_m(map_t &&container,
     const int_t type = id_map, const func_t func = stdAuto, PValRaw reused = nullptr
 );
 
+// data construction
+
 template <class... Args>
 inline Arr *_arr_m(arr_t &&container,
     const PVal &value, const Args... args /* values */
@@ -74,6 +76,22 @@ inline Map *_map(
     const Args... args /* (key, value) loop */
 ) {
     return _map_m(map_t(_COTL_RAWNEW(map_t::element_type())), args...);
+}
+
+// alias to "lib" types
+
+template <class... Args>
+inline Func *_libfunc(
+    const Args... args
+) {
+    return _func(args..., id_func, stdLibFunc);
+}
+
+template <class... Args>
+inline Map *_libmap(
+    const Args... args
+) {
+    return _map(args..., id_map, stdLibMap);
 }
 
 }
