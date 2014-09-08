@@ -45,6 +45,7 @@ namespace cotl {
     using MemAlloc = typename std::allocator<T>;
 
     #define _COTL_RAWNEW(obj) (new obj)
+    #define _COTL_RAWDEL(obj) (delete obj)
 #endif
 
 template <class T>

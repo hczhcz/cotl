@@ -54,7 +54,8 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Arr>()) {
         arr_t &data = self_p->getVar();
         if (tunnel) {
-            data->push_back(tunnel);
+            PVal helper(tunnel)
+            data->push_back(helper);
             tunnel = nullptr;
         } else {
             tunnel = data->back();
@@ -90,7 +91,7 @@ _COTL_FUNC_BEGIN
     lib.call<false>(caller1, lib1, tunnel1); // _COTL_CALL
 _COTL_FUNC_END
 
-long long ago = addInitializer(init);
+long long ago = addInitializer(init, init_core);
 
 }
 
