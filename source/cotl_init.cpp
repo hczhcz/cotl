@@ -55,7 +55,7 @@ void boot(const PVal &exec, PMaybe &tunnel) {
 
     callInitializer(lib);
 
-    exec(caller, lib, tunnel); // _COTL_CALL
+    exec.call(caller, lib, tunnel);
 }
 
 }

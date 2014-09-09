@@ -41,7 +41,7 @@ inline PValConst PValProto<maybe>::operator->() const {
 }
 
 template <bool maybe>
-inline void PValProto<maybe>::operator()(
+inline void PValProto<maybe>::call(
     const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
 ) const {
     if (!exist()) {

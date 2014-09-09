@@ -38,7 +38,7 @@ inline
 namespace published {
 
 enum {
-    id_type = IDX_TYPE, // TODO: add lib for id_error
+    id_type = IDX_TYPE,
 
         // atom
         id_atom  = IDX_TYPE + 16,

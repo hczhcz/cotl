@@ -43,7 +43,7 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdRefPtr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
-        self_p->get()(caller, lib, tunnel); // _COTL_CALL
+        self_p->get().call(caller, lib, tunnel);
     } else {
         throw;
     }
@@ -85,7 +85,7 @@ _COTL_FUNC_BEGIN
             ), id_quote)
         );
 
-        lib.call<false>(_atom(id_type_misc), nullptr, tunnel1); // _COTL_CALL
+        lib.call<false>(_atom(id_type_misc), nullptr, tunnel1);
     }
 _COTL_FUNC_END
 

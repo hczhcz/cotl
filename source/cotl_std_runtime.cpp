@@ -9,9 +9,9 @@ _COTL_FUNC_BEGIN
     PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib.call<true>(self, lib1, func); // _COTL_CALL
+    lib.call<true>(self, lib1, func);
 
-    func(self, lib, tunnel); // _COTL_CALL
+    func.call(self, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLiteral)
@@ -28,11 +28,11 @@ _COTL_FUNC_BEGIN
     PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib.call<true>(self, lib1, func); // _COTL_CALL
+    lib.call<true>(self, lib1, func);
 
     if (auto func_p = func.as<cotl::Func>()) {
         self.raw()->setFunc(func_p->get());
-        self(caller, lib, tunnel); // _COTL_CALL
+        self.call(caller, lib, tunnel);
     } else {
         throw;
     }
@@ -82,7 +82,7 @@ _COTL_FUNC_BEGIN
             ), id_quote)
         );
 
-        lib.call<false>(_atom(id_runtime), nullptr, tunnel1); // _COTL_CALL
+        lib.call<false>(_atom(id_runtime), nullptr, tunnel1);
 
         // hack
         PMaybe tunnel2(_libfunc(stdQuote));

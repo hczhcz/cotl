@@ -38,7 +38,7 @@ _COTL_FUNC_BEGIN
                 // call (next) lib
                 PMaybe lib1(nullptr);
 
-                lib(caller, lib1, tunnel); // _COTL_CALL
+                lib.call(caller, lib1, tunnel);
             }
         }
     } else {

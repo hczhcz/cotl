@@ -144,7 +144,7 @@ public:
     inline PValConst operator->() const;
     // defined in cotl_inline.hpp
 
-    inline void operator()(
+    inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const;
     // defined in cotl_inline.hpp
@@ -153,7 +153,7 @@ public:
     inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const {
-        (*this)(caller, lib, tunnel); // _COTL_CALL
+        call(caller, lib, tunnel);
         if (bool(tunnel) != ret) {
             throw;
         }

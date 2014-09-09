@@ -10,7 +10,6 @@ namespace cotlstd {
         (void) self; (void) caller; (void) lib; (void) tunnel;\
         {
 
-// TODO: check if PMaybe is nullptr
 // TODO: force explicit check on PMaybe -> PVal
 #define _COTL_FUNC_END \
         }\

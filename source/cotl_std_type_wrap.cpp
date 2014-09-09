@@ -74,7 +74,7 @@ _COTL_FUNC_BEGIN
             if (auto tunnel_p = tunnel.as<cotl::Ptr>()) {
                 PMaybe tunnel1(tunnel_p->get());
 
-                self_p->get().call<false>(caller, lib, tunnel1); // _COTL_CALL
+                self_p->get().call<false>(caller, lib, tunnel1);
 
                 tunnel = nullptr;
             } else {
@@ -83,7 +83,7 @@ _COTL_FUNC_BEGIN
         } else {
             PMaybe tunnel1(nullptr);
 
-            self_p->get().call<true>(caller, lib, tunnel1); // _COTL_CALL
+            self_p->get().call<true>(caller, lib, tunnel1);
 
             tunnel = _ptr(
                 tunnel1,
@@ -103,8 +103,8 @@ _COTL_FUNC_BEGIN
                 PMaybe tunnel1(tunnel_p->get().first);
                 PMaybe tunnel2(tunnel_p->get().second);
 
-                self_p->get().first.call<false>(caller, lib, tunnel1); // _COTL_CALL
-                self_p->get().second.call<false>(caller, lib, tunnel2); // _COTL_CALL
+                self_p->get().first.call<false>(caller, lib, tunnel1);
+                self_p->get().second.call<false>(caller, lib, tunnel2);
 
                 tunnel = nullptr;
             } else {
@@ -114,8 +114,8 @@ _COTL_FUNC_BEGIN
             PMaybe tunnel1(nullptr);
             PMaybe tunnel2(nullptr);
 
-            self_p->get().first.call<true>(caller, lib, tunnel1); // _COTL_CALL
-            self_p->get().second.call<true>(caller, lib, tunnel2); // _COTL_CALL
+            self_p->get().first.call<true>(caller, lib, tunnel1);
+            self_p->get().second.call<true>(caller, lib, tunnel2);
 
             tunnel = _pair(
                 tunnel1, tunnel2,
@@ -156,7 +156,7 @@ _COTL_FUNC_BEGIN
                     for (size_t i = 0; i != self_data->size(); ++i) {
                         PMaybe tunnel1((*tunnel_data)[i]);
 
-                        (*self_data)[i].call<false>(caller, lib, tunnel1); // _COTL_CALL
+                        (*self_data)[i].call<false>(caller, lib, tunnel1);
                     }
 
                     tunnel = nullptr;
@@ -176,7 +176,7 @@ _COTL_FUNC_BEGIN
             for (size_t i = 0; i != self_data->size(); ++i) {
                 PMaybe tunnel1(nullptr);
 
-                (*self_data)[i].call<true>(caller, lib, tunnel1); // _COTL_CALL
+                (*self_data)[i].call<true>(caller, lib, tunnel1);
 
                 PVal helper(tunnel1); // notice: use copy constructor in push_back
                 tunnel_data->push_back(helper);
@@ -201,7 +201,7 @@ _COTL_FUNC_BEGIN
                     if (tunnel_data->count(val.first)) {
                         PMaybe tunnel1(tunnel_data->at(val.first));
 
-                        val.second.call<false>(caller, lib, tunnel1); // _COTL_CALL
+                        val.second.call<false>(caller, lib, tunnel1);
                     } else {
                         throw;
                     }
@@ -220,7 +220,7 @@ _COTL_FUNC_BEGIN
             for (auto &val: *self_data) {
                 PMaybe tunnel1(nullptr);
 
-                val.second.call<true>(caller, lib, tunnel1); // _COTL_CALL
+                val.second.call<true>(caller, lib, tunnel1);
 
                 tunnel_data->insert({{val.first, tunnel1}});
             }
@@ -255,7 +255,7 @@ _COTL_FUNC_BEGIN
             ), id_quote)
         );
 
-        lib.call<false>(_atom(id_type_wrap), nullptr, tunnel1); // _COTL_CALL
+        lib.call<false>(_atom(id_type_wrap), nullptr, tunnel1);
     }
 _COTL_FUNC_END
 

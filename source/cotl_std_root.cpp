@@ -14,7 +14,7 @@ _COTL_FUNC_BEGIN
         PMaybe query(_atom(id_std));
         PMaybe map(nullptr);
 
-        query.call<true>(caller, lib, map); // _COTL_CALL
+        query.call<true>(caller, lib, map);
 
         if (auto map_p = map.raw<cotl::Map>()) {
             map_t &map_data = map_p->getVar();
@@ -23,7 +23,7 @@ _COTL_FUNC_BEGIN
                 PMaybe query1(_atom(id_type));
                 PMaybe map1(nullptr);
 
-                query1.call<true>(caller, lib, map1); // _COTL_CALL
+                query1.call<true>(caller, lib, map1);
 
                 if (auto map1_p = map1.as<cotl::Map>()) {
                     const map_t &map1_data = map1_p->get();
@@ -37,7 +37,7 @@ _COTL_FUNC_BEGIN
                 PMaybe query1(_atom(id_runtime));
                 PMaybe map1(nullptr);
 
-                query1.call<true>(caller, lib, map1); // _COTL_CALL
+                query1.call<true>(caller, lib, map1);
 
                 if (auto map1_p = map1.as<cotl::Map>()) {
                     const map_t &map1_data = map1_p->get();
