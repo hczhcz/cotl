@@ -4,13 +4,12 @@ namespace cotl {
 
 namespace {
 
-const int_t initListSize = 4096;
 int_t initListIndex = 0;
 
 struct {
     func_t func;
     init_t init;
-} initializerList[initListSize];
+} initializerList[_COTL_VAL_INIT_SIZE];
 
 }
 
@@ -18,7 +17,7 @@ inline
 namespace published {
 
 int_t addInitializer(const func_t func, const init_t init) {
-    assert(initListIndex < initListSize);
+    assert(initListIndex < _COTL_VAL_INIT_SIZE);
 
     initializerList[initListIndex] = {func, init};
     ++initListIndex;

@@ -15,3 +15,9 @@
 
 // use unordered_map instead of map
 #define _COTL_USE_UNORDERED_MAP
+
+// size of the initializer buffer
+#define _COTL_VAL_INIT_SIZE 4096
+
+// max repr depth
+#define _COTL_VAL_REPR_DEPTH 10

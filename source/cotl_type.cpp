@@ -70,7 +70,13 @@ void outputAppendTypeX(std::ostream &stream, const int_t type, const int_t dtype
         if (after) {
             stream << ", ";
         }
-        stream << type;
+        if (type != id_error) {
+            stream << type;
+        } else {
+            // TODO: better repr support of id and func
+            // TODO: support circular-ref and multi-ref objects
+            stream << "id_error";
+        }
         after = true;
     }
 }
@@ -102,7 +108,10 @@ inline
 namespace published {
 
 void Atom::repr(std::ostream &stream, const int_t level) const {
-    (void) level; // unused
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
 
     stream << "_atom(";
     bool after = false;
@@ -113,7 +122,10 @@ void Atom::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Int::repr(std::ostream &stream, const int_t level) const {
-    (void) level; // unused
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
 
     stream << "_int(" << get();
     outputAppendType(stream, getType(), id_int);
@@ -123,7 +135,10 @@ void Int::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Real::repr(std::ostream &stream, const int_t level) const {
-    (void) level; // unused
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
 
     stream << "_real(" << get();
     outputAppendType(stream, getType(), id_real);
@@ -133,7 +148,10 @@ void Real::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Func::repr(std::ostream &stream, const int_t level) const {
-    (void) level; // unused
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
 
     stream << "_func(";
     outputFunc(stream, get());
@@ -144,6 +162,11 @@ void Func::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Ptr::repr(std::ostream &stream, const int_t level) const {
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
+
     stream << "_ptr(" << std::endl;
 
     // next line
@@ -156,6 +179,11 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Pair::repr(std::ostream &stream, const int_t level) const {
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
+
     stream << "_pair(" << std::endl;
 
     // next line
@@ -173,7 +201,10 @@ void Pair::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Str::repr(std::ostream &stream, const int_t level) const {
-    (void) level; // unused
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
 
     stream << "_str(";
     outputStr(stream, get());
@@ -184,6 +215,11 @@ void Str::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Arr::repr(std::ostream &stream, const int_t level) const {
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
+
     stream << "_arr(";
 
     for (auto i = get()->begin(); i != get()->end(); ++i) {
@@ -205,6 +241,11 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
 
 template <>
 void Map::repr(std::ostream &stream, const int_t level) const {
+    if (level >= _COTL_VAL_REPR_DEPTH) {
+        stream << "...";
+        return;
+    }
+
     stream << "_map(";
 
     for (auto i = get()->begin(); i != get()->end(); ++i) {
