@@ -83,6 +83,10 @@ _COTL_FUNC_BEGIN
         );
 
         lib.call<false>(_atom(id_runtime), nullptr, tunnel1); // _COTL_CALL
+
+        // hack
+        PMaybe tunnel2(_libfunc(stdQuote));
+        lib.call<false>(_atom(id_quote), nullptr, tunnel2);
     }
 _COTL_FUNC_END
 
