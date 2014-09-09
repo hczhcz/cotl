@@ -10,7 +10,7 @@ _COTL_FUNC_BEGIN
         PMaybe caller1(nullptr);
         self_p->get()(caller, caller1, lib, tunnel); // _COTL_CALL
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -42,7 +42,7 @@ _COTL_FUNC_BEGIN
             }
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -51,7 +51,7 @@ namespace {
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         PMaybe tunnel1(
             _ptr(_libmap(

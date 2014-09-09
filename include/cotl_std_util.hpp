@@ -13,10 +13,24 @@ namespace cotlstd {
 // TODO: force explicit check on PMaybe -> PVal
 #define _COTL_FUNC_END \
         }\
-    } catch (const PVal &e) {\
-        throw _arr(self, caller.sure(), lib.sure(), tunnel.sure(), e, id_error);\
+    } catch (cotl::PValRaw e) {\
+        throw _arr(\
+            self, caller.sure(), lib.sure(), tunnel.sure(),\
+            e,\
+            id_error\
+        );\
+    } catch (const char *c) {\
+        throw _arr(\
+            self, caller.sure(), lib.sure(), tunnel.sure(),\
+            _str(c, id_error),\
+            id_error\
+        );\
     } catch (...) {\
-        throw _arr(self, caller.sure(), lib.sure(), tunnel.sure(), id_error);\
+        throw _arr(\
+            self, caller.sure(), lib.sure(), tunnel.sure(),\
+            _str("unknown error", id_error),\
+            id_error\
+        );\
     } // TODO TODO
 
 }

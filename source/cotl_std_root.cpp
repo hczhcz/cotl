@@ -9,7 +9,7 @@ namespace {
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         PMaybe query(_atom(id_std));
         PMaybe map(nullptr);
@@ -29,7 +29,7 @@ _COTL_FUNC_BEGIN
                     const map_t &map1_data = map1_p->get();
                     map_data->insert(map1_data->begin(), map1_data->end());
                 } else {
-                    throw;
+                    throw "bad map type";
                 }
             }
 
@@ -43,11 +43,11 @@ _COTL_FUNC_BEGIN
                     const map_t &map1_data = map1_p->get();
                     map_data->insert(map1_data->begin(), map1_data->end());
                 } else {
-                    throw;
+                    throw "bad map type";
                 }
             }
         } else {
-            throw;
+            throw "bad map type";
         }
     }
 _COTL_FUNC_END

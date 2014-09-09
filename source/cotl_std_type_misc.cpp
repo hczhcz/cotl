@@ -12,13 +12,13 @@ _COTL_FUNC_BEGIN
                 self_p->getVar() = tunnel_p->get();
                 tunnel = nullptr;
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             ++(self_p->getVar());
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -30,13 +30,13 @@ _COTL_FUNC_BEGIN
                 self_p->getVar() = tunnel_p->get();
                 tunnel = nullptr;
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             --(self_p->getVar());
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -45,7 +45,7 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
         self_p->get().call(caller, lib, tunnel);
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -62,7 +62,7 @@ _COTL_FUNC_BEGIN
             data->pop_back();
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -71,7 +71,7 @@ namespace {
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         PMaybe tunnel1(
             _ptr(_libmap(

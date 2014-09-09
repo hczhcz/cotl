@@ -17,7 +17,7 @@ _COTL_FUNC_END
 _COTL_FUNC_T(published::stdLiteral)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         tunnel = self;
     }
@@ -34,7 +34,7 @@ _COTL_FUNC_BEGIN
         self.raw()->setFunc(func_p->get());
         self.call(caller, lib, tunnel);
     } else {
-        throw;
+        throw "bad func type";
     }
 _COTL_FUNC_END
 
@@ -42,12 +42,12 @@ _COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Ptr>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = self_p->get();
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -61,7 +61,7 @@ _COTL_FUNC_BEGIN
             tunnel = self_p->get();
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -70,7 +70,7 @@ namespace {
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         PMaybe tunnel1(
             _ptr(_libmap(

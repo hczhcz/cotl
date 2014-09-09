@@ -8,14 +8,14 @@ _COTL_FUNC_T(stdWrapAtom)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Atom>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = _atom(
                 self_p->getType(), self_p->getFunc()
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -23,7 +23,7 @@ _COTL_FUNC_T(stdWrapInt)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Int>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = _int(
                 self_p->get(),
@@ -31,7 +31,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -39,7 +39,7 @@ _COTL_FUNC_T(stdWrapReal)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Real>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = _real(
                 self_p->get(),
@@ -47,7 +47,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -55,7 +55,7 @@ _COTL_FUNC_T(stdWrapFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = _func(
                 self_p->get(),
@@ -63,7 +63,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -78,7 +78,7 @@ _COTL_FUNC_BEGIN
 
                 tunnel = nullptr;
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             PMaybe tunnel1(nullptr);
@@ -91,7 +91,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -108,7 +108,7 @@ _COTL_FUNC_BEGIN
 
                 tunnel = nullptr;
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             PMaybe tunnel1(nullptr);
@@ -123,7 +123,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -131,7 +131,7 @@ _COTL_FUNC_T(stdWrapStr)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Str>()) {
         if (tunnel) {
-            throw;
+            throw "bad tunnel";
         } else {
             tunnel = _str(
                 self_p->get(),
@@ -139,7 +139,7 @@ _COTL_FUNC_BEGIN
             );
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -161,10 +161,10 @@ _COTL_FUNC_BEGIN
 
                     tunnel = nullptr;
                 } else {
-                    throw;
+                    throw "bad arr size";
                 }
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
@@ -185,7 +185,7 @@ _COTL_FUNC_BEGIN
             tunnel = tunnel_p;
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -203,13 +203,13 @@ _COTL_FUNC_BEGIN
 
                         val.second.call<false>(caller, lib, tunnel1);
                     } else {
-                        throw;
+                        throw "bad map key";
                     }
                 }
 
                 tunnel = nullptr;
             } else {
-                throw;
+                throw "bad tunnel type";
             }
         } else {
             auto tunnel_p = _map(self_p->getType(), self_p->getFunc());
@@ -228,7 +228,7 @@ _COTL_FUNC_BEGIN
             tunnel = tunnel_p;
         }
     } else {
-        throw;
+        throw "bad self type";
     }
 _COTL_FUNC_END
 
@@ -237,7 +237,7 @@ namespace {
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     if (tunnel) {
-        throw;
+        throw "bad tunnel";
     } else {
         PMaybe tunnel1(
             _ptr(_libmap(

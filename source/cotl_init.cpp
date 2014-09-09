@@ -36,14 +36,14 @@ void callInitializer(const PMaybe &lib) {
                 initializerList[i].func(blank, caller, lib, tunnel); // _COTL_CALL
 
                 if (tunnel) {
-                    throw;
+                    throw "bad initializer call return";
                 }
             }
         }
     }
 }
 
-void boot(const PVal &exec, PMaybe &tunnel) {
+void boot(const PVal &exec, PMaybe &tunnel) try {
     PMaybe caller(nullptr);
 
     auto lib_p = _libmap();
@@ -55,6 +55,14 @@ void boot(const PVal &exec, PMaybe &tunnel) {
     callInitializer(lib);
 
     exec.call(caller, lib, tunnel);
+} catch (PValRaw e) {
+    PVal val(e); // hold the object
+
+    std::cerr << "ERROR" << std::endl;
+    std::cerr << val << std::endl;
+} catch (...) {
+    std::cerr << "ERROR" << std::endl;
+    std::cerr << "_str(\"unknown error from root\", id_error)" << std::endl;
 }
 
 }

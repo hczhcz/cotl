@@ -34,7 +34,7 @@ inline bool PValProto<maybe>::exist() const {
 template <bool maybe>
 inline PValConst PValProto<maybe>::operator->() const {
     if (!exist()) {
-        throw;
+        throw "bad pointer dereference";
     }
 
     return _val;
@@ -45,7 +45,7 @@ inline void PValProto<maybe>::call(
     const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
 ) const {
     if (!exist()) {
-        throw;
+        throw "bad pointer call";
     }
 
     _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL

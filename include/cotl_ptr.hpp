@@ -33,7 +33,7 @@ public:
 
     inline PValProto(const PValRaw val): _val(val) {
         if (!legal()) {
-            throw;
+            throw "bad raw pointer";
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -43,7 +43,7 @@ public:
 
     inline PValProto(const PMaybe &ptr): _val(ptr._val) {
         if (!legal()) {
-            throw;
+            throw "bad copied pointer";
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -59,7 +59,7 @@ public:
 
     inline PValProto(PMaybe &&ptr): _val(ptr._val) {
         if (!legal()) {
-            throw;
+            throw "bad moved pointer";
         }
 
         ptr._val = nullptr;
@@ -81,7 +81,7 @@ public:
         _val = val;
 
         if (!legal()) {
-            throw;
+            throw "bad assigned raw pointer";
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -99,7 +99,7 @@ public:
         _val = ptr._val;
 
         if (!legal()) {
-            throw;
+            throw "bad copy-assigned pointer";
         }
 
         #ifdef _COTL_USE_REF_COUNT
@@ -131,7 +131,7 @@ public:
         _val = ptr._val;
 
         if (!legal()) {
-            throw;
+            throw "bad move-assigned pointer";
         }
 
         ptr._val = nullptr;
@@ -155,7 +155,7 @@ public:
     ) const {
         call(caller, lib, tunnel);
         if (bool(tunnel) != ret) {
-            throw;
+            throw "bad call return";
         }
     }
 
