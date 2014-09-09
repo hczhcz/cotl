@@ -51,6 +51,15 @@ inline void PValProto<maybe>::call(
     _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
 }
 
+template <bool maybe>
+inline PValRaw PValProto<maybe>::sure() const {
+    if (exist()) {
+        return _val;
+    } else {
+        return _atom(id_null);
+    }
+}
+
 }
 
 #endif

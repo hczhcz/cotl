@@ -184,6 +184,9 @@ public:
     inline PValRaw raw() const {
         return _val;
     }
+
+    inline PValRaw sure() const;
+    // defined in cotl_inline.hpp
 };
 
 }

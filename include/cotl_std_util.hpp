@@ -14,10 +14,10 @@ namespace cotlstd {
 #define _COTL_FUNC_END \
         }\
     } catch (const PVal &e) {\
-        throw _arr(self, caller, lib, tunnel, e, id_error);\
+        throw _arr(self, caller.sure(), lib.sure(), tunnel.sure(), e, id_error);\
     } catch (...) {\
-        throw _arr(self, caller, lib, tunnel, id_error);\
-    }// TODO TODO
+        throw _arr(self, caller.sure(), lib.sure(), tunnel.sure(), id_error);\
+    } // TODO TODO
 
 }
 
