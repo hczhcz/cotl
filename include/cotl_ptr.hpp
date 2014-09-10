@@ -14,11 +14,13 @@ private:
     // inline void *operator new(size_t) = delete;
     // inline void operator delete(void *) = delete;
 
-    inline bool legal() const;
-    // defined in cotl_inline.hpp
+    inline bool legal() const {
+        return maybe || _val;
+    }
 
-    inline bool exist() const;
-    // defined in cotl_inline.hpp
+    inline bool exist() const{
+        return !maybe || _val;
+    }
 
     #ifdef _COTL_USE_REF_COUNT
         inline void doInc() const;
@@ -141,8 +143,13 @@ public:
 
     inline PValProto<maybe> &operator=(PVal &&) = delete; // not allowed
 
-    inline PValConst operator->() const;
-    // defined in cotl_inline.hpp
+    inline PValConst operator->() const {
+        if (!exist()) {
+            throw "bad pointer dereference";
+        }
+
+        return _val;
+    }
 
     inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
