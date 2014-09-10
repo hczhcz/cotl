@@ -41,6 +41,12 @@ protected:
         _COTL_FREE(obj);
     }
 
+    inline void operator delete(void *obj, PValRaw reused) {
+        (void) reused;
+
+        _COTL_FREE(obj);
+    }
+
     inline Val(const int_t type, const func_t func): MemBase(), _type(type), _func(func) {}
 
     virtual ~Val() {}
