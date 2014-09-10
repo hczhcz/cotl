@@ -27,13 +27,12 @@ int_t addInitializer(const func_t func, const init_t init) {
 
 void callInitializer(const PMaybe &lib) {
     PVal blank(_atom(id_error));
-    PMaybe caller(nullptr);
     PMaybe tunnel(nullptr);
 
     for (int_t j = INIT_BEGIN; j < INIT_END; ++j) {
         for (int_t i = 0; i < initListIndex; ++i) {
             if (initializerList[i].init == j) {
-                initializerList[i].func(blank, caller, lib, tunnel); // _COTL_CALL
+                initializerList[i].func(blank, nullptr, lib, tunnel); // _COTL_CALL
 
                 if (tunnel) {
                     throw "bad initializer call return";
@@ -44,8 +43,6 @@ void callInitializer(const PMaybe &lib) {
 }
 
 void boot(const PVal &exec, PMaybe &tunnel) try {
-    PMaybe caller(nullptr);
-
     auto lib_p = _libmap();
     lib_p->getVar()->insert({{
         id_std, _ptr(lib_p, id_quote)
@@ -54,7 +51,7 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
 
     callInitializer(lib);
 
-    exec.call(caller, lib, tunnel);
+    exec.call(nullptr, lib, tunnel);
 } catch (PValRaw e) {
     PVal val(e); // hold the object
 

@@ -7,8 +7,7 @@ namespace cotlstd {
 _COTL_FUNC_T(published::stdLibFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
-        PMaybe caller1(nullptr);
-        self_p->get()(caller, caller1, lib, tunnel); // _COTL_CALL
+        self_p->get()(caller, nullptr, lib, tunnel); // _COTL_CALL
     } else {
         throw "bad self type";
     }
@@ -36,9 +35,7 @@ _COTL_FUNC_BEGIN
                 tunnel = nullptr;
             } else {
                 // call (next) lib
-                PMaybe lib1(nullptr);
-
-                lib.call(caller, lib1, tunnel);
+                lib.call(caller, nullptr, tunnel);
             }
         }
     } else {

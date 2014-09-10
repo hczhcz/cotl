@@ -127,6 +127,8 @@ class NativeVal: public Val {
 private:
     T _data;
 
+    static_assert(sizeof(T) <= 2 * sizeof(void *), "size of NativeVal<T> is limited");
+
 protected:
     inline NativeVal(const int_t type, const func_t func):
         Val(type, func), _data() {}

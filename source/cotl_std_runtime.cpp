@@ -6,10 +6,9 @@ namespace cotlstd {
 
 _COTL_FUNC_T(published::stdAuto)
 _COTL_FUNC_BEGIN
-    PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib.call<true>(self, lib1, func);
+    lib.call<true>(self, nullptr, func);
 
     func.call(self, lib, tunnel);
 _COTL_FUNC_END
@@ -25,10 +24,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdBind)
 _COTL_FUNC_BEGIN
-    PMaybe lib1(nullptr);
     PMaybe func(nullptr);
 
-    lib.call<true>(self, lib1, func);
+    lib.call<true>(self, nullptr, func);
 
     if (auto func_p = func.as<cotl::Func>()) {
         self.raw()->setFunc(func_p->get());
