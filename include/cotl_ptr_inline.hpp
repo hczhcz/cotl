@@ -29,7 +29,7 @@ inline void PValProto<maybe>::call(
         throw "bad pointer call";
     }
 
-    _val->getFunc()(*this, caller, lib, tunnel); // _COTL_CALL
+    _val->getFunc()(PVal(*this), caller, lib, tunnel); // _COTL_CALL
 }
 
 template <bool maybe>

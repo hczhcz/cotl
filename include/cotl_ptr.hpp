@@ -43,7 +43,7 @@ public:
         #endif
     }
 
-    inline PValProto(const PMaybe &ptr): _val(ptr._val) {
+    inline explicit PValProto(const PMaybe &ptr): _val(ptr._val) {
         if (!legal()) {
             throw "bad copied pointer";
         }

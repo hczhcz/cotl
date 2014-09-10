@@ -54,8 +54,7 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Arr>()) {
         arr_t &data = self_p->getVar();
         if (tunnel) {
-            PVal helper(tunnel); // notice: use copy constructor in push_back
-            data->push_back(helper);
+            data->push_back(PVal(tunnel));
             tunnel = nullptr;
         } else {
             tunnel = data->back();

@@ -7,7 +7,7 @@ namespace cotlstd {
 _COTL_FUNC_T(published::stdLibFunc)
 _COTL_FUNC_BEGIN
     if (auto self_p = self.as<cotl::Func>()) {
-        self_p->get()(caller, nullptr, lib, tunnel); // _COTL_CALL
+        self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
     } else {
         throw "bad self type";
     }
@@ -30,7 +30,7 @@ _COTL_FUNC_BEGIN
             // key not found
             if (tunnel) {
                 // insert new item
-                self_p->getVar()->insert({{type, tunnel}});
+                self_p->getVar()->insert({{type, PVal(tunnel)}});
 
                 tunnel = nullptr;
             } else {

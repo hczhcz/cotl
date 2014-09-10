@@ -73,9 +73,9 @@ int main(int argc, char* argv[]) {
         PVal a1(_atom(1002, stdAuto));
         PVal a2(_int(1002, 123, stdAuto, a1.raw()));
         (void) a2;
-        PMaybe a3 = a2;
+        PMaybe a3(a2); //PMaybe a3 = a2;
         PVal a4(a3);
-        PMaybe a5 = a3;
+        PMaybe a5(a4); //PMaybe a5 = a3;
         PMaybe a6(_atom(1234));
         // cout << (a2 == a1) << endl;
         // cout << a1 << endl;

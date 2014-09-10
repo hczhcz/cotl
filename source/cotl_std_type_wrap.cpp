@@ -86,7 +86,7 @@ _COTL_FUNC_BEGIN
             self_p->get().call<true>(caller, lib, tunnel1);
 
             tunnel = _ptr(
-                tunnel1,
+                PVal(tunnel1),
                 self_p->getType(), self_p->getFunc()
             );
         }
@@ -118,7 +118,7 @@ _COTL_FUNC_BEGIN
             self_p->get().second.call<true>(caller, lib, tunnel2);
 
             tunnel = _pair(
-                tunnel1, tunnel2,
+                PVal(tunnel1), PVal(tunnel2),
                 self_p->getType(), self_p->getFunc()
             );
         }
@@ -178,8 +178,7 @@ _COTL_FUNC_BEGIN
 
                 (*self_data)[i].call<true>(caller, lib, tunnel1);
 
-                PVal helper(tunnel1); // notice: use copy constructor in push_back
-                tunnel_data->push_back(helper);
+                tunnel_data->push_back(PVal(tunnel1));
             }
 
             tunnel = tunnel_p;
@@ -222,7 +221,7 @@ _COTL_FUNC_BEGIN
 
                 val.second.call<true>(caller, lib, tunnel1);
 
-                tunnel_data->insert({{val.first, tunnel1}});
+                tunnel_data->insert({{val.first, PVal(tunnel1)}});
             }
 
             tunnel = tunnel_p;
