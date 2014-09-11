@@ -52,6 +52,7 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
     callInitializer(lib);
 
     exec.call(nullptr, lib, tunnel);
+#ifdef _COTL_USE_ERR_CATCH
 } catch (PValRaw e) {
     PVal val(e); // hold the object
 
@@ -61,6 +62,12 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
     std::cerr << "ERROR" << std::endl;
     std::cerr << "_str(\"unknown error from root\", id_error)" << std::endl;
 }
+#else
+} catch (...) {
+    std::cerr << "ERROR" << std::endl;
+    throw;
+}
+#endif
 
 }
 

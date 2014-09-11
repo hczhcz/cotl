@@ -3,7 +3,7 @@
 
 #include "cotl_helper.hpp"
 
-#define NDEBUG
+// #define NDEBUG
 #include <cassert>
 
 #include <cstdlib>

@@ -133,6 +133,7 @@ class NativeVal: public Val {
 private:
     T _data;
 
+    // TODO: support bigger std::string
     static_assert(sizeof(T) <= 2 * sizeof(void *), "size of NativeVal<T> is limited");
 
 protected:
