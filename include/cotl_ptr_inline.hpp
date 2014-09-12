@@ -37,6 +37,9 @@ inline PValRaw PValProto<maybe>::sure() const {
     if (exist()) {
         return _val;
     } else {
+        // TODO: icc hack
+        using namespace cotlstd::published;
+
         return _atom(id_null);
     }
 }
