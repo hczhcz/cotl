@@ -33,6 +33,8 @@ using func_t = _COTL_FUNC_T(*);
 template <class T>
 using hold_t = std::unique_ptr<T, MemDel<T>>;
 
+using str_t = hold_t<std::string>;
+
 #ifdef _COTL_USE_DEQUE
     using arr_t = hold_t<std::deque<
         PVal, MemAlloc<PVal>

@@ -207,7 +207,7 @@ void Str::repr(std::ostream &stream, const int_t level) const {
     }
 
     stream << "_str(";
-    outputStr(stream, get());
+    outputStr(stream, *get());
     outputAppendType(stream, getType(), id_str);
     outputAppendFunc(stream, getFunc());
     stream << ")";

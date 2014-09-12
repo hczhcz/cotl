@@ -108,7 +108,7 @@ Str *_str(const std::string &data,
         int_t ref = _getRef(reused);
     #endif
 
-    Str * result = new (reused) Str(data, type, func);
+    Str * result = new (reused) Str(str_t(_COTL_RAWNEW(str_t::element_type(data))), type, func);
 
     #ifdef _COTL_USE_REF_COUNT
         _setRef(result, ref);

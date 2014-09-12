@@ -134,7 +134,7 @@ _COTL_FUNC_BEGIN
             throw "bad tunnel";
         } else {
             tunnel = _str(
-                self_p->get(),
+                *(self_p->get()),
                 self_p->getType(), self_p->getFunc()
             );
         }
@@ -249,7 +249,6 @@ _COTL_FUNC_BEGIN
                 id_str, _libfunc(stdWrapStr),
                 id_arr, _libfunc(stdWrapArr),
                 id_map, _libfunc(stdWrapMap)
-                // TODO: really necessary?
                 // id_error, _libfunc(stdWrapErr)
             ), id_quote)
         );

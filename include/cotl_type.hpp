@@ -124,7 +124,7 @@ using Real = NativeVal<real_t>;
 using Func = NativeVal<func_t>;
 using Ptr = NativeVal<PVal>;
 using Pair = NativeVal<std::pair<PVal, PVal>>;
-using Str = NativeVal<std::string>;
+using Str = NativeVal<str_t>;
 using Arr = NativeVal<arr_t>;
 using Map = NativeVal<map_t>;
 
@@ -133,7 +133,6 @@ class NativeVal: public Val {
 private:
     T _data;
 
-    // TODO: support bigger std::string
     static_assert(sizeof(T) <= 2 * sizeof(void *), "size of NativeVal<T> is limited");
 
 protected:
