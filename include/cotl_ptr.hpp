@@ -59,7 +59,7 @@ public:
         #endif
     }
 
-    inline PValProto(PMaybe &&ptr): _val(ptr._val) {
+    inline explicit PValProto(PMaybe &&ptr): _val(ptr._val) {
         if (!legal()) {
             throw "bad moved pointer";
         }

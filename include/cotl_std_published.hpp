@@ -5,8 +5,6 @@
 
 namespace cotlstd {
 
-using namespace cotl::published;
-
 inline
 namespace published {
 

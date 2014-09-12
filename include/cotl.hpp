@@ -10,6 +10,12 @@
 #include "cotl_ptr.hpp"
 #include "cotl_type.hpp"
 
+namespace cotlstd {
+
+using namespace cotl::published;
+
+}
+
 // cotl std library
 #include "cotl_std_id.hpp"
 #include "cotl_std_util.hpp"
