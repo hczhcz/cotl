@@ -26,7 +26,7 @@ using real_t = double;
         const PMaybe &caller,\
         const PMaybe &lib,\
         PMaybe &tunnel\
-    ) // if changed, check cotl_ptr.hpp and cotl_ptr_inline.hpp
+    ) // if changed, check cotl_ptr.hpp, cotl_ptr_inline.hpp and cotl_std_util.hpp
 
 using func_t = _COTL_FUNC_T(*);
 

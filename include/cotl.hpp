@@ -18,7 +18,6 @@ using namespace cotl::published;
 
 // cotl std library
 #include "cotl_std_id.hpp"
-#include "cotl_std_util.hpp"
 #include "cotl_std_published.hpp"
 #include "cotl_std_export.hpp"
 
@@ -26,6 +25,7 @@ using namespace cotl::published;
 #include "cotl_new.hpp"
 #include "cotl_init.hpp"
 #include "cotl_repr.hpp"
+#include "cotl_std_util.hpp"
 
 // implementation
 #include "cotl_ptr_inline.hpp"
