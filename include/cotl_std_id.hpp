@@ -48,7 +48,6 @@ enum {
 
         // int
         id_int   = IDX_TYPE + 32,
-        id_id,
         id_increment,
         id_decrement,
 

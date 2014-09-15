@@ -9,7 +9,7 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Int>()) {
         if (tunnel) {
             if (auto tunnel_p = tunnel.as<cotl::Int>()) {
-                self_p->getVar() = tunnel_p->get();
+                self_p->set(tunnel_p->get());
                 tunnel = nullptr;
             } else {
                 throw "bad tunnel type";
@@ -27,7 +27,7 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Int>()) {
         if (tunnel) {
             if (auto tunnel_p = tunnel.as<cotl::Int>()) {
-                self_p->getVar() = tunnel_p->get();
+                self_p->set(tunnel_p->get());
                 tunnel = nullptr;
             } else {
                 throw "bad tunnel type";
