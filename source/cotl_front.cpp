@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     cout << PVal(_pair(_arr(_map(123), _map(1, _ptr(_map())), _arr()), _atom())) << endl;
 
-    for (int i = 0; i < 100000; ++i) {
+    for (int i = 0; i < 10000; ++i) {
         // memory leak test
         PVal(
             _map(
@@ -80,6 +80,19 @@ int main(int argc, char* argv[]) {
         // cout << (a2 == a1) << endl;
         // cout << a1 << endl;
         // cout << a2.as<Int>()->get() << endl;
+
+        PMaybe tunnel1(nullptr);
+
+        boot(_atom(), tunnel1);
+
+        /*
+        auto lib_p = _libmap();
+        PVal lib(lib_p);
+
+        lib_p->getVar()->insert({{
+            id_std, _ptr(lib_p, id_quote)
+        }}); // add reference of self
+        */
     }
 
     PMaybe tunnel1(nullptr);
