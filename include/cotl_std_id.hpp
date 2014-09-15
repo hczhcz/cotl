@@ -48,6 +48,7 @@ enum {
 
         // int
         id_int   = IDX_TYPE + 32,
+        id_id,
         id_increment,
         id_decrement,
 
@@ -80,22 +81,23 @@ enum {
         // override packages
 
         id_type_wrap = IDX_TYPE + 176,
-            /* override: base types except error */
-
         id_type_lib,
-            /* override: func, map */
-
         id_type_misc
-            /* override: non-base types */
 };
 
 enum {
     id_std = IDX_CORE,
         // id_type,
-            // <types>
+            // <types> // value: aliases
+
             // id_type_wrap,
+                // override: base types except error
+
             // id_type_lib,
+                // override: func, map
+
             // id_type_misc,
+                // override: non-base types
 
         id_runtime,
             id_auto,
@@ -103,6 +105,14 @@ enum {
             id_bind,
             id_quote,
             id_contain,
+            // working:
+            id_with,
+            id_write,
+
+        id_unknown, // TODO: dispatch // or casting
+            //
+
+            // id_unknown, // TODO: 2-dispatch
 
         id_math,
             id_add, // TODO: both int and real (auto detect)
@@ -111,11 +121,41 @@ enum {
             id_div,
 
             id_math_int,
-                /* override: add, sub, mul, div */
+                // override: add, sub, mul, div
                 id_mod,
 
-            id_math_real
-                /* override: add, sub, mul, div */
+            id_math_real,
+                // override: add, sub, mul, div
+
+        id_bool,
+            //
+
+            // TODO
+            id_bool_int, // bitand, bitor, etc
+
+        id_strutil,
+
+        id_arrutil,
+
+        id_maputil,
+
+        id_call, // func(), call, closure, etc
+
+        id_compare,
+
+        id_hash,
+
+        id_container,
+
+        id_branch, // if, switch
+
+        id_loop, // for, while, etc
+
+        id_meta,
+
+        id_io, // time / file / console
+
+        id_regex
 };
 
 }
