@@ -31,7 +31,7 @@ _COTL_FUNC_BEGIN
             ), id_quote)
         );
 
-        lib.call<false>(_atom(id_???), nullptr, tunnel1);
+        libSet(id_???, lib, tunnel1);
     }
 _COTL_FUNC_END
 

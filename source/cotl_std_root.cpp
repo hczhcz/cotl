@@ -11,22 +11,18 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         throw "bad tunnel";
     } else {
-        PMaybe query(_atom(id_std));
-        PMaybe map(nullptr);
+        PMaybe tunnel1(lib);
+        libExec<true>(id_std, self, tunnel1);
 
-        query.call<true>(caller, lib, map);
-
-        if (auto map_p = map.raw<cotl::Map>()) {
+        if (auto map_p = tunnel1.raw<cotl::Map>()) {
             map_t &map_data = map_p->getVar();
 
             {
-                PMaybe query1(_atom(id_type));
-                PMaybe map1(nullptr);
+                PMaybe tunnel2(lib);
+                libExec<true>(id_type, self, tunnel2);
 
-                query1.call<true>(caller, lib, map1);
-
-                if (auto map1_p = map1.as<cotl::Map>()) {
-                    const map_t &map1_data = map1_p->get();
+                if (auto map2_p = tunnel2.as<cotl::Map>()) {
+                    const map_t &map1_data = map2_p->get();
                     map_data->insert(map1_data->begin(), map1_data->end());
                 } else {
                     throw "bad map type";
@@ -34,13 +30,11 @@ _COTL_FUNC_BEGIN
             }
 
             {
-                PMaybe query1(_atom(id_runtime));
-                PMaybe map1(nullptr);
+                PMaybe tunnel2(lib);
+                libExec<true>(id_runtime, self, tunnel2);
 
-                query1.call<true>(caller, lib, map1);
-
-                if (auto map1_p = map1.as<cotl::Map>()) {
-                    const map_t &map1_data = map1_p->get();
+                if (auto map2_p = tunnel2.as<cotl::Map>()) {
+                    const map_t &map1_data = map2_p->get();
                     map_data->insert(map1_data->begin(), map1_data->end());
                 } else {
                     throw "bad map type";

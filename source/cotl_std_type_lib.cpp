@@ -35,7 +35,11 @@ _COTL_FUNC_BEGIN
                 tunnel = nullptr;
             } else {
                 // call (next) lib
-                lib.call(caller, nullptr, tunnel);
+                if (lib) {
+                    libGet(caller, lib, tunnel);
+                } else {
+                    throw "bad lib query";
+                }
             }
         }
     } else {
@@ -57,7 +61,7 @@ _COTL_FUNC_BEGIN
             ), id_quote)
         );
 
-        lib.call<false>(_atom(id_type_lib), nullptr, tunnel1); // _COTL_CALL
+        libSet(id_type_lib, lib, tunnel1);
     }
 _COTL_FUNC_END
 
