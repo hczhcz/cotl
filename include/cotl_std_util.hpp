@@ -48,34 +48,38 @@ inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
     libGet(_atom(type), lib, tunnel);
 }
 
-// libExec acts like stdAuto()
-// see cotl_std_runtime.cpp
-
-inline void libExec(const int_t type, const PMaybe &caller, PMaybe &lib_tunnel) {
-    PMaybe lib(std::move(lib_tunnel));
-    PMaybe data(nullptr);
-
-    libGet(type, lib, data);
-
-    data.call(caller, lib, lib_tunnel);
-}
-
-template <bool ret>
-inline void libExec(const int_t type, const PMaybe &caller, PMaybe &lib_tunnel) {
-    PMaybe lib(std::move(lib_tunnel));
-    PMaybe data(nullptr);
-
-    libGet(type, lib, data);
-
-    data.call<ret>(caller, lib, lib_tunnel);
-}
-
 inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
     lib.call<false>(target, nullptr, tunnel);
 }
 
 inline void libSet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
     libSet(_atom(type), lib, tunnel);
+}
+
+inline void libExec(const PVal &target, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+    PMaybe data(nullptr);
+
+    libGet(target, lib, data);
+
+    data.call(caller, lib, tunnel);
+}
+
+template <bool ret>
+inline void libExec(const PVal &target, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+    PMaybe data(nullptr);
+
+    libGet(target, lib, data);
+
+    data.call<ret>(caller, lib, tunnel);
+}
+
+inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+    libExec(_atom(type), caller, lib, tunnel);
+}
+
+template <bool ret>
+inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+    libExec<ret>(_atom(type), caller, lib, tunnel);
 }
 
 }

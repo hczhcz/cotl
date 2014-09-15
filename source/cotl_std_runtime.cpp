@@ -6,11 +6,7 @@ namespace cotlstd {
 
 _COTL_FUNC_T(published::stdAuto)
 _COTL_FUNC_BEGIN
-    PMaybe func(nullptr);
-
-    libGet(self, lib, func);
-
-    func.call(self, lib, tunnel);
+    libExec(self, self, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLiteral)

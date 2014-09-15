@@ -11,15 +11,15 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         throw "bad tunnel";
     } else {
-        PMaybe tunnel1(lib);
-        libExec<true>(id_std, self, tunnel1);
+        PMaybe tunnel1(nullptr);
+        libExec<true>(id_std, self, lib, tunnel1);
 
         if (auto map_p = tunnel1.raw<cotl::Map>()) {
             map_t &map_data = map_p->getVar();
 
             {
-                PMaybe tunnel2(lib);
-                libExec<true>(id_type, self, tunnel2);
+                PMaybe tunnel2(nullptr);
+                libExec<true>(id_type, self, lib, tunnel2);
 
                 if (auto map2_p = tunnel2.as<cotl::Map>()) {
                     const map_t &map1_data = map2_p->get();
@@ -30,8 +30,8 @@ _COTL_FUNC_BEGIN
             }
 
             {
-                PMaybe tunnel2(lib);
-                libExec<true>(id_runtime, self, tunnel2);
+                PMaybe tunnel2(nullptr);
+                libExec<true>(id_runtime, self, lib, tunnel2);
 
                 if (auto map2_p = tunnel2.as<cotl::Map>()) {
                     const map_t &map1_data = map2_p->get();
