@@ -54,7 +54,8 @@ _COTL_FUNC_BEGIN
     if (auto self_p = self.raw<cotl::Arr>()) {
         arr_t &data = self_p->getVar();
         if (tunnel) {
-            data->push_back(PVal(tunnel));
+            PVal helper(tunnel); // for libstdc++ without gc
+            data->push_back(helper);
             tunnel = nullptr;
         } else {
             tunnel = data->back();

@@ -178,7 +178,8 @@ _COTL_FUNC_BEGIN
 
                 (*self_data)[i].call<true>(caller, lib, tunnel1);
 
-                tunnel_data->push_back(PVal(tunnel1));
+                PVal helper(tunnel1); // for libstdc++ without gc
+                tunnel_data->push_back(helper);
             }
 
             tunnel = tunnel_p;

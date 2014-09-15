@@ -44,10 +44,11 @@ void callInitializer(const PMaybe &lib) {
 
 void boot(const PVal &exec, PMaybe &tunnel) try {
     auto lib_p = _libmap();
+    PMaybe lib(lib_p);
+
     lib_p->getVar()->insert({{
         id_std, _ptr(lib_p, id_quote)
     }}); // add reference of self
-    PMaybe lib(lib_p);
 
     callInitializer(lib);
 

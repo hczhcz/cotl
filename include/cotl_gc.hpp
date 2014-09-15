@@ -4,6 +4,8 @@
 #include "cotl_helper.hpp"
 
 #ifdef _COTL_USE_GC
+    #define GC_IGNORE_WARN
+
     #ifdef _COTL_USE_GLOBAL_GC
         // use libgc from OS
         #include <gc/gc.h>
