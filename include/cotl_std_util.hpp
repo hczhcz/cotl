@@ -40,6 +40,44 @@ namespace cotlstd {
         }
 #endif
 
+inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+    lib.call<true>(target, nullptr, tunnel);
+}
+
+inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
+    libGet(_atom(type), lib, tunnel);
+}
+
+// libExec acts like stdAuto()
+// see cotl_std_runtime.cpp
+
+inline void libExec(const int_t type, const PMaybe &caller, PMaybe &lib_tunnel) {
+    PMaybe lib(std::move(lib_tunnel));
+    PMaybe data(nullptr);
+
+    libGet(type, lib, data);
+
+    data.call(caller, lib, lib_tunnel);
+}
+
+template <bool ret>
+inline void libExec(const int_t type, const PMaybe &caller, PMaybe &lib_tunnel) {
+    PMaybe lib(std::move(lib_tunnel));
+    PMaybe data(nullptr);
+
+    libGet(type, lib, data);
+
+    data.call<ret>(caller, lib, lib_tunnel);
+}
+
+inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+    lib.call<false>(target, nullptr, tunnel);
+}
+
+inline void libSet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
+    libSet(_atom(type), lib, tunnel);
+}
+
 }
 
 #endif
