@@ -82,6 +82,34 @@ inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, P
     libExec<ret>(_atom(type), caller, lib, tunnel);
 }
 
+inline void doDispatch(
+    const PVal &val, const int_t self_type,
+    const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+) {
+    PMaybe dlib1(nullptr);
+    PMaybe func(nullptr);
+
+    libExec(id_dispatch, val, lib, dlib1);
+    libGet(self_type, dlib1, func);
+
+    func.call(_ptr(_ptr(val, id_quote), self_type), lib, tunnel);
+}
+
+inline void doDispatch(
+    const PVal &val1, const PVal &val2, const int_t self_type,
+    const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+) {
+    PMaybe dlib1(nullptr);
+    PMaybe dlib2(nullptr);
+    PMaybe func(nullptr);
+
+    libExec(id_dispatch, val1, lib, dlib1);
+    libExec(id_dispatch, val2, dlib1, dlib2);
+    libGet(self_type, dlib2, func);
+
+    func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self_type), lib, tunnel);
+}
+
 }
 
 #endif

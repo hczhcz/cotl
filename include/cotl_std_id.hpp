@@ -108,10 +108,8 @@ enum {
             id_with,
             id_write,
 
-        id_unknown, // TODO: dispatch // or casting
+        id_dispatch, // TODO: dispatch // or casting
             //
-
-            // id_unknown, // TODO: 2-dispatch
 
         id_math,
             id_add, // TODO: both int and real (auto detect)
