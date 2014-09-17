@@ -105,7 +105,9 @@ enum {
             id_bind,
             id_quote,
             id_contain,
-            // working:
+            id_caller,
+            id_lib,
+            id_use,
             id_with,
             id_write,
 
