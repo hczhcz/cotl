@@ -92,7 +92,9 @@ Pair *_pair(const PVal &data1, const PVal &data2,
         int_t ref = _getRef(reused);
     #endif
 
-    Pair * result = new (reused) Pair(std::pair<PVal, PVal>(data1, data2), type, func);
+    std::pair<PVal, PVal> data(data1, data2);
+
+    Pair * result = new (reused) Pair(data, type, func);
 
     #ifdef _COTL_USE_REF_COUNT
         _setRef(result, ref);
