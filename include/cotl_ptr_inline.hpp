@@ -33,6 +33,37 @@ inline void PValProto<maybe>::call(
 }
 
 template <bool maybe>
+template <bool ret>
+inline void PValProto<maybe>::call(
+    const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+) const {
+    call(caller, lib, tunnel);
+    if (bool(tunnel) != ret) {
+        throw "bad call return";
+    }
+}
+
+template <bool maybe>
+template <class T, int_t id>
+inline const T *PValProto<maybe>::as() const {
+    if (exist() && (id == id_any || id == _val->getType())) {
+        return dynamic_cast<T *>(_val);
+    } else {
+        return nullptr;
+    }
+}
+
+template <bool maybe>
+template <class T, int_t id>
+inline T *PValProto<maybe>::raw() const {
+    if (exist() && (id == id_any || id == _val->getType())) {
+        return dynamic_cast<T *>(_val);
+    } else {
+        return nullptr;
+    }
+}
+
+template <bool maybe>
 inline PValRaw PValProto<maybe>::sure() const {
     if (exist()) {
         return _val;

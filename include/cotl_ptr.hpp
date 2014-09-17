@@ -159,34 +159,20 @@ public:
     template <bool ret>
     inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
-    ) const {
-        call(caller, lib, tunnel);
-        if (bool(tunnel) != ret) {
-            throw "bad call return";
-        }
-    }
+    ) const;
+    // defined in cotl_inline.hpp
 
     inline operator bool() const {
         return exist();
     }
 
-    template <class T>
-    inline const T *as() const {
-        if (exist()) {
-            return dynamic_cast<T *>(_val);
-        } else {
-            return nullptr;
-        }
-    }
+    template <class T, int_t id>
+    inline const T *as() const;
+    // defined in cotl_inline.hpp
 
-    template <class T>
-    inline T *raw() const {
-        if (exist()) {
-            return dynamic_cast<T *>(_val);
-        } else {
-            return nullptr;
-        }
-    }
+    template <class T, int_t id>
+    inline T *raw() const;
+    // defined in cotl_inline.hpp
 
     inline PValRaw raw() const {
         return _val;

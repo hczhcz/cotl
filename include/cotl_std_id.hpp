@@ -76,6 +76,7 @@ enum {
 
         // special
         id_error = IDX_TYPE + 160,
+        id_any,
 
         // override packages
 
