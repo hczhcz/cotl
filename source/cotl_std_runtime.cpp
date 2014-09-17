@@ -24,7 +24,7 @@ _COTL_FUNC_BEGIN
 
     libGet(self, lib, func);
 
-    if (auto func_p = func.as<cotl::Func>()) {
+    if (auto func_p = func.as<cotl::Func, id_func>()) {
         self.raw()->setFunc(func_p->get());
         self.call(caller, lib, tunnel);
     } else {
@@ -34,7 +34,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr>()) {
+    if (auto self_p = self.as<cotl::Ptr, id_quote>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -47,7 +47,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdContain)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Ptr>()) {
+    if (auto self_p = self.raw<cotl::Ptr, id_contain>()) {
         if (tunnel) {
             self_p->set(PVal(tunnel));
             tunnel = nullptr;

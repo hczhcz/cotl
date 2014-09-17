@@ -6,7 +6,7 @@ namespace cotlstd {
 
 _COTL_FUNC_T(stdWrapAtom)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Atom>()) {
+    if (auto self_p = self.as<cotl::Atom, id_atom>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -21,7 +21,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapInt)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Int>()) {
+    if (auto self_p = self.as<cotl::Int, id_int>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -37,7 +37,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapReal)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Real>()) {
+    if (auto self_p = self.as<cotl::Real, id_real>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -53,7 +53,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapFunc)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Func>()) {
+    if (auto self_p = self.as<cotl::Func, id_func>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -69,9 +69,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapPtr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr>()) {
+    if (auto self_p = self.as<cotl::Ptr, id_ptr>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Ptr>()) {
+            if (auto tunnel_p = tunnel.as<cotl::Ptr, id_any>()) {
                 PMaybe tunnel1(tunnel_p->get());
 
                 self_p->get().call<false>(caller, lib, tunnel1);
@@ -97,9 +97,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapPair)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Pair>()) {
+    if (auto self_p = self.as<cotl::Pair, id_pair>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Pair>()) {
+            if (auto tunnel_p = tunnel.as<cotl::Pair, id_any>()) {
                 PMaybe tunnel1(tunnel_p->get().first);
                 PMaybe tunnel2(tunnel_p->get().second);
 
@@ -129,7 +129,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapStr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Str>()) {
+    if (auto self_p = self.as<cotl::Str, id_str>()) {
         if (tunnel) {
             throw "bad tunnel";
         } else {
@@ -145,9 +145,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapArr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Arr>()) {
+    if (auto self_p = self.as<cotl::Arr, id_arr>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Arr>()) {
+            if (auto tunnel_p = tunnel.as<cotl::Arr, id_any>()) {
                 const arr_t &self_data = self_p->get();
                 const arr_t &tunnel_data = tunnel_p->get();
 
@@ -191,9 +191,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapMap)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Map>()) {
+    if (auto self_p = self.as<cotl::Map, id_map>()) {
         if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Map>()) {
+            if (auto tunnel_p = tunnel.as<cotl::Map, id_any>()) {
                 const map_t &self_data = self_p->get();
                 const map_t &tunnel_data = tunnel_p->get();
 

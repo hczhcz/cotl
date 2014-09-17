@@ -6,7 +6,7 @@ namespace cotlstd {
 
 _COTL_FUNC_T(std???)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::???>) {
+    if (auto self_p = self.as<cotl::???, id_???>) {
         if (tunnel) {
             //
         } else {

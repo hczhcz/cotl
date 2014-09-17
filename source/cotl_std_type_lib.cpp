@@ -6,7 +6,7 @@ namespace cotlstd {
 
 _COTL_FUNC_T(published::stdLibFunc)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Func>()) {
+    if (auto self_p = self.as<cotl::Func, id_func>()) {
         self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
     } else {
         throw "bad self type";
@@ -15,7 +15,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLibMap)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Map>()) {
+    if (auto self_p = self.raw<cotl::Map, id_map>()) {
         int_t type = caller->getType();
 
         if (self_p->get()->count(type)) {
