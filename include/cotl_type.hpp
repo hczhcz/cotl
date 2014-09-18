@@ -99,6 +99,8 @@ public:
         }
     #endif
 
+    virtual void each(void callback(const PVal &), const bool rev) = 0 /* abstract */;
+
     virtual void repr(std::ostream &stream, const int_t level) const = 0 /* abstract */;
 };
 
@@ -113,6 +115,8 @@ protected:
 
 public:
     friend Atom *_atom(const int_t type, const func_t func, PValRaw reused);
+
+    virtual void each(void callback(const PVal &), const bool rev) override;
 
     virtual void repr(std::ostream &stream, const int_t level) const override;
 };
@@ -172,6 +176,8 @@ public:
     friend Map *_map_m(map_t &&container,
         const int_t type, const func_t func, PValRaw reused
     );
+
+    virtual void each(void callback(const PVal &), const bool rev) override;
 
     virtual void repr(std::ostream &stream, const int_t level) const override;
 

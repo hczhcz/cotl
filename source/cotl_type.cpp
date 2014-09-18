@@ -107,6 +107,97 @@ void outputAppendFuncX(std::ostream &stream, const func_t func, bool &after) {
 inline
 namespace published {
 
+void Atom::each(void callback(const PVal &), const bool rev) {
+    (void) rev;
+
+    callback(PVal(this));
+}
+
+template <>
+void Int::each(void callback(const PVal &), const bool rev) {
+    (void) rev;
+
+    callback(PVal(this));
+}
+
+template <>
+void Real::each(void callback(const PVal &), const bool rev) {
+    (void) rev;
+
+    callback(PVal(this));
+}
+
+template <>
+void Func::each(void callback(const PVal &), const bool rev) {
+    (void) rev;
+
+    callback(PVal(this));
+}
+
+template <>
+void Ptr::each(void callback(const PVal &), const bool rev) {
+    if (!rev) {
+        callback(PVal(this));
+    }
+
+    getVar().raw()->each(callback, rev);
+
+    if (rev) {
+        callback(PVal(this));
+    }
+}
+
+template <>
+void Pair::each(void callback(const PVal &), const bool rev) {
+    if (!rev) {
+        callback(PVal(this));
+    }
+
+    getVar().first.raw()->each(callback, rev);
+    getVar().second.raw()->each(callback, rev);
+
+    if (rev) {
+        callback(PVal(this));
+    }
+}
+
+template <>
+void Str::each(void callback(const PVal &), const bool rev) {
+    (void) rev;
+
+    callback(PVal(this));
+}
+
+template <>
+void Arr::each(void callback(const PVal &), const bool rev) {
+    if (!rev) {
+        callback(PVal(this));
+    }
+
+    for (auto i = getVar()->begin(); i != getVar()->end(); ++i) {
+        i->raw()->each(callback, rev);
+    }
+
+    if (rev) {
+        callback(PVal(this));
+    }
+}
+
+template <>
+void Map::each(void callback(const PVal &), const bool rev) {
+    if (!rev) {
+        callback(PVal(this));
+    }
+
+    for (auto i = getVar()->begin(); i != getVar()->end(); ++i) {
+        i->second.raw()->each(callback, rev);
+    }
+
+    if (rev) {
+        callback(PVal(this));
+    }
+}
+
 void Atom::repr(std::ostream &stream, const int_t level) const {
     if (level >= _COTL_VAL_REPR_DEPTH) {
         stream << "...";
