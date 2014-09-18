@@ -83,32 +83,35 @@ inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, P
 }
 
 inline void doDispatch(
-    const PVal &val, const int_t self_type,
-    const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+    const PVal &val,
+    const PVal &self, const PMaybe &lib, PMaybe &tunnel
 ) {
-    // TODO: caller?
+    PMaybe dlib(nullptr);
     PMaybe dlib1(nullptr);
     PMaybe func(nullptr);
 
-    libExec(id_dispatch, val, lib, dlib1);
-    libGet(self_type, dlib1, func);
+    libExec(id_dispatch_ptr, self, lib, dlib);
+    libExec(val, self, dlib, dlib1);
 
-    func.call(_ptr(_ptr(val, id_quote), self_type), lib, tunnel);
+    libGet(self, dlib1, func);
+    func.call(_ptr(_ptr(val, id_quote), self->getType()), lib, tunnel);
 }
 
 inline void doDispatch(
-    const PVal &val1, const PVal &val2, const int_t self_type,
-    const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
+    const PVal &val1, const PVal &val2,
+    const PVal &self, const PMaybe &lib, PMaybe &tunnel
 ) {
+    PMaybe dlib(nullptr);
     PMaybe dlib1(nullptr);
     PMaybe dlib2(nullptr);
     PMaybe func(nullptr);
 
-    libExec(id_dispatch, val1, lib, dlib1);
-    libExec(id_dispatch, val2, dlib1, dlib2);
-    libGet(self_type, dlib2, func);
+    libExec(id_dispatch_pair, self, lib, dlib);
+    libExec(val1, self, dlib, dlib1);
+    libExec(val2, self, dlib1, dlib2);
 
-    func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self_type), lib, tunnel);
+    libGet(self, dlib2, func);
+    func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self->getType()), lib, tunnel);
 }
 
 }

@@ -38,6 +38,7 @@ inline void PValProto<maybe>::call(
     const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
 ) const {
     call(caller, lib, tunnel);
+
     if (bool(tunnel) != ret) {
         throw "bad call return";
     }

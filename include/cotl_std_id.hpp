@@ -111,8 +111,13 @@ enum {
             id_with,
             id_write,
 
-        id_dispatch, // TODO: dispatch // or casting
-            //
+        id_dispatch_ptr,
+            // TODO
+
+        id_dispatch_pair,
+            // TODO
+
+        // TODO id_dispatch_any
 
         id_math,
             id_add, // TODO: both int and real (auto detect)
