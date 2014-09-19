@@ -3,12 +3,11 @@
 # build cotl
 # use clang++ -O1 by default
 
-cc="clang++"
-# cc="icc"
+cc="g++"
 
 if ! type "$cc" > /dev/null
 then
-    sudo apt-get install clang++
+    sudo apt-get install g++
 fi
 
 ccflags="-c"
