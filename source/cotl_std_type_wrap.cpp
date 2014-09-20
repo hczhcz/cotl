@@ -7,56 +7,44 @@ namespace cotlstd {
 _COTL_FUNC_T(stdWrapAtom)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_atom);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = _atom(
-            self_p->getType(), self_p->getFunc()
-        );
-    }
+    tunnel = _atom(
+        self_p->getType(), self_p->getFunc()
+    );
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapInt)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Int, id_int);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = _int(
-            self_p->get(),
-            self_p->getType(), self_p->getFunc()
-        );
-    }
+    tunnel = _int(
+        self_p->get(),
+        self_p->getType(), self_p->getFunc()
+    );
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapReal)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Real, id_real);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = _real(
-            self_p->get(),
-            self_p->getType(), self_p->getFunc()
-        );
-    }
+    tunnel = _real(
+        self_p->get(),
+        self_p->getType(), self_p->getFunc()
+    );
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Func, id_func);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = _func(
-            self_p->get(),
-            self_p->getType(), self_p->getFunc()
-        );
-    }
+    tunnel = _func(
+        self_p->get(),
+        self_p->getType(), self_p->getFunc()
+    );
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapPtr)
@@ -118,15 +106,12 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdWrapStr)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Str, id_str);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = _str(
-            *(self_p->get()),
-            self_p->getType(), self_p->getFunc()
-        );
-    }
+    tunnel = _str(
+        *(self_p->get()),
+        self_p->getType(), self_p->getFunc()
+    );
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapArr)
@@ -218,26 +203,24 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        PMaybe tunnel1(
-            _ptr(_libmap(
-                id_atom, _libfunc(stdWrapAtom),
-                id_int, _libfunc(stdWrapInt),
-                id_real, _libfunc(stdWrapReal),
-                id_func, _libfunc(stdWrapFunc),
-                id_ptr, _libfunc(stdWrapPtr),
-                id_pair, _libfunc(stdWrapPair),
-                id_str, _libfunc(stdWrapStr),
-                id_arr, _libfunc(stdWrapArr),
-                id_map, _libfunc(stdWrapMap)
-                // id_error, _libfunc(stdWrapErr)
-            ), id_quote)
-        );
+    _COTL_CHECK_TUNNEL(false);
 
-        libSet(id_type_wrap, lib, tunnel1);
-    }
+    PMaybe tunnel1(
+        _ptr(_libmap(
+            id_atom, _libfunc(stdWrapAtom),
+            id_int, _libfunc(stdWrapInt),
+            id_real, _libfunc(stdWrapReal),
+            id_func, _libfunc(stdWrapFunc),
+            id_ptr, _libfunc(stdWrapPtr),
+            id_pair, _libfunc(stdWrapPair),
+            id_str, _libfunc(stdWrapStr),
+            id_arr, _libfunc(stdWrapArr),
+            id_map, _libfunc(stdWrapMap)
+            // id_error, _libfunc(stdWrapErr)
+        ), id_quote)
+    );
+
+    libSet(id_type_wrap, lib, tunnel1);
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

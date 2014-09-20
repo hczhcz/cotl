@@ -56,6 +56,13 @@ namespace cotlstd {
         }\
     } while (false)
 
+#define _COTL_CHECK_TUNNEL(exist) \
+    do {\
+        if (bool(tunnel) != (exist)) {\
+            throw "bad tunnel existence";\
+        }\
+    } while (false)
+
 inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
     lib.call<true>(target, nullptr, tunnel);
 }

@@ -19,18 +19,16 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        PMaybe tunnel1(
-            _atom(id_???),
-            _ptr(_libmap(
-                id_???, _libfunc(std???),
-            ), id_quote)
-        );
+    _COTL_CHECK_TUNNEL(false);
 
-        libSet(id_???, lib, tunnel1);
-    }
+    PMaybe tunnel1(
+        _atom(id_???),
+        _ptr(_libmap(
+            id_???, _libfunc(std???),
+        ), id_quote)
+    );
+
+    libSet(id_???, lib, tunnel1);
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_???);

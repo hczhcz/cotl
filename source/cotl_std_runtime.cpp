@@ -11,11 +11,9 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLiteral)
 _COTL_FUNC_BEGIN
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = self;
-    }
+    _COTL_CHECK_TUNNEL(false);
+
+    tunnel = self;
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdBind)
@@ -35,12 +33,9 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_quote);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = self_p->get();
-    }
+    tunnel = self_p->get();
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdContain)
@@ -58,23 +53,17 @@ _COTL_FUNC_END
 _COTL_FUNC_T(stdCaller)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_caller);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = caller;
-    }
+    tunnel = caller;
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdLib)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_lib);
+    _COTL_CHECK_TUNNEL(false);
 
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        tunnel = lib;
-    }
+    tunnel = lib;
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdUse)
@@ -111,31 +100,29 @@ namespace {
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
-    if (tunnel) {
-        throw "bad tunnel";
-    } else {
-        PMaybe tunnel1(
-            _ptr(_libmap(
-                id_auto, _libfunc(stdAuto),
-                id_literal, _libfunc(stdLiteral),
-                id_bind, _libfunc(stdBind),
-                id_quote, _libfunc(stdQuote),
-                id_contain, _libfunc(stdContain),
-                id_caller, _libfunc(stdCaller),
-                id_lib, _libfunc(stdLib),
-                id_use, _libfunc(stdUse),
-                id_with, _libfunc(stdWith),
-                id_write, _libfunc(stdWrite)
-            ), id_quote)
-        );
+    _COTL_CHECK_TUNNEL(false);
 
-        libSet(id_runtime, lib, tunnel1);
+    PMaybe tunnel1(
+        _ptr(_libmap(
+            id_auto, _libfunc(stdAuto),
+            id_literal, _libfunc(stdLiteral),
+            id_bind, _libfunc(stdBind),
+            id_quote, _libfunc(stdQuote),
+            id_contain, _libfunc(stdContain),
+            id_caller, _libfunc(stdCaller),
+            id_lib, _libfunc(stdLib),
+            id_use, _libfunc(stdUse),
+            id_with, _libfunc(stdWith),
+            id_write, _libfunc(stdWrite)
+        ), id_quote)
+    );
 
-        // hack
-        PMaybe tunnel2(_libfunc(stdQuote));
+    libSet(id_runtime, lib, tunnel1);
 
-        libSet(id_quote, lib, tunnel2);
-    }
+    // hack
+    PMaybe tunnel2(_libfunc(stdQuote));
+
+    libSet(id_quote, lib, tunnel2);
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);
