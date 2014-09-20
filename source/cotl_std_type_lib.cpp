@@ -6,44 +6,40 @@ namespace cotlstd {
 
 _COTL_FUNC_T(published::stdLibFunc)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Func, id_func>()) {
-        self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
-    } else {
-        throw "bad self type";
-    }
+    _COTL_CHECK_SELF(cotl::Func, id_func);
+
+    self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLibMap)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Map, id_map>()) {
-        int_t type = caller->getType();
+    _COTL_CHECK_SELF_VAR(cotl::Map, id_map);
 
-        if (self_p->get()->count(type)) {
-            if (tunnel) {
-                self_p->getVar()->at(type) = tunnel;
+    int_t type = caller->getType();
 
-                tunnel = nullptr;
-            } else {
-                tunnel = self_p->get()->at(type);
-            }
+    if (self_p->get()->count(type)) {
+        if (tunnel) {
+            self_p->getVar()->at(type) = tunnel;
+
+            tunnel = nullptr;
         } else {
-            // key not found
-            if (tunnel) {
-                // insert new item
-                self_p->getVar()->insert({{type, PVal(tunnel)}});
-
-                tunnel = nullptr;
-            } else {
-                // call (next) lib
-                if (lib) {
-                    libGet(caller, lib, tunnel);
-                } else {
-                    throw "bad lib query";
-                }
-            }
+            tunnel = self_p->get()->at(type);
         }
     } else {
-        throw "bad self type";
+        // key not found
+        if (tunnel) {
+            // insert new item
+            self_p->getVar()->insert({{type, PVal(tunnel)}});
+
+            tunnel = nullptr;
+        } else {
+            // call (next) lib
+            if (lib) {
+                libGet(caller, lib, tunnel);
+            } else {
+                throw "bad lib query";
+            }
+        }
     }
 _COTL_FUNC_END
 

@@ -40,6 +40,22 @@ namespace cotlstd {
         }
 #endif
 
+#define _COTL_CHECK_SELF(type, id) \
+    auto self_p = self.as<type, id>();\
+    do {\
+        if (!self_p) {\
+            throw "bad self type";\
+        }\
+    } while (false)
+
+#define _COTL_CHECK_SELF_VAR(type, id) \
+    auto self_p = self.raw<type, id>();\
+    do {\
+        if (!self_p) {\
+            throw "bad self type";\
+        }\
+    } while (false)
+
 inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
     lib.call<true>(target, nullptr, tunnel);
 }

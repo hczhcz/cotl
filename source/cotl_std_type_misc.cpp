@@ -6,63 +6,55 @@ namespace cotlstd {
 
 _COTL_FUNC_T(stdIncrement)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Int, id_increment>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Int, id_any>()) {
-                self_p->set(tunnel_p->get());
-                tunnel = nullptr;
-            } else {
-                throw "bad tunnel type";
-            }
+    _COTL_CHECK_SELF_VAR(cotl::Int, id_increment);
+
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Int, id_any>()) {
+            self_p->set(tunnel_p->get());
+            tunnel = nullptr;
         } else {
-            ++(self_p->getVar());
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        ++(self_p->getVar());
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdDecrement)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Int, id_decrement>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Int, id_any>()) {
-                self_p->set(tunnel_p->get());
-                tunnel = nullptr;
-            } else {
-                throw "bad tunnel type";
-            }
+    _COTL_CHECK_SELF_VAR(cotl::Int, id_decrement);
+
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Int, id_any>()) {
+            self_p->set(tunnel_p->get());
+            tunnel = nullptr;
         } else {
-            --(self_p->getVar());
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        --(self_p->getVar());
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdRefPtr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr, id_refptr>()) {
-        self_p->get().call(caller, lib, tunnel);
-    } else {
-        throw "bad self type";
-    }
+    _COTL_CHECK_SELF(cotl::Ptr, id_refptr);
+
+    self_p->get().call(caller, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.raw<cotl::Arr, id_stack>()) {
-        arr_t &data = self_p->getVar();
-        if (tunnel) {
-            PVal helper(tunnel); // for libstdc++ without gc
-            data->push_back(helper);
-            tunnel = nullptr;
-        } else {
-            tunnel = data->back();
-            data->pop_back();
-        }
+    _COTL_CHECK_SELF_VAR(cotl::Arr, id_stack);
+
+    arr_t &data = self_p->getVar();
+    if (tunnel) {
+        PVal helper(tunnel); // for libstdc++ without gc
+        data->push_back(helper);
+        tunnel = nullptr;
     } else {
-        throw "bad self type";
+        tunnel = data->back();
+        data->pop_back();
     }
 _COTL_FUNC_END
 

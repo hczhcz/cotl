@@ -6,229 +6,211 @@ namespace cotlstd {
 
 _COTL_FUNC_T(stdWrapAtom)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Atom, id_atom>()) {
-        if (tunnel) {
-            throw "bad tunnel";
-        } else {
-            tunnel = _atom(
-                self_p->getType(), self_p->getFunc()
-            );
-        }
+    _COTL_CHECK_SELF(cotl::Atom, id_atom);
+
+    if (tunnel) {
+        throw "bad tunnel";
     } else {
-        throw "bad self type";
+        tunnel = _atom(
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapInt)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Int, id_int>()) {
-        if (tunnel) {
-            throw "bad tunnel";
-        } else {
-            tunnel = _int(
-                self_p->get(),
-                self_p->getType(), self_p->getFunc()
-            );
-        }
+    _COTL_CHECK_SELF(cotl::Int, id_int);
+
+    if (tunnel) {
+        throw "bad tunnel";
     } else {
-        throw "bad self type";
+        tunnel = _int(
+            self_p->get(),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapReal)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Real, id_real>()) {
-        if (tunnel) {
-            throw "bad tunnel";
-        } else {
-            tunnel = _real(
-                self_p->get(),
-                self_p->getType(), self_p->getFunc()
-            );
-        }
+    _COTL_CHECK_SELF(cotl::Real, id_real);
+
+    if (tunnel) {
+        throw "bad tunnel";
     } else {
-        throw "bad self type";
+        tunnel = _real(
+            self_p->get(),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapFunc)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Func, id_func>()) {
-        if (tunnel) {
-            throw "bad tunnel";
-        } else {
-            tunnel = _func(
-                self_p->get(),
-                self_p->getType(), self_p->getFunc()
-            );
-        }
+    _COTL_CHECK_SELF(cotl::Func, id_func);
+
+    if (tunnel) {
+        throw "bad tunnel";
     } else {
-        throw "bad self type";
+        tunnel = _func(
+            self_p->get(),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapPtr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Ptr, id_ptr>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Ptr, id_any>()) {
-                PMaybe tunnel1(tunnel_p->get());
+    _COTL_CHECK_SELF(cotl::Ptr, id_ptr);
 
-                self_p->get().call<false>(caller, lib, tunnel1);
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Ptr, id_any>()) {
+            PMaybe tunnel1(tunnel_p->get());
 
-                tunnel = nullptr;
-            } else {
-                throw "bad tunnel type";
-            }
+            self_p->get().call<false>(caller, lib, tunnel1);
+
+            tunnel = nullptr;
         } else {
-            PMaybe tunnel1(nullptr);
-
-            self_p->get().call<true>(caller, lib, tunnel1);
-
-            tunnel = _ptr(
-                PVal(tunnel1),
-                self_p->getType(), self_p->getFunc()
-            );
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        PMaybe tunnel1(nullptr);
+
+        self_p->get().call<true>(caller, lib, tunnel1);
+
+        tunnel = _ptr(
+            PVal(tunnel1),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapPair)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Pair, id_pair>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Pair, id_any>()) {
-                PMaybe tunnel1(tunnel_p->get().first);
-                PMaybe tunnel2(tunnel_p->get().second);
+    _COTL_CHECK_SELF(cotl::Pair, id_pair);
 
-                self_p->get().first.call<false>(caller, lib, tunnel1);
-                self_p->get().second.call<false>(caller, lib, tunnel2);
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Pair, id_any>()) {
+            PMaybe tunnel1(tunnel_p->get().first);
+            PMaybe tunnel2(tunnel_p->get().second);
 
-                tunnel = nullptr;
-            } else {
-                throw "bad tunnel type";
-            }
+            self_p->get().first.call<false>(caller, lib, tunnel1);
+            self_p->get().second.call<false>(caller, lib, tunnel2);
+
+            tunnel = nullptr;
         } else {
-            PMaybe tunnel1(nullptr);
-            PMaybe tunnel2(nullptr);
-
-            self_p->get().first.call<true>(caller, lib, tunnel1);
-            self_p->get().second.call<true>(caller, lib, tunnel2);
-
-            tunnel = _pair(
-                PVal(tunnel1), PVal(tunnel2),
-                self_p->getType(), self_p->getFunc()
-            );
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        PMaybe tunnel1(nullptr);
+        PMaybe tunnel2(nullptr);
+
+        self_p->get().first.call<true>(caller, lib, tunnel1);
+        self_p->get().second.call<true>(caller, lib, tunnel2);
+
+        tunnel = _pair(
+            PVal(tunnel1), PVal(tunnel2),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapStr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Str, id_str>()) {
-        if (tunnel) {
-            throw "bad tunnel";
-        } else {
-            tunnel = _str(
-                *(self_p->get()),
-                self_p->getType(), self_p->getFunc()
-            );
-        }
+    _COTL_CHECK_SELF(cotl::Str, id_str);
+
+    if (tunnel) {
+        throw "bad tunnel";
     } else {
-        throw "bad self type";
+        tunnel = _str(
+            *(self_p->get()),
+            self_p->getType(), self_p->getFunc()
+        );
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdWrapArr)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Arr, id_arr>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Arr, id_any>()) {
-                const arr_t &self_data = self_p->get();
-                const arr_t &tunnel_data = tunnel_p->get();
+    _COTL_CHECK_SELF(cotl::Arr, id_arr);
 
-                if (self_data->size() == tunnel_data->size()) {
-                    // notice: without range check
-                    for (size_t i = 0; i != self_data->size(); ++i) {
-                        PMaybe tunnel1((*tunnel_data)[i]);
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Arr, id_any>()) {
+            const arr_t &self_data = self_p->get();
+            const arr_t &tunnel_data = tunnel_p->get();
 
-                        (*self_data)[i].call<false>(caller, lib, tunnel1);
-                    }
+            if (self_data->size() == tunnel_data->size()) {
+                // notice: without range check
+                for (size_t i = 0; i != self_data->size(); ++i) {
+                    PMaybe tunnel1((*tunnel_data)[i]);
 
-                    tunnel = nullptr;
-                } else {
-                    throw "bad arr size";
+                    (*self_data)[i].call<false>(caller, lib, tunnel1);
                 }
+
+                tunnel = nullptr;
             } else {
-                throw "bad tunnel type";
+                throw "bad arr size";
             }
         } else {
-            auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
-
-            const arr_t &self_data = self_p->get();
-            arr_t &tunnel_data = tunnel_p->getVar();
-
-            // notice: without range check
-            for (size_t i = 0; i != self_data->size(); ++i) {
-                PMaybe tunnel1(nullptr);
-
-                (*self_data)[i].call<true>(caller, lib, tunnel1);
-
-                PVal helper(tunnel1); // for libstdc++ without gc
-                tunnel_data->push_back(helper);
-            }
-
-            tunnel = tunnel_p;
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        auto tunnel_p = _arr(self_p->getType(), self_p->getFunc());
+
+        const arr_t &self_data = self_p->get();
+        arr_t &tunnel_data = tunnel_p->getVar();
+
+        // notice: without range check
+        for (size_t i = 0; i != self_data->size(); ++i) {
+            PMaybe tunnel1(nullptr);
+
+            (*self_data)[i].call<true>(caller, lib, tunnel1);
+
+            PVal helper(tunnel1); // for libstdc++ without gc
+            tunnel_data->push_back(helper);
+        }
+
+        tunnel = tunnel_p;
     }
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrapMap)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::Map, id_map>()) {
-        if (tunnel) {
-            if (auto tunnel_p = tunnel.as<cotl::Map, id_any>()) {
-                const map_t &self_data = self_p->get();
-                const map_t &tunnel_data = tunnel_p->get();
+    _COTL_CHECK_SELF(cotl::Map, id_map);
 
-                for (auto &val: *self_data) {
-                    if (tunnel_data->count(val.first)) {
-                        PMaybe tunnel1(tunnel_data->at(val.first));
-
-                        val.second.call<false>(caller, lib, tunnel1);
-                    } else {
-                        throw "bad map key";
-                    }
-                }
-
-                tunnel = nullptr;
-            } else {
-                throw "bad tunnel type";
-            }
-        } else {
-            auto tunnel_p = _map(self_p->getType(), self_p->getFunc());
-
+    if (tunnel) {
+        if (auto tunnel_p = tunnel.as<cotl::Map, id_any>()) {
             const map_t &self_data = self_p->get();
-            map_t &tunnel_data = tunnel_p->getVar();
+            const map_t &tunnel_data = tunnel_p->get();
 
             for (auto &val: *self_data) {
-                PMaybe tunnel1(nullptr);
+                if (tunnel_data->count(val.first)) {
+                    PMaybe tunnel1(tunnel_data->at(val.first));
 
-                val.second.call<true>(caller, lib, tunnel1);
-
-                tunnel_data->insert({{val.first, PVal(tunnel1)}});
+                    val.second.call<false>(caller, lib, tunnel1);
+                } else {
+                    throw "bad map key";
+                }
             }
 
-            tunnel = tunnel_p;
+            tunnel = nullptr;
+        } else {
+            throw "bad tunnel type";
         }
     } else {
-        throw "bad self type";
+        auto tunnel_p = _map(self_p->getType(), self_p->getFunc());
+
+        const map_t &self_data = self_p->get();
+        map_t &tunnel_data = tunnel_p->getVar();
+
+        for (auto &val: *self_data) {
+            PMaybe tunnel1(nullptr);
+
+            val.second.call<true>(caller, lib, tunnel1);
+
+            tunnel_data->insert({{val.first, PVal(tunnel1)}});
+        }
+
+        tunnel = tunnel_p;
     }
 _COTL_FUNC_END
 

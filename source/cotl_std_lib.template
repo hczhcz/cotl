@@ -6,14 +6,12 @@ namespace cotlstd {
 
 _COTL_FUNC_T(std???)
 _COTL_FUNC_BEGIN
-    if (auto self_p = self.as<cotl::???, id_???>) {
-        if (tunnel) {
-            //
-        } else {
-            //
-        }
+    _COTL_CHECK_SELF(cotl::???, id_???);
+
+    if (tunnel) {
+        //
     } else {
-        throw "bad self type";
+        //
     }
 _COTL_FUNC_END
 
