@@ -56,6 +56,22 @@ namespace cotlstd {
         }\
     } while (false)
 
+#define _COTL_CHECK_TYPE(target, type, id) \
+    auto target##_p = target.as<type, id>();\
+    do {\
+        if (!target##_p) {\
+            throw "bad " #target " type";\
+        }\
+    } while (false)
+
+#define _COTL_CHECK_TYPE_VAR(target, type, id) \
+    auto target##_p = target.raw<type, id>();\
+    do {\
+        if (!target##_p) {\
+            throw "bad " #target " type";\
+        }\
+    } while (false)
+
 #define _COTL_CHECK_TUNNEL(exist) \
     do {\
         if (bool(tunnel) != (exist)) {\

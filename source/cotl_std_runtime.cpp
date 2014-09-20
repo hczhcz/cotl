@@ -22,12 +22,10 @@ _COTL_FUNC_BEGIN
 
     libGet(self, lib, func);
 
-    if (auto func_p = func.as<cotl::Func, id_func>()) {
-        self.raw()->setFunc(func_p->get());
-        self.call(caller, lib, tunnel);
-    } else {
-        throw "bad func type";
-    }
+    _COTL_CHECK_TYPE(func, cotl::Func, id_func);
+
+    self.raw()->setFunc(func_p->get());
+    self.call(caller, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdQuote)

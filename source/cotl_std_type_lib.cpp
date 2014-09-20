@@ -13,13 +13,13 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(published::stdLibMap)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Map, id_map);
+    _COTL_CHECK_SELF(cotl::Map, id_map);
 
     int_t type = caller->getType();
 
     if (self_p->get()->count(type)) {
         if (tunnel) {
-            self_p->getVar()->at(type) = tunnel;
+            self_p->get()->at(type) = tunnel;
 
             tunnel = nullptr;
         } else {
@@ -29,7 +29,7 @@ _COTL_FUNC_BEGIN
         // key not found
         if (tunnel) {
             // insert new item
-            self_p->getVar()->insert({{type, PVal(tunnel)}});
+            self_p->get()->insert({{type, PVal(tunnel)}});
 
             tunnel = nullptr;
         } else {
