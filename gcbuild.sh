@@ -25,6 +25,6 @@ fi
 # make
 # make check
 
-make c++ -f Makefile.direct
+make gc.a c++ -f Makefile.direct
 
 cd ..

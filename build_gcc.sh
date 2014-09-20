@@ -23,7 +23,7 @@ fi
 
 if ! grep "^#define _COTL_USE_GLOBAL_GC" cotl_config > /dev/null
 then
-    lflags="./gc/*.o"
+    lflags="./gc/*.o -ldl -lpthread"
 fi
 if ! grep "^#define _COTL_USE_GC" cotl_config > /dev/null
 then
