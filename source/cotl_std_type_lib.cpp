@@ -50,10 +50,10 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe tunnel1(
-        _ptr(_libmap(
+        _libmap(
             id_func, _libfunc(stdLibFunc),
             id_map, _libfunc(stdLibMap)
-        ), id_quote)
+        )
     );
 
     libSet(id_type_lib, lib, tunnel1);

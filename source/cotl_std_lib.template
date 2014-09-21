@@ -23,9 +23,9 @@ _COTL_FUNC_BEGIN
 
     PMaybe tunnel1(
         _atom(id_???),
-        _ptr(_libmap(
+        _libmap(
             id_???, _libfunc(std???),
-        ), id_quote)
+        )
     );
 
     libSet(id_???, lib, tunnel1);

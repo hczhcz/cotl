@@ -129,8 +129,8 @@ inline void doDispatch(
     PMaybe dlib1(nullptr);
     PMaybe func(nullptr);
 
-    libExec(id_dispatch_ptr, self, lib, dlib);
-    libExec(val, self, dlib, dlib1);
+    libGet(id_dispatch_ptr, lib, dlib);
+    libGet(val, dlib, dlib1);
 
     libGet(self, dlib1, func);
     func.call(_ptr(_ptr(val, id_quote), self->getType()), lib, tunnel);
@@ -145,9 +145,9 @@ inline void doDispatch(
     PMaybe dlib2(nullptr);
     PMaybe func(nullptr);
 
-    libExec(id_dispatch_pair, self, lib, dlib);
-    libExec(val1, self, dlib, dlib1);
-    libExec(val2, self, dlib1, dlib2);
+    libGet(id_dispatch_pair, lib, dlib);
+    libGet(val1, dlib, dlib1);
+    libGet(val2, dlib1, dlib2);
 
     libGet(self, dlib2, func);
     func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self->getType()), lib, tunnel);

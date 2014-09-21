@@ -103,7 +103,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe tunnel1(
-        _ptr(_libmap(
+        _libmap(
             id_auto, _libfunc(stdAuto),
             id_literal, _libfunc(stdLiteral),
             id_bind, _libfunc(stdBind),
@@ -114,15 +114,10 @@ _COTL_FUNC_BEGIN
             id_use, _libfunc(stdUse),
             id_with, _libfunc(stdWith),
             id_write, _libfunc(stdWrite)
-        ), id_quote)
+        )
     );
 
     libSet(id_runtime, lib, tunnel1);
-
-    // hack
-    PMaybe tunnel2(_libfunc(stdQuote));
-
-    libSet(id_quote, lib, tunnel2);
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);

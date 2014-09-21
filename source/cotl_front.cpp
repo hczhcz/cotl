@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 
     PMaybe tunnel1(nullptr);
 
-    boot(_atom(), tunnel1);
+    boot(_ptr(_pair(_atom(), _int(233)), id_quote), tunnel1);
 
     cout << tunnel1 << endl;
 

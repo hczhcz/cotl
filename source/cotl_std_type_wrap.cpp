@@ -198,7 +198,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe tunnel1(
-        _ptr(_libmap(
+        _libmap(
             id_atom, _libfunc(stdWrapAtom),
             id_int, _libfunc(stdWrapInt),
             id_real, _libfunc(stdWrapReal),
@@ -209,7 +209,7 @@ _COTL_FUNC_BEGIN
             id_arr, _libfunc(stdWrapArr),
             id_map, _libfunc(stdWrapMap)
             // id_error, _libfunc(stdWrapErr)
-        ), id_quote)
+        )
     );
 
     libSet(id_type_wrap, lib, tunnel1);

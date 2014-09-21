@@ -61,7 +61,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe tunnel1(
-        _ptr(_libmap(
+        _libmap(
             id_null, _libfunc(stdLiteral),
             id_false, _libfunc(stdLiteral),
             id_true, _libfunc(stdLiteral),
@@ -69,7 +69,7 @@ _COTL_FUNC_BEGIN
             id_decrement, _libfunc(stdDecrement),
             id_refptr, _libfunc(stdRefPtr),
             id_stack, _libfunc(stdStack)
-        ), id_quote)
+        )
     );
 
     libSet(id_type_misc, lib, tunnel1);
