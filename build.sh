@@ -4,7 +4,6 @@
 # use clang++ -O1 by default
 
 cc="clang++"
-# cc="icc"
 
 if ! type "$cc" > /dev/null
 then

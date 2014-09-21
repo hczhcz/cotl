@@ -13,7 +13,7 @@ fi
 #     # TODO add gprof2dot
 # fi
 
-./build_gcc.sh -g -pg -O1 "$@"
+./build_cc.sh gcc -g -pg -O1 "$@"
 
 echo "======== ./output/cotl ========"
 cd output

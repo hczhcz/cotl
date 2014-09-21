@@ -1,10 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 # build cotl
 # use clang++ -O1 by default
 
-cc="g++"
+cc="$1"
 
+if ! type "$cc" > /dev/null
+then
+    cc="g++"
+fi
 if ! type "$cc" > /dev/null
 then
     sudo apt-get install g++
@@ -13,7 +17,7 @@ fi
 ccflags="-c"
 pchflags="-x c++-header"
 dflags="-std=c++11 -Wall -Wextra"
-flags="$@"
+echo ${@:2}
 lflags="-lgc"
 
 if [ "$flags" = "" ]
