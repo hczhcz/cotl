@@ -85,14 +85,6 @@ int main(int argc, char* argv[]) {
 
         boot(_atom(), tunnel1);
 
-        /*
-        auto lib_p = _libmap();
-        PVal lib(lib_p);
-
-        lib_p->getVar()->insert({{
-            id_std, _ptr(lib_p, id_quote)
-        }}); // add reference of self
-        */
     }
 
     PMaybe tunnel1(nullptr);

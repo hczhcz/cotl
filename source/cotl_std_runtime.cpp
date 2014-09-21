@@ -80,6 +80,8 @@ _COTL_FUNC_BEGIN
 
     PMaybe map(nullptr);
     self_p->get().first.call<true>(caller, lib, map);
+    // TODO: hard binding
+    // TODO: remove quote?
     self_p->get().second.call(caller,
         _pair(_ptr(PVal(lib), id_quote, stdQuote), PVal(map), id_use, stdUse),
     tunnel);
