@@ -107,7 +107,7 @@ public:
 inline
 namespace published {
 
-class Atom: public Val {
+class Atom final: public Val {
 protected:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
@@ -133,7 +133,7 @@ using Arr = NativeVal<arr_t>;
 using Map = NativeVal<map_t>;
 
 template <class T>
-class NativeVal: public Val {
+class NativeVal final: public Val {
 private:
     T _data;
 

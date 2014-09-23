@@ -6,7 +6,7 @@
 namespace cotl {
 
 template <bool maybe>
-class PValProto {
+class PValProto final {
 private:
     PValRaw _val;
 
