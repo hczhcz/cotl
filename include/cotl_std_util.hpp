@@ -125,14 +125,14 @@ inline void doDispatch(
     const PVal &val,
     const PVal &self, const PMaybe &lib, PMaybe &tunnel
 ) {
-    PMaybe dlib(nullptr);
     PMaybe dlib1(nullptr);
+    PMaybe vlib1(nullptr);
     PMaybe func(nullptr);
 
-    libGet(id_dispatch_ptr, lib, dlib);
-    libGet(val, dlib, dlib1);
+    libGet(id_dispatch,   lib, dlib1);
+    libGet(val,         dlib1, vlib1);
 
-    libGet(self, dlib1, func);
+    libGet(self,        vlib1, func);
     func.call(_ptr(_ptr(val, id_quote), self->getType()), lib, tunnel);
 }
 
@@ -140,16 +140,18 @@ inline void doDispatch(
     const PVal &val1, const PVal &val2,
     const PVal &self, const PMaybe &lib, PMaybe &tunnel
 ) {
-    PMaybe dlib(nullptr);
     PMaybe dlib1(nullptr);
     PMaybe dlib2(nullptr);
+    PMaybe vlib1(nullptr);
+    PMaybe vlib2(nullptr);
     PMaybe func(nullptr);
 
-    libGet(id_dispatch_pair, lib, dlib);
-    libGet(val1, dlib, dlib1);
-    libGet(val2, dlib1, dlib2);
+    libGet(id_dispatch,   lib, dlib1);
+    libGet(val1,        dlib1, vlib1);
+    libGet(id_dispatch, vlib1, dlib2);
+    libGet(val2,        dlib2, vlib2);
 
-    libGet(self, dlib2, func);
+    libGet(self,        vlib2, func);
     func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self->getType()), lib, tunnel);
 }
 
