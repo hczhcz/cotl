@@ -153,6 +153,78 @@ inline void doDispatch(
     func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self->getType()), lib, tunnel);
 }
 
+template <class T1, class Tr, int_t id,
+    typename Tr::DataType (&fr)(
+        const typename T1::DataType &
+    ),
+    typename T1::DataType (&fw)(
+        const typename Tr::DataType &
+    )
+>
+_COTL_FUNC_T(libFunc)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF_VAR(cotl::Ptr, id);
+
+    if (tunnel) {
+        _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
+
+        PMaybe data(_(fw(tunnel_p->get())));
+        self_p->getVar()->call<false>(caller, lib, data);
+
+        tunnel = nullptr;
+    } else {
+        PMaybe data(nullptr);
+        self_p->getVar()->call<true>(caller, lib, data);
+
+        _COTL_CHECK_TYPE(data, T1, id_any); // TODO id_any ??
+
+        tunnel = _(fr(data_p->get()));
+    }
+_COTL_FUNC_END
+
+template <class T1, class T2, class Tr, int_t id,
+    typename Tr::DataType (&fr)(
+        const typename T1::DataType &,
+        const typename T2::DataType &
+    ),
+    typename T1::DataType (&fw)(
+        const typename Tr::DataType &,
+        const typename T2::DataType &
+    )
+>
+_COTL_FUNC_T(libFunc)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF_VAR(cotl::Pair, id);
+    PVal &first(self_p->getVar().first);
+    PVal &second(self_p->getVar().second);
+
+    if (tunnel) {
+        _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
+
+        PMaybe data2(nullptr);
+        second.call<true>(caller, lib, data2);
+
+        _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
+
+        PMaybe data1(_(fw(tunnel_p->get(), data2_p->get())));
+        first.call<false>(caller, lib, data1);
+
+        tunnel = nullptr;
+    } else {
+        PMaybe data1(nullptr);
+        first.call<true>(caller, lib, data1);
+
+        _COTL_CHECK_TYPE(data1, T1, id_any); // TODO id_any ??
+
+        PMaybe data2(nullptr);
+        second.call<true>(caller, lib, data2);
+
+        _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
+
+        tunnel = _(fr(data1_p->get(), data2_p->get()));
+    }
+_COTL_FUNC_END
+
 }
 
 #endif
