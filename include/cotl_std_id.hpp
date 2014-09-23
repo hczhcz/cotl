@@ -124,13 +124,16 @@ enum {
             id_sub,
             id_mul,
             id_div,
+            id_mod,
+            id_rsub,
+            id_rdiv,
+            id_rmod,
 
             id_math_int,
-                // override: add, sub, mul, div
-                id_mod,
+                // override: add, sub, mul, div, ... // TODO
 
             id_math_real,
-                // override: add, sub, mul, div
+                // override: add, sub, mul, div, ... // TODO
 
         id_bool,
             //

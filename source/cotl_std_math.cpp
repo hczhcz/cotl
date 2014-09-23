@@ -14,14 +14,33 @@ int_t sub(const int_t &a, const int_t &b) {
     return a - b;
 }
 
-int_t rsub(const int_t &a, const int_t &b) {
-    return a - b;
+int_t mul(const int_t &a, const int_t &b) {
+    return a * b;
 }
 
-_COTL_FUNC_T(test)
-_COTL_FUNC_BEGIN
-    libFunc<cotl::Int, cotl::Int, cotl::Int, id_add, add, rsub>(self, caller, lib, tunnel);
-_COTL_FUNC_END
+int_t div(const int_t &a, const int_t &b) {
+    return a / b;
+}
+
+int_t mod(const int_t &a, const int_t &b) {
+    return a % b;
+}
+
+int_t rsub(const int_t &a, const int_t &b) {
+    return b - a;
+}
+
+int_t rdiv(const int_t &a, const int_t &b) {
+    return b / a;
+}
+
+int_t rmod(const int_t &a, const int_t &b) {
+    return b % a;
+}
+
+int_t merr(const int_t &a, const int_t &b) {
+    throw "math error"; // TODO
+}
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
@@ -29,7 +48,14 @@ _COTL_FUNC_BEGIN
 
     PMaybe tunnel1(
         _libmap(
-            id_add, _libfunc(test)
+            id_add, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_add, add, sub>),
+            id_sub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_sub, sub, add>),
+            id_mul, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mul, mul, div>),
+            id_div, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_div, div, mul>),
+            id_mod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mod, mod, merr>),
+            id_rsub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rsub, rsub, rsub>),
+            id_rdiv, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rdiv, rdiv, rdiv>),
+            id_rmod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rmod, rmod, merr>)
         )
     );
 
