@@ -94,6 +94,30 @@ inline Map *_libmap(
     return _map(args..., id_map, stdLibMap);
 }
 
+inline Int *_(const int_t &data,
+    const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
+) {
+    return _int(data, type, func, reused);
+}
+
+inline Real *_(const real_t &data,
+    const int_t type = id_real, const func_t func = stdAuto, PValRaw reused = nullptr
+) {
+    return _real(data, type, func, reused);
+}
+
+inline Func *_(const func_t &data,
+    const int_t type = id_func, const func_t func = stdAuto, PValRaw reused = nullptr
+) {
+    return _func(data, type, func, reused);
+}
+
+inline Str *_(const std::string &data,
+    const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
+) {
+    return _str(data, type, func, reused);
+}
+
 }
 
 }
