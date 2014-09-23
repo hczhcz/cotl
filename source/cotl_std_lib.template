@@ -22,7 +22,6 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe tunnel1(
-        _atom(id_???),
         _libmap(
             id_???, _libfunc(std???),
         )

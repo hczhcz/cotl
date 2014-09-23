@@ -177,6 +177,8 @@ public:
         const int_t type, const func_t func, PValRaw reused
     );
 
+    using DataType = T;
+
     virtual void each(void callback(const PVal &), const bool rev) override;
 
     virtual void repr(std::ostream &stream, const int_t level) const override;
