@@ -39,6 +39,9 @@ int_t rmod(const int_t &a, const int_t &b) {
 }
 
 int_t merr(const int_t &a, const int_t &b) {
+    (void) a;
+    (void) b;
+
     throw "math error"; // TODO
 }
 

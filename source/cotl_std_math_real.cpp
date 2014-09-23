@@ -30,10 +30,6 @@ real_t rdiv(const real_t &a, const real_t &b) {
     return b / a;
 }
 
-real_t merr(const real_t &a, const real_t &b) {
-    throw "math error"; // TODO
-}
-
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);

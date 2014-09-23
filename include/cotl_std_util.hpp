@@ -165,18 +165,18 @@ template <class T1, class Tr, int_t id,
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Ptr, id);
+    _COTL_CHECK_SELF(cotl::Ptr, id);
 
     if (tunnel) {
         _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
 
         PMaybe data(_(fw(tunnel_p->get())));
-        self_p->getVar()->call<false>(caller, lib, data);
+        self_p->get->call<false>(caller, lib, data);
 
         tunnel = nullptr;
     } else {
         PMaybe data(nullptr);
-        self_p->getVar()->call<true>(caller, lib, data);
+        self_p->get->call<true>(caller, lib, data);
 
         _COTL_CHECK_TYPE(data, T1, id_any); // TODO id_any ??
 
@@ -196,9 +196,9 @@ template <class T1, class T2, class Tr, int_t id,
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Pair, id);
-    PVal &first(self_p->getVar().first);
-    PVal &second(self_p->getVar().second);
+    _COTL_CHECK_SELF(cotl::Pair, id);
+    const PVal &first(self_p->get().first);
+    const PVal &second(self_p->get().second);
 
     if (tunnel) {
         _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
