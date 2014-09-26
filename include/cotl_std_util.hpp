@@ -62,7 +62,7 @@ namespace cotlstd {
         if (!target##_p) {\
             throw "bad " #target " type";\
         }\
-    } while (false)
+    } while (false) // TODO cast, dispatch
 
 #define _COTL_CHECK_TYPE_VAR(target, type, id) \
     auto target##_p = target.raw<type, id>();\
@@ -70,7 +70,7 @@ namespace cotlstd {
         if (!target##_p) {\
             throw "bad " #target " type";\
         }\
-    } while (false)
+    } while (false) // TODO cast, dispatch
 
 #define _COTL_CHECK_TUNNEL(exist) \
     do {\
@@ -119,6 +119,21 @@ inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, P
 template <bool ret>
 inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
     libExec<ret>(_atom(type), caller, lib, tunnel);
+}
+
+inline void doCast(
+    const int_t id, const PMaybe &lib, PMaybe &tunnel
+) {
+    PMaybe dlib1(nullptr);
+    PMaybe func(nullptr);
+
+    libGet(id_cast,   lib, dlib1);
+    libGet(id,      dlib1, func);
+
+    PMaybe caller(_ptr(_ptr(PVal(tunnel), id_quote), id));
+    tunnel = nullptr;
+
+    func.call<true>(caller, lib, tunnel);
 }
 
 inline void doDispatch(

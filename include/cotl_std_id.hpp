@@ -111,6 +111,8 @@ enum {
             id_with,
             id_write,
 
+        id_cast,
+
         id_dispatch,
             // TODO
 
