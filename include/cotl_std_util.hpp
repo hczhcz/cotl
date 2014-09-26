@@ -156,27 +156,25 @@ inline void doDispatch(
 }
 
 template <class T1, class Tr, int_t id,
-    typename Tr::DataType (&fr)(
-        const typename T1::DataType &
-    ),
-    typename T1::DataType (&fw)(
-        const typename Tr::DataType &
-    )
+    typename Tr::DataType (&fr)(typename T1::DataType),
+    typename T1::DataType (&fw)(typename Tr::DataType)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id);
 
+    const PVal &arg(self_p->get());
+
     if (tunnel) {
         _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
 
         PMaybe data(_(fw(tunnel_p->get())));
-        self_p->get->call<false>(caller, lib, data);
+        arg.call<false>(caller, lib, data);
 
         tunnel = nullptr;
     } else {
         PMaybe data(nullptr);
-        self_p->get->call<true>(caller, lib, data);
+        arg.call<true>(caller, lib, data);
 
         _COTL_CHECK_TYPE(data, T1, id_any); // TODO id_any ??
 
@@ -185,41 +183,36 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 template <class T1, class T2, class Tr, int_t id,
-    typename Tr::DataType (&fr)(
-        const typename T1::DataType &,
-        const typename T2::DataType &
-    ),
-    typename T1::DataType (&fw)(
-        const typename Tr::DataType &,
-        const typename T2::DataType &
-    )
+    typename Tr::DataType (&fr)(typename T1::DataType, typename T2::DataType),
+    typename T1::DataType (&fw)(typename Tr::DataType, typename T2::DataType)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id);
-    const PVal &first(self_p->get().first);
-    const PVal &second(self_p->get().second);
+
+    const PVal &arg1(self_p->get().first);
+    const PVal &arg2(self_p->get().second);
 
     if (tunnel) {
         _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
 
         PMaybe data2(nullptr);
-        second.call<true>(caller, lib, data2);
+        arg2.call<true>(caller, lib, data2);
 
         _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
 
         PMaybe data1(_(fw(tunnel_p->get(), data2_p->get())));
-        first.call<false>(caller, lib, data1);
+        arg1.call<false>(caller, lib, data1);
 
         tunnel = nullptr;
     } else {
         PMaybe data1(nullptr);
-        first.call<true>(caller, lib, data1);
+        arg1.call<true>(caller, lib, data1);
 
         _COTL_CHECK_TYPE(data1, T1, id_any); // TODO id_any ??
 
         PMaybe data2(nullptr);
-        second.call<true>(caller, lib, data2);
+        arg2.call<true>(caller, lib, data2);
 
         _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
 

@@ -6,27 +6,27 @@ namespace cotlstd {
 
 namespace {
 
-real_t add(const real_t &a, const real_t &b) {
+real_t add(real_t a, real_t b) {
     return a + b;
 }
 
-real_t sub(const real_t &a, const real_t &b) {
+real_t sub(real_t a, real_t b) {
     return a - b;
 }
 
-real_t mul(const real_t &a, const real_t &b) {
+real_t mul(real_t a, real_t b) {
     return a * b;
 }
 
-real_t div(const real_t &a, const real_t &b) {
+real_t div(real_t a, real_t b) {
     return a / b;
 }
 
-real_t rsub(const real_t &a, const real_t &b) {
+real_t rsub(real_t a, real_t b) {
     return b - a;
 }
 
-real_t rdiv(const real_t &a, const real_t &b) {
+real_t rdiv(real_t a, real_t b) {
     return b / a;
 }
 

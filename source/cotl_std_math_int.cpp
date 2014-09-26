@@ -6,39 +6,39 @@ namespace cotlstd {
 
 namespace {
 
-int_t add(const int_t &a, const int_t &b) {
+int_t add(int_t a, int_t b) {
     return a + b;
 }
 
-int_t sub(const int_t &a, const int_t &b) {
+int_t sub(int_t a, int_t b) {
     return a - b;
 }
 
-int_t mul(const int_t &a, const int_t &b) {
+int_t mul(int_t a, int_t b) {
     return a * b;
 }
 
-int_t div(const int_t &a, const int_t &b) {
+int_t div(int_t a, int_t b) {
     return a / b;
 }
 
-int_t mod(const int_t &a, const int_t &b) {
+int_t mod(int_t a, int_t b) {
     return a % b;
 }
 
-int_t rsub(const int_t &a, const int_t &b) {
+int_t rsub(int_t a, int_t b) {
     return b - a;
 }
 
-int_t rdiv(const int_t &a, const int_t &b) {
+int_t rdiv(int_t a, int_t b) {
     return b / a;
 }
 
-int_t rmod(const int_t &a, const int_t &b) {
+int_t rmod(int_t a, int_t b) {
     return b % a;
 }
 
-int_t merr(const int_t &a, const int_t &b) {
+int_t merr(int_t a, int_t b) {
     (void) a;
     (void) b;
 
