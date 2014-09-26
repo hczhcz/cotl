@@ -162,9 +162,11 @@ public:
     ) const;
     // defined in cotl_inline.hpp
 
-    inline operator bool() const {
+    inline explicit operator bool() const {
         return exist();
     }
+
+    inline explicit operator int_t() const = delete;
 
     template <class T, int_t id>
     inline const T *as() const;
