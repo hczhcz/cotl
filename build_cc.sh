@@ -17,7 +17,8 @@ fi
 ccflags="-c"
 pchflags="-x c++-header"
 dflags="-std=c++11 -Wall -Wextra"
-echo ${@:2}
+# echo ${@:2}
+flags="${@:2}"
 lflags="-lgc"
 
 if [ "$flags" = "" ]
