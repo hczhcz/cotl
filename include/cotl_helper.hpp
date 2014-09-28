@@ -1,2 +1,9 @@
 // include all header files to pass linter
-#include "cotl.hpp"
+// _COTL_WRAPPER defined if ../cotl included
+
+#ifndef _COTL_WRAPPER
+
+    #define _COTL_WRAPPER
+    #include "cotl.hpp"
+
+#endif

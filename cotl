@@ -1,2 +1,4 @@
+#define _COTL_WRAPPER
+
 #include "cotl_config"
 #include "include/cotl.hpp"
