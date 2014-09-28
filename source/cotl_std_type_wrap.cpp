@@ -212,7 +212,7 @@ _COTL_FUNC_BEGIN
         )
     );
 
-    libSet(id_type_wrap, lib, tunnel1);
+    libSet<id_type>(id_type_wrap, lib, tunnel1);
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);
