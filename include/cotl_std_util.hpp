@@ -79,20 +79,40 @@ namespace cotlstd {
         }\
     } while (false)
 
+template <std::nullptr_t placeholder = nullptr> // void arg template
 inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
     lib.call<true>(target, nullptr, tunnel);
 }
 
-inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
-    libGet(_atom(type), lib, tunnel);
+template <int_t type, int_t... Args>
+inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+    PMaybe tunnel1(nullptr);
+
+    libGet(_atom(type), lib, tunnel1);
+    libGet<Args...>(target, tunnel1, tunnel);
 }
 
+template <int_t... Args>
+inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
+    libGet<Args...>(_atom(type), lib, tunnel);
+}
+
+template <std::nullptr_t placeholder = nullptr> // void arg template
 inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
     lib.call<false>(target, nullptr, tunnel);
 }
 
+template <int_t type, int_t... Args>
+inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+    PMaybe tunnel1(nullptr);
+
+    libGet(_atom(type), lib, tunnel1);
+    libSet<Args...>(target, tunnel1, tunnel);
+}
+
+template <int_t... Args>
 inline void libSet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
-    libSet(_atom(type), lib, tunnel);
+    libSet<Args...>(_atom(type), lib, tunnel);
 }
 
 inline void libExec(const PVal &target, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
