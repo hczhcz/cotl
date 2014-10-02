@@ -48,7 +48,7 @@ _COTL_FUNC_BEGIN
     libSet<id_math>(id_math_real, lib, tunnel1);
 _COTL_FUNC_END
 
-long long ago = addInitializer(init, init_core);
+long long ago = addInitializer(init, init_lib_1);
 
 }
 
