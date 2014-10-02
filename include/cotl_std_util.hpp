@@ -56,19 +56,19 @@ namespace cotlstd {
         }\
     } while (false)
 
-#define _COTL_CHECK_TYPE(target, type, id) \
-    auto target##_p = target.as<type, id>();\
+#define _COTL_CHECK_TYPE(val, type, id) \
+    auto val##_p = val.as<type, id>();\
     do {\
-        if (!target##_p) {\
-            throw "bad " #target " type";\
+        if (!val##_p) {\
+            doCast(id, lib, val);\
         }\
     } while (false) // TODO cast, dispatch
 
-#define _COTL_CHECK_TYPE_VAR(target, type, id) \
-    auto target##_p = target.raw<type, id>();\
+#define _COTL_CHECK_TYPE_VAR(val, type, id) \
+    auto val##_p = val.raw<type, id>();\
     do {\
-        if (!target##_p) {\
-            throw "bad " #target " type";\
+        if (!val##_p) {\
+            doCast(id, lib, val);\
         }\
     } while (false) // TODO cast, dispatch
 
