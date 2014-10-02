@@ -183,12 +183,20 @@ inline void doDispatch(
 }
 
 template <class T1, class Tr, int_t id,
-    typename Tr::DataType (&fr)(typename T1::DataType),
-    typename T1::DataType (&fw)(typename Tr::DataType)
+    typename Tr::DataType (*fr)(typename T1::DataType),
+    typename T1::DataType (*fw)(typename Tr::DataType)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id);
+
+    if (!bool(fr) && !bool(fw)) {
+        throw;
+    } else if (bool(fr) && bool(fw)) {
+        // OK
+    } else {
+        _COTL_CHECK_TUNNEL(bool(fw));
+    }
 
     const PVal &arg(self_p->get());
 
@@ -210,12 +218,20 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 template <class T1, class T2, class Tr, int_t id,
-    typename Tr::DataType (&fr)(typename T1::DataType, typename T2::DataType),
-    typename T1::DataType (&fw)(typename Tr::DataType, typename T2::DataType)
+    typename Tr::DataType (*fr)(typename T1::DataType, typename T2::DataType),
+    typename T1::DataType (*fw)(typename Tr::DataType, typename T2::DataType)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id);
+
+    if (!bool(fr) && !bool(fw)) {
+        throw;
+    } else if (bool(fr) && bool(fw)) {
+        // OK
+    } else {
+        _COTL_CHECK_TUNNEL(bool(fw));
+    }
 
     const PVal &arg1(self_p->get().first);
     const PVal &arg2(self_p->get().second);
