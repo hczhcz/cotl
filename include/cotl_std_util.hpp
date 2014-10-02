@@ -15,14 +15,14 @@ namespace cotlstd {
             }\
         } catch (cotl::PValRaw e) {\
             throw _arr(\
-                self, caller.sure(), lib.sure(), tunnel.sure(),\
-                e,\
+                self, caller.sure(), /*lib.sure(), */tunnel.sure(),\
+                e, _str(__FUNCTION__),\
                 id_error\
             );\
         } catch (const char *c) {\
             throw _arr(\
-                self, caller.sure(), lib.sure(), tunnel.sure(),\
-                _str(c, id_error),\
+                self, caller.sure(), /*lib.sure(), */tunnel.sure(),\
+                _str(c, id_error), _str(__FUNCTION__),\
                 id_error\
             );\
         } catch (...) {\
@@ -31,7 +31,7 @@ namespace cotlstd {
                 _str("unknown error", id_error),\
                 id_error\
             );\
-        }
+        } // TODO: better re-thrown val structure
 #else
     #define _COTL_FUNC_END \
             }\
