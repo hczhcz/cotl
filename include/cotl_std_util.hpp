@@ -80,16 +80,16 @@ namespace cotlstd {
     } while (false)
 
 template <std::nullptr_t placeholder = nullptr> // void arg template
-inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
-    lib.call<true>(target, nullptr, tunnel);
+inline void libGet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
+    lib.call<true>(val, nullptr, tunnel);
 }
 
 template <int_t type, int_t... Args>
-inline void libGet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+inline void libGet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
     PMaybe tunnel1(nullptr);
 
     libGet(_atom(type), lib, tunnel1);
-    libGet<Args...>(target, tunnel1, tunnel);
+    libGet<Args...>(val, tunnel1, tunnel);
 }
 
 template <int_t... Args>
@@ -98,16 +98,16 @@ inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
 }
 
 template <std::nullptr_t placeholder = nullptr> // void arg template
-inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
-    lib.call<false>(target, nullptr, tunnel);
+inline void libSet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
+    lib.call<false>(val, nullptr, tunnel);
 }
 
 template <int_t type, int_t... Args>
-inline void libSet(const PVal &target, const PMaybe &lib, PMaybe &tunnel) {
+inline void libSet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
     PMaybe tunnel1(nullptr);
 
     libGet(_atom(type), lib, tunnel1);
-    libSet<Args...>(target, tunnel1, tunnel);
+    libSet<Args...>(val, tunnel1, tunnel);
 }
 
 template <int_t... Args>
@@ -115,19 +115,19 @@ inline void libSet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
     libSet<Args...>(_atom(type), lib, tunnel);
 }
 
-inline void libExec(const PVal &target, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+inline void libExec(const PVal &val, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
     PMaybe data(nullptr);
 
-    libGet(target, lib, data);
+    libGet(val, lib, data);
 
     data.call(caller, lib, tunnel);
 }
 
 template <bool ret>
-inline void libExec(const PVal &target, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
+inline void libExec(const PVal &val, const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel) {
     PMaybe data(nullptr);
 
-    libGet(target, lib, data);
+    libGet(val, lib, data);
 
     data.call<ret>(caller, lib, tunnel);
 }
@@ -142,16 +142,16 @@ inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, P
 }
 
 inline void doCast(
-    const int_t id, const PMaybe &lib, PMaybe &tunnel
+    const int_t id, const PMaybe &lib, PMaybe &val
 ) {
     PMaybe func(nullptr);
 
     libGet<id_cast>(id, lib, func);
 
-    PMaybe caller(_ptr(_ptr(PVal(tunnel), id_quote), id));
-    tunnel = nullptr;
+    PMaybe caller(_ptr(_ptr(PVal(val), id_quote), id));
+    val = nullptr;
 
-    func.call<true>(caller, lib, tunnel);
+    func.call<true>(caller, lib, val);
 }
 
 inline void doDispatch(

@@ -8,13 +8,13 @@ namespace cotl {
 inline
 namespace published {
 
-inline std::ostream &operator<<(std::ostream &stream, const PMaybe &value) {
-    value->repr(stream, 0);
+inline std::ostream &operator<<(std::ostream &stream, const PMaybe &val) {
+    val->repr(stream, 0);
     return stream;
 }
 
-inline std::ostream &operator<<(std::ostream &stream, const PVal &value) {
-    value->repr(stream, 0);
+inline std::ostream &operator<<(std::ostream &stream, const PVal &val) {
+    val->repr(stream, 0);
     return stream;
 }
 

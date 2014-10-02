@@ -48,9 +48,9 @@ Map *_map_m(map_t &&container,
 
 template <class... Args>
 inline Arr *_arr_m(arr_t &&container,
-    const PVal &value, const Args... args /* values */
+    const PVal &val, const Args... args /* values */
 ) {
-    container->push_back(value);
+    container->push_back(val);
 
     return _arr_m(std::move(container), args...);
 }
@@ -64,9 +64,9 @@ inline Arr *_arr(
 
 template <class... Args>
 inline Map *_map_m(map_t &&container,
-    const int_t key, const PVal &value, const Args... args /* (key, value) loop */
+    const int_t key, const PVal &val, const Args... args /* (key, value) loop */
 ) {
-    container->insert({{key, value}});
+    container->insert({{key, val}});
 
     return _map_m(std::move(container), args...);
 }
