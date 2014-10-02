@@ -38,13 +38,6 @@ int_t rmod(int_t a, int_t b) {
     return b % a;
 }
 
-int_t merr(int_t a, int_t b) {
-    (void) a;
-    (void) b;
-
-    throw "math error"; // TODO
-}
-
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
@@ -55,10 +48,10 @@ _COTL_FUNC_BEGIN
             id_sub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_sub, sub, add>),
             id_mul, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mul, mul, div>),
             id_div, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_div, div, mul>),
-            id_mod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mod, mod, merr>),
+            id_mod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mod, mod, nullptr>),
             id_rsub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rsub, rsub, rsub>),
             id_rdiv, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rdiv, rdiv, rdiv>),
-            id_rmod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rmod, rmod, merr>)
+            id_rmod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rmod, rmod, nullptr>)
         )
     );
 

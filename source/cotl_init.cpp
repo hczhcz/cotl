@@ -50,6 +50,8 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
         id_std, lib_p
     }}); // add reference of self
 
+    // TODO not only stdlib
+
     callInitializer(lib);
 
     exec.call(nullptr, lib, tunnel);
