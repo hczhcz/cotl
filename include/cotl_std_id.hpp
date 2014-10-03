@@ -76,7 +76,6 @@ enum {
 
         // special
         id_error = IDX_TYPE + 160,
-        id_any,
 
         // override packages
 
@@ -84,6 +83,17 @@ enum {
         id_type_lib,
         id_type_misc
 };
+
+template <class T> struct DefaultId {};
+template <> struct DefaultId<cotl::Atom> {static const int_t get = id_atom;};
+template <> struct DefaultId<cotl::Int>  {static const int_t get = id_int;};
+template <> struct DefaultId<cotl::Real> {static const int_t get = id_real;};
+template <> struct DefaultId<cotl::Func> {static const int_t get = id_func;};
+template <> struct DefaultId<cotl::Ptr>  {static const int_t get = id_ptr;};
+template <> struct DefaultId<cotl::Pair> {static const int_t get = id_pair;};
+template <> struct DefaultId<cotl::Str>  {static const int_t get = id_str;};
+template <> struct DefaultId<cotl::Arr>  {static const int_t get = id_arr;};
+template <> struct DefaultId<cotl::Map>  {static const int_t get = id_map;};
 
 enum {
     id_std = IDX_CORE,

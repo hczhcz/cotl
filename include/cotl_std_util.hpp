@@ -201,7 +201,7 @@ _COTL_FUNC_BEGIN
     const PVal &arg(self_p->get());
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(tunnel, Tr, DefaultId<Tr>::get);
 
         PMaybe data(_in(fw(_out(tunnel_p))));
         arg.call<false>(caller, lib, data);
@@ -211,7 +211,7 @@ _COTL_FUNC_BEGIN
         PMaybe data(nullptr);
         arg.call<true>(caller, lib, data);
 
-        _COTL_CHECK_TYPE(data, T1, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(data, T1, DefaultId<T1>::get);
 
         tunnel = _in(fr(_out(data_p)));
     }
@@ -237,12 +237,12 @@ _COTL_FUNC_BEGIN
     const PVal &arg2(self_p->get().second);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(tunnel, Tr, DefaultId<Tr>::get);
 
         PMaybe data2(nullptr);
         arg2.call<true>(caller, lib, data2);
 
-        _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(data2, T2, DefaultId<T2>::get);
 
         PMaybe data1(_in(fw(_out(tunnel_p), _out(data2_p))));
         arg1.call<false>(caller, lib, data1);
@@ -252,12 +252,12 @@ _COTL_FUNC_BEGIN
         PMaybe data1(nullptr);
         arg1.call<true>(caller, lib, data1);
 
-        _COTL_CHECK_TYPE(data1, T1, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(data1, T1, DefaultId<T1>::get);
 
         PMaybe data2(nullptr);
         arg2.call<true>(caller, lib, data2);
 
-        _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
+        _COTL_CHECK_TYPE(data2, T2, DefaultId<T2>::get);
 
         tunnel = _in(fr(_out(data1_p), _out(data2_p)));
     }

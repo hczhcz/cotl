@@ -9,7 +9,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF_VAR(cotl::Int, id_increment);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Int, id_any);
+        _COTL_CHECK_TYPE(tunnel, cotl::Int, id_int); // TODO tunnel cast
 
         self_p->set(tunnel_p->get());
         tunnel = nullptr;
@@ -23,7 +23,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF_VAR(cotl::Int, id_decrement);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Int, id_any);
+        _COTL_CHECK_TYPE(tunnel, cotl::Int, id_int); // TODO tunnel cast
 
         self_p->set(tunnel_p->get());
         tunnel = nullptr;

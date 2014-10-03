@@ -50,7 +50,7 @@ inline const T *PValProto<maybe>::as() const {
     // TODO: icc hack
     using namespace cotlstd::published;
 
-    if (exist() && (id == id_any || id == _val->getType())) {
+    if (exist() && id == _val->getType()) {
         return dynamic_cast<T *>(_val);
     } else {
         return nullptr;
@@ -63,7 +63,7 @@ inline T *PValProto<maybe>::raw() const {
     // TODO: icc hack
     using namespace cotlstd::published;
 
-    if (exist() && (id == id_any || id == _val->getType())) {
+    if (exist() && id == _val->getType()) {
         return dynamic_cast<T *>(_val);
     } else {
         return nullptr;
