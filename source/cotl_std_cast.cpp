@@ -10,15 +10,13 @@ real_t inttoreal(int_t val) {
     return val;
 }
 
-/*
-str_t inttostr(int_t val) {
-    return val;
+std::string inttostr(int_t val) {
+    return std::to_string(val);
 }
 
-str_t realtostr(real_t val) {
-    return val;
+std::string realtostr(real_t val) {
+    return std::to_string(val);
 }
-*/
 
 _COTL_FUNC_T(init)
 _COTL_FUNC_BEGIN
@@ -29,7 +27,10 @@ _COTL_FUNC_BEGIN
             id_real, _libmap(
                 id_int, _libfunc(libFunc<cotl::Int, cotl::Real, id_int, inttoreal, nullptr>)
             ),
-            id_str, _libmap()
+            id_str, _libmap(
+                id_int, _libfunc(libFunc<cotl::Int, cotl::Str, id_int, inttostr, nullptr>),
+                id_real, _libfunc(libFunc<cotl::Real, cotl::Str, id_real, realtostr, nullptr>)
+            )
         )
     );
 
