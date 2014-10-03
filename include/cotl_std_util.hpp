@@ -183,8 +183,8 @@ inline void doDispatch(
 }
 
 template <class T1, class Tr, int_t id,
-    typename Tr::DataType (*fr)(typename T1::DataType),
-    typename T1::DataType (*fw)(typename Tr::DataType)
+    DeclOut<Tr> (*fr)(DeclOut<T1>),
+    DeclOut<T1> (*fw)(DeclOut<Tr>)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
@@ -218,8 +218,8 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 template <class T1, class T2, class Tr, int_t id,
-    typename Tr::DataType (*fr)(typename T1::DataType, typename T2::DataType),
-    typename T1::DataType (*fw)(typename Tr::DataType, typename T2::DataType)
+    DeclOut<Tr> (*fr)(DeclOut<T1>, DeclOut<T2>),
+    DeclOut<T1> (*fw)(DeclOut<Tr>, DeclOut<T2>)
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN

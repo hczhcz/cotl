@@ -134,6 +134,12 @@ inline std::string _out(const Str *val) {
     return *(val->get());
 }
 
+template <class T>
+using DeclIn = decltype(_in((T *) nullptr));
+
+template <class T>
+using DeclOut = decltype(_out((T *) nullptr));
+
 }
 
 }
