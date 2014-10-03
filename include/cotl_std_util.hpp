@@ -60,7 +60,11 @@ namespace cotlstd {
     auto val##_p = val.as<type, id>();\
     do {\
         if (!val##_p) {\
-            doCast(id, lib, val);\
+            doCast<id>(lib, val);\
+            val##_p = val.as<type, id>();\
+            if (!val##_p) {\
+                throw "bad casting";\
+            }\
         }\
     } while (false) // TODO cast, dispatch
 
@@ -68,7 +72,11 @@ namespace cotlstd {
     auto val##_p = val.raw<type, id>();\
     do {\
         if (!val##_p) {\
-            doCast(id, lib, val);\
+            doCast<id>(lib, val);\
+            val##_p = val.as<type, id>();\
+            if (!val##_p) {\
+                throw "bad casting";\
+            }\
         }\
     } while (false) // TODO cast, dispatch
 
@@ -141,14 +149,13 @@ inline void libExec(const int_t type, const PMaybe &caller, const PMaybe &lib, P
     libExec<ret>(_atom(type), caller, lib, tunnel);
 }
 
-inline void doCast(
-    const int_t id, const PMaybe &lib, PMaybe &val
-) {
+template <int_t type>
+inline void doCast(const PMaybe &lib, PMaybe &val) {
     PMaybe func(nullptr);
 
-    libGet<id_cast>(id, lib, func);
+    libGet<id_cast, type>(PVal(val), lib, func);
 
-    PMaybe caller(_ptr(_ptr(PVal(val), id_quote), id));
+    PMaybe caller(_ptr(_ptr(PVal(val), id_quote), val->getType())); // TODO simplify
     val = nullptr;
 
     func.call<true>(caller, lib, val);
