@@ -203,7 +203,7 @@ _COTL_FUNC_BEGIN
     if (tunnel) {
         _COTL_CHECK_TYPE(tunnel, Tr, id_any); // TODO id_any ??
 
-        PMaybe data(_(fw(tunnel_p->get())));
+        PMaybe data(_in(fw(_out(tunnel_p))));
         arg.call<false>(caller, lib, data);
 
         tunnel = nullptr;
@@ -213,7 +213,7 @@ _COTL_FUNC_BEGIN
 
         _COTL_CHECK_TYPE(data, T1, id_any); // TODO id_any ??
 
-        tunnel = _(fr(data_p->get()));
+        tunnel = _in(fr(_out(data_p)));
     }
 _COTL_FUNC_END
 
@@ -244,7 +244,7 @@ _COTL_FUNC_BEGIN
 
         _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
 
-        PMaybe data1(_(fw(tunnel_p->get(), data2_p->get())));
+        PMaybe data1(_in(fw(_out(tunnel_p), _out(data2_p))));
         arg1.call<false>(caller, lib, data1);
 
         tunnel = nullptr;
@@ -259,7 +259,7 @@ _COTL_FUNC_BEGIN
 
         _COTL_CHECK_TYPE(data2, T2, id_any); // TODO id_any ??
 
-        tunnel = _(fr(data1_p->get(), data2_p->get()));
+        tunnel = _in(fr(_out(data1_p), _out(data2_p)));
     }
 _COTL_FUNC_END
 

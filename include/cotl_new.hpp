@@ -94,28 +94,44 @@ inline Map *_libmap(
     return _map(args..., id_map, stdLibMap);
 }
 
-inline Int *_(const int_t &data,
+inline Int *_in(const int_t &data,
     const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
 ) {
     return _int(data, type, func, reused);
 }
 
-inline Real *_(const real_t &data,
+inline Real *_in(const real_t &data,
     const int_t type = id_real, const func_t func = stdAuto, PValRaw reused = nullptr
 ) {
     return _real(data, type, func, reused);
 }
 
-inline Func *_(const func_t &data,
+inline Func *_in(const func_t &data,
     const int_t type = id_func, const func_t func = stdAuto, PValRaw reused = nullptr
 ) {
     return _func(data, type, func, reused);
 }
 
-inline Str *_(const std::string &data,
+inline Str *_in(const std::string &data,
     const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
 ) {
     return _str(data, type, func, reused);
+}
+
+inline int_t _out(const Int *val) {
+    return val->get();
+}
+
+inline real_t _out(const Real *val) {
+    return val->get();
+}
+
+inline func_t _out(const Func *val) {
+    return val->get();
+}
+
+inline std::string _out(const Str *val) {
+    return *(val->get());
 }
 
 }
