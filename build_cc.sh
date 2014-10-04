@@ -16,7 +16,7 @@ fi
 
 ccflags="-c"
 pchflags="-x c++-header"
-dflags="-std=c++11 -Wall -Wextra"
+dflags="-std=c++11 -Wall -Wextra -Wpedantic -fpermissive"
 # echo ${@:2}
 flags="${@:2}"
 lflags="-lgc"
