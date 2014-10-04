@@ -87,17 +87,16 @@ namespace cotlstd {
         }\
     } while (false)
 
-template <std::nullptr_t placeholder = nullptr> // void arg template
+template <int_t type = IDX_UNDEF, int_t... Args>
 inline void libGet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
-    lib.call<true>(val, nullptr, tunnel);
-}
+    if (type == IDX_UNDEF) {
+        lib.call<true>(val, nullptr, tunnel);
+    } else {
+        PMaybe tunnel1(nullptr);
 
-template <int_t type, int_t... Args>
-inline void libGet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
-    PMaybe tunnel1(nullptr);
-
-    libGet(_atom(type), lib, tunnel1);
-    libGet<Args...>(val, tunnel1, tunnel);
+        libGet(_atom(type), lib, tunnel1);
+        libGet<Args...>(val, tunnel1, tunnel);
+    }
 }
 
 template <int_t... Args>
@@ -105,17 +104,16 @@ inline void libGet(const int_t type, const PMaybe &lib, PMaybe &tunnel) {
     libGet<Args...>(_atom(type), lib, tunnel);
 }
 
-template <std::nullptr_t placeholder = nullptr> // void arg template
+template <int_t type = IDX_UNDEF, int_t... Args>
 inline void libSet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
-    lib.call<false>(val, nullptr, tunnel);
-}
+    if (type == IDX_UNDEF) {
+        lib.call<false>(val, nullptr, tunnel);
+    } else {
+        PMaybe tunnel1(nullptr);
 
-template <int_t type, int_t... Args>
-inline void libSet(const PVal &val, const PMaybe &lib, PMaybe &tunnel) {
-    PMaybe tunnel1(nullptr);
-
-    libGet(_atom(type), lib, tunnel1);
-    libSet<Args...>(val, tunnel1, tunnel);
+        libGet(_atom(type), lib, tunnel1);
+        libSet<Args...>(val, tunnel1, tunnel);
+    }
 }
 
 template <int_t... Args>

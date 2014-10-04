@@ -12,6 +12,9 @@ enum {
 };
 
 enum {
+    // special
+    IDX_UNDEF      = IDX_BASE + 1,
+
     // std lib
 
     // types (int, real, arr, stack, null, true etc.)
