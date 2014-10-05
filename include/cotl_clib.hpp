@@ -7,12 +7,11 @@
 
 // #define NDEBUG
 #include <cassert>
-
 #include <cstdlib>
-#include <cstddef>
-#include <cstdarg>
 
-#include <cmath>
+namespace std {
+    #include <math.h>
+}
 
 // C++
 
