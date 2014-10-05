@@ -12,7 +12,7 @@ fi
 
 ccflags="-c"
 pchflags="-x c++-header"
-dflags="-std=c++11 -Wall -Wextra -Wpedantic"
+dflags="-std=c++11 -Wall -Wextra -pedantic"
 flags="$@"
 lflags="-lgc"
 
