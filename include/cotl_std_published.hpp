@@ -12,6 +12,8 @@ namespace published {
 _COTL_FUNC_T(stdAuto);
 _COTL_FUNC_T(stdLiteral);
 _COTL_FUNC_T(stdBind);
+_COTL_FUNC_T(stdQuote);
+_COTL_FUNC_T(stdContain);
 
 // type
 _COTL_FUNC_T(stdLibFunc);

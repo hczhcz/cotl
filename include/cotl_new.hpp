@@ -94,6 +94,14 @@ inline Map *_libmap(
     return _map(args..., id_map, stdLibMap);
 }
 
+inline Ptr *_null() {
+    return _atom(id_null, stdLiteral); // TODO need bind?
+}
+
+inline Ptr *_quote(const PVal &data) {
+    return _ptr(data, id_quote, stdQuote);
+}
+
 inline Int *_in(const int_t &data,
     const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
 ) {

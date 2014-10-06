@@ -78,7 +78,7 @@ inline PValRaw PValProto<maybe>::sure() const {
         // TODO: icc hack
         using namespace cotlstd::published;
 
-        return _atom(id_null);
+        return _null();
     }
 }
 

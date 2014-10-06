@@ -28,7 +28,7 @@ _COTL_FUNC_BEGIN
     self.call(caller, lib, tunnel);
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdQuote)
+_COTL_FUNC_T(published::stdQuote)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_quote);
     _COTL_CHECK_TUNNEL(false);
@@ -36,7 +36,7 @@ _COTL_FUNC_BEGIN
     tunnel = self_p->get();
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdContain)
+_COTL_FUNC_T(published::stdContain)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF_VAR(cotl::Ptr, id_contain);
 
