@@ -124,6 +124,10 @@ enum {
             id_target,
             id_ref,
 
+            id_before,
+            id_after,
+
+            id_void,
             id_exec,
             id_write,
 

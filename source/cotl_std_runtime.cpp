@@ -62,7 +62,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_const);
     _COTL_CHECK_TUNNEL(false);
 
-    self_p->get().call(caller, lib, tunnel); // TODO limit?
+    self_p->get().call(caller, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdTarget)
@@ -70,7 +70,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_target);
     _COTL_CHECK_TUNNEL(true);
 
-    self_p->get().call(caller, lib, tunnel); // TODO limit?
+    self_p->get().call(caller, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdRef)
@@ -78,6 +78,35 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_ref);
 
     self_p->get().call(caller, lib, tunnel);
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdBefore)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Pair, id_before);
+
+    PMaybe data(nullptr);
+    self_p->get().first.call<false>(caller, lib, data);
+
+    self_p->get().second.call(caller, lib, tunnel);
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdAfter)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Pair, id_after);
+
+    self_p->get().first.call(caller, lib, tunnel);
+
+    PMaybe data(nullptr);
+    self_p->get().second.call<false>(caller, lib, data);
+_COTL_FUNC_END
+
+_COTL_FUNC_T(stdVoid)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Ptr, id_void);
+    _COTL_CHECK_TUNNEL(false);
+
+    self_p->get().call(caller, lib, tunnel);
+    tunnel = nullptr; // throw away
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdExec)
@@ -157,6 +186,10 @@ _COTL_FUNC_BEGIN
             id_target, _libfunc(stdTarget),
             id_ref, _libfunc(stdRef),
 
+            id_before, _libfunc(stdBefore),
+            id_after, _libfunc(stdAfter),
+
+            id_void, _libfunc(stdVoid),
             id_exec, _libfunc(stdExec),
             id_write, _libfunc(stdWrite),
 
