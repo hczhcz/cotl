@@ -116,13 +116,17 @@ enum {
             id_auto,
             id_literal,
             id_bind,
+
             id_quote,
             id_contain,
+            id_exec,
+            id_write,
+
             id_caller,
             id_lib,
+
             id_use,
             id_with,
-            id_write,
 
         id_cast,
 

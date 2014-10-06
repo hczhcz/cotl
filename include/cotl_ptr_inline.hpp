@@ -47,9 +47,6 @@ inline void PValProto<maybe>::call(
 template <bool maybe>
 template <class T, int_t id>
 inline const T *PValProto<maybe>::as() const {
-    // TODO: icc hack
-    using namespace cotlstd::published;
-
     if (exist() && id == _val->getType()) {
         return dynamic_cast<T *>(_val);
     } else {
@@ -60,9 +57,6 @@ inline const T *PValProto<maybe>::as() const {
 template <bool maybe>
 template <class T, int_t id>
 inline T *PValProto<maybe>::raw() const {
-    // TODO: icc hack
-    using namespace cotlstd::published;
-
     if (exist() && id == _val->getType()) {
         return dynamic_cast<T *>(_val);
     } else {
@@ -75,9 +69,6 @@ inline PValRaw PValProto<maybe>::sure() const {
     if (exist()) {
         return _val;
     } else {
-        // TODO: icc hack
-        using namespace cotlstd::published;
-
         return _null();
     }
 }

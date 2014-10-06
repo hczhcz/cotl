@@ -153,7 +153,7 @@ inline void doCast(const PMaybe &lib, PMaybe &val) {
 
     libGet<id_cast, type>(PVal(val), lib, func);
 
-    PMaybe caller(_ptr(_ptr(PVal(val), id_quote), val->getType())); // TODO simplify
+    PMaybe caller(_ptr(_quote(PVal(val)), val->getType())); // TODO simplify
     val = nullptr;
 
     func.call<true>(caller, lib, val);
@@ -169,7 +169,7 @@ inline void doDispatch(
     libGet<id_dispatch>(val, lib, vlib1);
 
     libGet(self, vlib1, func);
-    func.call(_ptr(_ptr(val, id_quote), self->getType()), lib, tunnel);
+    func.call(_ptr(_quote(val), self->getType()), lib, tunnel);
 }
 
 inline void doDispatch(
@@ -184,7 +184,7 @@ inline void doDispatch(
     libGet<id_dispatch>(val2, vlib1, vlib2);
 
     libGet(self, vlib2, func);
-    func.call(_pair(_ptr(val1, id_quote), _ptr(val2, id_quote), self->getType()), lib, tunnel);
+    func.call(_pair(_quote(val1), _quote(val2), self->getType()), lib, tunnel);
 }
 
 template <class T1, class Tr, int_t id,
