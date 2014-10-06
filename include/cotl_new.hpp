@@ -94,7 +94,7 @@ inline Map *_libmap(
     return _map(args..., id_map, stdLibMap);
 }
 
-inline Ptr *_null() {
+inline Atom *_null() {
     return _atom(id_null, stdLiteral); // TODO need bind?
 }
 

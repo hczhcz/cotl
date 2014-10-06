@@ -26,11 +26,11 @@ _COTL_FUNC_BEGIN
         map_data->insert(map1_data->begin(), map1_data->end());\
     } while (false)
 
-    _COTL_ADD_LIB_TO_STD(id_type)
-    _COTL_ADD_LIB_TO_STD(id_type_misc) // sub
-    _COTL_ADD_LIB_TO_STD(id_runtime)
-    _COTL_ADD_LIB_TO_STD(id_math)
-    _COTL_ADD_LIB_TO_STD(id_math_real) // sub
+    _COTL_ADD_LIB_TO_STD(id_type);
+    _COTL_ADD_LIB_TO_STD(id_type_misc); // sub
+    _COTL_ADD_LIB_TO_STD(id_runtime);
+    _COTL_ADD_LIB_TO_STD(id_math);
+    _COTL_ADD_LIB_TO_STD(id_math_real); // sub
     // ...
 
     #undef _COTL_ADD_LIB_TO_STD

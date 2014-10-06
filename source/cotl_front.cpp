@@ -83,8 +83,7 @@ int main(int argc, char* argv[]) {
 
         PMaybe tunnel1(nullptr);
 
-        boot(_atom(), tunnel1);
-
+        //boot(_atom(), tunnel1);
     }
 
     PMaybe tunnel1(nullptr);
