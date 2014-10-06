@@ -32,13 +32,6 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdRefPtr)
-_COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_refptr);
-
-    self_p->get().call(caller, lib, tunnel);
-_COTL_FUNC_END
-
 _COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Arr, id_stack);
@@ -67,7 +60,6 @@ _COTL_FUNC_BEGIN
             id_true, _libfunc(stdLiteral),
             id_increment, _libfunc(stdIncrement),
             id_decrement, _libfunc(stdDecrement),
-            id_refptr, _libfunc(stdRefPtr),
             id_stack, _libfunc(stdStack)
         )
     );

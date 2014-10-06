@@ -62,7 +62,6 @@ enum {
 
         // ptr
         id_ptr   = IDX_TYPE + 80,
-        id_refptr,
 
         // pair
         id_pair  = IDX_TYPE + 96,
@@ -118,7 +117,13 @@ enum {
             id_bind,
 
             id_quote,
-            id_contain,
+            id_blackhole,
+            id_container,
+
+            id_const,
+            id_target,
+            id_ref,
+
             id_exec,
             id_write,
 
@@ -167,7 +172,7 @@ enum {
 
         id_hash,
 
-        id_container,
+        // id_container, // rename
 
         id_branch, // if, switch
 

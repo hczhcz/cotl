@@ -13,7 +13,8 @@ _COTL_FUNC_T(stdAuto);
 _COTL_FUNC_T(stdLiteral);
 _COTL_FUNC_T(stdBind);
 _COTL_FUNC_T(stdQuote);
-_COTL_FUNC_T(stdContain);
+_COTL_FUNC_T(stdContainer);
+_COTL_FUNC_T(stdBlackhole);
 
 // type
 _COTL_FUNC_T(stdLibFunc);

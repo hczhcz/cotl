@@ -151,6 +151,8 @@ public:
         return _val;
     }
 
+    // call without checking
+    // for passing exec flow only
     inline void call(
         const PMaybe &caller, const PMaybe &lib, PMaybe &tunnel
     ) const;
