@@ -128,6 +128,17 @@ _COTL_FUNC_BEGIN
     self_p->get().second.call<false>(caller, lib, data);
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdIftunnel)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Pair, id_iftunnel);
+
+    if (tunnel) {
+        self_p->get().first.call(caller, lib, tunnel);
+    } else {
+        self_p->get().second.call(caller, lib, tunnel);
+    }
+_COTL_FUNC_END
+
 _COTL_FUNC_T(stdCaller)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_caller);
@@ -144,26 +155,15 @@ _COTL_FUNC_BEGIN
     tunnel = lib;
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdUse)
+_COTL_FUNC_T(stdTry)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_use);
+    _COTL_CHECK_SELF(cotl::Pair, id_try);
 
-    PMaybe map(nullptr);
-    self_p->get().first.call<true>(caller, lib, map);
-    // TODO: hard binding
-    self_p->get().second.call(caller, map, tunnel);
-_COTL_FUNC_END
-
-_COTL_FUNC_T(stdWith)
-_COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_with);
-
-    PMaybe map(nullptr);
-    self_p->get().first.call<true>(caller, lib, map);
-    // TODO: hard binding
-    self_p->get().second.call(caller,
-        _pair(_quote(PVal(lib)), PVal(map), id_use, stdUse),
-    tunnel);
+    try {
+        self_p->get().first.call(caller, lib, tunnel);
+    } catch (...) {
+        self_p->get().second.call(caller, lib, tunnel);
+    }
 _COTL_FUNC_END
 
 namespace {
@@ -192,12 +192,12 @@ _COTL_FUNC_BEGIN
             id_void, _libfunc(stdVoid),
             id_exec, _libfunc(stdExec),
             id_write, _libfunc(stdWrite),
+            id_iftunnel, _libfunc(stdIftunnel),
 
             id_caller, _libfunc(stdCaller),
             id_lib, _libfunc(stdLib),
 
-            id_use, _libfunc(stdUse),
-            id_with, _libfunc(stdWith)
+            id_try, _libfunc(stdTry)
         )
     );
 

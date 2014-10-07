@@ -130,17 +130,21 @@ enum {
             id_void,
             id_exec,
             id_write,
+            id_iftunnel,
 
             id_caller,
             id_lib,
 
-            id_use,
-            id_with,
+            id_try,
 
         id_cast,
 
         id_dispatch,
-            // TODO
+
+        id_query,
+            id_use,
+            id_with,
+            id_def,
 
         id_math,
             id_add, // TODO: both int and real (auto detect)

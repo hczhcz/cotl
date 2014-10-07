@@ -37,7 +37,8 @@ _COTL_FUNC_BEGIN
             if (lib) {
                 libGet(PVal(caller), lib, tunnel);
             } else {
-                throw "bad lib query";
+                tunnel = nullptr; // TODO
+                // throw "bad lib query";
             }
         }
     }
