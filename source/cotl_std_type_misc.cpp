@@ -47,6 +47,20 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdCode)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Arr, id_code);
+    _COTL_CHECK_TUNNEL(false);
+
+    const arr_t &self_data = self_p->get();
+
+    for (size_t i = 0; i != self_data->size(); ++i) {
+        PMaybe tunnel1(nullptr);
+
+        (*self_data)[i].call<false>(caller, lib, tunnel1);
+    }
+_COTL_FUNC_END
+
 namespace {
 
 _COTL_FUNC_T(init)
@@ -60,7 +74,8 @@ _COTL_FUNC_BEGIN
             id_true, _libfunc(stdLiteral),
             id_increment, _libfunc(stdIncrement),
             id_decrement, _libfunc(stdDecrement),
-            id_stack, _libfunc(stdStack)
+            id_stack, _libfunc(stdStack),
+            id_code, _libfunc(stdCode)
         )
     );
 

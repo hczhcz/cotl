@@ -72,6 +72,7 @@ enum {
         // arr
         id_arr   = IDX_TYPE + 128,
         id_stack,
+        id_code,
 
         // map
         id_map   = IDX_TYPE + 144,
