@@ -174,6 +174,10 @@ public:
     inline const T *as() const;
     // defined in cotl_inline.hpp
 
+    template <class T>
+    inline const T *asany() const;
+    // defined in cotl_inline.hpp
+
     template <class T, int_t id>
     inline T *raw() const;
     // defined in cotl_inline.hpp

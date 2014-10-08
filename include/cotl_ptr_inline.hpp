@@ -55,6 +55,16 @@ inline const T *PValProto<maybe>::as() const {
 }
 
 template <bool maybe>
+template <class T>
+inline const T *PValProto<maybe>::asany() const {
+    if (exist()) {
+        return dynamic_cast<T *>(_val);
+    } else {
+        return nullptr;
+    }
+}
+
+template <bool maybe>
 template <class T, int_t id>
 inline T *PValProto<maybe>::raw() const {
     if (exist() && id == _val->getType()) {
