@@ -146,6 +146,7 @@ enum {
         id_query,
             id_use,
             id_with,
+            id_withnew,
             id_def,
             id_quickdef,
 

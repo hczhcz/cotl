@@ -30,6 +30,15 @@ _COTL_FUNC_BEGIN
     tunnel);
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdWithnew)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Ptr, id_withnew);
+
+    self_p->get().call(caller,
+        _pair(_quote(PVal(lib)), _libmap(), id_use, stdUse),
+    tunnel);
+_COTL_FUNC_END
+
 _COTL_FUNC_T(stdDef)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_def);
@@ -65,6 +74,7 @@ _COTL_FUNC_BEGIN
         _libmap(
             id_use, _libfunc(stdUse),
             id_with, _libfunc(stdWith),
+            id_withnew, _libfunc(stdWithnew),
             id_def, _libfunc(stdDef),
             id_quickdef, _libfunc(stdQuickdef)
         )
