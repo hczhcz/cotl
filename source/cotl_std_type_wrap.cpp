@@ -52,7 +52,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_ptr);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Ptr, id_ptr); // TODO tunnel cast
+        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Ptr, id_ptr);
 
         PMaybe tunnel1(tunnel_p->get());
 
@@ -76,7 +76,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id_pair);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Pair, id_pair); // TODO tunnel cast
+        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Pair, id_pair);
 
         PMaybe tunnel1(tunnel_p->get().first);
         PMaybe tunnel2(tunnel_p->get().second);
@@ -115,7 +115,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Arr, id_arr);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Arr, id_arr); // TODO tunnel cast
+        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Arr, id_arr);
 
         const arr_t &self_data = self_p->get();
         const arr_t &tunnel_data = tunnel_p->get();
@@ -157,7 +157,7 @@ _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Map, id_map);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, cotl::Map, id_map); // TODO tunnel cast
+        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Map, id_map);
 
         const map_t &self_data = self_p->get();
         const map_t &tunnel_data = tunnel_p->get();

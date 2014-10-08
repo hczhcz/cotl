@@ -68,6 +68,18 @@ namespace cotlstd {
         }\
     } while (false) // TODO cast, dispatch
 
+#define _COTL_CHECK_TYPE_ANY(val, type, id) \
+    auto val##_p = val.asany<type>();\
+    do {\
+        if (!val##_p) {\
+            doCast<id>(lib, val);\
+            val##_p = val.as<type, id>();\
+            if (!val##_p) {\
+                throw "bad casting";\
+            }\
+        }\
+    } while (false) // TODO cast, dispatch
+
 #define _COTL_CHECK_TYPE_VAR(val, type, id) \
     auto val##_p = val.raw<type, id>();\
     do {\
@@ -206,7 +218,7 @@ _COTL_FUNC_BEGIN
     const PVal &arg(self_p->get());
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, Tr, DefaultId<Tr>::get);
+        _COTL_CHECK_TYPE_ANY(tunnel, Tr, DefaultId<Tr>::get);
 
         PMaybe data(_in(fw(_out(tunnel_p))));
         arg.call<false>(caller, lib, data);
@@ -242,7 +254,7 @@ _COTL_FUNC_BEGIN
     const PVal &arg2(self_p->get().second);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE(tunnel, Tr, DefaultId<Tr>::get);
+        _COTL_CHECK_TYPE_ANY(tunnel, Tr, DefaultId<Tr>::get);
 
         PMaybe data2(nullptr);
         arg2.call<true>(caller, lib, data2);
