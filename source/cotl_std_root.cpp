@@ -29,6 +29,7 @@ _COTL_FUNC_BEGIN
     _COTL_ADD_LIB_TO_STD(id_type);
     _COTL_ADD_LIB_TO_STD(id_type_misc); // sub
     _COTL_ADD_LIB_TO_STD(id_runtime);
+    _COTL_ADD_LIB_TO_STD(id_query);
     _COTL_ADD_LIB_TO_STD(id_math);
     _COTL_ADD_LIB_TO_STD(id_math_real); // sub
     // ...
