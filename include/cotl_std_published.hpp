@@ -12,9 +12,13 @@ namespace published {
 _COTL_FUNC_T(stdAuto);
 _COTL_FUNC_T(stdLiteral);
 _COTL_FUNC_T(stdBind);
+
 _COTL_FUNC_T(stdQuote);
 _COTL_FUNC_T(stdContainer);
 _COTL_FUNC_T(stdBlackhole);
+
+_COTL_FUNC_T(stdCaller);
+_COTL_FUNC_T(stdLib);
 
 // type
 _COTL_FUNC_T(stdLibFunc);

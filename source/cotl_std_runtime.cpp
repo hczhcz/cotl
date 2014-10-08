@@ -161,7 +161,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdCaller)
+_COTL_FUNC_T(published::stdCaller)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_caller);
     _COTL_CHECK_TUNNEL(false);
@@ -169,7 +169,7 @@ _COTL_FUNC_BEGIN
     tunnel = caller;
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdLib)
+_COTL_FUNC_T(published::stdLib)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Atom, id_lib);
     _COTL_CHECK_TUNNEL(false);
