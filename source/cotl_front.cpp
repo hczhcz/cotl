@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
     // boot(_pair(_real(233), _real(233), id_add), tunnel1);
     // boot(_pair(_int(233), _real(233), id_add), tunnel1);
     boot(_pair(
-        _pair(_int(233), _ptr(_quote(_atom(234)), id_def), id_write), // def(234) := 233
+        _pair(_int(233), _ptr(_atom(234), id_quickdef), id_write), // def(234) := 233
         _atom(234),
     id_before), tunnel1);
 

@@ -72,7 +72,7 @@ enum {
         // arr
         id_arr   = IDX_TYPE + 128,
         id_stack,
-        id_code,
+        id_code, // code list
 
         // map
         id_map   = IDX_TYPE + 144,
@@ -127,6 +127,7 @@ enum {
 
             id_before,
             id_after,
+            id_also,
 
             id_void,
             id_exec,
@@ -146,6 +147,7 @@ enum {
             id_use,
             id_with,
             id_def,
+            id_quickdef,
 
         id_math,
             id_add, // TODO: both int and real (auto detect)

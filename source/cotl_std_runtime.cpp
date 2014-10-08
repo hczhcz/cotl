@@ -100,6 +100,28 @@ _COTL_FUNC_BEGIN
     self_p->get().second.call<false>(caller, lib, data);
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdAlso)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Pair, id_also);
+    _COTL_CHECK_TUNNEL(false); // TODO with tunnel input?
+
+    PMaybe tunnel1(nullptr);
+    PMaybe tunnel2(nullptr);
+
+    self_p->get().first.call(caller, lib, tunnel1);
+    self_p->get().second.call(caller, lib, tunnel2);
+
+    if (tunnel1 && tunnel2) {
+        tunnel = _pair(PVal(tunnel1), PVal(tunnel2), id_also);
+    } else if (tunnel1) {
+        tunnel = tunnel1;
+    } else if (tunnel2) {
+        tunnel = tunnel2;
+    } else {
+        tunnel = nullptr;
+    }
+_COTL_FUNC_END
+
 _COTL_FUNC_T(stdVoid)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_void);
@@ -188,6 +210,7 @@ _COTL_FUNC_BEGIN
 
             id_before, _libfunc(stdBefore),
             id_after, _libfunc(stdAfter),
+            id_also, _libfunc(stdAlso),
 
             id_void, _libfunc(stdVoid),
             id_exec, _libfunc(stdExec),

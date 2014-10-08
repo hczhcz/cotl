@@ -10,7 +10,9 @@ _COTL_FUNC_BEGIN
 
     PMaybe lib1(nullptr);
     self_p->get().first.call<true>(caller, lib, lib1);
+
     // TODO: hard binding
+
     self_p->get().second.call(caller, lib1, tunnel);
 _COTL_FUNC_END
 
@@ -20,7 +22,9 @@ _COTL_FUNC_BEGIN
 
     PMaybe lib1(nullptr);
     self_p->get().first.call<true>(caller, lib, lib1);
+
     // TODO: hard binding
+
     self_p->get().second.call(caller,
         _pair(_quote(PVal(lib)), PVal(lib1), id_use, stdUse),
     tunnel);
@@ -40,6 +44,17 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+_COTL_FUNC_T(stdQuickdef)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Ptr, id_quickdef);
+
+    if (tunnel) {
+        libSet(self_p->get(), lib, tunnel);
+    } else {
+        libGet(self_p->get(), lib, tunnel);
+    }
+_COTL_FUNC_END
+
 namespace {
 
 _COTL_FUNC_T(init)
@@ -50,7 +65,8 @@ _COTL_FUNC_BEGIN
         _libmap(
             id_use, _libfunc(stdUse),
             id_with, _libfunc(stdWith),
-            id_def, _libfunc(stdDef)
+            id_def, _libfunc(stdDef),
+            id_quickdef, _libfunc(stdQuickdef)
         )
     );
 
