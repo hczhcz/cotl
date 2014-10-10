@@ -289,10 +289,9 @@ void Pair::repr(std::ostream &stream, const int_t level) const {
     // next line
     outputIndent(stream, level + 1);
     get().first->repr(stream, level + 1);
-    stream << "," << std::endl;
 
-    // next line
-    outputIndent(stream, level + 1);
+    outputSplit(stream, level + 1); // next line
+
     get().second->repr(stream, level + 1);
     outputAppendType(stream, getType(), id_pair);
     outputAppendFunc(stream, getFunc());
@@ -324,12 +323,12 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
 
     for (auto i = get()->begin(); i != get()->end(); ++i) {
         if (i != get()->begin()) {
-            stream << ",";
+            outputSplit(stream, level + 1);
+        } else {
+            stream << std::endl;
+            outputIndent(stream, level + 1);
         }
-        stream << std::endl;
 
-        // next line
-        outputIndent(stream, level + 1);
         (*i)->repr(stream, level + 1);
     }
 
@@ -350,12 +349,12 @@ void Map::repr(std::ostream &stream, const int_t level) const {
 
     for (auto i = get()->begin(); i != get()->end(); ++i) {
         if (i != get()->begin()) {
-            stream << ",";
+            outputSplit(stream, level + 1);
+        } else {
+            stream << std::endl;
+            outputIndent(stream, level + 1);
         }
-        stream << std::endl;
 
-        // next line
-        outputIndent(stream, level + 1);
         stream << i->first << ", ";
         i->second->repr(stream, level + 1);
     }
