@@ -68,16 +68,16 @@ void outputStr(std::ostream &stream, const std::string &str) {
     stream << "\"";
 }
 
-void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype) {
-    if (type != dtype) {
-        stream << ", " << type;
-    }
+void outputFunc(std::ostream &stream, const func_t func) {
+    stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
 }
 
-void outputAppendTypeX(std::ostream &stream, const int_t type, const int_t dtype, bool &after) {
+bool xtrue = true;
+
+void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype, bool &after = xtrue, const int_t level = -1) {
     if (type != dtype) {
         if (after) {
-            stream << ", ";
+            outputSplit(stream, level);
         }
         if (type != id_error) {
             stream << type;
@@ -90,21 +90,10 @@ void outputAppendTypeX(std::ostream &stream, const int_t type, const int_t dtype
     }
 }
 
-void outputFunc(std::ostream &stream, const func_t func) {
-    stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
-}
-
-void outputAppendFunc(std::ostream &stream, const func_t func) {
-    if (func != stdAuto) {
-        stream << ", ";
-        outputFunc(stream, func);
-    }
-}
-
-void outputAppendFuncX(std::ostream &stream, const func_t func, bool &after) {
+void outputAppendFunc(std::ostream &stream, const func_t func, bool &after = xtrue, const int_t level = -1) {
     if (func != stdAuto) {
         if (after) {
-            stream << ", ";
+            outputSplit(stream, level);
         }
         outputFunc(stream, func);
         after = true;
@@ -215,8 +204,8 @@ void Atom::repr(std::ostream &stream, const int_t level) const {
 
     stream << "_atom(";
     bool after = false;
-    outputAppendTypeX(stream, getType(), id_atom, after);
-    outputAppendFuncX(stream, getFunc(), after);
+    outputAppendType(stream, getType(), id_atom, after);
+    outputAppendFunc(stream, getFunc(), after);
     stream << ")";
 }
 
@@ -272,8 +261,8 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
     // next line
     outputIndent(stream, level + 1);
     get()->repr(stream, level + 1);
-    outputAppendType(stream, getType(), id_ptr);
-    outputAppendFunc(stream, getFunc());
+    outputAppendType(stream, getType(), id_ptr, xtrue, level);
+    outputAppendFunc(stream, getFunc(), xtrue, level);
     stream << ")";
 }
 
@@ -293,8 +282,8 @@ void Pair::repr(std::ostream &stream, const int_t level) const {
     outputSplit(stream, level + 1); // next line
 
     get().second->repr(stream, level + 1);
-    outputAppendType(stream, getType(), id_pair);
-    outputAppendFunc(stream, getFunc());
+    outputAppendType(stream, getType(), id_pair, xtrue, level);
+    outputAppendFunc(stream, getFunc(), xtrue, level);
     stream << ")";
 }
 
@@ -333,8 +322,8 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     }
 
     bool after = !get()->empty();
-    outputAppendTypeX(stream, getType(), id_arr, after);
-    outputAppendFuncX(stream, getFunc(), after);
+    outputAppendType(stream, getType(), id_arr, after, level);
+    outputAppendFunc(stream, getFunc(), after, level);
     stream << ")";
 }
 
@@ -360,8 +349,8 @@ void Map::repr(std::ostream &stream, const int_t level) const {
     }
 
     bool after = !get()->empty();
-    outputAppendTypeX(stream, getType(), id_map, after);
-    outputAppendFuncX(stream, getFunc(), after);
+    outputAppendType(stream, getType(), id_map, after, level);
+    outputAppendFunc(stream, getFunc(), after, level);
     stream << ")";
 }
 
