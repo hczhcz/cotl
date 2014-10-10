@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
             _atom(),
             1009
         ),
-    1001)) << endl;
+    1001, func_t(0x12345678))) << endl;
 
     cout << PVal(_pair(_arr(_map(123), _map(1, _ptr(_map())), _arr()), _atom())) << endl;
 
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
                     _atom(),
                     1009
                 ),
-            1001)
+            1001, func_t(0x12345678))
         );
 
         // correctness test

@@ -4,9 +4,18 @@ namespace cotl {
 
 namespace {
 
-void outputIndent(std::ostream &stream, const int_t indent) {
-    for (int_t i = 0; i < indent; ++i) {
+void outputIndent(std::ostream &stream, const int_t level) {
+    for (int_t i = 0; i < level; ++i) {
         stream << "    ";
+    }
+}
+
+void outputSplit(std::ostream &stream, const int_t level) {
+    if (level >= 0) {
+        stream << "," << std::endl;
+        outputIndent(stream, level);
+    } else {
+        stream << ", ";
     }
 }
 
