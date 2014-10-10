@@ -73,8 +73,9 @@ void outputFunc(std::ostream &stream, const func_t func) {
 }
 
 bool xtrue = true;
+int_t xnegone = -1;
 
-void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype, bool &after = xtrue, const int_t level = -1) {
+void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype, bool &after = xtrue, int_t &level = xnegone) {
     if (type != dtype) {
         if (after) {
             outputSplit(stream, level);
@@ -86,17 +87,19 @@ void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype,
             // TODO: support circular-ref and multi-ref objects
             stream << "id_error";
         }
-        after = true;
+        after = xtrue;
+        level = xnegone;
     }
 }
 
-void outputAppendFunc(std::ostream &stream, const func_t func, bool &after = xtrue, const int_t level = -1) {
+void outputAppendFunc(std::ostream &stream, const func_t func, bool &after = xtrue, int_t &level = xnegone) {
     if (func != stdAuto) {
         if (after) {
             outputSplit(stream, level);
         }
         outputFunc(stream, func);
-        after = true;
+        after = xtrue;
+        level = xnegone;
     }
 }
 
@@ -258,11 +261,12 @@ void Ptr::repr(std::ostream &stream, const int_t level) const {
 
     stream << "_ptr(" << std::endl;
 
-    // next line
     outputIndent(stream, level + 1);
     get()->repr(stream, level + 1);
-    outputAppendType(stream, getType(), id_ptr, xtrue, level);
-    outputAppendFunc(stream, getFunc(), xtrue, level);
+
+    int_t afterlevel = level;
+    outputAppendType(stream, getType(), id_ptr, xtrue, afterlevel);
+    outputAppendFunc(stream, getFunc(), xtrue, afterlevel);
     stream << ")";
 }
 
@@ -275,15 +279,15 @@ void Pair::repr(std::ostream &stream, const int_t level) const {
 
     stream << "_pair(" << std::endl;
 
-    // next line
     outputIndent(stream, level + 1);
     get().first->repr(stream, level + 1);
 
-    outputSplit(stream, level + 1); // next line
-
+    outputSplit(stream, level + 1);
     get().second->repr(stream, level + 1);
-    outputAppendType(stream, getType(), id_pair, xtrue, level);
-    outputAppendFunc(stream, getFunc(), xtrue, level);
+
+    int_t afterlevel = level;
+    outputAppendType(stream, getType(), id_pair, xtrue, afterlevel);
+    outputAppendFunc(stream, getFunc(), xtrue, afterlevel);
     stream << ")";
 }
 
@@ -322,8 +326,9 @@ void Arr::repr(std::ostream &stream, const int_t level) const {
     }
 
     bool after = !get()->empty();
-    outputAppendType(stream, getType(), id_arr, after, level);
-    outputAppendFunc(stream, getFunc(), after, level);
+    int_t afterlevel = level;
+    outputAppendType(stream, getType(), id_arr, after, afterlevel);
+    outputAppendFunc(stream, getFunc(), after, afterlevel);
     stream << ")";
 }
 
@@ -349,8 +354,9 @@ void Map::repr(std::ostream &stream, const int_t level) const {
     }
 
     bool after = !get()->empty();
-    outputAppendType(stream, getType(), id_map, after, level);
-    outputAppendFunc(stream, getFunc(), after, level);
+    int_t afterlevel = level;
+    outputAppendType(stream, getType(), id_map, after, afterlevel);
+    outputAppendFunc(stream, getFunc(), after, afterlevel);
     stream << ")";
 }
 
