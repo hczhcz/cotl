@@ -86,15 +86,34 @@ int main(int argc, char* argv[]) {
         //boot(_atom(), tunnel1);
     }
 
+    cout << "=== test ===" << endl;
+
     PMaybe tunnel1(nullptr);
 
     // boot(_ptr(_pair(_atom(), _int(233)), id_quote), tunnel1);
     // boot(_pair(_real(233), _real(233), id_add), tunnel1);
     // boot(_pair(_int(233), _real(233), id_add), tunnel1);
     boot(_pair(
-        _pair(_int(233), _ptr(_atom(234), id_quickdef), id_write), // def(234) := 233
-        _atom(234),
+        _pair(_quote(
+            _ptr(
+                // func body
+                _pair(
+                    // get param
+                    _pair(
+                        _ptr(_quote(_atom(id_caller)), id_def),
+                        _ptr(_ptr(_quote(_atom(3456)), id_def), id_ptr, stdWrapPtr),
+                    id_write), // wrapptr(def(#3456)) = 'caller
+                    // calc
+                    _pair(_int(333), _atom(3456), id_add), // <#3456> + 333
+                id_before),
+            id_capture, stdCapture)
+        ), _ptr(
+            _quote(_atom(2345)), id_def // def(#2345)
+        ), id_write), // def(#2345) = '<func>
+        _ptr(_int(23000), 2345), // <#2345>(23000)
     id_before), tunnel1);
+
+    // wrapptr(def('a)) = '<caller>
 
     cout << tunnel1 << endl;
 
