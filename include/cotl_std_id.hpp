@@ -204,6 +204,8 @@ enum {
         id_regex
 };
 
+const char *getTypeName(const int_t type);
+
 }
 
 }
