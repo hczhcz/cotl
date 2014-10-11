@@ -71,11 +71,11 @@ namespace cotlstd {
     } while (false)
 
 #define _COTL_CHECK_TYPE(val, type, id) \
-    auto val##_p = val.as<type, id>();\
+    auto val##_p = (val).as<type, id>();\
     do {\
         if (!val##_p) {\
-            doCast<id>(lib, val);\
-            val##_p = val.as<type, id>();\
+            doCast<id>(lib, (val));\
+            val##_p = (val).as<type, id>();\
             if (!val##_p) {\
                 throw "bad casting";\
             }\
@@ -83,11 +83,11 @@ namespace cotlstd {
     } while (false) // TODO cast, dispatch
 
 #define _COTL_CHECK_TYPE_ANY(val, type, id) \
-    auto val##_p = val.asany<type>();\
+    auto val##_p = (val).asany<type>();\
     do {\
         if (!val##_p) {\
-            doCast<id>(lib, val);\
-            val##_p = val.as<type, id>();\
+            doCast<id>(lib, (val));\
+            val##_p = (val).as<type, id>();\
             if (!val##_p) {\
                 throw "bad casting";\
             }\
@@ -95,11 +95,11 @@ namespace cotlstd {
     } while (false) // TODO cast, dispatch
 
 #define _COTL_CHECK_TYPE_VAR(val, type, id) \
-    auto val##_p = val.raw<type, id>();\
+    auto val##_p = (val).raw<type, id>();\
     do {\
         if (!val##_p) {\
-            doCast<id>(lib, val);\
-            val##_p = val.as<type, id>();\
+            doCast<id>(lib, (val));\
+            val##_p = (val).as<type, id>();\
             if (!val##_p) {\
                 throw "bad casting";\
             }\

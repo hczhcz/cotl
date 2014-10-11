@@ -20,7 +20,7 @@ _COTL_FUNC_BEGIN
     #define _COTL_ADD_LIB_TO_STD(id) \
     do {\
         PMaybe map1(nullptr);\
-        libGet(id, lib, map1);\
+        libGet((id), lib, map1);\
         _COTL_CHECK_TYPE(map1, cotl::Map, id_map);\
         const map_t &map1_data = map1_p->get();\
         map_data->insert(map1_data->begin(), map1_data->end());\
