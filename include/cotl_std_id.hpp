@@ -79,6 +79,13 @@ enum {
 
         // special
         id_error = IDX_TYPE + 160,
+            // members
+            id_error_self,
+            id_error_caller,
+            id_error_lib,
+            id_error_tunnel,
+            id_error_func,
+            id_error_detail,
 
         // override packages
 

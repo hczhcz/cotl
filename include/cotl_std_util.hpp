@@ -12,26 +12,37 @@ namespace cotlstd {
 
 #ifdef _COTL_USE_ERR_CATCH
     #ifdef _COTL_USE_ERR_FULL
-        #define _COTL_ERR_INFO self, caller.sure(), lib.sure(), tunnel.sure(), _str(__FUNCTION__)
+        #define _COTL_ERR_INFO \
+            id_error_self, self,\
+            id_error_caller, caller.sure(),\
+            id_error_lib, lib.sure(),\
+            id_error_tunnel, tunnel.sure(),\
+            id_error_func, _str(__FUNCTION__)
     #else
-        #define _COTL_ERR_INFO _str(__FUNCTION__)
+        #define _COTL_ERR_INFO \
+            id_error_caller, caller.sure(),\
+            id_error_tunnel, tunnel.sure(),\
+            id_error_func, _str(__FUNCTION__)
     #endif
 
     #define _COTL_FUNC_END \
             }\
         } catch (cotl::PValRaw e) {\
-            throw _arr(\
-                _COTL_ERR_INFO, e,\
+            throw _map(\
+                _COTL_ERR_INFO,\
+                id_error_detail, e,\
                 id_error\
             );\
         } catch (const char *c) {\
-            throw _arr(\
-                _COTL_ERR_INFO, _str(c, id_error),\
+            throw _map(\
+                _COTL_ERR_INFO,\
+                id_error_detail, _str(c, id_error),\
                 id_error\
             );\
         } catch (...) {\
-            throw _arr(\
-                _COTL_ERR_INFO, _str("unknown error", id_error),\
+            throw _map(\
+                _COTL_ERR_INFO,\
+                id_error_detail, _str("unknown error", id_error),\
                 id_error\
             );\
         } // TODO: better re-thrown val structure
