@@ -141,9 +141,6 @@ enum {
             id_write,
             id_iftunnel,
 
-            id_caller,
-            id_lib,
-
             id_try,
 
         id_cast,

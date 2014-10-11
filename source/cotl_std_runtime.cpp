@@ -161,22 +161,6 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdCaller)
-_COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Atom, id_caller);
-    _COTL_CHECK_TUNNEL(false);
-
-    tunnel = caller;
-_COTL_FUNC_END
-
-_COTL_FUNC_T(published::stdLib)
-_COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Atom, id_lib);
-    _COTL_CHECK_TUNNEL(false);
-
-    tunnel = lib;
-_COTL_FUNC_END
-
 _COTL_FUNC_T(stdTry)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id_try);
@@ -216,9 +200,6 @@ _COTL_FUNC_BEGIN
             id_exec, _libfunc(stdExec),
             id_write, _libfunc(stdWrite),
             id_iftunnel, _libfunc(stdIftunnel),
-
-            id_caller, _libfunc(stdCaller),
-            id_lib, _libfunc(stdLib),
 
             id_try, _libfunc(stdTry)
         )

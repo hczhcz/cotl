@@ -17,9 +17,6 @@ _COTL_FUNC_T(stdQuote);
 _COTL_FUNC_T(stdContainer);
 _COTL_FUNC_T(stdBlackhole);
 
-_COTL_FUNC_T(stdCaller);
-_COTL_FUNC_T(stdLib);
-
 // type
 _COTL_FUNC_T(stdLibFunc);
 _COTL_FUNC_T(stdLibMap);

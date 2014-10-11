@@ -64,8 +64,6 @@ const char *getTypeName(const int_t type) {
         _COTL_ADD_ID(id_exec);
         _COTL_ADD_ID(id_write);
         _COTL_ADD_ID(id_iftunnel);
-        _COTL_ADD_ID(id_caller);
-        _COTL_ADD_ID(id_lib);
         _COTL_ADD_ID(id_try);
 
         default:
