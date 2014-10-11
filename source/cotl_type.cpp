@@ -68,6 +68,14 @@ void outputStr(std::ostream &stream, const std::string &str) {
     stream << "\"";
 }
 
+void outputType(std::ostream &stream, const int_t type) {
+    if (auto typeName = getTypeName(type)) {
+        stream << typeName;
+    } else {
+        stream << type;
+    }
+}
+
 void outputFunc(std::ostream &stream, const func_t func) {
     stream << "func_t(0x" << std::hex << int_t(func) << std::dec << ")";
 }
@@ -80,13 +88,7 @@ void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype,
         if (after) {
             outputSplit(stream, level);
         }
-        if (type != id_error) {
-            stream << type;
-        } else {
-            // TODO: better repr support of id and func
-            // TODO: support circular-ref and multi-ref objects
-            stream << "id_error";
-        }
+        outputType(stream, type);
         after = xtrue;
         level = xnegone;
     }
@@ -349,7 +351,8 @@ void Map::repr(std::ostream &stream, const int_t level) const {
             outputIndent(stream, level + 1);
         }
 
-        stream << i->first << ", ";
+        outputType(stream, i->first);
+        outputSplit(stream, xnegone);
         i->second->repr(stream, level + 1);
     }
 
