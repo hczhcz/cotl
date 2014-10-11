@@ -24,6 +24,12 @@ _COTL_FUNC_T(stdWrapPtr);
 _COTL_FUNC_T(stdWrapPair);
 _COTL_FUNC_T(stdWrapArr);
 
+// query
+_COTL_FUNC_T(stdUse);
+_COTL_FUNC_T(stdWith);
+_COTL_FUNC_T(stdWithnew);
+_COTL_FUNC_T(stdCapture);
+
 }
 
 }

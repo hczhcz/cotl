@@ -151,8 +151,14 @@ enum {
             id_use,
             id_with,
             id_withnew,
+            id_capture,
+
             id_def,
             id_quickdef,
+
+            // members
+            id_caller,
+            id_global,
 
         id_math,
             id_add, // TODO: both int and real (auto detect)

@@ -4,7 +4,7 @@ namespace cotlstd {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(stdUse)
+_COTL_FUNC_T(published::stdUse)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id_use);
 
@@ -16,7 +16,7 @@ _COTL_FUNC_BEGIN
     self_p->get().second.call(caller, lib1, tunnel);
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWith)
+_COTL_FUNC_T(published::stdWith)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id_with);
 
@@ -30,12 +30,28 @@ _COTL_FUNC_BEGIN
     tunnel);
 _COTL_FUNC_END
 
-_COTL_FUNC_T(stdWithnew)
+_COTL_FUNC_T(published::stdWithnew)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_withnew);
 
     self_p->get().call(caller,
         _pair(_quote(PVal(lib)), _libmap(), id_use, stdUse),
+    tunnel);
+_COTL_FUNC_END
+
+_COTL_FUNC_T(published::stdCapture)
+_COTL_FUNC_BEGIN
+    _COTL_CHECK_SELF(cotl::Ptr, id_capture);
+
+    self_p->get().call(caller,
+        _pair(
+            _quote(PVal(lib)),
+            _libmap(
+                id_caller, caller.sure(),
+                id_global, lib.sure()
+            ),
+            id_use, stdUse
+        ),
     tunnel);
 _COTL_FUNC_END
 
@@ -75,6 +91,7 @@ _COTL_FUNC_BEGIN
             id_use, _libfunc(stdUse),
             id_with, _libfunc(stdWith),
             id_withnew, _libfunc(stdWithnew),
+            id_capture, _libfunc(stdCapture),
             id_def, _libfunc(stdDef),
             id_quickdef, _libfunc(stdQuickdef)
         )
