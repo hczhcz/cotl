@@ -80,11 +80,8 @@ inline Map *_map(
 
 // alias to "lib" types
 
-template <class... Args>
-inline Func *_libfunc(
-    const Args... args
-) {
-    return _func(args..., id_func, stdLibFunc);
+inline Func *_libfunc(const func_t &data) {
+    return _func(data, id_func, stdLibFunc);
 }
 
 template <class... Args>
