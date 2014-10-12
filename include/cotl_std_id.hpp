@@ -176,6 +176,16 @@ enum {
             id_math_real,
                 // override: add, sub, mul, div, ... // TODO
 
+        id_structural,
+            id_ifthen, // or use switch+map[bool]?
+            id_for,
+            id_forin,
+            id_foreach,
+            id_while,
+            id_until,
+
+        id_call, // func(), call, closure, etc
+
         id_bool,
             //
 
@@ -188,17 +198,11 @@ enum {
 
         id_maputil,
 
-        id_call, // func(), call, closure, etc
-
         id_compare,
 
         id_hash,
 
         // id_container, // rename
-
-        id_branch, // if, switch
-
-        id_loop, // for, while, etc
 
         id_meta,
 
