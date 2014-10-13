@@ -114,7 +114,7 @@ template <class T> class NativeVal;
 }
 
 inline
-namespace published {
+namespace type {
 
 class Atom final: public Val {
 // protected:

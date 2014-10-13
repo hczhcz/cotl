@@ -23,7 +23,7 @@ template <bool maybe> class PValProto;
 }
 
 inline
-namespace published {
+namespace type {
 
 using PMaybe = PValProto<true>;
 using PVal = PValProto<false>;
