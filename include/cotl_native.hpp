@@ -5,11 +5,22 @@
 
 namespace cotl {
 
+inline
+namespace valtype {
+
 class Val;
+
+}
+
+inline
+namespace ptrtype {
+
 using PValRaw = Val *;
 using PValConst = const Val *;
 
 template <bool maybe> class PValProto;
+
+}
 
 inline
 namespace published {
@@ -31,17 +42,17 @@ using real_t = double;
 using func_t = _COTL_FUNC_T(*);
 
 template <class T>
-using hold_t = std::unique_ptr<T, MemDel<T>>;
+using hold_t = std::unique_ptr<T, gcutil::MemDel<T>>;
 
 using str_t = hold_t<std::string>;
 
 #ifdef _COTL_USE_DEQUE
     using arr_t = hold_t<std::deque<
-        PVal, MemAlloc<PVal>
+        PVal, gcutil::MemAlloc<PVal>
     >>;
 #else
     using arr_t = hold_t<std::vector<
-        PVal, MemAlloc<PVal>
+        PVal, gcutil::MemAlloc<PVal>
     >>;
 #endif
 
@@ -50,13 +61,13 @@ using str_t = hold_t<std::string>;
         int_t, PVal,
         std::hash<int_t>,
         std::equal_to<int_t>,
-        MemAlloc<std::pair<const int_t, PVal>>
+        gcutil::MemAlloc<std::pair<const int_t, PVal>>
     >>;
 #else
     using map_t = hold_t<std::map<
         int_t, PVal,
         std::less<int_t>,
-        MemAlloc<std::pair<const int_t, PVal>>
+        gcutil::MemAlloc<std::pair<const int_t, PVal>>
     >>;
 #endif
 

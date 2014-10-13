@@ -26,6 +26,12 @@ using namespace cotl::published;
 #include "cotl_init.hpp"
 #include "cotl_repr.hpp"
 #include "cotl_std_util.hpp"
+namespace cotlstd {
+
+using namespace cotl::initutil;
+using namespace cotl::libutil;
+
+}
 
 // implementation
 #include "cotl_ptr_inline.hpp"

@@ -5,8 +5,7 @@
 
 namespace cotl {
 
-inline
-namespace published {
+namespace initutil {
 
 enum init_t {
     INIT_BEGIN,
@@ -31,6 +30,11 @@ enum init_t {
 int_t addInitializer(const func_t func, const init_t init);
 
 void callInitializer(const PMaybe &lib);
+
+}
+
+inline
+namespace published {
 
 void boot(const PVal &exec, PMaybe &tunnel);
 

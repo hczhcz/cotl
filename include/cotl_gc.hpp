@@ -21,6 +21,8 @@
 
 namespace cotl {
 
+namespace gcutil {
+
 #ifdef _COTL_USE_GC
     #define _COTL_MALLOC(size) GC_MALLOC(size)
     #define _COTL_FREE(ptr) GC_FREE(ptr)
@@ -57,6 +59,8 @@ public:
         _COTL_RAWDEL(ptr);
     }
 };
+
+}
 
 }
 

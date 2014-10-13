@@ -5,6 +5,9 @@
 
 namespace cotl {
 
+inline
+namespace ptrtype {
+
 #ifdef _COTL_USE_REF_COUNT
     template <bool maybe>
     inline void PValProto<maybe>::doInc() const {
@@ -81,6 +84,8 @@ inline PValRaw PValProto<maybe>::sure() const {
     } else {
         return _null();
     }
+}
+
 }
 
 }

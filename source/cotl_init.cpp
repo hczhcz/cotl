@@ -8,15 +8,12 @@ int_t initListIndex = 0;
 
 struct {
     func_t func;
-    init_t init;
+    initutil::init_t init;
 } initializerList[_COTL_VAL_INIT_SIZE];
 
 }
 
-inline
-namespace published {
-
-int_t addInitializer(const func_t func, const init_t init) {
+int_t initutil::addInitializer(const func_t func, const init_t init) {
     assert(initListIndex < _COTL_VAL_INIT_SIZE);
 
     initializerList[initListIndex] = {func, init};
@@ -25,7 +22,7 @@ int_t addInitializer(const func_t func, const init_t init) {
     return 0;
 }
 
-void callInitializer(const PMaybe &lib) {
+void initutil::callInitializer(const PMaybe &lib) {
     PVal blank(_atom(id_error));
     PMaybe tunnel(nullptr);
 
@@ -42,7 +39,7 @@ void callInitializer(const PMaybe &lib) {
     }
 }
 
-void boot(const PVal &exec, PMaybe &tunnel) try {
+void published::boot(const PVal &exec, PMaybe &tunnel) try {
     auto lib_p = _libmap();
     PMaybe lib(lib_p);
 
@@ -52,7 +49,7 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
 
     // TODO not only stdlib
 
-    callInitializer(lib);
+    initutil::callInitializer(lib);
 
     exec.call(nullptr, lib, tunnel);
 #ifdef _COTL_USE_ERR_CATCH
@@ -71,7 +68,5 @@ void boot(const PVal &exec, PMaybe &tunnel) try {
     throw;
 }
 #endif
-
-}
 
 }

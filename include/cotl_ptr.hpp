@@ -5,6 +5,9 @@
 
 namespace cotl {
 
+inline
+namespace ptrtype {
+
 template <bool maybe>
 class PValProto final {
 private:
@@ -189,6 +192,8 @@ public:
     inline PValRaw sure() const;
     // defined in cotl_inline.hpp
 };
+
+}
 
 }
 

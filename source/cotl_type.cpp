@@ -107,9 +107,6 @@ void outputAppendFunc(std::ostream &stream, const func_t func, bool &after = xtr
 
 }
 
-inline
-namespace published {
-
 void Atom::each(void callback(const PVal &), const bool rev) {
     (void) rev;
 
@@ -361,8 +358,6 @@ void Map::repr(std::ostream &stream, const int_t level) const {
     outputAppendType(stream, getType(), id_map, after, afterlevel);
     outputAppendFunc(stream, getFunc(), after, afterlevel);
     stream << ")";
-}
-
 }
 
 }

@@ -5,7 +5,10 @@
 
 namespace cotl {
 
-class Val: public MemBase {
+inline
+namespace valtype {
+
+class Val: public gcutil::MemBase {
 private:
     int_t _type;
     func_t _func;
@@ -20,7 +23,8 @@ private:
     inline Val &operator=(const Val &) = delete;
     inline Val &operator=(Val &&) = delete;
 
-protected:
+// protected:
+public:
     inline void *operator new(size_t size, PValRaw reused) {
         (void) size;
 
@@ -47,7 +51,8 @@ protected:
         _COTL_FREE(obj);
     }
 
-    inline Val(const int_t type, const func_t func): MemBase(), _type(type), _func(func) {}
+protected:
+    inline Val(const int_t type, const func_t func): gcutil::MemBase(), _type(type), _func(func) {}
 
     virtual ~Val() {}
 
@@ -104,11 +109,16 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const = 0 /* abstract */;
 };
 
+template <class T> class NativeVal;
+
+}
+
 inline
 namespace published {
 
 class Atom final: public Val {
-protected:
+// protected:
+public:
     inline Atom(const int_t type, const func_t func): Val(type, func) {}
 
     virtual ~Atom() override {}
@@ -121,8 +131,6 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const override;
 };
 
-template <class T> class NativeVal;
-
 using Int = NativeVal<int_t>;
 using Real = NativeVal<real_t>;
 using Func = NativeVal<func_t>;
@@ -132,6 +140,11 @@ using Str = NativeVal<str_t>;
 using Arr = NativeVal<arr_t>;
 using Map = NativeVal<map_t>;
 
+}
+
+inline
+namespace valtype {
+
 template <class T>
 class NativeVal final: public Val {
 private:
@@ -139,7 +152,8 @@ private:
 
     static_assert(sizeof(T) <= 2 * sizeof(void *), "size of NativeVal<T> is limited");
 
-protected:
+// protected:
+public:
     inline NativeVal(const int_t type, const func_t func):
         Val(type, func), _data() {}
 
@@ -152,31 +166,6 @@ protected:
     virtual ~NativeVal() override {}
 
 public:
-    friend Int *_int(const int_t &data,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Real *_real(const real_t &data,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Func *_func(const func_t &data,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Ptr *_ptr(const PVal &data,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Pair *_pair(const PVal &data1, const PVal &data2,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Str *_str(const std::string &data,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Arr *_arr_m(arr_t &&container,
-        const int_t type, const func_t func, PValRaw reused
-    );
-    friend Map *_map_m(map_t &&container,
-        const int_t type, const func_t func, PValRaw reused
-    );
-
     virtual void each(void callback(const PVal &), const bool rev) override;
 
     virtual void repr(std::ostream &stream, const int_t level) const override;
