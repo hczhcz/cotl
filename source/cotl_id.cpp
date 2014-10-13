@@ -1,11 +1,8 @@
 #include "../cotl"
 
-namespace cotlstd {
+namespace cotl {
 
-inline
-namespace published {
-
-const char *getTypeName(const int_t type) {
+const char *published::getTypeName(const int_t type) {
     #define _COTL_ADD_ID(name) \
         case (name):\
             static const char *nm_##name = #name;\
@@ -72,8 +69,6 @@ const char *getTypeName(const int_t type) {
     }
 
     #undef _COTL_ADD_ID
-}
-
 }
 
 }
