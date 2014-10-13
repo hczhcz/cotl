@@ -39,7 +39,7 @@ void initutil::callInitializer(const PMaybe &lib) {
     }
 }
 
-void published::boot(const PVal &exec, PMaybe &tunnel) try {
+void util::boot(const PVal &exec, PMaybe &tunnel) try {
     auto lib_p = _libmap();
     PMaybe lib(lib_p);
 

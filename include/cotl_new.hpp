@@ -6,7 +6,7 @@
 namespace cotl {
 
 inline
-namespace published {
+namespace util {
 
 Atom *_atom(
     const int_t type = id_atom, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr

@@ -6,7 +6,7 @@
 namespace cotl {
 
 inline
-namespace published {
+namespace util {
 
 inline std::ostream &operator<<(std::ostream &stream, const PMaybe &val) {
     val->repr(stream, 0);

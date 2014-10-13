@@ -3,7 +3,7 @@
 namespace cotl {
 
 inline
-namespace published {
+namespace util {
 
 Atom *_atom(
     const int_t type, const func_t func, PValRaw reused

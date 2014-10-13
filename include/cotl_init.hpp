@@ -34,7 +34,7 @@ void callInitializer(const PMaybe &lib);
 }
 
 inline
-namespace published {
+namespace util {
 
 void boot(const PVal &exec, PMaybe &tunnel);
 

@@ -2,7 +2,8 @@
 
 int main(int argc, char* argv[]) {
     using namespace std;
-    using namespace cotl::published;
+    using namespace cotl::type;
+    using namespace cotl::util;
     using namespace cotl::stdlib;
     using namespace cotl::stdid;
 
