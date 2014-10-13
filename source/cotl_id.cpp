@@ -2,7 +2,7 @@
 
 namespace cotl {
 
-const char *published::getTypeName(const int_t type) {
+const char *id::getTypeName(const int_t type) {
     #define _COTL_ADD_ID(name) \
         case (name):\
             static const char *nm_##name = #name;\

@@ -6,7 +6,7 @@
 namespace cotl {
 
 inline
-namespace published {
+namespace id {
 
 enum {
     // the range of id
