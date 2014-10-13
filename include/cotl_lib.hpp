@@ -29,7 +29,7 @@ namespace libutil {
 
     #define _COTL_FUNC_END \
             }\
-        } catch (cotl::PValRaw e) {\
+        } catch (PValRaw e) {\
             throw _map(\
                 _COTL_ERR_INFO,\
                 id_error_detail, e,\
@@ -221,7 +221,7 @@ template <class T1, class Tr, int_t id,
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id);
+    _COTL_CHECK_SELF(Ptr, id);
 
     if (!bool(fr) && !bool(fw)) {
         throw;
@@ -256,7 +256,7 @@ template <class T1, class T2, class Tr, int_t id,
 >
 _COTL_FUNC_T(libFunc)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id);
+    _COTL_CHECK_SELF(Pair, id);
 
     if (!bool(fr) && !bool(fw)) {
         throw;

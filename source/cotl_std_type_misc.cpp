@@ -8,10 +8,10 @@ namespace stdlib {
 
 _COTL_FUNC_T(stdIncrement)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Int, id_increment);
+    _COTL_CHECK_SELF_VAR(Int, id_increment);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Int, id_int);
+        _COTL_CHECK_TYPE_ANY(tunnel, Int, id_int);
 
         self_p->set(tunnel_p->get());
         tunnel = nullptr;
@@ -22,10 +22,10 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdDecrement)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Int, id_decrement);
+    _COTL_CHECK_SELF_VAR(Int, id_decrement);
 
     if (tunnel) {
-        _COTL_CHECK_TYPE_ANY(tunnel, cotl::Int, id_int);
+        _COTL_CHECK_TYPE_ANY(tunnel, Int, id_int);
 
         self_p->set(tunnel_p->get());
         tunnel = nullptr;
@@ -36,7 +36,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdStack)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Arr, id_stack);
+    _COTL_CHECK_SELF(Arr, id_stack);
 
     const arr_t &data = self_p->get();
     if (tunnel) {
@@ -51,7 +51,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdCode)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Arr, id_code);
+    _COTL_CHECK_SELF(Arr, id_code);
     _COTL_CHECK_TUNNEL(false);
 
     const arr_t &self_data = self_p->get();

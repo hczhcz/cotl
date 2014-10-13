@@ -27,11 +27,11 @@ _COTL_FUNC_BEGIN
     PMaybe tunnel1(
         _libmap(
             id_real, _libmap(
-                id_int, _libfunc(libFunc<cotl::Int, cotl::Real, id_int, inttoreal, nullptr>)
+                id_int, _libfunc(libFunc<Int, Real, id_int, inttoreal, nullptr>)
             ),
             id_str, _libmap(
-                id_int, _libfunc(libFunc<cotl::Int, cotl::Str, id_int, inttostr, nullptr>),
-                id_real, _libfunc(libFunc<cotl::Real, cotl::Str, id_real, realtostr, nullptr>)
+                id_int, _libfunc(libFunc<Int, Str, id_int, inttostr, nullptr>),
+                id_real, _libfunc(libFunc<Real, Str, id_real, realtostr, nullptr>)
             )
         )
     );

@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 
     // for testing
 
-    cout << sizeof(cotl::Val) << endl;
+    cout << sizeof(cotl::valtype::Val) << endl;
     cout << sizeof(Atom) << endl;
     cout << sizeof(Int) << endl;
     cout << sizeof(Real) << endl;

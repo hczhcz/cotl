@@ -15,7 +15,7 @@ _COTL_FUNC_BEGIN
     PMaybe map(nullptr);
     libGet(id_std, lib, map);
 
-    _COTL_CHECK_TYPE(map, cotl::Map, id_map);
+    _COTL_CHECK_TYPE(map, Map, id_map);
 
     const map_t &map_data = map_p->get();
 
@@ -23,7 +23,7 @@ _COTL_FUNC_BEGIN
     do {\
         PMaybe map1(nullptr);\
         libGet((id), lib, map1);\
-        _COTL_CHECK_TYPE(map1, cotl::Map, id_map);\
+        _COTL_CHECK_TYPE(map1, Map, id_map);\
         const map_t &map1_data = map1_p->get();\
         map_data->insert(map1_data->begin(), map1_data->end());\
     } while (false)

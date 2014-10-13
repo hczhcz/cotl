@@ -46,14 +46,14 @@ _COTL_FUNC_BEGIN
 
     PMaybe tunnel1(
         _libmap(
-            id_add, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_add, add, sub>),
-            id_sub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_sub, sub, add>),
-            id_mul, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mul, mul, div>),
-            id_div, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_div, div, mul>),
-            id_mod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_mod, mod, nullptr>),
-            id_rsub, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rsub, rsub, rsub>),
-            id_rdiv, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rdiv, rdiv, rdiv>),
-            id_rmod, _libfunc(libFunc<cotl::Int, cotl::Int, cotl::Int, id_rmod, rmod, nullptr>)
+            id_add, _libfunc(libFunc<Int, Int, Int, id_add, add, sub>),
+            id_sub, _libfunc(libFunc<Int, Int, Int, id_sub, sub, add>),
+            id_mul, _libfunc(libFunc<Int, Int, Int, id_mul, mul, div>),
+            id_div, _libfunc(libFunc<Int, Int, Int, id_div, div, mul>),
+            id_mod, _libfunc(libFunc<Int, Int, Int, id_mod, mod, nullptr>),
+            id_rsub, _libfunc(libFunc<Int, Int, Int, id_rsub, rsub, rsub>),
+            id_rdiv, _libfunc(libFunc<Int, Int, Int, id_rdiv, rdiv, rdiv>),
+            id_rmod, _libfunc(libFunc<Int, Int, Int, id_rmod, rmod, nullptr>)
         )
     );
 

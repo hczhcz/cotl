@@ -8,14 +8,14 @@ namespace stdlib {
 
 _COTL_FUNC_T(stdLibFunc)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Func, id_func);
+    _COTL_CHECK_SELF(Func, id_func);
 
     self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdLibMap)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Map, id_map);
+    _COTL_CHECK_SELF(Map, id_map);
 
     int_t type = caller->getType();
 

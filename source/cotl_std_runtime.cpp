@@ -24,7 +24,7 @@ _COTL_FUNC_BEGIN
 
     libGet(self, lib, func);
 
-    _COTL_CHECK_TYPE(func, cotl::Func, id_func);
+    _COTL_CHECK_TYPE(func, Func, id_func);
 
     self.raw()->setFunc(func_p->get());
     self.call(caller, lib, tunnel);
@@ -32,7 +32,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_quote);
+    _COTL_CHECK_SELF(Ptr, id_quote);
     _COTL_CHECK_TUNNEL(false);
 
     tunnel = self_p->get();
@@ -40,7 +40,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdBlackhole)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Ptr, id_blackhole);
+    _COTL_CHECK_SELF_VAR(Ptr, id_blackhole);
     _COTL_CHECK_TUNNEL(true);
 
     self_p->set(PVal(tunnel));
@@ -49,7 +49,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdContainer)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF_VAR(cotl::Ptr, id_container);
+    _COTL_CHECK_SELF_VAR(Ptr, id_container);
 
     if (tunnel) {
         self_p->set(PVal(tunnel));
@@ -61,7 +61,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdConst)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_const);
+    _COTL_CHECK_SELF(Ptr, id_const);
     _COTL_CHECK_TUNNEL(false);
 
     self_p->get().call(caller, lib, tunnel);
@@ -69,7 +69,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdTarget)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_target);
+    _COTL_CHECK_SELF(Ptr, id_target);
     _COTL_CHECK_TUNNEL(true);
 
     self_p->get().call(caller, lib, tunnel);
@@ -77,14 +77,14 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdRef)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_ref);
+    _COTL_CHECK_SELF(Ptr, id_ref);
 
     self_p->get().call(caller, lib, tunnel);
 _COTL_FUNC_END
 
 _COTL_FUNC_T(stdBefore)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_before);
+    _COTL_CHECK_SELF(Pair, id_before);
 
     PMaybe data(nullptr);
     self_p->get().first.call<false>(caller, lib, data);
@@ -94,7 +94,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdAfter)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_after);
+    _COTL_CHECK_SELF(Pair, id_after);
 
     self_p->get().first.call(caller, lib, tunnel);
 
@@ -104,7 +104,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdAlso)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_also);
+    _COTL_CHECK_SELF(Pair, id_also);
     _COTL_CHECK_TUNNEL(false); // TODO with tunnel input?
 
     PMaybe tunnel1(nullptr);
@@ -126,7 +126,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdVoid)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_void);
+    _COTL_CHECK_SELF(Ptr, id_void);
     _COTL_CHECK_TUNNEL(false);
 
     self_p->get().call(caller, lib, tunnel);
@@ -135,7 +135,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdExec)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_exec);
+    _COTL_CHECK_SELF(Ptr, id_exec);
 
     PMaybe data(nullptr);
     self_p->get().call<true>(caller, lib, data);
@@ -144,7 +144,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWrite)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_write);
+    _COTL_CHECK_SELF(Pair, id_write);
     _COTL_CHECK_TUNNEL(false);
 
     PMaybe data(nullptr);
@@ -154,7 +154,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdIftunnel)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_iftunnel);
+    _COTL_CHECK_SELF(Pair, id_iftunnel);
 
     if (tunnel) {
         self_p->get().first.call(caller, lib, tunnel);
@@ -165,7 +165,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdTry)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_try);
+    _COTL_CHECK_SELF(Pair, id_try);
 
     try {
         self_p->get().first.call(caller, lib, tunnel);

@@ -8,7 +8,7 @@ namespace stdlib {
 
 _COTL_FUNC_T(std???)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::???, id_???);
+    _COTL_CHECK_SELF(???, id_???);
 
     if (tunnel) {
         //

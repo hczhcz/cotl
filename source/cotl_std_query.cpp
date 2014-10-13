@@ -8,7 +8,7 @@ namespace stdlib {
 
 _COTL_FUNC_T(stdUse)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_use);
+    _COTL_CHECK_SELF(Pair, id_use);
 
     PMaybe lib1(nullptr);
     self_p->get().first.call<true>(caller, lib, lib1);
@@ -20,7 +20,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWith)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Pair, id_with);
+    _COTL_CHECK_SELF(Pair, id_with);
 
     PMaybe lib1(nullptr);
     self_p->get().first.call<true>(caller, lib, lib1);
@@ -34,7 +34,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdWithnew)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_withnew);
+    _COTL_CHECK_SELF(Ptr, id_withnew);
 
     self_p->get().call(caller,
         _pair(_quote(PVal(lib)), _libmap(), id_use, stdUse),
@@ -43,7 +43,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdCapture)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_capture);
+    _COTL_CHECK_SELF(Ptr, id_capture);
 
     self_p->get().call(caller,
         _pair(
@@ -59,7 +59,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdDef)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_def);
+    _COTL_CHECK_SELF(Ptr, id_def);
 
     PMaybe val(nullptr);
     self_p->get().call<true>(caller, lib, val);
@@ -73,7 +73,7 @@ _COTL_FUNC_END
 
 _COTL_FUNC_T(stdQuickdef)
 _COTL_FUNC_BEGIN
-    _COTL_CHECK_SELF(cotl::Ptr, id_quickdef);
+    _COTL_CHECK_SELF(Ptr, id_quickdef);
 
     if (tunnel) {
         libSet(self_p->get(), lib, tunnel);

@@ -5,7 +5,6 @@
 
 namespace cotl {
 
-inline
 namespace valtype {
 
 class Val: public gcutil::MemBase {
@@ -116,10 +115,10 @@ template <class T> class NativeVal;
 inline
 namespace type {
 
-class Atom final: public Val {
+class Atom final: public valtype::Val {
 // protected:
 public:
-    inline Atom(const int_t type, const func_t func): Val(type, func) {}
+    inline Atom(const int_t type, const func_t func): valtype::Val(type, func) {}
 
     virtual ~Atom() override {}
 
@@ -131,18 +130,17 @@ public:
     virtual void repr(std::ostream &stream, const int_t level) const override;
 };
 
-using Int = NativeVal<int_t>;
-using Real = NativeVal<real_t>;
-using Func = NativeVal<func_t>;
-using Ptr = NativeVal<PVal>;
-using Pair = NativeVal<std::pair<PVal, PVal>>;
-using Str = NativeVal<str_t>;
-using Arr = NativeVal<arr_t>;
-using Map = NativeVal<map_t>;
+using Int = valtype::NativeVal<int_t>;
+using Real = valtype::NativeVal<real_t>;
+using Func = valtype::NativeVal<func_t>;
+using Ptr = valtype::NativeVal<PVal>;
+using Pair = valtype::NativeVal<std::pair<PVal, PVal>>;
+using Str = valtype::NativeVal<str_t>;
+using Arr = valtype::NativeVal<arr_t>;
+using Map = valtype::NativeVal<map_t>;
 
 }
 
-inline
 namespace valtype {
 
 template <class T>

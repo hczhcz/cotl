@@ -5,7 +5,6 @@
 
 namespace cotl {
 
-inline
 namespace valtype {
 
 class Val;
@@ -15,8 +14,8 @@ class Val;
 inline
 namespace ptrtype {
 
-using PValRaw = Val *;
-using PValConst = const Val *;
+using PValRaw = valtype::Val *;
+using PValConst = const valtype::Val *;
 
 template <bool maybe> class PValProto;
 

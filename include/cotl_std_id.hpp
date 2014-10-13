@@ -63,15 +63,15 @@ enum {
 };
 
 template <class T> struct DefaultId {};
-template <> struct DefaultId<cotl::Atom> {static const int_t get = id_atom;};
-template <> struct DefaultId<cotl::Int>  {static const int_t get = id_int;};
-template <> struct DefaultId<cotl::Real> {static const int_t get = id_real;};
-template <> struct DefaultId<cotl::Func> {static const int_t get = id_func;};
-template <> struct DefaultId<cotl::Ptr>  {static const int_t get = id_ptr;};
-template <> struct DefaultId<cotl::Pair> {static const int_t get = id_pair;};
-template <> struct DefaultId<cotl::Str>  {static const int_t get = id_str;};
-template <> struct DefaultId<cotl::Arr>  {static const int_t get = id_arr;};
-template <> struct DefaultId<cotl::Map>  {static const int_t get = id_map;};
+template <> struct DefaultId<Atom> {static const int_t get = id_atom;};
+template <> struct DefaultId<Int>  {static const int_t get = id_int;};
+template <> struct DefaultId<Real> {static const int_t get = id_real;};
+template <> struct DefaultId<Func> {static const int_t get = id_func;};
+template <> struct DefaultId<Ptr>  {static const int_t get = id_ptr;};
+template <> struct DefaultId<Pair> {static const int_t get = id_pair;};
+template <> struct DefaultId<Str>  {static const int_t get = id_str;};
+template <> struct DefaultId<Arr>  {static const int_t get = id_arr;};
+template <> struct DefaultId<Map>  {static const int_t get = id_map;};
 
 enum {
     id_std = IDX_CORE,
