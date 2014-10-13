@@ -95,7 +95,7 @@ void outputAppendType(std::ostream &stream, const int_t type, const int_t dtype,
 }
 
 void outputAppendFunc(std::ostream &stream, const func_t func, bool &after = xtrue, int_t &level = xnegone) {
-    if (func != stdAuto) {
+    if (func != stdlib::stdAuto) {
         if (after) {
             outputSplit(stream, level);
         }

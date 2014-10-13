@@ -3,6 +3,8 @@
 int main(int argc, char* argv[]) {
     using namespace std;
     using namespace cotl::published;
+    using namespace cotl::stdlib;
+    using namespace cotl::stdid;
 
     (void) argc;
     (void) argv;

@@ -9,39 +9,39 @@ inline
 namespace published {
 
 Atom *_atom(
-    const int_t type = id_atom, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_atom, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Int *_int(const int_t &data,
-    const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_int, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Real *_real(const real_t &data,
-    const int_t type = id_real, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_real, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Func *_func(const func_t &data,
-    const int_t type = id_func, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_func, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Ptr *_ptr(const PVal &data,
-    const int_t type = id_ptr, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_ptr, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Pair *_pair(const PVal &data1, const PVal &data2,
-    const int_t type = id_pair, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_pair, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Str *_str(const std::string &data,
-    const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_str, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Arr *_arr_m(arr_t &&container,
-    const int_t type = id_arr, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_arr, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 Map *_map_m(map_t &&container,
-    const int_t type = id_map, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_map, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 );
 
 // data construction
@@ -81,44 +81,44 @@ inline Map *_map(
 // alias to "lib" types
 
 inline Func *_libfunc(const func_t &data) {
-    return _func(data, id_func, stdLibFunc);
+    return _func(data, id_func, stdlib::stdLibFunc);
 }
 
 template <class... Args>
 inline Map *_libmap(
     const Args... args
 ) {
-    return _map(args..., id_map, stdLibMap);
+    return _map(args..., id_map, stdlib::stdLibMap);
 }
 
 inline Atom *_null() {
-    return _atom(id_null, stdLiteral); // TODO need bind?
+    return _atom(id_null, stdlib::stdLiteral); // TODO need bind?
 }
 
 inline Ptr *_quote(const PVal &data) {
-    return _ptr(data, id_quote, stdQuote);
+    return _ptr(data, id_quote, stdlib::stdQuote);
 }
 
 inline Int *_in(const int_t &data,
-    const int_t type = id_int, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_int, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 ) {
     return _int(data, type, func, reused);
 }
 
 inline Real *_in(const real_t &data,
-    const int_t type = id_real, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_real, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 ) {
     return _real(data, type, func, reused);
 }
 
 inline Func *_in(const func_t &data,
-    const int_t type = id_func, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_func, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 ) {
     return _func(data, type, func, reused);
 }
 
 inline Str *_in(const std::string &data,
-    const int_t type = id_str, const func_t func = stdAuto, PValRaw reused = nullptr
+    const int_t type = id_str, const func_t func = stdlib::stdAuto, PValRaw reused = nullptr
 ) {
     return _str(data, type, func, reused);
 }
