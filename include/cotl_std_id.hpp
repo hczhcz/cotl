@@ -3,10 +3,10 @@
 
 #include "cotl_helper.hpp"
 
-namespace cotlstd {
+namespace cotl {
 
 inline
-namespace published {
+namespace stdid {
 
 enum {
     id_type = IDX_TYPE,

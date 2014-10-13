@@ -11,16 +11,9 @@
 #include "cotl_type.hpp"
 #include "cotl_id.hpp"
 
-namespace cotlstd {
-
-using namespace cotl::published;
-
-}
-
 // cotl std library
 #include "cotl_std_id.hpp"
 #include "cotl_std_published.hpp"
-#include "cotl_std_export.hpp"
 
 // utilities
 #include "cotl_new.hpp"
@@ -28,10 +21,14 @@ using namespace cotl::published;
 #include "cotl_init.hpp"
 #include "cotl_lib.hpp"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace stdlib {
 
 using namespace cotl::initutil;
 using namespace cotl::libutil;
+
+}
 
 }
 

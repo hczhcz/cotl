@@ -3,10 +3,9 @@
 
 #include "cotl_helper.hpp"
 
-namespace cotlstd {
+namespace cotl {
 
-inline
-namespace published {
+namespace stdlib {
 
 // runtime
 _COTL_FUNC_T(stdAuto);

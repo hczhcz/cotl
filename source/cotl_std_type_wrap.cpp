@@ -1,6 +1,8 @@
 #include "../cotl"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace stdlib {
 
 // arg: self, caller, lib, tunnel
 
@@ -47,7 +49,7 @@ _COTL_FUNC_BEGIN
     );
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdWrapPtr)
+_COTL_FUNC_T(stdWrapPtr)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_ptr);
 
@@ -71,7 +73,7 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdWrapPair)
+_COTL_FUNC_T(stdWrapPair)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Pair, id_pair);
 
@@ -110,7 +112,7 @@ _COTL_FUNC_BEGIN
     );
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdWrapArr)
+_COTL_FUNC_T(stdWrapArr)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Arr, id_arr);
 
@@ -216,6 +218,8 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core_1);
+
+}
 
 }
 

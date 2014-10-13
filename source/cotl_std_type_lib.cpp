@@ -1,17 +1,19 @@
 #include "../cotl"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace stdlib {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(published::stdLibFunc)
+_COTL_FUNC_T(stdLibFunc)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Func, id_func);
 
     self_p->get()(PVal(caller), nullptr, lib, tunnel); // _COTL_CALL
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdLibMap)
+_COTL_FUNC_T(stdLibMap)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Map, id_map);
 
@@ -61,6 +63,8 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core_1);
+
+}
 
 }
 

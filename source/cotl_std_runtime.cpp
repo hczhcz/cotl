@@ -1,22 +1,24 @@
 #include "../cotl"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace stdlib {
 
 // arg: self, caller, lib, tunnel
 
-_COTL_FUNC_T(published::stdAuto)
+_COTL_FUNC_T(stdAuto)
 _COTL_FUNC_BEGIN
     libExec(self, self, lib, tunnel);
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdLiteral)
+_COTL_FUNC_T(stdLiteral)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_TUNNEL(false);
 
     tunnel = self;
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdBind)
+_COTL_FUNC_T(stdBind)
 _COTL_FUNC_BEGIN
     PMaybe func(nullptr);
 
@@ -28,7 +30,7 @@ _COTL_FUNC_BEGIN
     self.call(caller, lib, tunnel);
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdQuote)
+_COTL_FUNC_T(stdQuote)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF(cotl::Ptr, id_quote);
     _COTL_CHECK_TUNNEL(false);
@@ -36,7 +38,7 @@ _COTL_FUNC_BEGIN
     tunnel = self_p->get();
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdBlackhole)
+_COTL_FUNC_T(stdBlackhole)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF_VAR(cotl::Ptr, id_blackhole);
     _COTL_CHECK_TUNNEL(true);
@@ -45,7 +47,7 @@ _COTL_FUNC_BEGIN
     tunnel = nullptr;
 _COTL_FUNC_END
 
-_COTL_FUNC_T(published::stdContainer)
+_COTL_FUNC_T(stdContainer)
 _COTL_FUNC_BEGIN
     _COTL_CHECK_SELF_VAR(cotl::Ptr, id_container);
 
@@ -209,6 +211,8 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_core);
+
+}
 
 }
 

@@ -1,6 +1,8 @@
 #include "../cotl"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace stdlib {
 
 // arg: self, caller, lib, tunnel
 
@@ -18,6 +20,8 @@ _COTL_FUNC_BEGIN
 _COTL_FUNC_END
 
 long long ago = addInitializer(init, init_lib);
+
+}
 
 }
 
