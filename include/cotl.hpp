@@ -9,6 +9,7 @@
 #include "cotl_native.hpp"
 #include "cotl_ptr.hpp"
 #include "cotl_type.hpp"
+#include "cotl_id.hpp"
 
 namespace cotlstd {
 
@@ -23,9 +24,10 @@ using namespace cotl::published;
 
 // utilities
 #include "cotl_new.hpp"
-#include "cotl_init.hpp"
 #include "cotl_repr.hpp"
-#include "cotl_std_util.hpp"
+#include "cotl_init.hpp"
+#include "cotl_lib.hpp"
+
 namespace cotlstd {
 
 using namespace cotl::initutil;

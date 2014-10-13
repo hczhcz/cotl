@@ -1,9 +1,11 @@
-#ifndef _COTL_STD_UTIL_HPP
-#define _COTL_STD_UTIL_HPP
+#ifndef _COTL_LIBUTIL_HPP
+#define _COTL_LIBUTIL_HPP
 
 #include "cotl_helper.hpp"
 
-namespace cotlstd {
+namespace cotl {
+
+namespace libutil {
 
 #define _COTL_FUNC_BEGIN \
     try {\
@@ -293,6 +295,8 @@ _COTL_FUNC_BEGIN
         tunnel = _in(fr(_out(data1_p), _out(data2_p)));
     }
 _COTL_FUNC_END
+
+}
 
 }
 
