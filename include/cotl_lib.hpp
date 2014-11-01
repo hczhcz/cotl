@@ -296,6 +296,54 @@ _COTL_FUNC_BEGIN
     }
 _COTL_FUNC_END
 
+// param list
+template <class... T, class Tr,
+    DeclOut<Tr> (*fr)(DeclOut...<T1>) // ???
+>
+_COTL_FUNC_T(libFuncParam)
+_COTL_FUNC_BEGIN
+// TODO
+/*
+    _COTL_CHECK_SELF(Pair, id);
+
+    if (!bool(fr) && !bool(fw)) {
+        throw;
+    } else if (bool(fr) && bool(fw)) {
+        // OK
+    } else {
+        _COTL_CHECK_TUNNEL(bool(fw));
+    }
+
+    const PVal &arg1(self_p->get().first);
+    const PVal &arg2(self_p->get().second);
+
+    if (tunnel) {
+        _COTL_CHECK_TYPE_ANY(tunnel, Tr, DefaultId<Tr>::get);
+
+        PMaybe data2(nullptr);
+        arg2.call<true>(caller, lib, data2);
+
+        _COTL_CHECK_TYPE(data2, T2, DefaultId<T2>::get);
+
+        PMaybe data1(_in(fw(_out(tunnel_p), _out(data2_p))));
+        arg1.call<false>(caller, lib, data1);
+
+        tunnel = nullptr;
+    } else {
+        PMaybe data1(nullptr);
+        arg1.call<true>(caller, lib, data1);
+
+        _COTL_CHECK_TYPE(data1, T1, DefaultId<T1>::get);
+
+        PMaybe data2(nullptr);
+        arg2.call<true>(caller, lib, data2);
+
+        _COTL_CHECK_TYPE(data2, T2, DefaultId<T2>::get);
+
+        tunnel = _in(fr(_out(data1_p), _out(data2_p)));
+    }*/
+_COTL_FUNC_END
+
 }
 
 }
